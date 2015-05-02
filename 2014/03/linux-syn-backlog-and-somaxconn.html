@@ -6,21 +6,15 @@
   
   <title>Linux SYN Backlog and somaxconn | Water is</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="SYN 包攻击是网络上比较老的一种攻击方式。在 Linux 中，可以通过开启 net.ipv4.tcp_syncookies = 1 来抵抗这种攻击。那么，在开启 syncookies 之后，Linux 系统做了些什么？如何做的？这是本文试图整理的内容。
-以下是一组常见的 syncookies 在 sysctl.conf 中的配置：
-net.ipv4.tcp_syncookies = 1  #开启">
+  <meta name="description" content="SYN 包攻击是网络上比较老的一种攻击方式。在 Linux 中，可以通过开启 net.ipv4.tcp_syncookies = 1 来抵抗这种攻击。那么，在开启 syncookies 之后，Linux 系统做了些什么？如何做的？这是本文试图整理的内容。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux SYN Backlog and somaxconn">
 <meta property="og:url" content="http://latteye.com/2014/03/linux-syn-backlog-and-somaxconn.html">
 <meta property="og:site_name" content="Water is">
-<meta property="og:description" content="SYN 包攻击是网络上比较老的一种攻击方式。在 Linux 中，可以通过开启 net.ipv4.tcp_syncookies = 1 来抵抗这种攻击。那么，在开启 syncookies 之后，Linux 系统做了些什么？如何做的？这是本文试图整理的内容。
-以下是一组常见的 syncookies 在 sysctl.conf 中的配置：
-net.ipv4.tcp_syncookies = 1  #开启">
+<meta property="og:description" content="SYN 包攻击是网络上比较老的一种攻击方式。在 Linux 中，可以通过开启 net.ipv4.tcp_syncookies = 1 来抵抗这种攻击。那么，在开启 syncookies 之后，Linux 系统做了些什么？如何做的？这是本文试图整理的内容。">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux SYN Backlog and somaxconn">
-<meta name="twitter:description" content="SYN 包攻击是网络上比较老的一种攻击方式。在 Linux 中，可以通过开启 net.ipv4.tcp_syncookies = 1 来抵抗这种攻击。那么，在开启 syncookies 之后，Linux 系统做了些什么？如何做的？这是本文试图整理的内容。
-以下是一组常见的 syncookies 在 sysctl.conf 中的配置：
-net.ipv4.tcp_syncookies = 1  #开启">
+<meta name="twitter:description" content="SYN 包攻击是网络上比较老的一种攻击方式。在 Linux 中，可以通过开启 net.ipv4.tcp_syncookies = 1 来抵抗这种攻击。那么，在开启 syncookies 之后，Linux 系统做了些什么？如何做的？这是本文试图整理的内容。">
   
     <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
   
@@ -103,6 +97,7 @@ net.ipv4.tcp_syncookies = 1  #开启">
     <div class="article-entry" itemprop="articleBody">
       
         <p>SYN 包攻击是网络上比较老的一种攻击方式。在 Linux 中，可以通过开启 <code>net.ipv4.tcp_syncookies = 1</code> 来抵抗这种攻击。那么，在开启 syncookies 之后，Linux 系统做了些什么？如何做的？这是本文试图整理的内容。</p>
+<a id="more"></a>
 <p>以下是一组常见的 syncookies 在 sysctl.conf 中的配置：</p>
 <p><code>net.ipv4.tcp_syncookies = 1  #开启 syncookies 功能 
 net.ipv4.tcp_max_syn_backlog = 262144 # 最大 SYN 缓冲内存大小
@@ -145,7 +140,7 @@ net.ipv4.tcp_syn_retries = 2 # SYN 重试次数</code></p>
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://latteye.com/2014/03/linux-syn-backlog-and-somaxconn.html" data-id="ci9779ur000anfepii9ddkvo9" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://latteye.com/2014/03/linux-syn-backlog-and-somaxconn.html" data-id="ci97b3e7h00ana6piamrerir8" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
