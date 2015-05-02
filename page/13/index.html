@@ -1,0 +1,768 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.com/page/13/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main">
+  
+    <article id="post-learning-perl-6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2008/09/learning-perl-6.html" class="article-date">
+  <time datetime="2008-09-01T15:15:03.000Z" itemprop="datePublished">2008-09-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Dev/">Dev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2008/09/learning-perl-6.html">Perl 语言入门 第六章</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>6.1</p>
+<pre lang="PERL" line="1">
+#!/usr/bin/perl -w
+
+my %name_hash=(
+    "fred"=>"flintstone",
+    "barney"=>"rubble",
+    "wilma"=>"flintstone");
+#print $name_hash{"fred"};
+
+while (chomp($_=<STDIN>)){
+#    chomp ($_);
+    $name=$name_hash{$_};
+    print "$name\n";
+}
+</pre>
+        
+          <p class="article-more-link">
+            <a href="/2008/09/learning-perl-6.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2008/09/learning-perl-6.html" data-id="ci973npl700br7opi08meln9b" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2008/09/learning-perl-6.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-configure-perl-in-vim" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2008/09/configure-perl-in-vim.html" class="article-date">
+  <time datetime="2008-09-01T08:42:33.000Z" itemprop="datePublished">2008-09-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Dev/">Dev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2008/09/configure-perl-in-vim.html">配置 VIM 适合 Perl</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>由于一直没学多少开发，所以我对编辑器要求都不是很高。现在开始学 Perl 了，把 VIM 稍微弄一下吧。</p>
+<p><code>.vimrc</code></p>
+<p><code>syntax on
+set tabstop=4
+set nu
+set showmatch
+set syntax=perl</code></p>
+<p>同时下载 perl.vim 高亮脚本：<a href="http://www.vim.org/scripts/script.php?script_id=56" target="_blank" rel="external">http://www.vim.org/scripts/script.php?script_id=56</a></p>
+<p>保存为 ~/.vim/syntax/perl.vim 即可。如果配置文件中包含Windows下的回车符，替换掉即可。</p>
+<p><code>cat -A perl.vim | sed &#39;s/\^\M\$//g&#39; &gt; perl.vim</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2008/09/configure-perl-in-vim.html" data-id="ci973npw100lz7opiqzlw9h8l" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2008/09/configure-perl-in-vim.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-learning-perl-5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2008/08/learning-perl-5.html" class="article-date">
+  <time datetime="2008-08-31T07:35:56.000Z" itemprop="datePublished">2008-08-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Dev/">Dev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2008/08/learning-perl-5.html">Perl 语言入门 第五章</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先把自己拼拼凑凑写出来的东西贴出来，找到了英文版本 CHM，看过那个里面的答案。简单几行代码就能看出自己的代码组织能力很差。回头再分析一下原文答案。<br>
+        
+          <p class="article-more-link">
+            <a href="/2008/08/learning-perl-5.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2008/08/learning-perl-5.html" data-id="ci973npl900bt7opidw530d38" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2008/08/learning-perl-5.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-learning-perl-4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2008/08/learning-perl-4.html" class="article-date">
+  <time datetime="2008-08-30T15:40:17.000Z" itemprop="datePublished">2008-08-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Dev/">Dev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2008/08/learning-perl-4.html">Perl 语言入门 第四章 答案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>自己在学，边学边做作业：<br>
+        
+          <p class="article-more-link">
+            <a href="/2008/08/learning-perl-4.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2008/08/learning-perl-4.html" data-id="ci973nplc00bv7opiiy6fbqtd" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2008/08/learning-perl-4.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-end-of" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2008/08/end-of.html" class="article-date">
+  <time datetime="2008-08-21T08:59:12.000Z" itemprop="datePublished">2008-08-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Life/">Life</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2008/08/end-of.html">搞笑的机器猫结局</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天上网随便搜了一下，发现晚上流传的 “机器猫结局” 有好多版本，于是仔细的看看，到底别人编了多少个版本。<br>
+        
+          <p class="article-more-link">
+            <a href="/2008/08/end-of.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2008/08/end-of.html" data-id="ci973npp700fv7opi5taz5c3f" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2008/08/end-of.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-monit-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2008/08/monit-1.html" class="article-date">
+  <time datetime="2008-08-15T07:56:04.000Z" itemprop="datePublished">2008-08-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2008/08/monit-1.html">Monit 技巧一则</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.tildeslash.com/monit">Monit</a> 对管理员来说可谓神器也。话说 Nagios 也就是在监控牛，而 Monit 不但本地监控牛，远程服务监控也牛。更牛的是，只要你花点功夫，你的服务就永远都能“死而复生”。</p>
+<p>用了 Monit 之后，我再也不用担心 amule 挂掉了，吃饭也吃得好了，睡觉也睡的香了~~</p>
+        
+          <p class="article-more-link">
+            <a href="/2008/08/monit-1.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2008/08/monit-1.html" data-id="ci973npid008p7opigbslkqn7" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2008/08/monit-1.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mysql-trouble-shootin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2008/08/mysql-trouble-shootin.html" class="article-date">
+  <time datetime="2008-08-13T09:23:01.000Z" itemprop="datePublished">2008-08-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2008/08/mysql-trouble-shootin.html">MySQL 报错-解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在尝试导入一整个数据库之后，再次进入 mysql shell，一直出现奇怪的问题：</p>
+<blockquote>
+<p>mysql&gt; use test</p>
+<p>Database changed</p>
+<p>mysql&gt; show tables;</p>
+<p>Ignoring query to other database</p>
+<p>mysql&gt;</p>
+</blockquote>
+<p>几乎所有指令都报这个错误。</p>
+<p>在执行多次： mysql -v -uroot 之后，就好了。<br>依旧不知道这个问题的起因，以及明确的解决方法。</p>
+<hr>
+<p>8月14日更新：</p>
+<p>发现，现在如果用 mysql -root 进入 mysql shell，就总是出现同样的问题。<br>但是若 mysql -uroot 则没有问题。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2008/08/mysql-trouble-shootin.html" data-id="ci973nphs00817opiifuv1a93" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2008/08/mysql-trouble-shootin.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mysql-mycnf-loca" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2008/08/mysql-mycnf-loca.html" class="article-date">
+  <time datetime="2008-08-13T04:13:56.000Z" itemprop="datePublished">2008-08-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2008/08/mysql-mycnf-loca.html">MySQL 配置文件位置问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>MySQL 配置文件最常见的有两个地方：</p>
+<blockquote>
+<p>1. /etc/my.cnf</p>
+<p>2.~/.my.cnf</p>
+</blockquote>
+<p>今天上午做了几次尝试，稍微写两句结论。</p>
+<p>1. /etc/my.cnf 的优先级高。<br>2. ~/.my.cnf 其中的 ~ 与 mysqld_safe —user=username 中的 username 用户无关。<br>   ~定位的是当前执行命令的用户。并且 由于 sudo 命令并不会改变环境变量。所以以 latteye 用户执行 sudo 时，并不读取 root 根目录下的配置文件，而是读取 latteye home 目录下的配置文件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2008/08/mysql-mycnf-loca.html" data-id="ci973nphu00837opixnofbq41" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2008/08/mysql-mycnf-loca.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-answer-intervie" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2008/08/answer-intervie.html" class="article-date">
+  <time datetime="2008-08-07T09:48:07.000Z" itemprop="datePublished">2008-08-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2008/08/answer-intervie.html">答：外企面SA遇到的面试问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有朋友问了，我就非常粗略的答一下吧。</p>
+<p>1.<br>a. 这个很简单，先建立 PV，再来是 VG，最后是 LV。把东西都塞到 VG 里面就是了。<br>b. lvextend 命令有个 -m 参数是建立镜像的。</p>
+<p>2. SSL 是在传输层之上的，也就是在 TCP/IP 之上。所以他可以适用与任何的7层服务。</p>
+<p>原理么，说出来一大堆了。对对称加密和非对称加密知道是怎么回事情就可以了。</p>
+<p>3. 这个问题 kiever 已经说过了。<a href="http://latteye.com/2008/07/use-smtp-by-sendmail.html" target="_blank" rel="external">请看这里</a>。</p>
+<p>4. inode 满了，block 没满。<br>解决方法，删文件咯。ln 挂其他分区过来咯~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2008/08/answer-intervie.html" data-id="ci973npzd00on7opi051jauy8" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2008/08/answer-intervie.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e5-a4-96-e4-bc-81-e9-9d-a2sa-e9-81-87-e5-88-b0-e7-9a-84-e9-9d-a2-e8-af-95-e9-97-ae-e9-a2-98" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2008/07/e5-a4-96-e4-bc-81-e9-9d-a2sa-e9-81-87-e5-88-b0-e7-9a-84-e9-9d-a2-e8-af-95-e9-97-ae-e9-a2-98.html" class="article-date">
+  <time datetime="2008-07-26T01:45:24.000Z" itemprop="datePublished">2008-07-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2008/07/e5-a4-96-e4-bc-81-e9-9d-a2sa-e9-81-87-e5-88-b0-e7-9a-84-e9-9d-a2-e8-af-95-e9-97-ae-e9-a2-98.html">外企面SA遇到的面试问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近打算换工作， 面了几家外企，碰到几个问题，发上来共享一下<br>1.两块120G硬盘，如何达成如下要求</p>
+<p>a 要组成240G的单卷容量</p>
+<p>b 建成容量120G的镜像卷</p>
+<p>说明操作步骤</p>
+<p>2.简诉ssl的工作原理。它工作于OSI模型的哪层？</p>
+<p>3.一台linux应用服务器上需要通过lan上的另一台邮件网关服务器投递邮件出去，如何配置，简述步骤（假设均使用sendmail）。</p>
+<p>4.磁盘上还有不少剩余空间，但无法创建新文件，撇开权限不谈，还有什么原因可能引起，如何处理？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2008/07/e5-a4-96-e4-bc-81-e9-9d-a2sa-e9-81-87-e5-88-b0-e7-9a-84-e9-9d-a2-e8-af-95-e9-97-ae-e9-a2-98.html" data-id="ci973nptb00jl7opilar5xx7j" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2008/07/e5-a4-96-e4-bc-81-e9-9d-a2sa-e9-81-87-e5-88-b0-e7-9a-84-e9-9d-a2-e8-af-95-e9-97-ae-e9-a2-98.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/14/">Next &raquo;</a>
+    </nav>
+  
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

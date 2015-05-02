@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>切割经验总结 | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="此文是由 kiever 所写，他是个懒人，已经很难从网络上找到他的足迹了。
+贴于此处，为自己备忘。
+切割：将某服务从一台设备转移到另外一台设备，要求劲量做到无缝。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="切割经验总结">
+<meta property="og:url" content="http://latteye.com/2007/09/experience-in-chinadim.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="此文是由 kiever 所写，他是个懒人，已经很难从网络上找到他的足迹了。
+贴于此处，为自己备忘。
+切割：将某服务从一台设备转移到另外一台设备，要求劲量做到无缝。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="切割经验总结">
+<meta name="twitter:description" content="此文是由 kiever 所写，他是个懒人，已经很难从网络上找到他的足迹了。
+贴于此处，为自己备忘。
+切割：将某服务从一台设备转移到另外一台设备，要求劲量做到无缝。">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-experience-in-chinadim" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2007/09/experience-in-chinadim.html" class="article-date">
+  <time datetime="2007-09-03T08:23:25.000Z" itemprop="datePublished">2007-09-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      切割经验总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>此文是由 kiever 所写，他是个懒人，已经很难从网络上找到他的足迹了。</p>
+<p>贴于此处，为自己备忘。</p>
+<p>切割：将某服务从一台设备转移到另外一台设备，要求劲量做到无缝。</p>
+<a id="more"></a>
+<p><strong>1．Java环境建立</strong></p>
+<p>尽量使用/etc/profile做全局配置</p>
+<p><strong>2．前置机中导入iptables时，注意iptables版本问题。</strong></p>
+<p>导入iptables后可以用service iptables save将配置自动保存。<br>修改/etc/sysctl.conf可以使ip_forward功能自动打开。<br>以上设置后，使用chkconfig将iptables服务选上，可以在默认运行级别下保证iptables的自动运行。</p>
+<p>3．使用redhat 8版本的ifup（即服务器切割脚本中的ifrouteup）可以在调整网卡时自动修改默认路由</p>
+<p>4．在IDC做服务器切割时，尽量使用mac地址模拟</p>
+<p>操作命令ifconfig eth0 hw ether aa:bb:cc:dd:ee:ff</p>
+<p><strong>5．静态路由添加方式</strong></p>
+<p><code>/etc/sysconfig/network-scripts/routes-eth0
+192.168.0.0/16 via 10.10.0.22</code></p>
+<p><code>/etc/sysconfig/static-routes
+eth0 net 192.168.0.0 netmask 255.255.0.0 gw 10.10.0.22</code></p>
+<p>6．iptables做端口映射时，如果映射的服务器默认网关并非是前置机本身，则postrouting中SNAT必须指定为前置机内网地址<br>以电信机房为例，防火墙eth0 10.10.0.1  eth1 218.78.212.84<br>Client A ：10.10.0.33   默认路由：10.10.0.1<br>-A PREROUTING -d 218.78.212.84 -p tcp -m tcp —dport 22 -j DNAT —to-destination 10.10.0.33<br>结果：除10.10.0.33不能连通外，都可以ssh，日志记录为正确来源IP</p>
+<p>-A PREROUTING -d 218.78.212.84 -p tcp -m tcp —dport 22 -j DNAT —to-destination 10.10.0.33<br>-A POSTROUTING -d 10.10.0.33 -p tcp -m tcp —dport 22 -j SNAT —to-source 218.78.212.84<br>结果：包括10.10.0.33都可以ssh，但日志记录为防火墙外网IP 218.78.212.84</p>
+<p>-A PREROUTING -d 218.78.212.84 -p tcp -m tcp —dport 22 -j DNAT —to-destination 10.10.0.33<br>-A POSTROUTING -s 10.10.0.33 -p tcp -m tcp —dport 22 -j SNAT —to-source 218.78.212.84<br>结果：包括10.10.0.33都可以ssh，且日志记录为正确来源IP</p>
+<p>Clent B ：10.10.0.138  默认路由：10.10.0.241<br>-A PREROUTING -d 218.78.212.84 -p tcp -m tcp —dport 22 -j DNAT —to-destination 10.10.0.33<br>-A POSTROUTING -d 10.10.0.33 -p tcp -m tcp —dport 22 -j SNAT —to-source 10.10.0.1<br>结果：只有此方式包括10.10.0.138可以ssh，但日志记录为防火墙内网IP 10.10.0.1</p>
+<p>7．修改/etc/inittab，将Ctrl+Alt+Del的组合键屏蔽，防止误操作及杜绝安全隐患</p>
+<p>8．SSH只使用key验证方式</p>
+<p>9．使用/etc/hosts.allow及/etc/hosts.deny做IP地址访问过滤</p>
+<h2 id="以下脚本是通过log日志将非法连接的IP列入/etc/hosts-deny的黑名单">以下脚本是通过log日志将非法连接的IP列入/etc/hosts.deny的黑名单</h2><p>`# !/bin/bash</p>
+<h1 id="为防止自身地址被列入黑名单，可以先将自身IP加入/etc/hosts-allow">为防止自身地址被列入黑名单，可以先将自身IP加入/etc/hosts.allow</h1><h1 id="查找最后20条日志中非法连接和尝试连接失败的IP地址">查找最后20条日志中非法连接和尝试连接失败的IP地址</h1><p>tail -20 /var/log/secure|awk ‘$0~/Illegal|Failed/‘|awk -Ffrom ‘{print $2}’|awk ‘{print $1}’ &gt;/tmp/badip</p>
+<h1 id="读取/etc/hosts-deny中有关sshd的地址定义">读取/etc/hosts.deny中有关sshd的地址定义</h1><p>list=<code>grep sshd /etc/hosts.deny</code></p>
+<h1 id="判断日志中非法连接IP的连接数超过5时列入黑名单">判断日志中非法连接IP的连接数超过5时列入黑名单</h1><p>if [ “<code>wc -l /tmp/badip|awk &#39;{print $1}&#39;</code>“ &gt; “5” -a “<code>sort -u /tmp/badip|wc -l|awk &#39;{print $1}&#39;</code>“ = “1” ]<br>then<br>blockip=<code>head -1 /tmp/badip</code><br>if [ <code>grep $blockip /etc/hosts.deny|wc -l|awk &#39;{print $1}&#39;</code> != 1 ]<br>then<br>echo “$list $blockip” &gt;/etc/hosts.deny<br>fi<br>fi<br>———————————————————————————————————————————————————————————`</p>
+<p>我们通过一个例子来大致理解一 下它是如何工作的。比如，我想通过Internet连接发布我们的网站，但是HTTP server在我们的内网里，而 且我们对外只有一个合法的IP，就是防火墙那个对外的IP——$INET_IP。防火墙还 有一个内网的IP——$LAN_IP，HTTP server的IP是$HTTP_IP （这当然是内网的了）。为了完成我们的设想，要做的第一件事就是把下面的这个简单的规则加入到nat表 的PREROUTING链中：<br>iptables -t nat -A PREROUTING —dst $INET_IP -p tcp —dport 80 -j DNAT \ —to-destination $HTTP_IP<br>现在，所有从Internet来的、到防火墙的80端口去的包都会被转发（或称做被DNAT ）到在内网的HTTP服务器上。如果你在Internet上试验一下，一切正常吧。再从内网里试验一下，完全 不能用吧。这其实是路由的问题。下面我们来好好分析这个问题。为了容易阅读，我们把在外网上访问我们 服务器的那台机子的IP地址记为$EXT_BOX。</p>
+<blockquote>
+<p>1.包从地址为$EXT_BOX的机子出发，去往地址为$INET_IP 的机子。<br>2.包到达防火墙。<br>3.防火墙DNAT（也就是转发）这个包，而且包会经过很多其他的链检验及处理。<br>4.包离开防火墙向$HTTP_IP前进。<br>5.包到达HTTP服务器，服务器就会通过防火墙给以回应，当然，这要求把防火墙作为HTTP到达$EXT_BOX的网关。一般情况下，防火墙就是HTTP服务器的缺省网关。<br>6.防火墙再对返回包做Un-DNAT（就是照着DNAT的步骤反过来做一遍），这样就 好像是防火墙自己回复了那个来自外网的请求包。<br>7.返回包好象没经过这么复杂的处理、没事一样回到$EXT_BOX。</p>
+</blockquote>
+<p>现在，我们来考虑和HTTP服务器在同一个内网（这里是指所有机子不需要经过路由器而可以直接互相访 问的网络，不是那种把服务器和客户机又分在不同子网的情况）的客户访问它时会发生什么。我们假设客户 机的IP为$LAN_BOX，其他设置同上。</p>
+<blockquote>
+<p>1.包离开$LAN_BOX，去往$INET_IP。<br>2.包到达防火墙。<br>3.包被DNAT,而且还会经过其他的处理。但是包没有经过SNAT 的处理，所以包还是使用它自己的源地址，就是$LAN_BOX（译者注：这就是IP 传输包的特点，只根据目的地的不同改变目的地址，但不因传输过程中要经过很多路由器而随着路由器改变 其源地址，除非你单独进行源地址的改变。其实这一步的处理和对外来包的处理是一样的，只不过内网包的 问题就在于此，所以这里交待一下原因）。<br>4.包离开防火墙，到达HTTP服务器。<br>5.HTTP服务器试图回复这个包。它在路由数据库中看到包是来自同一个网络的一台机子，因此它会把回 复包直接发送到请求包的源地址（现在是回复包的目的地址），也就是$LAN_BOX。<br>6.回复包到达客户机，但它会很困惑，因为这个包不是来自它访问的那台机子。这样，它就会把这个包 扔掉而去等待“真正”的回复包。<br>针对这个问题有个简单的解决办法，因为这些包都要进入防火墙，而且它们都去往需要做DNAT才能到达 的那个地址，所以我们只要对这些包做SNAT操作即可。比如，我们来考虑上面的例子，如果对那些进入防火 墙而且是去往地址为$HTTP_IP、端口为80的包做SNAT操作，那么这些包就好象是从$LAN_IP来的了，也就是 说，这些包的源地址被改为$LAN_IP了。这样，HTTP服务器就会把回复包发给防火墙，而防火墙会再对包做 Un-DNAT操作，并把包发送到客户机。解决问题的规则如下：<br>iptables -t nat -A POSTROUTING -p tcp —dst $HTTP_IP —dport 80 -j SNAT \ —to-source $LAN_IP<br>要记住，按运行的顺序POSTROUTING链是所有链中最后一个，因此包到 达这条链时，已经被做过DNAT操作了，所以我们在规则里要基于内网的地址$HTTP_IP（包的目的地）来匹配包。</p>
+</blockquote>
+<p>警告：我们刚才写的这条规则会对日志产生很大影响，这种影响应该说是很不好的。因为来自 Internet包在防火墙内先后经过了DNAT和SNAT处理，才能到达HTTP服务器（上面的例子），所以HTTP服务器 就认为包是防火墙发来的，而不知道真正的源头是其他的IP。这样，当它记录服务情况时，所有访问记录的 源地址都是防火墙的IP而不是真正的访问源。我们如果想根据这些记录来了解访问情况就不可能了。因此上 面提供的“简单办法”并不是一个明智的选择，但它确实可以解决“能够访问”的问题，只是没有考虑到日 志而已。<br>其他的服务也有类似的问题。比如，你在LAN内建立了SMTP服务器，那你就要设置防火墙以便能转 发SMTP的数据流。这样你就创建了一个开放的SMTP中继服务器，随之而来的就是日志的问题了。<br>一定要注意，这里所说的问题只是针对没有建立DMZ或类似结构的网络，并且内网的用户访问的是 服务器的外网地址而言的。（译者注：因为如果建立了DMZ，或者服务器和客户机又被分在不同的子网里， 那就不需要这么麻烦了。因为所有访问的源头都不在服务器所在的网里，所以就没必要做SNAT去改变包的源 地址了，从而记录也就不是问题了。如果内网客户是直接访问服务器的内网地址那就更没事了）<br>较好的解决办法是为你的LAN在内网建立一台单独的DNS服务器（译者注：这样，内网的客户使用网站名 访问HTTP服务器时，DNS就可以把它解析成内网地址。客户机就可以直接去访问HTTP服务器的内网地址了， 从而避免了通过防火墙的操作，而且包的源地址也可以被HTTP服务器的日志使用，也就没有上面说的日志问 题了。），或者干脆建立DMZ得了（这是最好的办法，但你要有钱哦，因为用的设备多啊）。<br>对上面的例子应该考虑再全面些，现在还有一个问题没解决，就是防火墙自己要访问HTTP服务器时会发 生什么，能正常访问吗？你觉得呢:)很可惜，现在的配置还是不行，仔细想想就明白了。我们这里讨论的基 础都是假设机子访问的是HTTP服务器的外网地址，但这个外网地址其实就是防火墙对外的地址，所以当防火 墙访问这个外网地址时，就是访问它自己。防火墙上如果有HTTP服务，那客户机就会看到页面内容，不过这 不是它想看到的（它想要的在DNAT上了），如果没有HTTP服务，客户就只能收到错 误信息了。前面给出的规则之所以不起作用是因为从防火墙发出的请求包不会经过那两条链。还记得防火墙 自己发出的包经过哪些链吧:)我们要在nat表的OUTPUT链中添加下面的规则：<br>iptables -t nat -A OUTPUT —dst $INET_IP -p tcp —dport 80 -j DNAT \ —to-destination $HTTP_IP<br>有了最后这条规则，一切都正常了。和HTTP服务器不在同一个网的机子能正常访问服务了，和它在一个 网内的机子也可以正常访问服务了，防火墙本身也能正常访问服务了，没有什么问题了。这种心情，套用 《大话西游》里的一句话，就是“世界又清净了”。（不要说你不知道什么是《大话西游》）</p>
+<p>我想大家应该能明白这些规则只说明了数据包是如何恰当地被DNAT和SNAT的。除此之外，在 filter表中还需要其他的规则（在FORWARD链里），以允许特定的包也能经过前面写的（在POSTROUTING链和 OUTPUT链里的）规则。千万不要忘了，那些包在到达FORWARD链之前已经在PREROUTING链里被DNAT过了，也 就是说它们的目的地址已被改写，在写规则时要注意这一点。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2007/09/experience-in-chinadim.html" data-id="ci973npos00ff7opib2av28lh" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2007/09/experience-in-chinadim.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2007/09/add-linux-to-windows-domain-with-winbind.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          使用 Winbind 将 Linux 加入 Windows 域环境
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2007/09/84.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">好人难做</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2007/09/experience-in-chinadim.html" data-title="切割经验总结" data-url="http://latteye.com/2007/09/experience-in-chinadim.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

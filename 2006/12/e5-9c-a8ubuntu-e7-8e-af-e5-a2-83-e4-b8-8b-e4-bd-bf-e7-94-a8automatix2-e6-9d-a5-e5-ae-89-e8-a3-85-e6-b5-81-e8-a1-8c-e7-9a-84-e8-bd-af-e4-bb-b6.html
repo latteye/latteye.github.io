@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在Ubuntu环境下使用Automatix2来安装流行的软件 | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="原作者：Falko Timme   编译：latteye
+尽管 ubuntu 自身已经提供了许多的软件，但是总有一些软件需要通过第三方的源来安装。一个个去寻找那些源并且安装是一项很花费时间的工程，不过现在一个名为 Automatix2 的脚本已经出现了（Automatix的后续版本），它将为你完成这些工作。Automatix2 具有一套图形界面系统，你可以在桌面上方便的使用它，而本文就是指导你如何">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Ubuntu环境下使用Automatix2来安装流行的软件">
+<meta property="og:url" content="http://latteye.com/2006/12/e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e4-bd-bf-e7-94-a8automatix2-e6-9d-a5-e5-ae-89-e8-a3-85-e6-b5-81-e8-a1-8c-e7-9a-84-e8-bd-af-e4-bb-b6.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="原作者：Falko Timme   编译：latteye
+尽管 ubuntu 自身已经提供了许多的软件，但是总有一些软件需要通过第三方的源来安装。一个个去寻找那些源并且安装是一项很花费时间的工程，不过现在一个名为 Automatix2 的脚本已经出现了（Automatix的后续版本），它将为你完成这些工作。Automatix2 具有一套图形界面系统，你可以在桌面上方便的使用它，而本文就是指导你如何">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_19.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_20.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_21.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_22.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_23.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_25.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_26.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_27.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_28.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_30.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_31.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_32.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_33.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_34.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_35.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_36.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_37.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_38.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_39.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_40.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_41.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_42.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_43.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_44.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_45.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_46.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_47.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_48.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_49.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_52.jpg">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_53.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在Ubuntu环境下使用Automatix2来安装流行的软件">
+<meta name="twitter:description" content="原作者：Falko Timme   编译：latteye
+尽管 ubuntu 自身已经提供了许多的软件，但是总有一些软件需要通过第三方的源来安装。一个个去寻找那些源并且安装是一项很花费时间的工程，不过现在一个名为 Automatix2 的脚本已经出现了（Automatix的后续版本），它将为你完成这些工作。Automatix2 具有一套图形界面系统，你可以在桌面上方便的使用它，而本文就是指导你如何">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e4-bd-bf-e7-94-a8automatix2-e6-9d-a5-e5-ae-89-e8-a3-85-e6-b5-81-e8-a1-8c-e7-9a-84-e8-bd-af-e4-bb-b6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2006/12/e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e4-bd-bf-e7-94-a8automatix2-e6-9d-a5-e5-ae-89-e8-a3-85-e6-b5-81-e8-a1-8c-e7-9a-84-e8-bd-af-e4-bb-b6.html" class="article-date">
+  <time datetime="2006-12-06T05:56:11.000Z" itemprop="datePublished">2006-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在Ubuntu环境下使用Automatix2来安装流行的软件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原作者：Falko Timme <ft [at]="" falkotimme="" [dot]="" com="">  编译：latteye</ft></p>
+<p>尽管 ubuntu 自身已经提供了许多的软件，但是总有一些软件需要通过第三方的源来安装。一个个去寻找那些源并且安装是一项很花费时间的工程，不过现在一个名为 Automatix2 的脚本已经出现了（Automatix的后续版本），它将为你完成这些工作。Automatix2 具有一套图形界面系统，你可以在桌面上方便的使用它，而本文就是指导你如何使用它！</p>
+<p>通过Automatix2,你可以方便的安装：Skype, Opera, the Macromedia Flash plugin for Firefox, Google Earth, Picasa, Acrobat Reader, aMule, multimedia codecs, VMware Player等软件。<br><a id="more"></a><br>我不保证他一定可以在您的系统上完美运行。</p>
+<p><strong>1.写在前面的话</strong></p>
+<p>在本指南中，我将展示如何在 Ubuntu 6.10 (“Edgy Eft”) 桌面版本上使用 Automatix2。当然你也可以在Ubuntu 6.10 AMD64 和 Ubuntu 6.06 LTS (“Dapper Drake”) (i386 和 AMD64)上使用他。所以在继续阅读前，你最好已经安装了我所提到的系统。当然 Automatix2 也适合 Kubuntu 和 Xubuntu 系列。他同样可以运行在 Mepis 6.0（i386）上，不过本文并没有这个此系统。</p>
+<p><strong>2.更新你的系统</strong></p>
+<p>很重要的一点！在你运行 Automatix2 时，不可以运行其他 APT 类的程序，比如 synaptic。所以，在你看到系统提示你有可升级的软件包时，先将他们升级到最新版本吧。点击任务栏中的橘黄色小按钮。</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/19.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_19.jpg" alt=""></a></p>
+<p>管理器将告诉你有哪些可升级的包，点击升级。</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/20.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_20.jpg" alt=""></a></p>
+<p>输入 root 密码</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/21.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_21.jpg" alt=""></a></p>
+<p>开始升级软件包</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/22.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_22.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/23.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_23.jpg" alt=""></a></p>
+<p>在完成升级后，点击关闭</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/25.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_25.jpg" alt=""></a></p>
+<p>好了，现在你的系统已经在最新状态，右下角的橘黄色图标也没有了。</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/26.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_26.jpg" alt=""></a></p>
+<p><strong>3.安装 Automatix2</strong></p>
+<p>Automatix2 本身是一款图形化软件，但为了安装他，我们还必须在命令行中操作一下。通过<strong>程序-附件-终端</strong>打开Shell：</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/27.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_27.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/28.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_28.jpg" alt=""></a></p>
+<p>输入以下内容来安装 Automatix2：</p>
+<p><em>Ubuntu 6.10 (i386 and AMD64)</em></p>
+<p><code>echo &quot;deb http://www.getautomatix.com/apt edgy main&quot; | sudo tee -a /etc/apt/sources.list
+wget http://www.getautomatix.com/apt/key.gpg.asc
+gpg --import key.gpg.asc
+gpg --export --armor 521A9C7C | sudo apt-key add -</code></p>
+<p><code>sudo apt-get update</code></p>
+<p><code>sudo apt-get install automatix2</code></p>
+<p><em>Ubuntu 6.06 (i386 and AMD64)</em></p>
+<p><code>echo &quot;deb http://www.getautomatix.com/apt dapper main&quot; | sudo tee -a /etc/apt/sources.list
+wget http://www.getautomatix.com/apt/key.gpg.asc
+gpg --import key.gpg.asc
+gpg --export --armor 521A9C7C | sudo apt-key add -</code></p>
+<p><code>sudo apt-get update</code></p>
+<p><code>sudo apt-get install automatix2</code></p>
+<p>现在就可以关闭Shell了，你已经安装了Automatix2,可以在<strong>菜单-应用程序-系统工具</strong>中找到它。</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/30.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_30.jpg" alt=""></a></p>
+<p>4.运行 Automatix2，并且安装流行的软件</p>
+<p>Now start Automatix2. It comes up with a warning that you must not install the package AUD-DVD if you are from the USA because it is illegal there (so if you are from the USA, don’t install that package).</p>
+<p>好了，现在启动Automatix2.打开就会出现一个警告，提醒你不要安装AUD-DVD软件包。（在美国这可能会触犯法律。）</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/31.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_31.jpg" alt=""></a></p>
+<p>点掉警告后，Automatix2启动：</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/32.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_32.jpg" alt=""></a></p>
+<p>接着在<em>/etc/apt/sources.list</em>文件中添加源：</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/33.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_33.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/34.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_34.jpg" alt=""></a></p>
+<p>在左边的窗口中你可以看到可用包的分组，右边的窗口中你可以看到可以安装的软件包与他们的所属组。浏览软件包，选择你想安装的软件：</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/35.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_35.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/36.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_36.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/37.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_37.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/38.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_38.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/39.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_39.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/40.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_40.jpg" alt=""></a></p>
+<p>选择完毕后，点击开始按钮。安装就会开始了。这可能会用掉1-2个小时的时间，取决于你选择的软件包的大小。某些软件包：Java, Google Earth, 或 VMware Player 在安装过程中，需要你确认协议。</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/41.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_41.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/42.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_42.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/43.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_43.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/44.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_44.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/45.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_45.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/46.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_46.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/47.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_47.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/48.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_48.jpg" alt=""></a></p>
+<p>有些时候会弹出一个窗口问你是否想要卸载 Sun Java JRE（同时也会卸载 Azureus 。）。我不知道为什么会出现这个东西，不过我选择的是“否”。（我从没有试过“是”选项。）</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/49.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_49.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/52.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_52.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/53.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_53.jpg" alt=""></a><br>未完待续</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2006/12/e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e4-bd-bf-e7-94-a8automatix2-e6-9d-a5-e5-ae-89-e8-a3-85-e6-b5-81-e8-a1-8c-e7-9a-84-e8-bd-af-e4-bb-b6.html" data-id="ci973nptj00jt7opib390belx" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2006/12/e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e4-bd-bf-e7-94-a8automatix2-e6-9d-a5-e5-ae-89-e8-a3-85-e6-b5-81-e8-a1-8c-e7-9a-84-e8-bd-af-e4-bb-b6.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2006/12/kvpnc.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          kvpnc
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2006/12/gentoo-e7-9a-84-e5-89-8d-e4-b8-96-e4-bb-8a-e7-94-9f.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Gentoo的前世今生</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2006/12/e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e4-bd-bf-e7-94-a8automatix2-e6-9d-a5-e5-ae-89-e8-a3-85-e6-b5-81-e8-a1-8c-e7-9a-84-e8-bd-af-e4-bb-b6.html" data-title="在Ubuntu环境下使用Automatix2来安装流行的软件" data-url="http://latteye.com/2006/12/e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e4-bd-bf-e7-94-a8automatix2-e6-9d-a5-e5-ae-89-e8-a3-85-e6-b5-81-e8-a1-8c-e7-9a-84-e8-bd-af-e4-bb-b6.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

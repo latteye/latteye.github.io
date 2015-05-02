@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>gimmie的安装使用 | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在LinuxToy上看到了Gimmie这个小东西，想要试试。在安装的过程中也遇到了一点问题，现在写来于大家分享。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gimmie的安装使用">
+<meta property="og:url" content="http://latteye.com/2006/10/gimmie-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="在LinuxToy上看到了Gimmie这个小东西，想要试试。在安装的过程中也遇到了一点问题，现在写来于大家分享。">
+<meta property="og:image" content="http://www.laroea.cn/myfiles/pic/gimmie/gimmie.jpg">
+<meta property="og:image" content="http://www.laroea.cn/myfiles/pic/gimmie/gimmie2.jpg">
+<meta property="og:image" content="http://www.laroea.cn/myfiles/pic/gimmie/gimmie3.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gimmie的安装使用">
+<meta name="twitter:description" content="在LinuxToy上看到了Gimmie这个小东西，想要试试。在安装的过程中也遇到了一点问题，现在写来于大家分享。">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-gimmie-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2006/10/gimmie-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8.html" class="article-date">
+  <time datetime="2006-10-25T15:46:00.000Z" itemprop="datePublished">2006-10-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gimmie的安装使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在<a href="http://linuxtoy.org/archives/gimmie.html" target="_blank" rel="external">LinuxToy</a>上看到了Gimmie这个小东西，想要试试。在安装的过程中也遇到了一点问题，现在写来于大家分享。<br><a id="more"></a><br>  一、安装</p>
+<p>  1.按照英文论坛上我们需要安装如下包：</p>
+<blockquote>
+<ul>
+<li>build-essential<ul>
+<li>python-dev</li>
+<li>python-gtk2-dev</li>
+<li>python-gnome2-dev</li>
+<li>python-gnome2-desktop</li>
+<li>python-gnome2-extras-dev</li>
+<li>libgnome-desktop-dev</li>
+<li>libgnomecups1.0-dev</li>
+<li>libwnck-dev</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>  在我的系统中实际安装的包有：</p>
+<blockquote>
+<p>libart-2.0-dev libavahi-client-dev libavahi-common-dev libavahi-glib-dev<br>libbonobo2-dev libbonoboui2-dev libcupsys2-dev libgconf2-dev libgcrypt11-dev<br>libgnome-desktop-dev libgnome-keyring-dev libgnome2-dev libgnomecanvas2-dev<br>libgnomecups1.0-dev libgnomeui-dev libgnomevfs2-dev libgnutls-dev<br>libgpg-error-dev libidl-dev libopencdk8-dev liborbit2-dev libselinux1-dev<br>libsepol1-dev libtasn1-3-dev libwnck-dev libxres-dev python-gnome2-dev<br>python-gnome2-extras-dev x11proto-resource-dev</p>
+</blockquote>
+<p>  2.到</p>
+<p>下载源代码包<a href="http://www.beatniksoftware.com/gimmie/releases/gimmie-0.1.1.tar.gz" target="_blank" rel="external">gimmie-0.1.1.tar.gz</a>，并解压缩。</p>
+<p>  3.进入解压缩后的目录执行：<br><code>./configure &amp;&amp; make</code></p>
+<p>  4.程序有一点小问题，模块没有被复制到合适的目录。我们手动调整一下。在软件目录下执行：<br><code>cp egg/.libs/_egg.so ..
+cp gdmclient/.libs/_gdmclient.so ..
+cp gnomecups/.libs/_gnomecups.so ..
+cp gnomedesktop/.libs/_gnomedesktop.so ..
+cp iconentry/.libs/_iconentry.so ..
+cp sexy/.libs/_sexy.so ..
+cp wnck/.libs/wnck.so ..</code></p>
+<p>  5.运行命令启动程序：<br><code>./gimmie.py</code></p>
+<p>  6.如果你希望每次开机时都能自动启动，在<strong>菜单-系统-首选项-会话-启动程序</strong>处添加gimmie.py的地址即可。</p>
+<p><img src="http://www.laroea.cn/myfiles/pic/gimmie/gimmie.jpg" alt=""></p>
+<p>  二、使用</p>
+<p>  在bar上端我们可以看到分别有Applications、Documents、Peple、Computer，只要左键单击这几个字就可以打开相应的配置菜单。<br><img src="http://www.laroea.cn/myfiles/pic/gimmie/gimmie2.jpg" alt=""><br>  在任何窗口里面，右键点击一个图标就会出现选项。选择Keep Around就可以让图标作为快捷方式显示在bar上。<br><img src="http://www.laroea.cn/myfiles/pic/gimmie/gimmie3.jpg" alt=""><br>  People是和Gaim相互关联的，你可以把你经常联系的朋友图标作为快捷方式添加。也可以快速的进行分组、添加好友的动作。另外似乎还可以监视Gmail（有那个图标，但是我这里是灰色的。）。<br>  在Computer字符上点击右键可以快速打开系统设置菜单。<br>  在Documents字符上点击右键可以快速的新建文本文件。打开标签目录。<br>  状态栏图标：比如Gaim、amule，他们曾经也显示在gimmie的右侧，但是在写此文的时候他们依然还是在Gnome的任务栏上。</p>
+<p>  如果你知道更多的gimmie设置方法，希望分享。</p>
+<p>  转贴请注明出处，谢谢配合。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2006/10/gimmie-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8.html" data-id="ci973npnh00e57opiinywkeht" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2006/10/gimmie-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2006/10/e9-80-9a-e8-bf-87-e8-84-9a-e6-9c-ac-e5-ae-89-e8-a3-85firefox-20.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          通过脚本安装Firefox 2.0
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2006/10/gnome-dock-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">gnome-dock的安装使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2006/10/gimmie-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8.html" data-title="gimmie的安装使用" data-url="http://latteye.com/2006/10/gimmie-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

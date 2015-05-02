@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>孤军大作战！疯狂DIY 1U硬件防火墙实录 | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="作者：唐华   原地址
+前言：
+前些天，经理气乎乎找到笔者说：“怎么咱们上网老掉线啊，是不是被攻击啦？咱们单位养着你这个电脑高手不能白养吧？”。笔者赶紧检查了一下，感觉主要是单位用了多年的那个宽带路由器可能有点不稳定了，所以常常掉线，这个宽带路由器是2000年那会儿花400元买的，典型的家用宽带路由器，却在公司一跑就是多年，带着整个公司的电脑上网，白天黑夜从来不关机，用的够狠的，上面落了厚厚一层土">
+<meta property="og:type" content="article">
+<meta property="og:title" content="孤军大作战！疯狂DIY 1U硬件防火墙实录">
+<meta property="og:url" content="http://latteye.com/2007/09/make-1u-firewall-with-routeros-m0n0wall.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="作者：唐华   原地址
+前言：
+前些天，经理气乎乎找到笔者说：“怎么咱们上网老掉线啊，是不是被攻击啦？咱们单位养着你这个电脑高手不能白养吧？”。笔者赶紧检查了一下，感觉主要是单位用了多年的那个宽带路由器可能有点不稳定了，所以常常掉线，这个宽带路由器是2000年那会儿花400元买的，典型的家用宽带路由器，却在公司一跑就是多年，带着整个公司的电脑上网，白天黑夜从来不关机，用的够狠的，上面落了厚厚一层土">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_1.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_2.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_3.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_4.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_5.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_6.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_7.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_8.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_9.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_10.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_11.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_12.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_13.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_14.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_15.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_16.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_17.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_18.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_19.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_20.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_21.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_22.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_23.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_24.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_25.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_26.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_27.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_28.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_29.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_30.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_31.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_32.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_33.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_33.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_34.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_35.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_36.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_37.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_38.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_39.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_40.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_41.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_42.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_43.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_44.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_45.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_46.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_47.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_48.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_49.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_50.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_51.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_52.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_53.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_54.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_55.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_56.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_57.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_58.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_59.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_60.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_61.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_62.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_63.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_64.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_65.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_66.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_67.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_68.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_69.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_70.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_71.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="孤军大作战！疯狂DIY 1U硬件防火墙实录">
+<meta name="twitter:description" content="作者：唐华   原地址
+前言：
+前些天，经理气乎乎找到笔者说：“怎么咱们上网老掉线啊，是不是被攻击啦？咱们单位养着你这个电脑高手不能白养吧？”。笔者赶紧检查了一下，感觉主要是单位用了多年的那个宽带路由器可能有点不稳定了，所以常常掉线，这个宽带路由器是2000年那会儿花400元买的，典型的家用宽带路由器，却在公司一跑就是多年，带着整个公司的电脑上网，白天黑夜从来不关机，用的够狠的，上面落了厚厚一层土">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-make-1u-firewall-with-routeros-m0n0wall" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2007/09/make-1u-firewall-with-routeros-m0n0wall.html" class="article-date">
+  <time datetime="2007-09-17T07:53:43.000Z" itemprop="datePublished">2007-09-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      孤军大作战！疯狂DIY 1U硬件防火墙实录
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>作者：唐华   <a href="http://www.pconline.com.cn/servers/skills/0604/784861.html" target="_blank" rel="external">原地址</a></p>
+<p>前言：</p>
+<p>前些天，经理气乎乎找到笔者说：“怎么咱们上网老掉线啊，是不是被攻击啦？咱们单位养着你这个电脑高手不能白养吧？”。笔者赶紧检查了一下，感觉主要是单位用了多年的那个宽带路由器可能有点不稳定了，所以常常掉线，这个宽带路由器是2000年那会儿花400元买的，典型的家用宽带路由器，却在公司一跑就是多年，带着整个公司的电脑上网，白天黑夜从来不关机，用的够狠的，上面落了厚厚一层土，估计快寿终正寝了。</p>
+<a id="more"></a>
+<p>可是听完笔者汇报之后领导依旧疑心重重，老是不踏实，非要花点钱买个硬件防火墙，把单位局域网保护起来，我心中暗暗叫苦，那是花点钱能办的事儿吗？硬件防火墙多贵啊，动辄几万元，十几万元扔进去根本看不出好来，不过再为难，领导交给咱的任务还是必须完成好，没办法，还得发挥井冈山精神，自己动手丰衣足食吧。</p>
+<p>过程：</p>
+<p>笔者打算自己组装一台硬件防火墙，基本的要求是：第一，要能替代原有的宽带路由器作为大家共享上网的路由器；第二，要具有防火墙功能，抵御常见的网络攻击，对内部网络起到保护作用。基本调子定下了，具体怎么实施呢，其实一般的中小型企事业单位根本用不到“并发12000个连接”这么高的性能指标，常常也就是几十个连接而已，所以，这套硬件应付我们这样办公室的局域网保护，应该是绰绰有余了。</p>
+<p>下面是笔者收集的几张硬件防火墙的图片，大家先看看这些名牌防火墙里外是啥样子，是不是看着确实有点眼熟啊？<br><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/1.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_1.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/2.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_2.jpg" alt=""></a></p>
+<p>下面这个带硬件防火墙功能的路由器采用的是一块笔记本硬盘。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/3.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_3.jpg" alt=""></a></p>
+<p>还是老路数，先去二手电脑市场转转，很快淘来一个二手套板：赛扬533＋主板＋256M的SD内存，主板集成显卡，价格相当便宜，就是下面这个。瞧上去不错吧，回想当年笔者曾经为了买一套二手的赛扬233（超到400）＋64M内存＋4.3G硬盘的机器花去8000元！不得不慨叹，电脑发展真是好快啊。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/4.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_4.jpg" alt=""></a></p>
+<p>这就是咱们今天要组装的防火墙的硬件平台了，欣赏一下吧，说真的，比笔者看过的有些名牌防火墙的板子都显得好。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/5.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_5.jpg" alt=""></a></p>
+<p>另一个今天的主角当然就是机箱了，很多硬件防火墙不过是多网卡的PC机而已，只是采用了UNIX类操作系统，并定制了一个特殊的机箱——盒子，就身价百倍。呵呵，这里说的那个能让PC配件身价百倍的“魔法盒子”就是一台1U钢壳特制防火墙机箱。</p>
+<p>今天笔者选用的是一台型号为1U1D360的防火墙路由器专业1U机箱。这台机箱内含一台350瓦大功率防火墙不间断纯净电源，6个高速滚珠风扇，可以保证温度较高的PC处理器和其他配件在狭小的1U空间里稳定持久地运行，其定位即是硬件防火墙、专业路由器DIY市场，所以比较全面地考虑了对市场上常见配件的兼容性，因而使用起来感觉非常顺手。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/6.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_6.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/7.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_7.jpg" alt=""></a></p>
+<p>虽然今天用的是温度较低的P3赛扬，但是要保持其能在仅仅4厘米高度的1U超薄空间里稳定持久地运行，也需要特殊的散热装备来保证，下面是一块铜冰三代P3涡轮纯铜超薄散热器，可以为全系列的P3处理器提供强劲的散热，对于一块赛扬，更是不在话下。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/8.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_8.jpg" alt=""></a></p>
+<p>现在散热器已经装好在主板上了，看上去挺有专业感觉吧。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/9.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_9.jpg" alt=""></a></p>
+<p>这个机箱里可以安装一个普通硬盘，IDE、SATA、SCSI硬盘均可，先取下机箱里的硬盘支架，将一块10G的老旧硬盘拧上，这个硬盘也是淘来的二手货，其实做防火墙用不到多大的硬盘容量，因为防火墙的操作系统往往是采用freebsd、linux等内核修改而成的，体积都很小巧，有的甚至能装入一张软盘里，和庞大的微软视窗操作系统相比真可以说都是微型系统了。</p>
+<p>正因为如此，这些系统内核都很简洁实用，运行起来轻快稳定，不会出现windows越用越慢的问题，一开机就是一年半载不用重启，也不会死机，可能感染的病毒木马也很少。其实今天我不使用这块硬盘来安装防火墙系统，只不过现在演示一下安装硬盘的形式，我今天要使用的是更加坚固耐用的电子盘，也就是专业防火墙里经常使用的DOM盘，不过一般爱好者如果找不到电子盘，也完全可以使用象这样一块普通的硬盘，一样很耐用，性能上没有什么差异，只不过可能碰到几个老鸟笑话你用件不专业，别理他们，他们恨不得你买他们十八万元一套的硬件防火墙呢。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/10.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_10.jpg" alt=""></a></p>
+<p>将上好硬盘的支架，拧到1U防火墙机箱里。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/11.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_11.jpg" alt=""></a></p>
+<p>将主板也装入机箱。这个1U防火墙机箱，采取全包藏式的设计，主板安装进去，整个被包藏在里面，合上盖子之后，从机箱外面根本看不出里面到底使用的是什么元件，因为硬件防火墙多数是禁止用户自己拆开检修的，所以，你如果DIY一套这样的防火墙给用户，丝毫不用担心他们会挑剔你使用的是什么配件，除非他不要保修了，呵呵，说得好笑，其实这还真是许多专业防火墙厂商的一贯做法，不信，您去问问那些动辄售价几万元、十几万元一套的防火墙厂商，他们的防火墙能否让我们打开参观参观？估计问十个就会有十个拒绝的。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/12.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_12.jpg" alt=""></a></p>
+<p>这块主板集成显卡但是不集成网卡，防火墙至少需要2个网卡，一个连接公网一个连接内网，所以今天我们要采用两块PCI转接卡，大家仔细看看，这两个转接卡有什么不同？对，这是两块不同的转接卡，上面那块是一块反向转接卡，而下面那块是一块常见的正向转接卡，用这两个转接卡，就可以想两个不同方向转接网卡，从而达到在1U机箱内转接两块网卡的目的。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/13.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_13.jpg" alt=""></a></p>
+<p>网卡也要稍微改造一下，宁开网卡上的螺丝钉，取下前面的铁板，在1U防火墙机箱里准备了专用的金属固定支架，可以将网卡固定在机箱上。我今天用了两块廉价的8139百兆网卡，因为手头正好有现成的，我们单位是用ADSL共享上网，网络负载要求不高，大家不一定学我，如果大家组装时，感觉8139网卡不能满足要求，建议可以到二手市场淘两块好点的拆机网卡，例如著名的3COM网卡或者英特尔82559网卡都是不错的选择，具有较高的性价比，用好的网卡可以有效提升防火墙的网络负载能力、数据吞吐能力和抗攻击能力，减少对CPU的资源占用，使系统运行更加轻快稳定。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/14.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_14.jpg" alt=""></a></p>
+<p>看，两个网卡都固定好了，这样这台机器就具有了两块百兆网卡。下一步是插上主板上的电源插头。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/15.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_15.jpg" alt=""></a></p>
+<p>插上硬盘数据线，插上主板上的POWER、RESET、SPEAKER等跳线插头。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/16.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_16.jpg" alt=""></a></p>
+<p>好了，现在咱们的防火墙已经初具规模了,欣赏一下。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/17.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_17.jpg" alt=""></a></p>
+<p>机箱上带有两条前置串口线，将串口连线的插头插到主板上，这个串口和我们现在老说的串口硬盘那个意思不太一样，大家用过老式的串口鼠标吧？就是那个口，这个串口在防火墙使用中，可以作为一个调试接口，用串口连接线将其他电脑连接到这个串口上，就可以调试维护这台防火墙，其实一般我们也很少用到。喜欢观察的朋友可能也注意到了，现在很多ADSL猫和家用宽带路由器上都带有一个这样的串口，其作用是一样的，平时也很少用到。</p>
+<p>现在请出今天的另一位明星——电子盘，笔者前面说了，虽然我在这台机器里安装了一块硬盘，但主要为了给大家做安装演示，今天并不想将防火墙的系统内核安装在硬盘上，而是要安装在更加坚固耐用的存储元件——电子盘上。这也是许多名牌防火墙宣传时爱说自己使用的是嵌入式操作系统，这种操作系统不装入硬盘，而是直接嵌入到硬件之中。</p>
+<p>那他们说的操作系统到底是嵌入到什么硬件之中呢？其实十有八九是嵌入到这个电子盘里，电子盘也被称作 DOM盘，很多商家在宣传时常常爱用“军用级存储硬件”来形容它，这种东西有点类似现在我们使用的闪存、U盘，按照容量分成8M、16M、64M、 128M、256M等多种规格，由于存储时没有机械运动，所以相对硬盘来说比较坚固耐用。</p>
+<p>当然，我并不是说所有的防火墙都使用电子盘，其实还有很多存储硬件可以使用，例如许多朋友在组装路由器、工控设备时喜欢使用CF卡，通过一种转换卡，将CF卡插入主板IDE接口，也可以当作电子盘使用，还有许多工业主板上本身就带有CF卡接口，可以直接插入CF卡来安装操作系统和其他软件，大家有兴趣可以上网搜索一下，进一步了解。</p>
+<p>今天使用的是一块PQI牌的128M容量的电子盘，支持普通PC主板的40pin的IDE硬盘接口。就是下面这块。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/18.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_18.jpg" alt=""></a></p>
+<p>近距离看看。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/19.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_19.jpg" alt=""></a></p>
+<p>看这个接口是不是和IDE硬盘的数据线接口一摸一样？这个可以直接插入主板上的IDE硬盘插口里。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/20.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_20.jpg" alt=""></a></p>
+<p>电子盘后面拖着一个小尾巴，是供电线路，接口也和IDE硬盘的大4pin供电接口一样，可以直接插入PC电源。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/21.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_21.jpg" alt=""></a></p>
+<p>把电子盘插入主板上的IDE硬盘插口，建议大家最好把电子盘插入主板的IDE1主接口，因为有时候插入IDE2副接口会出现一些问题。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/22.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_22.jpg" alt=""></a></p>
+<p>把电子盘的供电接头和电源上的大4pin接头插在一起。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/23.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_23.jpg" alt=""></a></p>
+<p>插好了，现在咱们也可以把软件嵌入硬件了，怎么样够专业吧。告诉大家这个电子盘不贵，价格根据容量不同，也就100－300元而已，比硬盘便宜。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/24.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_24.jpg" alt=""></a></p>
+<p>把显示器和键盘插入主板，现在大家就跟着我一步一步来将防火墙系统核心嵌入到咱们的防火墙硬件里。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/25.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_25.jpg" alt=""></a></p>
+<p>前面，我们将防火墙的硬件部分基本安装完毕，要嵌入防火墙核心了，市面上的大部分硬件防火墙都装了UNIX系统+软件防火墙模块，看来这套基于 UNIX系统的软件防火墙模块几乎可以称作是硬件防火墙灵魂，有了它，这台PC机就变成一台“号称支持100M带宽、并发12000个连接”的硬件防火墙了，可以拿到市场上叫出20万的高价了。</p>
+<p>那么我们怎么才能获得这样一套软件呢？当然，各家防火墙厂商对自己的软件都是深藏不露，绝对不会拿出来给大家自由使用的，那么还有其他办法吗？</p>
+<p>当然有，那就是使用开源的防火墙软件，现在国内外有很多软件开发机构，矢志开发基于FREEBSD、LINUX等开源操作系统的防火墙软件，并且将软件放在网络上供大家自由下载、测试，共同完善，其中有很多软件的性能已经达到了相当高的水平，性能不亚于一些名牌防火墙产品，其中m0n0wall是笔者最欣赏的一个，我认为m0n0wall运行稳定、功能强大、技术比较成熟，完全可以与一些国内的名牌专业防火墙产品媲美。</p>
+<p>m0n0wall对于国内的软件路由器爱好者来说早已不是什么新鲜事物，不过大家多数使用它来diy软件路由器，而忽略了它强大的防火墙功能，和其他常常被用来作为软件路由器核心的软件相比，m0n0的防火墙性能明显胜出一筹，对于来自外界的攻击和入侵，默认一律拒绝，可以很好地保护内网的安全，你看人家的名字就是wall啊，wall是什么？就是防火墙啊，可见软件作者的初衷并不是仅仅将它作为一款路由器软件，而是侧重在防火墙上。</p>
+<p>m0n0wall的安装和设置都非常简单快捷，特别适合初学者使用，软件安装好无需设置繁琐的防火墙规则，默认设置下即可为内网筑起一道强大的防火墙，一般的黑客和木马根本无法穿透这道防火墙，我的许多朋友长期使用m0n0做局域网防火墙，迄今为止还没有谁发现有人能破解它，当然，我不是说 m0n0wall是坚不可摧的，我的意思是说，m0n0wall作为一般中小型局域网的防护屏障是很好的选择，毕竟水平超群的黑客不会费劲去攻击这些小目标。理论上讲，就和世界上没有一把绝对安全的锁一样，世界上也没有一台绝对安全的防火墙，在超级黑客眼里，一切都是可以穿透的，希望大家懂得这个道理，想成为一名优秀的网络安全维护人员，除了技术过硬之外，更重要的一点就是务必注意少得罪人。</p>
+<p>m0n0wall固然好，但是因为是舶来品，国人使用起来往往还有点不适应，国内的一些发烧友和软件机构，根据国情对于m0n0wall做了不少优化工作，这些优化版本，减少了原版的bug，加强了稳定性和功能，操作上更加适合国人的习惯和口味，这其中由千际公司的工程师鲁承明先生优化的版本一直受到网友的欢迎，优化后的版本依旧是免费软件，供大家免费下载使用，现在最新的版本是1000g-1.0-060202版，在这里<a href="http://www.1000gwall.com/1000gwall.rar可以下载，该版本支持安装到普通硬盘、电子盘、CF卡上使用。" target="_blank" rel="external">http://www.1000gwall.com/1000gwall.rar可以下载，该版本支持安装到普通硬盘、电子盘、CF卡上使用。</a></p>
+<p>笔者先下载了防火墙软件模块，但是如何将这个模块安装进电子盘呢，m0n0wall不是windows下开发的软件，而是基于一种陌生的操作系统 freebsd，这个系统比linux更加让人感到陌生，但是freebsd具有神秘的稳定性，许多高端的服务器都采用这种操作系统，常常一开机就是一年不重启一次，很少有病毒可以侵袭它，一般的黑客对它也是束手无策。</p>
+<p>既然是基于陌生的操作系统，m0n0的安装自然也就有点与众不同，没有什么安装文件可以让我们双击，我们需要下载专门的“烧录”工具来将防火墙模块 “烧”进硬件里。这个工具就是physdiskwrite.exe，刚才下载的那个包含防火墙模块的压缩包里有两个文件1000g-1.0- 060202.img 和physdiskwrite.exe 其中physdiskwrite.exe就是烧录工具，另一个1000g-1.0-060202.img就是防火墙模块软件，好了，万事齐备，我们正式开始安装。</p>
+<!--page-->
+<p>先把电子盘插入一台安装有windows操作系统的PC电脑的主板IDE接口上，点击开始菜单——运行。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/26.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_26.jpg" alt=""></a></p>
+<p>输入“CMD”命令。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/27.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_27.jpg" alt=""></a></p>
+<p>调出DOS命令窗口，记住一定要这样调出窗口，切记千万不能通过“点击开始菜单——程序——附件——C：\命令提示符”这种方式来调出窗口，否则将不能正常“烧录”。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/28.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_28.jpg" alt=""></a></p>
+<p>将刚才下载的防火墙软件模块1000g-1.0-060202.img和physdiskwrite.exe烧录工具拷贝到同一个目录下，然后执行如下命令：physdiskwrite 1000g-1.0-060202.img ，如果不是往电子盘烧录，而是往IDE硬盘烧录，当你的IDE硬盘容量超过800MB，请添加参数 -u，也就是这样：physdiskwrite 1000g-1.0-060202.img -u</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/29.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_29.jpg" alt=""></a></p>
+<p>回车后，屏幕显示如下，显示出两个硬盘的参数，注意Model后面的名称，st3160021A是指的IDE硬盘，而PQI IDE DiskOnModule则是指的电子盘，别忘了今天咱们用的电子盘是PQI牌的，所以一看带有PQI字样，就知道这是电子盘。屏幕下面出现一行字，让选择哪个硬盘是要写入防火墙模块的，自然是选择PQI所在的1号，此处填写1，回车。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/30.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_30.jpg" alt=""></a></p>
+<p>屏幕提示，确认是否正确，是否真的写入，当然选Y。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/31.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_31.jpg" alt=""></a></p>
+<p>几秒钟，防火墙模块即被写入电子盘，也就是被“烧录”、“嵌入”进硬件里。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/32.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_32.jpg" alt=""></a></p>
+<p>将电子盘重新插入咱们组装的1U防火墙那台机器里，启动系统，看到屏幕上飞速滑过一串串神秘的字母和数字，和windows的启动截然不同。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/33.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_33.jpg" alt=""></a><br><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/33.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_33.jpg" alt=""></a></p>
+<p>最终，屏幕停在这里，显示6个选项。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/34.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_34.jpg" alt=""></a></p>
+<p>先选择1，是为了指定防火墙的wan口和lan口到两个网卡上。屏幕提示询问是否设置VLANs，选择N</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/35.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_35.jpg" alt=""></a></p>
+<p>现在输入两个网卡名称，先给lAN口指定网卡rl0，再给WAN口指定网卡xl0，注意网卡的名称请看屏幕左上角都有显示。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/36.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_36.jpg" alt=""></a></p>
+<p>网卡绑定好后，输入N，回车。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/37.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_37.jpg" alt=""></a></p>
+<p>屏幕显示LAN和WAN口的绑定网卡名称，并提示防火墙将保存这些设置并重启，是否继续？当然要选Y</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/38.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_38.jpg" alt=""></a></p>
+<p>重启之后，选择选项2，为了给LAN口绑定的网卡指定新的IP地址。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/39.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_39.jpg" alt=""></a></p>
+<p>m0n0wall默认的LAN网卡的IP地址是192.168.1.1，端口是80，但是我们单位的局域网使用的网段是192.168.123.x，所以要把防火墙的LAN口IP地址改成这个网段的，我输入的是：192.168.123.21</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/40.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_40.jpg" alt=""></a></p>
+<p>子网掩码输入24，这个代表的是掩码：255.255.255.0，回车。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/41.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_41.jpg" alt=""></a></p>
+<p>屏幕提示是否开启DHCP服务，当然要开启，选择Y，这样防火墙可以给内网的客户机自动分配IP地址。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/42.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_42.jpg" alt=""></a></p>
+<p>下面输入自动分配IP地址的起始IP地址，输入192.168.123.22</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/43.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_43.jpg" alt=""></a></p>
+<p>再输入自动分配IP地址的终结IP地址，输入 192.168.123.122</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/44.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_44.jpg" alt=""></a></p>
+<p>再回车。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/45.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_45.jpg" alt=""></a></p>
+<p>回到主菜单。<br><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/46.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_46.jpg" alt=""></a></p>
+<p>输入选项6，测试网络是否通。此时已经把网线插入防火墙的LAN口，输入局域网网关的IP，ping一下，哦，通了！有时候可能会弄不清到底哪个网卡是LAN，这时可以来回将网线分别插入两个网卡测试，那个通那个就是，另一个网卡就是连接外网的WAN口。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/47.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_47.jpg" alt=""></a></p>
+<p>现在专业的防火墙都可以通过IE浏览器的WEB界面来远程管理，咱们的防火墙自然也不例外。在局域网里任何一台客户机的浏览器的地址栏里输入防火墙的IP地址：<a href="http://192.168.123.21" target="_blank" rel="external">http://192.168.123.21</a> 不用输入端口，防火墙默认是80端口，立即弹出防火墙的登陆界面，要求输入用户名和密码，我输入防火墙默认用户名admin 和密码 1000g 点击确定，进入防火墙管理界面。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/48.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_48.jpg" alt=""></a></p>
+<p>看看，界面够酷吧，和一般硬件防火墙的管理界面没什么区别。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/49.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_49.jpg" alt=""></a></p>
+<p>点击左边菜单的system——general setup，在这里可以更改hostname，你可以改成任意自己喜欢的名字和符号，我改成1000gwall，domain改成 1000gwall.com，下面的DNS server填入当地常用的dns服务器的IP地址。—在向下的选项usename和password可以更改防火墙的默认登陆用户名和密码。 webgui port这个选项可以更改防火墙的web登陆端口号，默认是80，我给改成8080，这样就可以通过诸如：<a href="http://192.168.123.21:8080来访问防火墙的管理界面了，这样可以防止黑客利用默认端口攻击防火墙。" target="_blank" rel="external">http://192.168.123.21:8080来访问防火墙的管理界面了，这样可以防止黑客利用默认端口攻击防火墙。</a></p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/50.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_50.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/51.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_51.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/52.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_52.jpg" alt=""></a></p>
+<p>修改完毕，点击页面下面的save，保存修改。屏幕显示改变已经保存生效。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/53.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_53.jpg" alt=""></a></p>
+<p>现在的硬件防火墙很多都带有共享上网的路由功能，咱们这个也不例外，笔者将用这台防火墙为整个单位的局域网提供共享上网功能，替换原有的那个老路由器，大家都知道现在用来共享上网的宽带路由器都带有pppoe拨号功能，能够自动通过一条ADSL宽带拨号上网，然后让局域网里的全部电脑都共享上网，咱们的这台防火墙也有这个能力，下面选择菜单里wan选项进行设置。在TYPE（类型）中有Static（固定）、DHCP（动态）、PPPoE、PPTP、BigPond等五种类型，这里我们介绍固定IP和ADSL的设置，另外的设置方式类似。</p>
+<p>a. 固定IP方式设置</p>
+<p>如果您使用的固定IP请选择选择Static，在这里我选择了Static，Static IP configuration(静态IP地址配置)?IP Address（IP地址）输入外网IP地址219.159.82.XXX/30，Gateway（网关）输入外网网关地址 219.159.82.xxx。</p>
+<p>提示：这台防火墙子网掩码采用的是CIDR标记法，如255.255.255.0用/24表示, 255.255.0.0用/16表示，255.0.0.0用/8表示等，实际上x中的就是子网掩码二进制表示的数位1的个数，如 255.255.255.252,用CIDR标记为/30。</p>
+<p>b. ADSL宽带设置</p>
+<p>如果你使用的是ADSL，请在type中选择PPPoE在PPPoE Configuration下的username（用户名）处输入用户名，Password处输入密码，Service name（服务商名称）可以随意输入或留空，最后点击Save保存配置。</p>
+<p>提示：只需设置一种上网方式。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/54.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_54.jpg" alt=""></a></p>
+<p>设置好ADSL帐号的用户名和密码之后，选择保存设置，修改的选项立刻生效，将防火墙的wan接口接入adsl猫，lan口接入交换机或者集线器的任意一个接口（记住是任意一个lan接口而不是集线器级联用的uplink接口），其他客户机电脑接入集线器或者交换机的其他lan口，重启防火墙之后，防火墙即可自动拨号上网，并给各个客户机自动分配IP地址，局域网用户即可共享上网，当然这时大家已经处于防火墙的保护之下了。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/55.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_55.jpg" alt=""></a></p>
+<p>现在许多防火墙还具有动态主机功能，就是内置了一些动态主机软件，例如花生壳客户端、每步动态域名客户端，让其他互联网用户可以通过动态域名访问到防火墙所在的局域网内的服务器，这个功能咱们的防火墙也有，点击dynamic dns选项进行设置，首先将Enable选项勾选上，启动动态域名服务。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/56.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_56.jpg" alt=""></a></p>
+<p>在咱们的防火墙里默认内置了许多国际上常见的动态域名的客户端，我喜欢使用其中的hn.org，去hn.org网站注册一个用户名，在防火墙下拉菜单里选择使用hn.org的客户端，然后输入刚刚注册的用户名和密码就可以使用了，互联网上的网民只要输入你的动态域名，例如 1000g.hn.org即可访问到防火墙所在的公网IP地址，再通过在防火墙上设置端口映射，即可让外界的网民访问到内网的服务器，端口映射的方法我下面接着说。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/57.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_57.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/58.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_58.jpg" alt=""></a></p>
+<p>发布Web和ftp服务器</p>
+<p>我们单位局域网里安装有对外开放的web和ftp服务器，配置防火墙可以让外界网民访问web和ftp服务器。</p>
+<p>步骤一：点击Firewall——NAT，点击Inbound的+号增加配置信息。</p>
+<p>步骤二：配置Web端口映射。其中Interface设置为ＷＡＮ，Protocol设置为tcp，External port range设置为http, NAT IP设置为192.168.123.88，Local port设置为http，Description（描述信息）设置为web Server，最后Auto-add a firewall rule to permit traffic through this NAT rule一定要选定，否则必须手动在Firewall中rules 加规则，所有设置如图15所示，点击save键。</p>
+<p>步骤三：配置FTP端口映射。其中Interface设置为ＷＡＮ， Protocol设置为tcp，External port range设置为FTP, NAT IP设置为192.168.123.88，Local port设置为FTP，Description（描述信息）设置为FTP Server，最后Auto-add a firewall rule to permit traffic through this NAT rule一定要选定，否则必须手动在Firewall中rules 加规则，点击save键，再点击“apply Changes”（修改确认），系统提示应用生效，通过查看Firewall rules，发现系统已经有二条新加入的规则。在外网输入动态域名就可以访问发布的web服务器了。</p>
+<p>依此类推，可以设置好远程桌面3389、smtp、pop3等常用的端口映射，如下图显示。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/59.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_59.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/60.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_60.jpg" alt=""></a></p>
+<p>如果您并不想用这台防火墙给局域网做防护，而是想用于一台服务器的防护，可以选择firewall:NAT里面的1：1模式，这样，所有访问都将经过防火墙过滤后转发到同一个IP地址上。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/61.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_61.jpg" alt=""></a></p>
+<p>硬件防火墙都可以监控流量和资源占用率，咱们的防火墙当然也可以了，选择status——system 出现System information界面，点击上面的CPU usage——view graph选项，这时出现CPU占用率的曲线图，但是现在显示不正常，原来必须安装一个小小的插件，点击这里http: //www.1000gwall.com/1000gwallview.rar即可下载这个插件。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/62.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_62.jpg" alt=""></a></p>
+<p>在客户端电脑下载插件安装之后，登陆防火墙管理界面后即可显示现在的CPU占用率，现在的占用率很低。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/63.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_63.jpg" alt=""></a></p>
+<p>结尾：</p>
+<p>一切顺利，最后要把藏在机箱内的两个网卡的接口引出来到前面板上，自己动手做了两条网线，把网线一头插入网卡。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/64.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_64.jpg" alt=""></a></p>
+<p>网线另一头插入1U防火墙机箱前面板的前置网络接口上，这样就把百兆网卡的接口引出到机箱的前面板上了。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/65.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_65.jpg" alt=""></a></p>
+<p>一切搞好，拧上机箱盖子，好了！万事大吉，来欣赏一下我们的硬件防火墙吧！</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/66.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_66.jpg" alt=""></a></p>
+<p>怎么样，看外观上谁敢说它不专业？呵呵，不仅外观专业，使用起来更专业呢，来吧，我们快来使用一下。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/67.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_67.jpg" alt=""></a></p>
+<p>对了，这个1U防火墙机箱的前面板是可以更换的，现在电信和网通宽带存在速度瓶颈，所以很多网吧都买了昂贵的双WAN口路由器，来同时接入电信和网通线路，保证玩家们无论玩哪个线路上的游戏都通畅。假如你要组装一台双WAN口的大型网吧路由器，那么就需要3个网卡口，这是你可以换上下面这个带有三个网口的前面板。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/68.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_68.jpg" alt=""></a></p>
+<p>笔者用自己组装的防火墙替换下公司的老旧宽带路由器，将局域网内的客户机的默认网关都改成防火墙的IP地址，防火墙一开机，很快局域网里面的电脑就都可以上网了，QQ、MSN、FTP、Email等等都不用特殊设置，和直接上网没有区别，局域网里79台电脑，上网速度都很快，感觉防火墙的拨号连接速度和上网速度，都明显比原来的老路由器速度快，而且咱们防火墙默认即可断线重拨，重拨能力特强，几乎感觉不到断线，不像一般的家用宽带路由器，经常要重启才能恢复上线。</p>
+<p>有天晚上笔者把防火墙拔下来拿到一家200台电脑的网吧进行测试，发现上网速度和打游戏的速度依然很快，性能比网吧原来用的名牌硬件路由器还好，网吧老板特高兴，让我也给他装一台。对于防火墙的防范攻击性能，我没有做过多的测试，只是利用一些测试网站做了粗略检测，感觉不错，用在我们这样的普通单位，这样的防护效果已经足够了，毕竟没有什么高级黑客会费劲闯入这样无关紧要的地方来过瘾，大家看看检测结果。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/69.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_69.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/70.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_70.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/wp-content/images/diy-1u-firewall/71.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/diy-1u-firewall/_71.jpg" alt=""></a></p>
+<p>怎么样不赖吧，还不赶紧动手！装一台玩玩吧。希望大家能拿出更加详细更加合理的组装方案和设置方法、测试报告来分享。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2007/09/make-1u-firewall-with-routeros-m0n0wall.html" data-id="ci973npja009l7opi2ldld5mn" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2007/09/make-1u-firewall-with-routeros-m0n0wall.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2007/09/sodelicious-latteye-release.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          Sodelicious 1.0 修改版本
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2007/09/change-theme-sodelicious.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">更换新主题 Sodelicious v1.0</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2007/09/make-1u-firewall-with-routeros-m0n0wall.html" data-title="孤军大作战！疯狂DIY 1U硬件防火墙实录" data-url="http://latteye.com/2007/09/make-1u-firewall-with-routeros-m0n0wall.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

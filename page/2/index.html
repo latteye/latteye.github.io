@@ -1,0 +1,739 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.com/page/2/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main">
+  
+    <article id="post-linux-mpd-e6-92-ad-e6-94-be-e9-9f-b3-e4-b9-90-e9-80-9f-e5-ba-a6-e5-bf-ab-e9-97-ae-e9-a2-98-e4-b8-80-e5-88-99" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/08/linux-mpd-e6-92-ad-e6-94-be-e9-9f-b3-e4-b9-90-e9-80-9f-e5-ba-a6-e5-bf-ab-e9-97-ae-e9-a2-98-e4-b8-80-e5-88-99.html" class="article-date">
+  <time datetime="2012-08-13T02:42:01.000Z" itemprop="datePublished">2012-08-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Music/">Music</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/08/linux-mpd-e6-92-ad-e6-94-be-e9-9f-b3-e4-b9-90-e9-80-9f-e5-ba-a6-e5-bf-ab-e9-97-ae-e9-a2-98-e4-b8-80-e5-88-99.html">Linux MPD 播放音乐速度快问题一则</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上周买了一个 CM6631 放在 DAC 前面，用来解决 USB 转出 24bit 192KHz 音频的问题。同时购买了 Micro USB OTG 线，发现接在手机（Samsung Galaxy S III）上播放音乐的时候声音变快了，出来的效果很有喜感！<br>前两天 ArchLinux 崩溃，换上了 Debian，在更新为 testing 后，aplay -l 命令可以识别声卡设备。但是 mpd 播放出来的效果和手机一样稍稍变快非常幽默。</p>
+<p>折腾了一番找到了问题，原来 CM6631 默认以 48000 频率来接受PCM数据，而 MPD 的默认配置以 44100 来输出，自然 CM6631 1秒钟拿到的数据是实际超过一秒钟的。于是听起来就觉得播放速度变快了。</p>
+<p>同时还尝试配置了一些 mpd 的其他参数，原来resample还有这么多的质量选择。但是经过试听，最好的配置就是 mpd 什么都不要配置</p>
+<p><code>audio_output {
+    type        &quot;alsa&quot;
+    name        &quot;My ALSA Device&quot;
+    auto_resample    &quot;no&quot;
+    mixer_type    &quot;software&quot;    # optional
+}</code></p>
+<p>以上就是我 MPD 设备的配置参数。任何的 resample 参数都会带来明显的损失，听感上也是一耳朵的效果。对于解码器来说，最好的可能就是软件什么都不处理吧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2012/08/linux-mpd-e6-92-ad-e6-94-be-e9-9f-b3-e4-b9-90-e9-80-9f-e5-ba-a6-e5-bf-ab-e9-97-ae-e9-a2-98-e4-b8-80-e5-88-99.html" data-id="ci973npkc00ar7opimi1b4jaa" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2012/08/linux-mpd-e6-92-ad-e6-94-be-e9-9f-b3-e4-b9-90-e9-80-9f-e5-ba-a6-e5-bf-ab-e9-97-ae-e9-a2-98-e4-b8-80-e5-88-99.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-arch-linux-e4-bd-a0-e5-92-8b-e5-9c-b0-e4-ba-86-ef-bc-9f" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/08/arch-linux-e4-bd-a0-e5-92-8b-e5-9c-b0-e4-ba-86-ef-bc-9f.html" class="article-date">
+  <time datetime="2012-08-10T04:32:46.000Z" itemprop="datePublished">2012-08-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Life/">Life</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/08/arch-linux-e4-bd-a0-e5-92-8b-e5-9c-b0-e4-ba-86-ef-bc-9f.html">Arch Linux 你咋地了？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>昨天晚上接在 HomeServer 上的 USB 音频解码器不出声音了，开始找问题。接着习惯性的 <code>pacman -Syu</code> 一下，提示 “已经存在 /lib 目录，无法继续”。瞄了一眼觉得可能是维护人员弄了低级的 bug，任何系统都有 /lib 目录啊，遂 <code>pacman -Su --force</code> ，谁知道紧接着就是 glibc 安装错误，然后所有的系统命令都提示不存在了。这时候连 reboot 命令都没有了…</p>
+<p>到 <a href="http://www.linuxsir.org/bbs/forum96.html" target="_blank" rel="external">linuxsir 的 Arch 板块</a>看了两页，报错的帖子占了很多，其中的一类就是将 /lib 转移到 /usr/lib, 或者是 /lib 和 /lib64 合并。真不知道 Arch 这是怎么了，虽然以前 Arch 也出过问题，但是也没将系统弄崩溃过。也没深看下去，不知道官方想合并 lib 目录的用意何在。但无论如何，这绝对是一个危险的动作。我相信大多数发行版本都会将这个动作作为 dist upgrade 来处理。但是 Arch 没有这个概念… 于是铤而走险？</p>
+<p>今天一大早起来重新安装了 Debian Stable，后来发现 Stable 的 Kernel 和 alsa 都太老了，可能是无法识别 USB Audio 的主要原因，于是更新到 Debian testing。其实 Debian testing 还是比较稳定的。目前看来一切正常。</p>
+<p>人老了就经不起折腾了，现在只希望这些东西好好工作，别出问题。3年前还在不断的玩发行版本，遇到发行版本讨论还会参与一点。现在的心态是，工作的、稳定的就是好东西！</p>
+<p>其实各个发行版本维护了这么多年了，相互也已经形成了一种平衡关系，在我的概念里面 RedHat（CentOS），Fedora，Debian，Ubuntu，Gentoo 都有自己明确的市场定位和用户群体，常见的发行版本中不太熟悉的是 SuSe，不知道这个发行版本存在的意义。而如今市场向移动端转移，早早的被 Android 抢占了市场，站稳了脚跟。这本应该是 Linux 发行公司和 各大桌面体系所必争之地，而如今似乎大家都已经认命了。以前还看到过 Ubuntu 跑在手机上，后来也没什么新的动静。其实 Linux 手机端完全有能力做的像 iOS 那样好。当然 Android 的实时切入和 Google Play（Market）所积累的 App 资源现在很难被撼动，但还是值得一试。期待 Mozilla 的新系统。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2012/08/arch-linux-e4-bd-a0-e5-92-8b-e5-9c-b0-e4-ba-86-ef-bc-9f.html" data-id="ci973npz300of7opiiu61s7er" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2012/08/arch-linux-e4-bd-a0-e5-92-8b-e5-9c-b0-e4-ba-86-ef-bc-9f.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e5-9c-a8-mac-os-e3-80-81linux-e4-b8-8b-e4-bd-bf-e7-94-a8-keepassx-e8-87-aa-e5-8a-a8-e5-a1-ab-e5-86-99-e8-a1-a8-e5-8d-95" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/12/e5-9c-a8-mac-os-e3-80-81linux-e4-b8-8b-e4-bd-bf-e7-94-a8-keepassx-e8-87-aa-e5-8a-a8-e5-a1-ab-e5-86-99-e8-a1-a8-e5-8d-95.html" class="article-date">
+  <time datetime="2011-12-26T14:17:00.000Z" itemprop="datePublished">2011-12-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Life/">Life</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/12/e5-9c-a8-mac-os-e3-80-81linux-e4-b8-8b-e4-bd-bf-e7-94-a8-keepassx-e8-87-aa-e5-8a-a8-e5-a1-ab-e5-86-99-e8-a1-a8-e5-8d-95.html">在 Mac OS、Linux 下使用 KeePassX 自动填写表单</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近几天众多网站数据库都被爆出，现在这里鄙视一下这些网站的技术负责人！你们是猪啊，密码做单向加密是常识中的常识！多调用一个函数会死啊！<br>现在我已经不相信国内绝大多数的网站，尽管已经修改过一批密码，但还是不放心。最安全的方式则是使用无规则密码，且各个网站都不同。但是这样无疑在使用上麻烦了许多。<br>以前我用 KeePass 或者 KeePassX 的时候都是复制粘贴密码，而大多数浏览网页的时候也不需要使用 KeePass，通过网站类型的不同，自己设定几个不同等级的密码即可—这个方式现在看来已经不够安全了。<br>Google 个2个小时，发现了 KeePassX 在 MacOS 下自动填写表单功能，记录流水帐一片。
+        
+          <p class="article-more-link">
+            <a href="/2011/12/e5-9c-a8-mac-os-e3-80-81linux-e4-b8-8b-e4-bd-bf-e7-94-a8-keepassx-e8-87-aa-e5-8a-a8-e5-a1-ab-e5-86-99-e8-a1-a8-e5-8d-95.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2011/12/e5-9c-a8-mac-os-e3-80-81linux-e4-b8-8b-e4-bd-bf-e7-94-a8-keepassx-e8-87-aa-e5-8a-a8-e5-a1-ab-e5-86-99-e8-a1-a8-e5-8d-95.html" data-id="ci973npts00k17opiixyr9g3g" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2011/12/e5-9c-a8-mac-os-e3-80-81linux-e4-b8-8b-e4-bd-bf-e7-94-a8-keepassx-e8-87-aa-e5-8a-a8-e5-a1-ab-e5-86-99-e8-a1-a8-e5-8d-95.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-amazon-ec2-disk-performence" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/12/amazon-ec2-disk-performence.html" class="article-date">
+  <time datetime="2011-12-14T05:22:31.000Z" itemprop="datePublished">2011-12-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/12/amazon-ec2-disk-performence.html">Amazon EC2 Disk Performence</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文的目的是为了测试 Amazon EC2 的磁盘性能，从而为数据库搭建做性能估算。使用的测试工具为 <a href="http://sysbench.sourceforge.net/">sysbench</a> ，这款软件已经很久没更新了。所以全当得出数据为“比较值”。<br>Amazon 的 Elastic Storage 为 EC2 Instance 提供了软 Raid 的可能性，但是，其 Raid 除了具有数据保障性外，是否有性能提升？提升多少？这是这次实验的目的。<br>
+        
+          <p class="article-more-link">
+            <a href="/2011/12/amazon-ec2-disk-performence.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2011/12/amazon-ec2-disk-performence.html" data-id="ci973npzk00ot7opistg7gsxj" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2011/12/amazon-ec2-disk-performence.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mac-timemachine-server-base-on-arch-linux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/12/mac-timemachine-server-base-on-arch-linux.html" class="article-date">
+  <time datetime="2011-12-09T07:58:36.000Z" itemprop="datePublished">2011-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Life/">Life</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/12/mac-timemachine-server-base-on-arch-linux.html">Linux 上搭建 Mac TimeMachine Server</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在接触 Mac TimeMachine 之前已经用过了 Windows Home Server。HomeServer 的备份效果几乎和 TimeMachine 是一样的。不过你可以更加灵活的定制自己想要备份的频率。虽然 Mac 备份的频率不可调节，但也足够了：
+        
+          <p class="article-more-link">
+            <a href="/2011/12/mac-timemachine-server-base-on-arch-linux.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2011/12/mac-timemachine-server-base-on-arch-linux.html" data-id="ci973npje009r7opij8qv92ur" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2011/12/mac-timemachine-server-base-on-arch-linux.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-redis-persistence" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/11/redis-persistence.html" class="article-date">
+  <time datetime="2011-11-27T14:53:53.000Z" itemprop="datePublished">2011-11-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/11/redis-persistence.html">Redis Persistence</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文由 <a href="http://latteye.com"> latteye</a> 翻译自 Redis 文档 <a href="http://redis.io/topics/persistence">Redis Persistence</a>。此文比较详细的介绍了 Redis 的两种持久化方式，是 Linux SA 了解 Redis 的必读资料.同时此文整理在 <a href="http://latteye.com/doc">latteye doc 页面</a>。本人能力有限，英文水平不佳，翻译有错误的地方欢迎指出。
+        
+          <p class="article-more-link">
+            <a href="/2011/11/redis-persistence.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2011/11/redis-persistence.html" data-id="ci973npex00507opiu8j9or0m" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2011/11/redis-persistence.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-redis-replication" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/11/redis-replication.html" class="article-date">
+  <time datetime="2011-11-24T10:30:04.000Z" itemprop="datePublished">2011-11-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/11/redis-replication.html">Redis Replication</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Redis replication(复制)是一款基于 master-slave （主从）机制且易于配置和使用的 Replication。master-slave 则表示 slave 服务器可以成为 master 服务器额外的数据备份。以下是关于 Redis Replication 非常重要的知识点：
+        
+          <p class="article-more-link">
+            <a href="/2011/11/redis-replication.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2011/11/redis-replication.html" data-id="ci973npev004y7opil0er360q" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2011/11/redis-replication.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-15-minutes-introduction-to-redis-data-types" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/11/15-minutes-introduction-to-redis-data-types.html" class="article-date">
+  <time datetime="2011-11-24T09:12:59.000Z" itemprop="datePublished">2011-11-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/11/15-minutes-introduction-to-redis-data-types.html">十五分钟介绍 Redis 数据结构</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文转载自 <a href="http://blog.1001i.com/databases/redis/introduce-redis" title="1001i blog">1001i blog</a>。
+        
+          <p class="article-more-link">
+            <a href="/2011/11/15-minutes-introduction-to-redis-data-types.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2011/11/15-minutes-introduction-to-redis-data-types.html" data-id="ci973nq0t00pt7opima2dk2i7" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2011/11/15-minutes-introduction-to-redis-data-types.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-keyboard" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/11/keyboard.html" class="article-date">
+  <time datetime="2011-11-23T16:31:22.000Z" itemprop="datePublished">2011-11-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Life/">Life</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/11/keyboard.html">说说键盘吧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天收到了 Apple G5 键盘，虽然满怀期待，但又有诸多不爽。
+        
+          <p class="article-more-link">
+            <a href="/2011/11/keyboard.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2011/11/keyboard.html" data-id="ci973nplp00cb7opityaeb6sa" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2011/11/keyboard.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-redhatcentosamazon-linux-6-httpd-mod-proxy-balancer-bug" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/11/redhatcentosamazon-linux-6-httpd-mod-proxy-balancer-bug.html" class="article-date">
+  <time datetime="2011-11-19T14:16:16.000Z" itemprop="datePublished">2011-11-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/11/redhatcentosamazon-linux-6-httpd-mod-proxy-balancer-bug.html">RedHat&amp;CentOS&amp;Amazon Linux 6 httpd mod_proxy_balancer bug</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在 Amazon Linux 上应用 Apache httpd mod_proxy_balancer 模块，后端 tomcat 需要 session，于是使用到了 stickysession 功能，但起初无论如何都无法令其工作。于是再转入 CentOS 6 环境测试，发现效果一样。
+        
+          <p class="article-more-link">
+            <a href="/2011/11/redhatcentosamazon-linux-6-httpd-mod-proxy-balancer-bug.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2011/11/redhatcentosamazon-linux-6-httpd-mod-proxy-balancer-bug.html" data-id="ci973npf000547opirt0yveof" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2011/11/redhatcentosamazon-linux-6-httpd-mod-proxy-balancer-bug.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    </nav>
+  
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

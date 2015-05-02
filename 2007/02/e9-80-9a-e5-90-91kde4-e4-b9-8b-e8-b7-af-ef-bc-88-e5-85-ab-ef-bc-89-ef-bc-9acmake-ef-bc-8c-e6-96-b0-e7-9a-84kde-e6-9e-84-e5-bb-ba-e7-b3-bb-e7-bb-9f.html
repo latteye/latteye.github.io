@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>通向KDE4之路（八）：CMake，新的KDE构建系统 | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="原文地址 翻译：千里孤坟  &amp;amp; yuanjiayj
+通向KDE4之路（八）：CMake，新的KDE构建系统
+当一个项目的规模发展到像KDE这样庞大的时候，对既定设计的变更比起十年前要困难多了。起初，KDE依靠autotools工具集来构建大部分的项目，但从去年开始，KDE 4将改用一个全新的构建系统，CMake。我们认为它将很快成为世界上现存的各种构建系统中有力的竞争者之一。详情见下。
+本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通向KDE4之路（八）：CMake，新的KDE构建系统">
+<meta property="og:url" content="http://latteye.com/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e5-85-ab-ef-bc-89-ef-bc-9acmake-ef-bc-8c-e6-96-b0-e7-9a-84kde-e6-9e-84-e5-bb-ba-e7-b3-bb-e7-bb-9f.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="原文地址 翻译：千里孤坟  &amp;amp; yuanjiayj
+通向KDE4之路（八）：CMake，新的KDE构建系统
+当一个项目的规模发展到像KDE这样庞大的时候，对既定设计的变更比起十年前要困难多了。起初，KDE依靠autotools工具集来构建大部分的项目，但从去年开始，KDE 4将改用一个全新的构建系统，CMake。我们认为它将很快成为世界上现存的各种构建系统中有力的竞争者之一。详情见下。
+本">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通向KDE4之路（八）：CMake，新的KDE构建系统">
+<meta name="twitter:description" content="原文地址 翻译：千里孤坟  &amp;amp; yuanjiayj
+通向KDE4之路（八）：CMake，新的KDE构建系统
+当一个项目的规模发展到像KDE这样庞大的时候，对既定设计的变更比起十年前要困难多了。起初，KDE依靠autotools工具集来构建大部分的项目，但从去年开始，KDE 4将改用一个全新的构建系统，CMake。我们认为它将很快成为世界上现存的各种构建系统中有力的竞争者之一。详情见下。
+本">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e5-85-ab-ef-bc-89-ef-bc-9acmake-ef-bc-8c-e6-96-b0-e7-9a-84kde-e6-9e-84-e5-bb-ba-e7-b3-bb-e7-bb-9f" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e5-85-ab-ef-bc-89-ef-bc-9acmake-ef-bc-8c-e6-96-b0-e7-9a-84kde-e6-9e-84-e5-bb-ba-e7-b3-bb-e7-bb-9f.html" class="article-date">
+  <time datetime="2007-02-24T01:54:25.000Z" itemprop="datePublished">2007-02-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      通向KDE4之路（八）：CMake，新的KDE构建系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.myswear.net/forum/viewthread.php?tid=7889" target="_blank" rel="external">原文地址</a> 翻译：千里孤坟  &amp; yuanjiayj</p>
+<p>通向KDE4之路（八）：CMake，新的KDE构建系统</p>
+<p>当一个项目的规模发展到像KDE这样庞大的时候，对既定设计的变更比起十年前要困难多了。起初，KDE依靠autotools工具集来构建大部分的项目，但从去年开始，KDE 4将改用一个全新的构建系统，CMake。我们认为它将很快成为世界上现存的各种构建系统中有力的竞争者之一。详情见下。</p>
+<p>本文会着重介绍CMake，CMake不属于KDE项目，它是另一个独立开源软件小组Kitware的产品，以BSD授权协议发布。虽然我恐怕无法用截图这种形式来展现这种构建系统的特征，但是我将尽可能通过文字描述CMake之所以会受到KDE开发组欢迎的原因。<br><a id="more"></a><br>不过在正式开始讨论CMake之前，我打算先回顾一下KDE和autotools的关系史。KDE创自Qt，Qt中有一个很棒的特性被称为元对象编译器（moc），而autotools若要支持moc作为大多数KDE头文件的预处理器必须在功能上进行一些拓展。这种状况只不过是个开始，为了在构建过程中自动生成并添加所需的文件类型，KDE的开发者写了许多自用的DCOP通讯协议完成这一工作，比如加入文档编译器、语言包自动处理器、从XML中生成配置文件样本、Qt用户界面编译器（就是那些.ui文件）等，我们希望构建系统能支持对这些操作的处理。更甚者，我们还企求KDE构建系统能支持预配置、编译选项等一系列完整的工程流水线。久而久之，现在的KDE构建系统已经演变得像一只由各种器官杂凑出来的怪兽，就算这样，autotools也还是不能完全满足我们的需求。</p>
+<p>在KDE 3时代，仅有极少数所谓“编译专家”才能通彻地熟悉整个KDE构建系统，不了解内情的KDE开发者若想把一个组件从某文件夹移到另个文件夹里，别指望不花上几个小时就让这套代码能再次成功编译出来。甚至有时候，从头开始一个独立的KDE项目之前需要先部署500K左右的autotools配置，最终却只是为了支持一个简单的“hello world”类型程序。</p>
+<p>事情很明显了，KDE 4必须做些什么来摆脱这种窘境，在Akademy 2005会议中，我们决定要发掘其它可选用的构建系统。刚开始，SCons一度成为新KDE构建系统的原型，但它还是太慢了，况且经过几个月的工作，我们都没能将kdelibs成功地从autotools完整迁移出去，其中一个很大的问题就是SCons在模块化上有显著的欠缺。</p>
+<p>在这之后，有一名对KDE颇有贡献的人士，Alexander Neundorf决定尝试将KDE迁移到CMake构建系统，这一流程居然相当顺利，而且他本人还是CMake开发者的技术支持。接下来，我们只用了几个星期就顺利地把KDE中大部分东西用CMake构建成功，这样autotools终于可以彻底地被驱逐了。</p>
+<p>CMake的开发者对KDE的迁移计划给予了很多的援助，他们还参与到针对KDE构建系统的邮件列表里一起帮忙，这种合作对彼此都有益处。就像KDE开发者会和CMake开发者展开交流，提出改进建议，这能促进CMake系统中某些落后设计加速进步──他们也很乐意提供反馈，这将使得CMake会对所有采用构建系统的项目都能及时给出有效的改进。</p>
+<p>在我们的合作期间，CMake为KDE的构建作出了大量的改良。使用CMake的项目可以花更少的时间完成构建系统的建设，开发者也一定希望用来折腾构建系统的精力越少越好。如一名KDE开发者所言：“CMake不会再让你构建项目时烦得只想往自己脑袋上来一枪。”</p>
+<p>CMake的核心是读取一个容易理解的文本文件“CMakeLists.txt”，开发者可以往里面添加自己的源码目录。当您运行“cmake”命令时，它会寻找这个文件，根据里面的内容生成标准的Makefiles（UNIX平台专用）或是利用命令行开关生成XCode项目文件（用于构建OS X系统上XCode开发工具所面向的Mac程序），甚至还能通过您的源代码生成MSVC项目。此外，CMake中还有个KDE相关的特色功能，它可以基于 “CMakeLists.txt”自动创建出对应的KDevelop项目文件，这里的“CMakefiles.txt”和用来生成Makefiles的文件是一致的。</p>
+<p>KDE的代码力图确保相当的可移植性（有少数部分例外），然而这并不足以让它能在Windows这样的其它系统上构建，因为受到了autotools的局限。但是现在，由于构建系统能在别的操作系统上运行，KDE自身也同样可以了（当然，Qt在其它平台上也已经是GPL了）。</p>
+<p>在KDE 3.x中，推荐的KDE构建方式是像下面这样：</p>
+<p>`% ./configure —prefix=/foo —enable-debug<br>% make</p>
+<h1 id="make_install`">make install`</h1><p>如您所知，上面那是非常标准的autotools构建模式，只是，控制构建进程的那些脚本可是太难弄懂了。</p>
+<p>使用CMake的话，构建语法有所改变（在开闭配置选项上比旧形式更加直观），但命令还是挺相似的，见下：</p>
+<p>`% cmake -DCMAKE_INSTALL_PREFIX=/foo \<br>    -DCMAKE_BUILD_TYPE=debugfull .<br>% make</p>
+<h1 id="make_install`-1">make install`</h1><p>以上语法的变化幅度其实没多大，但却好懂多了。</p>
+<p>CMake搜索依赖对象的速度比“./configure”快了好几倍，用CMake构建kdelibs4比用autotools构建KDE 3.5.6的kdelibs所花的时间少了40%，大概是拜CMake不使用libtool组织工具链所致吧。在UNIX平台上，CMake使用的工具链是这样的：<em>cmake+make</em>，然后您再看看KDE 3.5.6的构建工具链：<em>automake+autoconf+libtool+make+sh+perl+m4</em>……伙计，对比一下吧。</p>
+<p>这里我准备凭自己的个人经验来说明CMake到底有多好用：有一天Aaron Seigo向我讨教怎么把一些原属kdesktop的组件转移到krunner下，因为到KDE 4以后kdesktop将被全部清除。如果是在KDE 3下，我就得拟定一张待办事项清单，倒不是因为代码有多难懂，而是因为这构建系统太难应付。总之无论如何，我都不想再为KDE 3做这种事了。不过在KDE 4和CMake上，我只需要把代码换个存放位置，再改几个分类名字，这场代码迁移就在构建系统中顺利就绪了，整个过程里只需在krunner的CMake 构建文件里修改两到三行而已。几分钟后，整个项目就可以重新构建，且成功完成了链接和安装。我对这件事印象很深，从此以后也致力于帮助别人做构建系统迁移的事务。反观在KDE 3时，我的脑子几乎要被构建系统弄垮，都打算放弃，不想再把代码往KDE SVN上提交了（真的不是KDE代码本身的问题啊）。</p>
+<p>事实可以表明，各位KDE编译专家以后可以少死些脑细胞了，每个人都可以较轻松地构建他们的项目并让其运行起来。或许有人有不同看法，但很多开发者都已经在对照了“CMakeLists.txt”和“autotools”语法之后直截表露出和我类似的感觉。当然了，几乎所有的KDE开发者现在还是 CMake菜鸟，为此CMake开发者已经亲身进入KDE群体中帮助我们尽可能顺利地完成系统迁移。</p>
+<p>这次CMake迁移并不是KDE项目第一次变更开发所需的核心技术了。在KDE开发早期，我们使用CVS实行源码版本控制，可惜CVS服务器维护者的脚步开始渐渐跟不上KDE发展的速度，我们这里还堆了一卡车访问时间记录比原始提交版本还要早的莫名其妙的代码文件。后来我们发现Subversion （SVN）这个全新的并行版本控制系统更加有前途，更加适合KDE项目的需要，也更加容易维护。当时，还没有一个KDE这等规模的项目是用SVN管理的，对Subversion自己来说此次迁移也是个严峻的考验，最终的结果证明了KDE和SVN能协作得很好，自KDE先行之后，很多别的项目也都跟着往 SVN上迁移了。</p>
+<p>KDE选用CMake构建系统也对公众起到了一定的示范作用，就像Subversion那样。一些其它项目也在迁移到CMake上，其中包括但不限于： Scribus、Rosegarden（原本是SCons）、PIPlot、ChickenScheme等，另外我们还有项工作是让KDE 3.x程序也能使用CMake（例如KDE 3上的KPilot就已经是了）。我认为，每一个试图支持多平台的项目都应该试试CMake，往您的源码树里加一个“CMakeLists.txt”文件不会影响既有的构建系统，反能成为体验CMake能为您做些什么的良好契机。还有，和KDE一样，除非发生不可预料的意外，CMake小组总会对产品的改进持以开放的态度。</p>
+<p>这些链接可能对有兴趣知道更多的读者有用：</p>
+<p>The original post by Alex about the port to CMake，一年多前的文章。</p>
+<p>An earlier article on KDE + CMake，曾发表在Linux每周新闻上的报道。</p>
+<p><a href="http://wiki.kde.org/tiki-index.php?page=KDECMakeIntro" target="_blank" rel="external">KDE + CMake beginners guide</a>，KDE Wiki的礼物。</p>
+<p>这篇就到此为止。下星期，我答应给大家看些炫的东西……</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e5-85-ab-ef-bc-89-ef-bc-9acmake-ef-bc-8c-e6-96-b0-e7-9a-84kde-e6-9e-84-e5-bb-ba-e7-b3-bb-e7-bb-9f.html" data-id="ci973nppv00gh7opitzza8t7u" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e5-85-ab-ef-bc-89-ef-bc-9acmake-ef-bc-8c-e6-96-b0-e7-9a-84kde-e6-9e-84-e5-bb-ba-e7-b3-bb-e7-bb-9f.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2007/02/within-temptation-e3-80-8athe-heart-of-everything-e3-80-8b-e4-b8-93-e8-be-91-e4-b8-8b-e8-bd-bd.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          Within Temptation - 《The Heart Of Everything》 - 专辑 -下载
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2007/02/unixlinux-e5-b7-a5-e5-85-b7-screen-e5-91-bd-e4-bb-a4-e4-bd-bf-e7-94-a8.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Unix/Linux 工具: Screen 命令使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e5-85-ab-ef-bc-89-ef-bc-9acmake-ef-bc-8c-e6-96-b0-e7-9a-84kde-e6-9e-84-e5-bb-ba-e7-b3-bb-e7-bb-9f.html" data-title="通向KDE4之路（八）：CMake，新的KDE构建系统" data-url="http://latteye.com/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e5-85-ab-ef-bc-89-ef-bc-9acmake-ef-bc-8c-e6-96-b0-e7-9a-84kde-e6-9e-84-e5-bb-ba-e7-b3-bb-e7-bb-9f.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

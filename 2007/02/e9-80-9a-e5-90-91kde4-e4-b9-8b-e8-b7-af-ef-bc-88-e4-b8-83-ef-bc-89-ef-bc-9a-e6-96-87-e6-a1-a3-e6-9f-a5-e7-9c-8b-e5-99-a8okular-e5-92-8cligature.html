@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>通向KDE4之路（七）：文档查看器Okular和Ligature | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="原文地址，翻译者：yuanjiayj
+本周的通向KDE4之路栏目的焦点转回到应用程序上来。今天要介绍的这两个极有前途的KDE4软件是Okular和Ligature。虽然它们是KDE4中才出现的新星，但在KDE3中都可以找到它们萌生的根基。下面是细节…
+过去，KDE中包含了各式各样的用于查看各种文件格式的程序，通过KDE的KParts技术，这些查看器在需要时可被嵌入到其它KDE程序（如 konque">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通向KDE4之路（七）：文档查看器Okular和Ligature">
+<meta property="og:url" content="http://latteye.com/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b8-83-ef-bc-89-ef-bc-9a-e6-96-87-e6-a1-a3-e6-9f-a5-e7-9c-8b-e5-99-a8okular-e5-92-8cligature.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="原文地址，翻译者：yuanjiayj
+本周的通向KDE4之路栏目的焦点转回到应用程序上来。今天要介绍的这两个极有前途的KDE4软件是Okular和Ligature。虽然它们是KDE4中才出现的新星，但在KDE3中都可以找到它们萌生的根基。下面是细节…
+过去，KDE中包含了各式各样的用于查看各种文件格式的程序，通过KDE的KParts技术，这些查看器在需要时可被嵌入到其它KDE程序（如 konque">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_vol7_356_kghostview.png">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_vol7_356_kpdf.png">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_vol7_4x_mac_okular.png">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_vol7_4x_okular.png">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_vol7_4x_ligature.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通向KDE4之路（七）：文档查看器Okular和Ligature">
+<meta name="twitter:description" content="原文地址，翻译者：yuanjiayj
+本周的通向KDE4之路栏目的焦点转回到应用程序上来。今天要介绍的这两个极有前途的KDE4软件是Okular和Ligature。虽然它们是KDE4中才出现的新星，但在KDE3中都可以找到它们萌生的根基。下面是细节…
+过去，KDE中包含了各式各样的用于查看各种文件格式的程序，通过KDE的KParts技术，这些查看器在需要时可被嵌入到其它KDE程序（如 konque">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b8-83-ef-bc-89-ef-bc-9a-e6-96-87-e6-a1-a3-e6-9f-a5-e7-9c-8b-e5-99-a8okular-e5-92-8cligature" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b8-83-ef-bc-89-ef-bc-9a-e6-96-87-e6-a1-a3-e6-9f-a5-e7-9c-8b-e5-99-a8okular-e5-92-8cligature.html" class="article-date">
+  <time datetime="2007-02-15T05:27:17.000Z" itemprop="datePublished">2007-02-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      通向KDE4之路（七）：文档查看器Okular和Ligature
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.myswear.net/forum/viewthread.php?tid=7863" target="_blank" rel="external">原文地址</a>，翻译者：yuanjiayj</p>
+<p>本周的通向KDE4之路栏目的焦点转回到应用程序上来。今天要介绍的这两个极有前途的KDE4软件是Okular和Ligature。虽然它们是KDE4中才出现的新星，但在KDE3中都可以找到它们萌生的根基。下面是细节…</p>
+<p>过去，KDE中包含了各式各样的用于查看各种文件格式的程序，通过KDE的KParts技术，这些查看器在需要时可被嵌入到其它KDE程序（如 konqueror等）中。这些查看器支持的格式有TIFF，PDF，PostScript，fax，DjVu等等。okular和Ligature从那些早期的简单的查看器的设计中汲取了大量的营养，并逐步形成了现在的样子。</p>
+<p>KDE中早就包含了一个叫作KGhostView的软件，它使用GhostScript作为后端，可用于查看PDF和PostScript这两种格式的文件。KDE已经将其作为打印预览工具。下面就是KDE 3.5.6版中KGhostScript的一张截图。请注意图中有些文字渲染失真的情况可能是我所用的发行版中所选的字体的关系，而不一定是因为 KGhostScript渲染文件的功能有缺陷。</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/vol7_356_kghostview.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_vol7_356_kghostview.png" alt=""></a></p>
+<a id="more"></a>
+<p>在KDE3系列中，KGhostView有了一个可用于查看PDF文件的竞争对手。这就是KPDF，它在功能、速度等很多方面都令KGhostView黯然失色。现在许多发行版都将KPDF作为KDE中默认的PDF浏览器。下图就是显示与上图同一文件的KPDF。</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/vol7_356_kpdf.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_vol7_356_kpdf.png" alt=""></a></p>
+<p>就个人体验来说，KDE中KPDF的表现令人惊喜。当您点击网页中PDF文件的链接，并指定在浏览器中显示它时，KPDF可快速而无缝地嵌入到Konqueror中，它表现地如此之好以至于我几乎会忘记当前页面不是HTML的了。</p>
+<p>KGhostView也还有一些高级功能如文本搜索，PDF文件的拷贝与粘贴等从来没真正实现过。不仅如此，在图层渲染，特别是加载的PDF文件中包含了大量矢量图像的时候，KPDF要快上很多。在工作中，我用到大量的地图，这些地图大都是PDF格式的，使用KGhostView查看时慢的一塌糊涂，您甚至可以逐条地看到地图上那些矢量图慢慢地显现出来。而KPDF加载相同的地图时可以做到立即显现，这就使我节省了大量的时间。</p>
+<p>KPDF不久前决定扩大它的文件支持范围，而不再仅仅支持PDF格式了，这得感谢Google公司的‘代码之夏’活动的赞助。开发者们决定对KPDF进行扩展而不是另起炉灶做个全新的软件。主要原因是KPDF已经具备了大量高级功能，这些功能在查看其它格式的文件时就不需要重新实现了。为了更准确地反映 KPDF已演化为一个可以支持众多文件格式的查看器，于是它就被改名为‘okular’。</p>
+<p>KDE4的用户们面临一个使用上的选择，即究竟是用okular还是选用Ligature，因为两者都被设计为可以支持多种的文件格式（实际上它们的有些功能是重复的）。但因为它们都可被嵌入到其它应用程序中，无论用户选用哪一个都会同样觉得高兴。我将首先谈谈okular，因为我手上掌握了关于它的大量信息。在原本功能就很完备的KPDF的基础上，开发中的okular获得了了引人注目的巨大改进。目前，它看来是KDE4中最好的应用程序之一。</p>
+<p>Pin Toscano(irc.freenode.org上他叫pinotree)是okular的开发领袖。目前它已存在于KDE SVN库中，有兴趣的朋友可以在<a href="http://websvn.kde.org/trunk/playground/graphics/okular" target="_blank" rel="external">/trunk/playground/graphics/okular</a>下找到它的源代码。它在KDE4已相当稳定-实际上它是我所试用过的最稳定的KDE4软件之一。它也已被纳为 KDE/Mac软件包的一部分。 Benjamin Reed提交了下面这张在Mac中运行的okular的截图：</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/vol7_4x_mac_okular.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_vol7_4x_mac_okular.png" alt=""></a></p>
+<p>他提到：“真爽啊，okular在OS X中运行的很快。我可以把Acrobat扔掉了！:)”</p>
+<p>我没有对它支持的所有文件格式进行测试，但根据okular网站中所列出的<a href="http://www.okular.org/formats.php" target="_blank" rel="external">支持格式</a>，它已能完全或部分支持以下11种文件格式：PDF, PS, TIFF, CHM, DjVu, DVI, XPS, OOo, FictionBook, ComicBook和s标准图形文件。为了所有这些格式都可完美地呈现在大家的面前，其开发工作仍在继续中，而更多的格式支持也已列上日程。okular 将与KDE4同时发布，届时不一定所有格式支持都会被启用，这取决于届时它的稳定程度，当然您所用的发行版也可能会作出增删的决定。</p>
+<p>下面这张图是查看ComicBook格式的okular，这种格式通常用于在线发行漫画。考虑到今后KDE4可运行多种操作系统平台上，okular甚至有可能成为最受欢迎的ComicBook查看程序。</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/vol7_4x_okular.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_vol7_4x_okular.png" alt=""></a></p>
+<p>Pino很乐意与<a href="http://www.okular.org/news.php#itemokularjoinsTheSeasonofUsabilityproject" target="_blank" rel="external">易用性小组</a>的伙伴们共同工作以改进okular的易用性，这也是 <a href="http://www.myswear.net/forum/viewthread.php?tid=7826&amp;extra=page%3D1" target="_blank" rel="external">Season of Usability</a>项目的一部分。在KDE 4.0发布之前，它的各个界面部件都将会得到几乎是彻底地精细检查，以使得它可以做的更好。</p>
+<p>KDE4中各一个可作为竞争对手的文档查看器是Ligature，其前身是KViewShell。它存在于kdegraphics模块中，所以目前它还是它所支持的各种格式的默认查看器。但对于那些更喜欢okular的人们来说，这个默认随时都可以被修改。而我所能找到的可以使Ligature继续存在于 kdegraphics模块中的唯一理由是‘历史因素’：其前身KViewShell过去本来就是kdegraphics的一部分。但这也不意味着 okular就会被KDE小看：如虽然Amarok从不曾放在正式的kdemultimedia包中，但Amarok仍是KDE最好的软件之一。</p>
+<p>目前Ligature本身支持PDF, PostScript, EPS, fax, Tiff, DjVu等文件格式，同时SVN中也有支持TeX格式的插件。在我印象中‘fax’格式与TIFF图片格式有很深的关联。Ligature的前身 KViewShell在其主kdegraphics分支中还不支持上述格式中的某几种，但在KDE3.5.x分支中已加入了对上述几种格式的支持。</p>
+<p>我试图弄一张显示PDF文件的Ligature的截图出来，奇怪的是它竟无法加载。我又试了一个PostScript文件，它加载后却什么也没显示出来。所以我只好打开了一个实在是比较无趣的DVI文件来展示Ligature当前的用户界面，但它的渲染功能也只是一般。</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/vol7_4x_ligature.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_vol7_4x_ligature.png" alt=""></a></p>
+<p>看起来Ligature与okular的用户界面很相像。这很大程度是由于它们都利用了相同的标准Qt和KDE库来绘制用户界面部件。由于 Ligature还不能显示一些格式的文档，所以我就无法将之与okular作实际的易用性对比。不过请注意，当前它还在开发状态下，出现一些低级错误也不必过于苛责。</p>
+<p>关于DVI文件的说明：为了查看DVI文件，您需要安装一些TeTeX文件，在我的发行版上加起来总共是85Mb左右——这可能是DVI文件不太受欢迎的原因之一吧，虽然这种格式的表现能力还是很出色的。当Ligature在DVI文件中找到一个超级链接时，它会在文本下显示一条下划线以示可被点击，这在某些场合下是很有用的，不过这种链接也使得文件很丑陋。okular就没用加上这种下划线，但也工作的很好。</p>
+<p>okular与Ligature实现了相似的功能，但它们的内部构架是完全不同的，而它们内部所依赖的底层库又是相同的（就像MPlayer和xine内部千差万别，但它们都使用相同的底层库来解码）。这就意味着它们不太容易合并为一个项目，而对底层库的跟进开发则可同时使得两个程序都受益。okular 将会被各个发行版单独打包，而由于现在很多发行版最终都会把kdegraphics分解为若干个包，所以Ligature也将会被打成一个单独的软件包。当然只要也安装了必要的KDE库，GNOME用户们也可以正常地使用okular和Ligature。但他们也可以使用共享底层库的<a href="http://www.gnome.org/projects/evince/" target="_blank" rel="external">Evince</a>，而Evince与GNOME环境集成的更好。</p>
+<p>本周的内容就是这些。希望可以澄清关于okular和Ligature的理解上的混乱。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b8-83-ef-bc-89-ef-bc-9a-e6-96-87-e6-a1-a3-e6-9f-a5-e7-9c-8b-e5-99-a8okular-e5-92-8cligature.html" data-id="ci973nppz00gl7opi5j6ree9k" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b8-83-ef-bc-89-ef-bc-9a-e6-96-87-e6-a1-a3-e6-9f-a5-e7-9c-8b-e5-99-a8okular-e5-92-8cligature.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2007/02/e6-98-8e-e6-9c-9d-e9-82-a3-e4-ba-9b-e4-ba-8b-e5-84-bf.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          明朝那些事儿
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2007/02/grafpup-linux-20-e5-bc-80-e5-8f-91-e7-89-88-e6-9c-ac-e5-8f-91-e5-b8-83.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Grafpup Linux 2.0 开发版本发布</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b8-83-ef-bc-89-ef-bc-9a-e6-96-87-e6-a1-a3-e6-9f-a5-e7-9c-8b-e5-99-a8okular-e5-92-8cligature.html" data-title="通向KDE4之路（七）：文档查看器Okular和Ligature" data-url="http://latteye.com/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b8-83-ef-bc-89-ef-bc-9a-e6-96-87-e6-a1-a3-e6-9f-a5-e7-9c-8b-e5-99-a8okular-e5-92-8cligature.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

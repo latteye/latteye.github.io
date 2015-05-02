@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Amazon EC2 Disk Performence | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文的目的是为了测试 Amazon EC2 的磁盘性能，从而为数据库搭建做性能估算。使用的测试工具为 sysbench ，这款软件已经很久没更新了。所以全当得出数据为“比较值”。Amazon 的 Elastic Storage 为 EC2 Instance 提供了软 Raid 的可能性，但是，其 Raid 除了具有数据保障性外，是否有性能提升？提升多少？这是这次实验的目的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Amazon EC2 Disk Performence">
+<meta property="og:url" content="http://latteye.com/2011/12/amazon-ec2-disk-performence.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="本文的目的是为了测试 Amazon EC2 的磁盘性能，从而为数据库搭建做性能估算。使用的测试工具为 sysbench ，这款软件已经很久没更新了。所以全当得出数据为“比较值”。Amazon 的 Elastic Storage 为 EC2 Instance 提供了软 Raid 的可能性，但是，其 Raid 除了具有数据保障性外，是否有性能提升？提升多少？这是这次实验的目的。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Amazon EC2 Disk Performence">
+<meta name="twitter:description" content="本文的目的是为了测试 Amazon EC2 的磁盘性能，从而为数据库搭建做性能估算。使用的测试工具为 sysbench ，这款软件已经很久没更新了。所以全当得出数据为“比较值”。Amazon 的 Elastic Storage 为 EC2 Instance 提供了软 Raid 的可能性，但是，其 Raid 除了具有数据保障性外，是否有性能提升？提升多少？这是这次实验的目的。">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-amazon-ec2-disk-performence" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/12/amazon-ec2-disk-performence.html" class="article-date">
+  <time datetime="2011-12-14T05:22:31.000Z" itemprop="datePublished">2011-12-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Amazon EC2 Disk Performence
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文的目的是为了测试 Amazon EC2 的磁盘性能，从而为数据库搭建做性能估算。使用的测试工具为 <a href="http://sysbench.sourceforge.net/" target="_blank" rel="external">sysbench</a> ，这款软件已经很久没更新了。所以全当得出数据为“比较值”。<br>Amazon 的 Elastic Storage 为 EC2 Instance 提供了软 Raid 的可能性，但是，其 Raid 除了具有数据保障性外，是否有性能提升？提升多少？这是这次实验的目的。<br><a id="more"></a></p>
+<p>参考别处资料写了一个 sysbench 测试脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line"><span class="built_in">set</span> -u</span><br><span class="line"><span class="built_in">set</span> -x</span><br><span class="line"><span class="built_in">set</span> <span class="operator">-e</span></span><br><span class="line"><span class="keyword">for</span> size <span class="keyword">in</span> <span class="number">2</span>G <span class="number">4</span>G <span class="number">8</span>G;<span class="keyword">do</span></span><br><span class="line">    <span class="keyword">for</span> mode <span class="keyword">in</span> seqwr seqrd seqrewr rndrd rndwr rndrw;<span class="keyword">do</span></span><br><span class="line">        <span class="keyword">for</span> blksize <span class="keyword">in</span> <span class="number">16384</span> ; <span class="keyword">do</span></span><br><span class="line">            sysbench --test=fileio --file-num=<span class="number">32</span> --file-total-size=<span class="variable">$size</span> prepare</span><br><span class="line">            <span class="keyword">for</span> threads <span class="keyword">in</span> <span class="number">1</span> <span class="number">4</span> <span class="number">8</span> <span class="number">16</span> <span class="number">32</span>; <span class="keyword">do</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">"===== testing <span class="variable">$blksize</span> in $ <span class="variable">$threads</span> threads"</span></span><br><span class="line">                <span class="built_in">echo</span> PARAMS <span class="variable">$size</span> <span class="variable">$mode</span> <span class="variable">$threads</span> <span class="variable">$blksize</span> &gt; sysbench-size-<span class="variable">$size</span>-mode-<span class="variable">$mode</span>-threads-<span class="variable">$threads</span>-blksz-<span class="variable">$blksize</span></span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> ; <span class="keyword">do</span></span><br><span class="line">                    sysbench --test=fileio --file-total-size=<span class="variable">$size</span> --file-test-mode=<span class="variable">$mode</span> --max-time=<span class="number">180</span> --max-requests=<span class="number">100000000</span> --num-threads=<span class="variable">$threads</span> --init-rng=on --file-num=<span class="number">32</span> --file-extra-flags=direct --file-fsync-freq=<span class="number">0</span> --file-block-size=<span class="variable">$blksize</span> run | tee <span class="operator">-a</span> sysbench-size-<span class="variable">$size</span>-mode-<span class="variable">$mode</span>-threads-<span class="variable">$threads</span>-blksz-<span class="variable">$blksize</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br><span class="line">                <span class="keyword">done</span></span><br><span class="line">            <span class="keyword">done</span></span><br><span class="line">            sysbench --test=fileio --file-total-size=<span class="variable">$size</span> cleanup</span><br><span class="line">        <span class="keyword">done</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<font size="3"><strong>基础数值</strong></font>
+
+<p>首先，来一款手头上的普通三星 160G 硬盘，将其作为一个参考数值。</p>
+<p><strong><font color="Teal">Form 1 — </font>fsync at end of test</strong></p>
+<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th>RndWR</th><br><th>RndReWr</th><br></tr><br><tr><br><th>Trd 1</th><br><td>3481\54M</td><br><td>3771\58M</td><br><td>4152\64M</td><br><td>114\1.7M</td><br><td>181\2.8M</td><br><td>123\1.9M</td><br></tr><br><tr><br><th>Trd 4</th><br><td>1951\30M</td><br><td>4403\68M</td><br><td>2324\36M</td><br><td>114\1.7M</td><br><td>181\2.8M</td><br><td>124\1.9M</td><br></tr><br><tr><br><th>Trd 8</th><br><td>1289\20M</td><br><td>4287\66M</td><br><td>2630\41M</td><br><td>114\1.7M</td><br><td>181\2.8M</td><br><td>&nbsp;</td><br></tr><br><tr><br><th>Trd 16</th><br><td>1600\25M</td><br><td>4133\64M</td><br><td>1727\26M</td><br><td>115\1.7M</td><br><td>181\2.8M</td><br><td>&nbsp;</td><br></tr><br><tr><br><th>Trd 32</th><br><td>1939\30M</td><br><td>3952\61M</td><br><td>2080\32M</td><br><td>115\1.8M</td><br><td>182\2.8M</td><br><td>&nbsp;</td><br></tr><br></table>
+
+<p><strong><font color="Teal">Form 2 — </font><font color="red">fsync per write request</font></strong></p>
+<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th>RndWR</th><br><th>RndReWr</th><br></tr><br><tr><br><th>Trd 1</th><br><td>33\543Kb</td><br><td>3842\60Mb</td><br><td>36\576Kb</td><br><td>110\1.7Mb</td><br><td>17\280Kb</td><br><td>31\510Kb</td><br></tr><br><tr><br><th>Trd 4</th><br><td>35\575Kb</td><br><td>4400\68Mb</td><br><td>34\556Kb</td><br><td>109\1.7Mb</td><br><td>26\418Kb</td><br><td>43\694Kb</td><br></tr><br><tr><br><th>Trd 8</th><br><td>34\545Kb</td><br><td>4267\66Mb</td><br><td>30\485Kb</td><br><td>111\1.7Mb</td><br><td>28\452Kb</td><br><td>47\756Kb</td><br></tr><br><tr><br><th>Trd 16</th><br><td>33\541Kb</td><br><td>4138\64Mb</td><br><td>34\545Kb</td><br><td>110\1.7Mb</td><br><td>30\481Kb</td><br><td>50\813Kb</td><br></tr><br><tr><br><th>Trd 32</th><br><td>33\532Kb</td><br><td>3942\61Mb</td><br><td>34\558Kb</td><br><td>110\1.7Mb</td><br><td>50\813Kb</td><br><td>65\1.0Mb</td><br></tr><br></table>
+
+<p>一些缩写解释如下：</p>
+<pre lang="ini">
+Req&Trans/s=Request & Transferred/sec
+TRD=Threads
+SEQ=sequency
+RD=read
+WR=Write
+RND=Random
+REWR=Read&Write
+</pre>
+
+<p>你看到的是一块非常普通的硬盘，他的顺序写也只有每秒54M，而现在好一些的硬盘都可以做到每秒80M以上的顺序写了。<br>来看看 Amazon 的测试数据吧。</p>
+<font size="3"><strong>Amazon Micro Instance with Single Elastic Storage</strong></font>
+
+<p><strong><font color="Teal">Form 3 — </font>fsync at end of test</strong></p>
+<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th><font color="red">RndRD</font></th><br><th><font color="red">RndWR</font></th><br><th><font color="red">RndReWr</font></th><br></tr><br><tr><br><th>Trd 1</th><br><td>235\3.6M</td><br><td>1521\23M</td><br><td>256\4.0M</td><br><td><font color="red">1525\23M</font></td><br><td><font color="red">222\3.4M</font></td><br><td><font color="red">523\8.1M</font></td><br></tr><br><tr><br><th>Trd 4</th><br><td>247\3.8M</td><br><td>2480\38M</td><br><td>253\3.9M</td><br><td><font color="red">3138\49M</font></td><br><td><font color="red">1005\15M</font></td><br><td><font color="red">1698\26M</font></td><br></tr><br><tr><br><th>Trd 8</th><br><td>256\4.0M</td><br><td>3483\54M</td><br><td>251\3.9M</td><br><td><font color="red">8482\81M</font></td><br><td><font color="red">1691\26M</font></td><br><td><font color="red">1653\25M</font></td><br></tr><br><tr><br><th>Trd 16</th><br><td>251\3.9M</td><br><td><font color="red">5959\93M</font></td><br><td>243\3.7M</td><br><td><font color="red">1594\24M</font></td><br><td><font color="red">1888\29M</font></td><br><td><font color="red">1386\21M</font></td><br></tr><br><tr><br><th>Trd 32</th><br><td>251\3.9M</td><br><td><font color="red">6387\99M</font></td><br><td>260\4.0M</td><br><td><font color="red">5452\85M</font></td><br><td><font color="red">1303\20M</font></td><br><td>&nbsp;</td><br></tr><br></table>
+
+<p>请注意看红色的部分，Amazon 磁盘的测试结果，写操作差的一塌糊涂，几乎和个U盘一样，但是只要有读操作！尤其是随机读取操作，数据就牛逼的一塌糊涂。其中随机读取最佳成绩为 5452\85M，而单个物理硬盘仅为 115\1.8M 。天壤之别！<br>而且 RndWr 的写入比 SeqWr 要快了很多，这肯定是因为逻辑磁盘到物理磁盘之间存在数据分片。</p>
+<p><strong>猜测：</strong><br>1.Elastic Storage 和EC2 instance 之间很可能是走网络的。<br>2.一定有数据冗余机制，但估计不是 RAID。<br>3.有很大的 cache 在前面。很可能在用 SSD 做 cache。</p>
+<p>这测试结果，你说好么，写入速度慢成这样…这鸟样也太过分了一点。你说他差么，随机读牛成这样… 没办法形容了。</p>
+<font size="3"><strong>Amazon Micro Instance with Raid 0 （2 disk）</strong></font>
+
+<p><strong><font color="Teal">Form 4 — </font>fsync at end of test</strong></p>
+<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th><font color="red">RndWR</font></th><br><th><font color="red">RndReWr</font></th><br></tr><br><tr><br><th>Trd 1</th><br><td><font color="blue">194\3.0M</font></td><br><td>1440\22M</td><br><td>289\4.5M</td><br><td>1430\22M</td><br><td>188\2.9M</td><br><td>494\7.7M</td><br></tr><br><tr><br><th>Trd 4</th><br><td><font color="blue">182\2.7M</font></td><br><td>2631\41M</td><br><td>320\3.1M</td><br><td>3226\50M</td><br><td>650\10M</td><br><td>1248\19M</td><br></tr><br><tr><br><th>Trd 8</th><br><td><font color="blue">190\2.9M</font></td><br><td>3753\58M</td><br><td>297\3.2M</td><br><td>4330\67M</td><br><td>1612\25M</td><br><td><font color="red">2781\43M</font></td><br></tr><br><tr><br><th>Trd 16</th><br><td><font color="blue">182\2.8M</font></td><br><td>2895\45M</td><br><td>199\5.0M</td><br><td>3124\48M</td><br><td><font color="red">2121\33M</font></td><br><td><font color="red">2875\44M</font></td><br></tr><br><tr><br><th>Trd 32</th><br><td><font color="blue">190\2.9M</font></td><br><td>2465\38M</td><br><td>206\4.6M</td><br><td>4161\65M</td><br><td><font color="red">2158\33M</font></td><br><td><font color="red">3671\57M</font></td><br></tr><br></table>
+
+<p>2 Disks Raid0 几乎和单硬盘没有什么太大变化，SeqWr 的数值全线微幅下降，可能是由于系统做软 Raid，系统层面有所开销所致。RndWr 在 16 线程和 32线程略微高一点。但也不是本质性提升。<br>RndRW 8、16、32 有明显提高，但是很难判断是某个时间段 Amazon IO 比较空闲所致，还是 Raid0 的帮助。有一种可能是我做 md 的时候使用的默认 chunk 为 64，而 Amazon 本身的 chunk 比 64 大，所以我这么操作以后造成了更加分散的数据分布，所以 RndRW 会略好一点。但也很难解释为什么 RndRd 没有明显高起来。</p>
+<p>同时我还做了 6 Disk Raid0 测试，由于数据和 2 Disk 实在是没啥差距，就不贴上来了。<br>总的感觉 Amazon 上做 Raid 是件无意义的事情。这与国外一个人的测试[ <a href="http://af-design.com/blog/2009/02/27/amazon-ec2-disk-performance/" target="_blank" rel="external">1</a> <a href="http://af-design.com/blog/2010/03/02/honesty-box-ebs-performance-revisited/" target="_blank" rel="external">2</a> ]相去甚远。不止是结论差异，性能也有差异，他在 6 Disk Raid0 的情况下 Seq Input 居然可以走到接近 110M 的速度，但是他的 Rnd Seek 在8Disk 的情况下最高也只走到 4000左右。我怀疑这是 Instance 差异导致，接下来看看 m1.large 的测试数据。</p>
+<font size="3"><strong>Amazon EC2 m1.large NoRaid</strong></font>
+
+<p><strong><font color="Teal">Form 5 — </font>fsync at end of test</strong></p>
+<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th>RndWR</th><br><th>RndReWr</th><br></tr><br><tr><br><th>Trd 1</th><br><td>1084\16M</td><br><td>2330\36M</td><br><td>1149\17M</td><br><td>2134\33M</td><br><td>1124\17M</td><br><td>1378\21M</td><br></tr><br><tr><br><th>Trd 4</th><br><td>1058\16M</td><br><td>5445\85M</td><br><td>1113\17M</td><br><td>5586\87M</td><br><td>2039\31M</td><br><td>2904\45M</td><br></tr><br><tr><br><th>Trd 8</th><br><td>1053\16M</td><br><td>6509\101M</td><br><td>1147\17M</td><br><td>6569\102M</td><br><td>2112\33M</td><br><td>3054\47M</td><br></tr><br><tr><br><th>Trd 16</th><br><td>1026\16M</td><br><td>6195\96M</td><br><td>1122\17M</td><br><td>6486\101M</td><br><td>2144\33M</td><br><td>3802\59M</td><br></tr><br><tr><br><th>Trd 32</th><br><td>1034\16M</td><br><td>5985\93M</td><br><td>1158\18M</td><br><td>6490\101M</td><br><td>2149\33M</td><br><td>3859\60M</td><br></tr><br></table>
+
+<p><strong><font color="Teal">Form 6 — </font><font color="red">fsync every 64 times write(1M)</font></strong></p>
+<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th>RndWR</th><br><th>RndReWr</th><br></tr><br><tr><br><th>Trd 1</th><br><td>1112\17M</td><br><td>2122\33M</td><br><td>1117\17M</td><br><td>2139\33M</td><br><td>1097\17M</td><br><td>1385\21M</td><br></tr><br><tr><br><th>Trd 4</th><br><td>1073\16M</td><br><td>5598\87M</td><br><td>1097\17M</td><br><td>5759\89M</td><br><td>2263\35M</td><br><td>3179\49M</td><br></tr><br><tr><br><th>Trd 8</th><br><td>1064\16M</td><br><td>6453\100M</td><br><td>1122\17M</td><br><td>6563\102M</td><br><td>2164\33M</td><br><td>3740\58M</td><br></tr><br><tr><br><th>Trd 16</th><br><td>1118\17M</td><br><td>6511\101M</td><br><td>1138\17M</td><br><td>6607\103M</td><br><td>2060\32M</td><br><td>3763\58M</td><br></tr><br><tr><br><th>Trd 32</th><br><td>1083\16M</td><br><td>6715\1044M</td><br><td>1173\18M</td><br><td>6713\104M</td><br><td>1997\31M</td><br><td>3880\60M</td><br></tr><br></table>
+
+<p><strong><font color="Teal">Form 7 — </font><font color="red">fsync per write request</font></strong></p>
+<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th>RndWR</th><br><th>RndReWr</th><br></tr><br><tr><br><th>Trd 1</th><br><td>353\5.5M</td><br><td>1808\28M</td><br><td>371\5.8M</td><br><td>2017\31M</td><br><td>289\4.5M</td><br><td>677\10M</td><br></tr><br><tr><br><th>Trd 4</th><br><td>352\5.5M</td><br><td>5003\78M</td><br><td>395\6.1M</td><br><td>5256\82M</td><br><td>1237\19M</td><br><td>1634\25M</td><br></tr><br><tr><br><th>Trd 8</th><br><td>350\5.4M</td><br><td>6071\94M</td><br><td>388\6.0M</td><br><td>5825\91M</td><br><td>1589\24M</td><br><td>2879\44M</td><br></tr><br><tr><br><th>Trd 16</th><br><td>355\5.5M</td><br><td>6420\100M</td><br><td>360\5.6M</td><br><td>6172\96M</td><br><td>1607\25M</td><br><td>3104\48M</td><br></tr><br><tr><br><th>Trd 32</th><br><td>349\5.4M</td><br><td>6507\101M</td><br><td>374\5.8M</td><br><td>6248\97M</td><br><td>1703\26M</td><br><td>3156\49M</td><br></tr><br></table>
+
+<font size="3"><strong>Amazon EC2 m1.large 6 Disk Raid 0</strong></font>
+
+<p><strong><font color="Teal">Form 8 — </font><font color="red">fsync per write request</font></strong></p>
+<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th>RndWR</th><br><th>RndReWr</th><br></tr><br><tr><br><th>Trd 1</th><br><td>164\2.5M</td><br><td>1605\25M</td><br><td>225\3.5M</td><br><td>1338\20M</td><br><td>238\3.7M</td><br><td>280\4.3M</td><br></tr><br><tr><br><th>Trd 4</th><br><td>177\2.7M</td><br><td>3707\57M</td><br><td>242\3.7M</td><br><td>4730\73M</td><br><td>649\10M</td><br><td>671\10M</td><br></tr><br><tr><br><th>Trd 8</th><br><td>176\2.7M</td><br><td>5043\78M</td><br><td>237\3.7M</td><br><td>7538\117M</td><br><td>948\14M</td><br><td>1083\16M</td><br></tr><br><tr><br><th>Trd 16</th><br><td>163\2.5M</td><br><td>5927\92M</td><br><td>233\3.6M</td><br><td>9168\143M</td><br><td>1006\15M</td><br><td>1273\19M</td><br></tr><br><tr><br><th>Trd 32</th><br><td>152\2.3M</td><br><td>9210\143M</td><br><td>240\3.7M</td><br><td>10025\156M</td><br><td>573\8.9M</td><br><td>1369\21M</td><br></tr><br></table>
+
+<p>根据这些数据可以得到以下结论：</p>
+<p>1. Large 比 Micro 在 IO 方面性能好。<br>2. RAID 无意义。<br>3. 瓶颈在连续写。<br>4. Amazon 机器即使在 fsync per write request 的情况下，随机写也可以达到 1000/s ，而随机读在 5000-6000/s。其随机性能比得上 SSD 了。<br>5. 由于 MySQL Dirty Page 有两次写，两次写空间为 2M，每写1M sync 一次，所以上面专门有 64 times sync 的测试数据。其连续写数据，我觉得可以做为 Amazon Large MySQL 写入瓶颈数值参考。<br>6. 不要轻易相信别人的神化！</p>
+<p>很多 MySQL 的参数设置还需要结合很多信息才能确定，单靠磁盘监测还不够。以后再开别的文章来探讨吧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2011/12/amazon-ec2-disk-performence.html" data-id="ci973npzk00ot7opistg7gsxj" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2011/12/amazon-ec2-disk-performence.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2011/12/e5-9c-a8-mac-os-e3-80-81linux-e4-b8-8b-e4-bd-bf-e7-94-a8-keepassx-e8-87-aa-e5-8a-a8-e5-a1-ab-e5-86-99-e8-a1-a8-e5-8d-95.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          在 Mac OS、Linux 下使用 KeePassX 自动填写表单
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2011/12/mac-timemachine-server-base-on-arch-linux.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Linux 上搭建 Mac TimeMachine Server</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2011/12/amazon-ec2-disk-performence.html" data-title="Amazon EC2 Disk Performence" data-url="http://latteye.com/2011/12/amazon-ec2-disk-performence.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

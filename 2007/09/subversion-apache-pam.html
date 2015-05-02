@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Subversion 通过 Apache 结合 PAM 达到域验证 | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、概述
+Subversion 是一款开源的版本控制工具。作为 CVS 的替代品，他拥有众多优点。 其中一点即使可以在 Apache 下完全作模块化运行，通过了 Apache 这个接口，就可以使用 Apache 提供的众多功能。
+Apache 自然可以和 PAM 结合，于是 Subversion 也可以通过 PAM 来进行用户的多种验证方式。在企业中域是较多被使用的一种验证方式。 Winbind">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Subversion 通过 Apache 结合 PAM 达到域验证">
+<meta property="og:url" content="http://latteye.com/2007/09/subversion-apache-pam.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="一、概述
+Subversion 是一款开源的版本控制工具。作为 CVS 的替代品，他拥有众多优点。 其中一点即使可以在 Apache 下完全作模块化运行，通过了 Apache 这个接口，就可以使用 Apache 提供的众多功能。
+Apache 自然可以和 PAM 结合，于是 Subversion 也可以通过 PAM 来进行用户的多种验证方式。在企业中域是较多被使用的一种验证方式。 Winbind">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Subversion 通过 Apache 结合 PAM 达到域验证">
+<meta name="twitter:description" content="一、概述
+Subversion 是一款开源的版本控制工具。作为 CVS 的替代品，他拥有众多优点。 其中一点即使可以在 Apache 下完全作模块化运行，通过了 Apache 这个接口，就可以使用 Apache 提供的众多功能。
+Apache 自然可以和 PAM 结合，于是 Subversion 也可以通过 PAM 来进行用户的多种验证方式。在企业中域是较多被使用的一种验证方式。 Winbind">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-subversion-apache-pam" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2007/09/subversion-apache-pam.html" class="article-date">
+  <time datetime="2007-09-12T06:37:59.000Z" itemprop="datePublished">2007-09-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Subversion 通过 Apache 结合 PAM 达到域验证
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>一、概述</strong></p>
+<p><a href="http://subversion.tigris.org/" target="_blank" rel="external">Subversion</a> 是一款开源的版本控制工具。作为 CVS 的替代品，他拥有<a href="http://www.subversion.org.cn/svnbook" target="_blank" rel="external">众多优点</a>。 其中一点即使可以在 Apache 下完全作模块化运行，通过了 Apache 这个接口，就可以使用 Apache 提供的众多功能。</p>
+<p>Apache 自然可以和 PAM 结合，于是 Subversion 也可以通过 PAM 来进行用户的多种验证方式。在企业中域是较多被使用的一种验证方式。 Winbind 已经在<a href="http://linuxblog.cn/2007/09/add-linux-to-windows-domain-with-winbind.html" target="_blank" rel="external">前一文</a>中介绍过了。此文不再描述通过 Winbind 加域的方法。</p>
+<p>Subversion 有很棒的<a href="http://www.subversion.org.cn" target="_blank" rel="external">中文站</a>。SVN 即为 Subversion 简称。<br><a id="more"></a></p>
+<p><strong>二、安装包</strong></p>
+<p>在 CentOS 环境下以下包需要安装：</p>
+<blockquote>
+<p>httpd   #Apache<br>mod_dav_svn   #Subversion 在 Apache 中的模块<br>mod_auth_pam  # Apache 中 PAM 模块<br>subversion  # svn 程序<br>通过 yum 即可方便的安装：</p>
+</blockquote>
+<p><code>yum install httpd mod_dav_svn mod_auth_pam subversion</code></p>
+<p><strong>三、http 配置</strong></p>
+<p>在 CentOS 4.5 下 apache 的配置文件在 <em>/etc/httpd</em> 目录下。请注意，<em>/etc/httpd/conf.d</em> 目录下的配置文件具有和 <strong><em>/etc/httpd/conf/httpd.conf</em></strong> 等价的作用，所以劲量让自己的配置在 <em>/etc/httpd/conf.d</em> 下完成。</p>
+<p>创建配置文件： <em>/etc/httpd/conf.d/subversion.conf</em></p>
+<blockquote>
+<p>LoadModule dav_svn_module     modules/mod_dav_svn.so   #此处即为 Apache 调用 SVN 模块<br>LoadModule authz_svn_module   modules/mod_authz_svn.so    #此模块提供了目录级别用户验证的能力，详细资料可以参考 <a href="http://man.chinaunix.net/linux/debian/debian_learning/ch09s14.html" target="_blank" rel="external"><strong>Debian的文档</strong></a> 。</p>
+<h1 id="开始定义SVN仓库的位置：">开始定义SVN仓库的位置：</h1><p><location><br>DAV svn  # 通过 DAV 模块调用其 SVN 模块<br>SVNPath /var/svn/repos  #指定SVN仓库的绝对地址<br>AuthType Basic #用户验证方式，验证方式有多种，可以参考 <a href="http://www.chinaunix.net/jh/13/1943.html" target="_blank" rel="external"><strong>此文</strong></a>，这也是网络上流传比较广的一遍文章。我觉得还可以有更好、更通俗的文章来解释<strong>验证方式</strong>的问题。<br>AuthName “Authorization Realm”  #引号内的内容会显示在你访问的 Subversion 服务器标题上。<br>AuthPAM_Enabled on  #通过这个参数告诉Apache，当用户访问此虚拟目录的时候，启用 PAM 验证接口<br>Require valid-user #<br></location><br><strong>四、创建 SVN 仓库</strong></p>
+</blockquote>
+<p>使用 svnadmin create 命令来创建仓库：</p>
+<p><code>svnadmin create /var/svn/repos</code></p>
+<p><strong>五、配置 PAM</strong></p>
+<p>在安装了 mod_auth_pam 之后，系统中会出现以下两个库文件：</p>
+<blockquote>
+<p>/usr/lib/httpd/modules/mod<em>auth_pam.so<br>/usr/lib/httpd/modules/mod_auth_sys_group.so<br>你需要确保他们在正确的位置，以便 Apache 可以通过 **_AuthPAM_Enabled on</em>** 参数来调用他。</p>
+</blockquote>
+<p>编辑 <em>/etc/pam.d/httpd</em> 文件来定义 Apache 通过 PAM 时的验证方式。</p>
+<p>以下是我实验中此文件的内容：</p>
+<blockquote>
+<h1 id="%PAM-1-0">%PAM-1.0</h1><p>auth       required     /lib/security/pam<em>winbind.so<br>account    required     pam_permit.so<br>有两点需要提醒：首先 /etc/pam.d/httpd 文件也是在 mod_auth_pam 包里面的。其次，很多地方都给出了这样的参数 _auth   required  /lib/security/pam_winbind.so service=system-auth</em>，这在我的电脑上导致了 message 的报警：<br>pam_winbind[4603]: pam_parse: unknown option; service=system-auth<br>在我去掉了：service=system-auth 参数之后便没有了这样的报警，且功能不影响。</p>
+</blockquote>
+<p><strong>六、琐碎的处理</strong></p>
+<p>到此，当你重启了 httpd 服务之后，你的 SVN 应该就可以正常工作了。如果出现了一些问题，比如“无权限访问”等。你可以尝试以下操作：</p>
+<p>1.修改 SVN 目录所有人为 apache。<br>2.修改 SVN 目录权限。<br>3.按照 <a href="http://forum.ubuntu.org.cn/viewtopic.php?t=2796&amp;highlight=apache+svn" target="_blank" rel="external">Ubuntu 论坛中的帖子</a>，执行：</p>
+<p><code>svnserve -d -T -r /svnpath</code></p>
+<h1 id="我还没搞懂这个命令的意思，但他的确为我解决了一些问题。">我还没搞懂这个命令的意思，但他的确为我解决了一些问题。</h1><p>您可以通过 <a href="http://ip/repos" target="_blank" rel="external">http://ip/repos</a> 类似的路径来访问它，具体取决于你在配置文件中的定义。</p>
+<p>不知为何，mod_auth_pam 包我总是 yum 不到，所以也提供在此。此包适合 CentOS 4.5，<a href="http://down.linuxblog.cn/soft/mod_auth_pam-1.2-4.i386.rpm" target="_blank" rel="external">点击下载</a>。</p>
+<p>如果您觉得此文有错误的地方，或者是需要补充的地方，请来信告诉我。</p>
+<p>latteye@gmail.com</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2007/09/subversion-apache-pam.html" data-id="ci973npdl003n7opixam9tdxo" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2007/09/subversion-apache-pam.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2007/09/change-tty-resolution-with-framebuffer.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          修改启动参数调整 tty 分辨率
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2007/09/add-linux-to-windows-domain-with-winbind.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">使用 Winbind 将 Linux 加入 Windows 域环境</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2007/09/subversion-apache-pam.html" data-title="Subversion 通过 Apache 结合 PAM 达到域验证" data-url="http://latteye.com/2007/09/subversion-apache-pam.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

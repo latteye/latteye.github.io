@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>通向KDE4之路（九）：Dolphin与Konqueror | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="经常注意看KDE新闻的朋友也许已经注意到了，最近在kdebase模块中多了一个新东西。Dolphin文件管理器作为Konqueror的补充被加入了kdebase。以下是这个新的文件管理器以及它与Konqueror和KDE相关部分的关系的详细内容。
+首先大家对KDE中的文件管理器作一个回顾：出现在KDE 1.x中的是KFM（KDE文件管理器），它是一个初步的拥有一定网络浏览功能的文件管理器。下面是一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通向KDE4之路（九）：Dolphin与Konqueror">
+<meta property="og:url" content="http://latteye.com/2007/03/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b9-9d-ef-bc-89-ef-bc-9adolphin-e4-b8-8ekonqueror.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="经常注意看KDE新闻的朋友也许已经注意到了，最近在kdebase模块中多了一个新东西。Dolphin文件管理器作为Konqueror的补充被加入了kdebase。以下是这个新的文件管理器以及它与Konqueror和KDE相关部分的关系的详细内容。
+首先大家对KDE中的文件管理器作一个回顾：出现在KDE 1.x中的是KFM（KDE文件管理器），它是一个初步的拥有一定网络浏览功能的文件管理器。下面是一">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol10_1x_kfm.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol10_356_konq.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol10_4x_konq.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol10_4x_dolphin_breadcrumb.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol10_4x_dolphin_alt.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol10_4x_dolphin_options.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通向KDE4之路（九）：Dolphin与Konqueror">
+<meta name="twitter:description" content="经常注意看KDE新闻的朋友也许已经注意到了，最近在kdebase模块中多了一个新东西。Dolphin文件管理器作为Konqueror的补充被加入了kdebase。以下是这个新的文件管理器以及它与Konqueror和KDE相关部分的关系的详细内容。
+首先大家对KDE中的文件管理器作一个回顾：出现在KDE 1.x中的是KFM（KDE文件管理器），它是一个初步的拥有一定网络浏览功能的文件管理器。下面是一">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b9-9d-ef-bc-89-ef-bc-9adolphin-e4-b8-8ekonqueror" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2007/03/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b9-9d-ef-bc-89-ef-bc-9adolphin-e4-b8-8ekonqueror.html" class="article-date">
+  <time datetime="2007-03-03T10:30:31.000Z" itemprop="datePublished">2007-03-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      通向KDE4之路（九）：Dolphin与Konqueror
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>经常注意看KDE新闻的朋友也许已经注意到了，最近在kdebase模块中多了一个新东西。<a href="http://enzosworld.gmxhome.de/" target="_blank" rel="external">Dolphin文件管理器</a>作为Konqueror的补充被加入了kdebase。以下是这个新的文件管理器以及它与Konqueror和KDE相关部分的关系的详细内容。</p>
+<p>首先大家对KDE中的文件管理器作一个回顾：出现在KDE 1.x中的是KFM（KDE文件管理器），它是一个初步的拥有一定网络浏览功能的文件管理器。下面是一张KFM的截图（从kde.org的截图库里找出来的），从图中您可以对它的操作方式有一个了解。</p>
+<a id="more"></a>
+<p><a href="http://linuxblog.cn/wp-content/images/vol10_1x_kfm.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol10_1x_kfm.png" alt=""></a></p>
+<p>虽然从KDE 1.x开始，KDE已发展了很多年了，但仍然可以很容易地发现KFM的某些部分启发了Konqueror的设计，那些设计就被加入了当时的KDE 2.0中。KParts技术为我们的文件管理程序带来了新的革命，同时也造就了Konqueror这个集网络浏览器、文件管理器等功能一体的强大程序。下面是张KDE3.5.6中Konqueror的截图，您可以看到虽然界面改进了很多，但依然可以看到当年KFM的影子。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol10_356_konq.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol10_356_konq.png" alt=""></a></p>
+<p>Konqueror实为KDE 2.x和3.x系列中KDE技术的代表作，它展示了KDE技术中最优秀的部分。<br>Konqueror显示了KDE的IOslaves技术的强大，这个技术使得您通过FTP,fish（SSH），HTTP以及其它协议进行文件操作时实现网络的透明化（网络操作时与在本机操作一样方便）。Konqueror是如此的先进，只要您在地址栏填上FTP位置，您就可以像在本机上一样操作它（据我所知，只有Konqueror能做到这点）。它的KParts功能可以令它嵌入各种所需的查看器，如可以直接在它的界面中嵌入如<a href="http://kpdf.kde.org/" target="_blank" rel="external">KPDF</a>,<a href="http://koffice.kde.org/kword/" target="_blank" rel="external">KWord</a>，图像查看器，当然还有我们最重要的<a href="http://www.khtml.info/" target="_blank" rel="external">KHTML</a>网页翻译引擎。有了KParts，Konqueror的图标查看功能也可作为一个插件来实现。</p>
+<p>Konqueror真是个强大的工具，它可以完成您或您的系统想做的任何事，并且可以通过模块和插件无限制地对它进行定制和扩展。当Konqueror用作网络浏览器的时候，它仍然可以以一个文件管理器的方式工作。看看Konqueror的工具栏上的按钮吧，您可以轻松地注意到这种独特的运转方式。例如工具栏的那个“向上”按钮在您浏览Google地图的时候仍然可用。但它与网页内容一点关系也没有，另一个例子是当您在排列/home/里的图标时，它的网络书签依然可用。</p>
+<p>Dolphin的介绍：Dolphin是KDE4中的新文件管理器，它百分之百地专注于文件管理功能而并不想成为一个如Konqueror那样万能的程序。它试图优化与文件管理相关的工作，并为KDE用户提供一个易于使用的灵活的文件管理器。这并不意味着它功能匮乏或无法定制，这只是表示Dolphin 是为单一目的而构建的。</p>
+<p>Dolphin也不是完全重写的新项目，也没有与Konqueror竞争的打算，这两个程序都将得到喝彩。Dolphin使用KDE平台上已存在的IO slave来完成远程或本地文件管理，也就是说它可以胜任所有‘远程’管理之类的任务，而此功能正是得益于Konqueror。Dolphin将不会显示网页或像Konqueror那样嵌入式地显示PDF文件。</p>
+<p>Konqueror也将从Dolphin中受益。虽然Konqueror的用户界面会有所调整，它也不再是KDE4的默认文件管理器了，但是它不会在 KDE4中消失。Konqueror的文件管理功能仍然会得到保留，其功能与过去一致没有改变。在Dolphin的开发而带来的对KDE的图标查看部分的改进也将被用于改进Konqueror的图标显示，因为他们共享同样的底层库。前面提到的Konqueror使用KParts实现图标查看功能，对于底层的KParts的改进将使Konqueror的用户受益。</p>
+<p>现在让我们看看KDE SVN库中的Dolphin和Konqueror的截图吧。请注意这些截图代表的是开发者目前所构建的样子，而并不表示它最终就是这样了或是功能已定型了，也不表示推荐大家编译SVN中的这两个软件作日常使用。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol10_4x_konq.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol10_4x_konq.png" alt=""></a></p>
+<p>您可以将Konqueror设置为默认使用标签浏览，也可以定制其它相关界面。它目前常作为一个网络浏览器来使用，只是偶尔被用于作文件管理。 Konqueror最初就是由文件管理器衍生而来，现在它却越来越多地被KDE用户们用作网络浏览器。作为一个网络浏览器，Konqueror工作的很好，它对CSS3的兼容性非常出色，包括对高度期望的‘不透明标签’的支持也很好。</p>
+<p>在KDE3.x中Konqueror的网络浏览器功能不断改进的同时，其标准的文件管理功能也将得到维护。而它文件管理部分的代码与Dolphin共享，从而也从Dolphin的开发中获益。</p>
+<p>Dolphin与Konqueror完全不同，它是一个‘真正’的文件管理器，它的界面中的大量元素是专门为文件管理开发的，它也不会由于要作为一个网络浏览器而被迫调整。可以用一个截图来证明：</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol10_4x_dolphin_breadcrumb.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol10_4x_dolphin_breadcrumb.png" alt=""></a></p>
+<p>请注意Dolphin的‘breadcrumb’式的目录选择器，这个东西对于文件管理时非常有用，但如果您需要使用浏览器的URL地址时它就没什么用了，因此它就是那种只用于层次文件处理的窗口小部件。对于用过OSX的Finder或GNOME的Nautilus的朋友来说，breadcrumb部件应该不陌生吧。对上面这张截图的另一个注明是：点击并按住一个breadcrumb目录条时，它会出现一个下拉的目录表，这个目录表显示的是与其目录同级的文件夹，这就提供了更高效的文件导航了。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol10_4x_dolphin_alt.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol10_4x_dolphin_alt.png" alt=""></a></p>
+<p>不过breadcrumb部件也不一定需要，如果您更喜欢Konqueror式的地址栏的话，在设置中做个更改就行了。Dolphin的定制度也很高，看下面。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol10_4x_dolphin_options.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol10_4x_dolphin_options.png" alt=""></a></p>
+<p>这张截图证明了KDE在设置排版方面花了大力气，它提供了尽可能需要的选项但设置条款的排布上却清清楚楚。请注意KDE4的设置对话框的改进。当然对某些屏幕来说，它的对话框显得过于高大了，有些地方尚需修改。等Oxygen图像组件齐备之后，这个对话框也会更容易看了。</p>
+<p>Dolphin的功能也不完全是新的，它只是换了个新的方式而已。它可以看作是Konqueror功能和Nautilus框架的混同体。Dolphin构建于壮健的KDE基础之上，它重新利用了如KIO slaves等现有技术，并有所创新。在Konqueror中常用的右键操作仍然会最大限度的保留（只是Donphin不会像Konqueror那样嵌入查看器，它会在外部启动程序）。Konqueror现在的开发关注于其网络浏览体验，而在KDE2.0时代就具备的文件管理功能仍将支持。</p>
+<p>当KDE4发布的时候，Dolphin将设为本地file:/协议的默认程序，在程序菜单中它也将被设为是默认的文件管理器。Konqueror则是默认的网络浏览器，照顾到长期以来的用户习惯，它的文件管理器功能仍然可用。，就像KDE3.x中用户也可以将第三方的程序如Krusader作为默认的文件管理器那样，用户也可以设置他们喜欢的程序作为默认文件管理器。请继续关注Dolphin和KDE的消息，下周见。</p>
+<p>翻译：yuanjiayj   <a href="http://www.myswear.net/forum/viewthread.php?tid=7910" target="_blank" rel="external">原文地址</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2007/03/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b9-9d-ef-bc-89-ef-bc-9adolphin-e4-b8-8ekonqueror.html" data-id="ci973nppx00gj7opi5e5woxe5" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2007/03/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b9-9d-ef-bc-89-ef-bc-9adolphin-e4-b8-8ekonqueror.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2007/03/e4-b8-89-e5-85-ab-e5-a6-87-e5-a5-b3-e8-8a-82-e9-80-9b-e8-a1-97-e8-ae-b0.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          三八妇女节逛街记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2007/03/audacious-13-e6-9c-80-e7-bb-88-e7-89-88-e9-87-8a-e5-87-ba.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Audacious 1.3 最终版释出</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2007/03/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b9-9d-ef-bc-89-ef-bc-9adolphin-e4-b8-8ekonqueror.html" data-title="通向KDE4之路（九）：Dolphin与Konqueror" data-url="http://latteye.com/2007/03/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b9-9d-ef-bc-89-ef-bc-9adolphin-e4-b8-8ekonqueror.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

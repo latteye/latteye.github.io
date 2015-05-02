@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>通过网络安装 Linux （ CentOS ）系统 | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上班还是蛮忙的，所以最近LinuxBlog少有更新。LinuxBlog 原则上不登 Server 性质的文章。但基于本文应用广泛，且耗费了我一天的时间，还是记录一下吧。
+  一、思路
+  无光驱、软驱的一台服务器，想要安装Linux系统。我们需要通过网卡的PXE协议，引导之后安装Linux。流程：机器启动－网卡引导－通过DHCP获得IP地址－通过tftp获得最基础的内核文件，使用该内核文件启动机器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过网络安装 Linux （ CentOS ）系统">
+<meta property="og:url" content="http://latteye.com/2007/03/e9-80-9a-e8-bf-87-e7-bd-91-e7-bb-9c-e5-ae-89-e8-a3-85-linux-ef-bc-88-centos-ef-bc-89-e7-b3-bb-e7-bb-9f.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="上班还是蛮忙的，所以最近LinuxBlog少有更新。LinuxBlog 原则上不登 Server 性质的文章。但基于本文应用广泛，且耗费了我一天的时间，还是记录一下吧。
+  一、思路
+  无光驱、软驱的一台服务器，想要安装Linux系统。我们需要通过网卡的PXE协议，引导之后安装Linux。流程：机器启动－网卡引导－通过DHCP获得IP地址－通过tftp获得最基础的内核文件，使用该内核文件启动机器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过网络安装 Linux （ CentOS ）系统">
+<meta name="twitter:description" content="上班还是蛮忙的，所以最近LinuxBlog少有更新。LinuxBlog 原则上不登 Server 性质的文章。但基于本文应用广泛，且耗费了我一天的时间，还是记录一下吧。
+  一、思路
+  无光驱、软驱的一台服务器，想要安装Linux系统。我们需要通过网卡的PXE协议，引导之后安装Linux。流程：机器启动－网卡引导－通过DHCP获得IP地址－通过tftp获得最基础的内核文件，使用该内核文件启动机器">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-e9-80-9a-e8-bf-87-e7-bd-91-e7-bb-9c-e5-ae-89-e8-a3-85-linux-ef-bc-88-centos-ef-bc-89-e7-b3-bb-e7-bb-9f" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2007/03/e9-80-9a-e8-bf-87-e7-bd-91-e7-bb-9c-e5-ae-89-e8-a3-85-linux-ef-bc-88-centos-ef-bc-89-e7-b3-bb-e7-bb-9f.html" class="article-date">
+  <time datetime="2007-03-27T14:29:27.000Z" itemprop="datePublished">2007-03-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      通过网络安装 Linux （ CentOS ）系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上班还是蛮忙的，所以最近LinuxBlog少有更新。<br>LinuxBlog 原则上不登 Server 性质的文章。但基于本文应用广泛，且耗费了我一天的时间，还是记录一下吧。</p>
+<p>  一、思路</p>
+<p>  无光驱、软驱的一台服务器，想要安装Linux系统。我们需要通过网卡的PXE协议，引导之后安装Linux。流程：机器启动－网卡引导－通过DHCP获得IP地址－通过tftp获得最基础的内核文件，使用该内核文件启动机器－启动之后可以对安装程序配置，选择使用http、ftp、nfs方式远程获得安装所需要的软件包。</p>
+<p>  显然，网络安装是必须配置服务器端的。我们的服务端需要提供以下服务：</p>
+<p>  DHCP<br>  TFTP<br>  HTTP(FTP,NFS)<br><a id="more"></a><br>  二、服务配置</p>
+<p>  1.DHCP</p>
+<p>  <strong>配置文件</strong>：</p>
+<p><code>option domain-name &quot;mydomain&quot;;
+ddns-update-style none;
+default-lease-time 600;
+max-lease-time 7200;
+server-name &quot;bootserver&quot;;
+subnet 192.168.123.0 netmask 255.255.255.0 {
+  range 192.168.123.200 192.168.123.201;
+  deny unknown-clients;
+}
+host MyP5 {
+  filename &quot;pxelinux.0&quot;;
+  server-name &quot;bootserver&quot;;
+  hardware ethernet ae:32:20:00:b0:02;
+  fixed-address 192.168.123.90;
+}</code></p>
+<p>  这是复制来的配置文件，稍微解释一下：</p>
+<p>  filename 后面是tftp目录下的文件，pxelinux.0 则是 syslinux 包内的文件。默认 pxelinux.0 可能在 /usr/lib/syslinux 目录下，必须将其复制到 tftp 目录下。</p>
+<p>  host MyP5 下出现的：<br><code>hardware ethernet ae:32:20:00:b0:02;
+  fixed-address 192.168.123.90;</code></p>
+<p>  为客户机（需要安装系统的机器）的 MAC 地址和所分配的IP地址。</p>
+<p>  2.TFTP</p>
+<p>  由于必须支持<a href="http://syslinux.zytor.com/pxe.php" target="_blank" rel="external">TSIZE</a>协议，所以不能安装最原始的TFTP包。我选择使用 tftp-hpa 。</p>
+<p>  编辑文件 /etc/xinetd.d/tftp （若没有，则添加tftp文件）（若不存在xinetd.d，请安装 xinetd 包）</p>
+<p>`# default: off</p>
+<h1 id="description:_The_tftp_server_serves_files_using_the_trivial_file_transfer_\">description: The tftp server serves files using the trivial file transfer \</h1><h1 id="protocol-_The_tftp_protocol_is_often_used_to_boot_diskless_\">protocol.  The tftp protocol is often used to boot diskless \</h1><h1 id="workstations,_download_configuration_files_to_network-aware_printers,_\">workstations, download configuration files to network-aware printers, \</h1><h1 id="and_to_start_the_installation_process_for_some_operating_systems-">and to start the installation process for some operating systems.</h1><p>service tftp<br>{<br>        disable = no<br>        socket_type             = dgram<br>        protocol                = udp<br>        wait                    = yes<br>        user                    = root<br>        server                  = /usr/sbin/in.tftpd<br>        server_args             = -s /tftpboot<br>        per_source              = 11<br>        cps                     = 100 2<br>        flags                   = IPv4<br>}`</p>
+<p>  这里将 /tftpboot 定义为 tftp 服务的默认目录，您可以自行修改。</p>
+<p>  保存之后重启 /etc/init.d/xinetd 服务，即可开启 tftp 服务。</p>
+<blockquote>
+<p>如何测试 tftp 是否成功开启？</p>
+<p>在 tftp 目录下创建一个文件，比如 1.txt 。<br>在 Shell 中连接 tftp 服务：<br><code>tftp 127.0.0.1
+tftp&gt;get 1.txt</code></p>
+<p>若服务成功开启，则能看到成功下载文件的提示。并在当前目录下找到1.txt文件。</p>
+</blockquote>
+<p>  接着复制光盘中 isolinux 目录下的 vmlinuz、initrd.img 文件到 /tftpboot 目录下。<br>  在 /tftpboot 中创建文件夹 syslinux.cfg 。syslinux.cfg 中保存了 pxelinux 的两个配置文件：default、list。</p>
+<p>  default：</p>
+<p>`  default linux</p>
+<p>label linux<br>kernel vmlinuz<br>append initrd=initrd.img devfs=nomount nofb ramdisk_size=9216`</p>
+<p>你可以写很多个label，这取决于你同时想在这台服务器上提供多少种版本的 Linux 给客户机安装。一个版本一个label，当然kernel、与initrd文件名不可以重复。</p>
+<p>list：</p>
+<p>`<br>Choose one of the following Linux distributions for your installation:</p>
+<h2 id="Name_Distribution_Arch-_Installation_media">Name           Distribution   Arch.   Installation media</h2><p>CentOS   CentOS 4.4    i386 192.168.99.90:/<br>`</p>
+<p>你也可以添加多行，用来选择不同的发行版本。在选择的时候填写Name下的内容即可。</p>
+<p>  三、复制光盘文件</p>
+<p>  将光盘文件复制到对应目录（ftp、http、nfs），如果是使用 http 使用以下命令将多张光盘复制到一个目录里面：</p>
+<p>  <code>[root@bootserver] # cp -arv /media/cdrom/* /install</code></p>
+<p>  如果使用 ftp，请确保可以访问（可以有用户名、密码）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2007/03/e9-80-9a-e8-bf-87-e7-bd-91-e7-bb-9c-e5-ae-89-e8-a3-85-linux-ef-bc-88-centos-ef-bc-89-e7-b3-bb-e7-bb-9f.html" data-id="ci973nppr00gd7opi4gm9vbfn" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2007/03/e9-80-9a-e8-bf-87-e7-bd-91-e7-bb-9c-e5-ae-89-e8-a3-85-linux-ef-bc-88-centos-ef-bc-89-e7-b3-bb-e7-bb-9f.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2007/03/mount-iso-image.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          Mount ISO Image
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2007/03/debian-gnulinux-bible.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Debian GNU/Linux Bible</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2007/03/e9-80-9a-e8-bf-87-e7-bd-91-e7-bb-9c-e5-ae-89-e8-a3-85-linux-ef-bc-88-centos-ef-bc-89-e7-b3-bb-e7-bb-9f.html" data-title="通过网络安装 Linux （ CentOS ）系统" data-url="http://latteye.com/2007/03/e9-80-9a-e8-bf-87-e7-bd-91-e7-bb-9c-e5-ae-89-e8-a3-85-linux-ef-bc-88-centos-ef-bc-89-e7-b3-bb-e7-bb-9f.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

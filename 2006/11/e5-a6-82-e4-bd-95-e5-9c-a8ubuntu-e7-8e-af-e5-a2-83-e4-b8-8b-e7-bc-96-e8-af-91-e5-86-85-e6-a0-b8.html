@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>如何在Ubuntu环境下编译内核 | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="每个发行版本都有一些特殊的工具方便大家从源文件编译内核，本文介绍如何在ubuntu环境下编译内核。本文介绍了如何从www.kernel.org上下载最新的内核并定制它适合自己的机器，从而你可以不再以来发行版本中所带的内核版本。本文也介绍了如何给内核添加补丁以增加那些没有启用的功能。
+  本文通过以下系统测试：Ubuntu 6.10 Server (“Edgy Eft”) 和 Ubuntu 6.06">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在Ubuntu环境下编译内核">
+<meta property="og:url" content="http://latteye.com/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="每个发行版本都有一些特殊的工具方便大家从源文件编译内核，本文介绍如何在ubuntu环境下编译内核。本文介绍了如何从www.kernel.org上下载最新的内核并定制它适合自己的机器，从而你可以不再以来发行版本中所带的内核版本。本文也介绍了如何给内核添加补丁以增加那些没有启用的功能。
+  本文通过以下系统测试：Ubuntu 6.10 Server (“Edgy Eft”) 和 Ubuntu 6.06">
+<meta property="og:image" content="http://latteye.com/wp-content/images/kernel/_1.png">
+<meta property="og:image" content="http://latteye.com/wp-content/images/kernel/_2.png">
+<meta property="og:image" content="http://latteye.com/wp-content/images/kernel/_3.png">
+<meta property="og:image" content="http://latteye.com/wp-content/images/kernel/_4.png">
+<meta property="og:image" content="http://latteye.com/wp-content/images/kernel/_5.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何在Ubuntu环境下编译内核">
+<meta name="twitter:description" content="每个发行版本都有一些特殊的工具方便大家从源文件编译内核，本文介绍如何在ubuntu环境下编译内核。本文介绍了如何从www.kernel.org上下载最新的内核并定制它适合自己的机器，从而你可以不再以来发行版本中所带的内核版本。本文也介绍了如何给内核添加补丁以增加那些没有启用的功能。
+  本文通过以下系统测试：Ubuntu 6.10 Server (“Edgy Eft”) 和 Ubuntu 6.06">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-e5-a6-82-e4-bd-95-e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html" class="article-date">
+  <time datetime="2006-11-21T01:38:55.000Z" itemprop="datePublished">2006-11-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如何在Ubuntu环境下编译内核
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>每个发行版本都有一些特殊的工具方便大家从源文件编译内核，本文介绍如何在ubuntu环境下编译内核。本文介绍了如何从www.kernel.org上下载最新的内核并定制它适合自己的机器，从而你可以不再以来发行版本中所带的内核版本。本文也介绍了如何给内核添加补丁以增加那些没有启用的功能。</p>
+<p>  本文通过以下系统测试：Ubuntu 6.10 Server (“Edgy Eft”) 和 Ubuntu 6.06 Desktop (“Dapper Drake”)。</p>
+<p>  首先我想说的是这并不是唯一编译内核的方法。有许多种方法可以达到相同的目的，这只是我所使用的一种方法。并且我保证我的方法不会出问题。<br><a id="more"></a><br>  1.准备工作</p>
+<p>  在以下的工作中我会以root的身份来完成工作，如果你还没有root用户，你需要执行以下命令：</p>
+<p><code>sudo passwd root</code></p>
+<p>  之后以root登录：</p>
+<p><code>su</code></p>
+<p>  如果你想以普通用户身份工作，一定要记得在每个命令前面加上sudo。比如当我执行：</p>
+<p><code>apt-get update</code></p>
+<p>  你一定要输入：</p>
+<p><code>sudo apt-get update</code></p>
+<p>  1.1  /bin/sh on Ubuntu 6.10 (“Edgy Eft”)</p>
+<p>  在ubuntu 6.10上，/bin/sh默认链接到/bin/dash。/bin/dash在编译软件的时候有时会出错，至少我有这个问题。所以我将他重新链接到/bin/bash。</p>
+<p>  如果正在使用ubuntu 6.10，你需要执行以下命令：</p>
+<p><code>rm -f /bin/sh
+ln -s /bin/bash /bin/sh</code></p>
+<p>  2 为编译内核安装必要的软件包</p>
+<p>  首先我们更新系统：</p>
+<p><code>apt-get update</code></p>
+<p>  接着我们安装所需要的软件包：</p>
+<p><code>apt-get install kernel-package libncurses5-dev fakeroot wget bzip2</code></p>
+<p>  3.下载内核源代码</p>
+<p>  接着我们将所需要的内核下载到/usr/src目录。到<a href="http://www.kernek.org下载你所需要的内核源代码，比如linux-2.6.18.1.tar.bz2，（你可以通过这个目录下载2.6系列的内核：http://www.kernel.org/pub/linux/kernel/v2.6/）。接着你就可以将它下载到/usr/src目录下：" target="_blank" rel="external">http://www.kernek.org下载你所需要的内核源代码，比如linux-2.6.18.1.tar.bz2，（你可以通过这个目录下载2.6系列的内核：http://www.kernel.org/pub/linux/kernel/v2.6/）。接着你就可以将它下载到/usr/src目录下：</a></p>
+<p><code>cd /usr/src
+wget http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.18.1.tar.bz2</code></p>
+<p>  接着我们解压缩内核并且将目录做一个链接：</p>
+<p><code>tar xjf linux-2.6.18.1.tar.bz2
+ln -s linux-2.6.18.1 linux
+cd /usr/src/linux</code></p>
+<p>  4.给内核文件打补丁（可选）</p>
+<p>  有些时候你需要给内核添加一些驱动以让他适应你的设备，或者你需要让他可以使用最新的虚拟技术，或者是一些edgy没有的功能。这一段将告诉你如何给内核打补丁（如果已经有这些补丁了……）。</p>
+<p>  好，我们假定你已经下载好补丁到/usr/src。（假定为patch.bz2）。</p>
+<p><code>bzip2 -dc /usr/src/patch.bz2 | patch -p1 --dry-run
+bzip2 -dc /usr/src/patch.bz2 | patch -p1</code></p>
+<p>  第一行命令只是一个测试，它并没有对你的内核做什么。如果他没有提示错误，那么你可以运行第二个命令，他会应用补丁。如果第一个命令提示错误了，千万别再继续了。</p>
+<p>  你也可以给内核源代码打上内核的补丁。比如，如果你需要的某些功能在2.6.19-rc4中，但完全的内核包并没有发布。但是patch-2.6.19-rc4.bz2却已经发布了。你可以将这些补丁打到2.6.18中去，不过并不打到2.6.18.1或者2.6.18.2中。这在<a href="http://kernel.org/patchtypes/pre.html有详细的解释：" target="_blank" rel="external">http://kernel.org/patchtypes/pre.html有详细的解释：</a></p>
+<p>  单个的内核补丁包相当于内核的alpha版本；他们仍然在测试中。他们通过补丁工具适用于只有3-部分版本编码的版本（比如2.6.18字符为三段，而不是4段）</p>
+<p>  所以，如果你想编译2.6.19-rc4，你必须下载2.6.18源代码替代之前的2.6.18.1！</p>
+<p><code>cd /usr/src
+wget http://www.kernel.org/pub/linux/kernel/v2.6/testing/patch-2.6.19-rc4.bz2
+cd /usr/src/linux
+bzip2 -dc /usr/src/patch-2.6.19-rc4.bz2 | patch -p1 --dry-run
+bzip2 -dc /usr/src/patch-2.6.19-rc4.bz2 | patch -p1</code></p>
+<p>  5.配置内核</p>
+<p>  一个比较好的方法是使用已有的配置文件给新的内核。于是我们复制以前的配置文件到/usr/src/linux目录：</p>
+<p><code>cp /boot/config-</code>uname -r<code>./.config</code></p>
+<p>  接着运行：</p>
+<p><code>make menuconfig</code></p>
+<p>  这将出现一个配置菜单。选择Load an Alternate Configuration File，并且选择我们复制过来的.config文件：<br><a href="http://latteye.com/wp-content/images/kernel/1.png" target="_blank" rel="external"><img src="http://latteye.com/wp-content/images/kernel/_1.png" alt=""></a></p>
+<p><a href="http://latteye.com/wp-content/images/kernel/2.png" target="_blank" rel="external"><img src="http://latteye.com/wp-content/images/kernel/_2.png" alt=""></a></p>
+<p>  接着浏览菜单中的选项，并且修改你的选择。当你结束选择并且按下Exit，回答下列问题，选择Yes。（Do you wish to save your new kernel configuration?）</p>
+<p><a href="http://latteye.com/wp-content/images/kernel/3.png" target="_blank" rel="external"><img src="http://latteye.com/wp-content/images/kernel/_3.png" alt=""></a></p>
+<p>  6.编译内核</p>
+<p>  编译内核，只需要执行下面两个命令：</p>
+<p><code>make-kpkg clean
+fakeroot make-kpkg --initrd --append-to-version=-custom kernel_image kernel_headers</code></p>
+<p>  你可以添加任何参数在<code>--append-to-version=</code>之后，但是开头必须要有“-”字符并且不能有空格。</p>
+<p>  接着就要忍耐了，编译内核可能会用掉你几个小时的时间，这取决于你的处理器速度。</p>
+<p>7.安装新内核</p>
+<p>  成功编译内核之后，你可以在/usr/src目录下发现两个内核包。</p>
+<p><code>cd /usr/src
+ls -l</code></p>
+<p>  在我测试的机器上，他们的文件名是：linux-image-2.6.18.1-custom_2.6.18.1-custom-10.00.Custom_i386.deb (包含实际的内核文件。) 和 linux-headers-2.6.18.1-custom_2.6.18.1-custom-10.00.Custom_i386.deb (包含一些附加的模块文件。)。安装他们：</p>
+<p><code>dpkg -i linux-image-2.6.18.1-custom_2.6.18.1-custom-10.00.Custom_i386.deb
+dpkg -i linux-headers-2.6.18.1-custom_2.6.18.1-custom-10.00.Custom_i386.deb</code></p>
+<p>  （你可以把他们复制到其他机器上去，并用同样的方法安装。你不用再编译一次了。）</p>
+<p>  好了，你可以检查/boot/grub/menu.lst文件，可以发现新的两行：</p>
+<p>vi /boot/grub/menu.lst</p>
+<p>  添加的两行类似：<br>`<br>title           Ubuntu, kernel 2.6.18.1-custom<br>root            (hd0,0)<br>kernel          /boot/vmlinuz-2.6.18.1-custom root=/dev/sda1 ro quiet splash<br>initrd          /boot/initrd.img-2.6.18.1-custom<br>savedefault<br>boot</p>
+<p>title           Ubuntu, kernel 2.6.18.1-custom (recovery mode)<br>root            (hd0,0)<br>kernel          /boot/vmlinuz-2.6.18.1-custom root=/dev/sda1 ro single<br>initrd          /boot/initrd.img-2.6.18.1-custom<br>boot<br>`</p>
+<p>  现在，重启系统：</p>
+<p><code>shutdown -r now</code></p>
+<p>  如果一切正常，就会以新内核启动了。你可以运行以下命令确认是否是在使用新内核：</p>
+<p><code>uname -r</code></p>
+<p>  应该会显示：</p>
+<p><code>2.6.18-custom</code></p>
+<p>  如果系统没有正常启动，重启系统。当你看到：</p>
+<p><a href="http://latteye.com/wp-content/images/kernel/4.png" target="_blank" rel="external"><img src="http://latteye.com/wp-content/images/kernel/_4.png" alt=""></a></p>
+<p>  按下esc以看到如下页面：</p>
+<p><a href="http://latteye.com/wp-content/images/kernel/5.png" target="_blank" rel="external"><img src="http://latteye.com/wp-content/images/kernel/_5.png" alt=""></a></p>
+<p>  选择老的内核，接着你可以试着重新编译新内核。或者移出无法工作的内核。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html" data-id="ci973npsx00j97opiusr3vt54" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2006/11/gmobilemedia.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          gMobileMedia
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2006/11/totem-2163-e5-8f-91-e5-b8-83.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Totem 2.16.3 发布</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2006/11/e5-a6-82-e4-bd-95-e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html" data-title="如何在Ubuntu环境下编译内核" data-url="http://latteye.com/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

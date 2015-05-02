@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>通过 Openswan 建立 Linux-Linux 之间的 VPN 隧道 | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="写在开头的话
+其实这个实验还没有做完，一方面虚拟机环境里面有些内容已经很难实现（可能是先天缺陷），有空的时候我会对这个实验进行抓包，来给自己排错。但目前由于公司环境需求，我必须进行 Subversion 的学习了。
+一、网络架构
+必须模拟出两个网段来做这个实验。于是就有了这样的结构：
+
+点击图片查看大图。
+我们将网段分为了三个：
+10.10.0.0/24:模拟公网网段，两个网关可以在这里互相访问。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过 Openswan 建立 Linux-Linux 之间的 VPN 隧道">
+<meta property="og:url" content="http://latteye.com/2007/10/openswan-ipsec-vpn.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="写在开头的话
+其实这个实验还没有做完，一方面虚拟机环境里面有些内容已经很难实现（可能是先天缺陷），有空的时候我会对这个实验进行抓包，来给自己排错。但目前由于公司环境需求，我必须进行 Subversion 的学习了。
+一、网络架构
+必须模拟出两个网段来做这个实验。于是就有了这样的结构：
+
+点击图片查看大图。
+我们将网段分为了三个：
+10.10.0.0/24:模拟公网网段，两个网关可以在这里互相访问。">
+<meta property="og:image" content="http://photo5.yupoo.com/20071011/170141_498158656.jpg">
+<meta property="og:image" content="http://photo11.yupoo.com/20071011/164554_694805693.jpg">
+<meta property="og:image" content="http://photo11.yupoo.com/20071011/164555_1386151475.jpg">
+<meta property="og:image" content="http://photo11.yupoo.com/20071011/164555_251233710.jpg">
+<meta property="og:image" content="http://photo5.yupoo.com/20071011/164556_735054871.jpg">
+<meta property="og:image" content="http://photo11.yupoo.com/20071011/164556_479812621.jpg">
+<meta property="og:image" content="http://photo5.yupoo.com/20071011/164557_2035366831.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过 Openswan 建立 Linux-Linux 之间的 VPN 隧道">
+<meta name="twitter:description" content="写在开头的话
+其实这个实验还没有做完，一方面虚拟机环境里面有些内容已经很难实现（可能是先天缺陷），有空的时候我会对这个实验进行抓包，来给自己排错。但目前由于公司环境需求，我必须进行 Subversion 的学习了。
+一、网络架构
+必须模拟出两个网段来做这个实验。于是就有了这样的结构：
+
+点击图片查看大图。
+我们将网段分为了三个：
+10.10.0.0/24:模拟公网网段，两个网关可以在这里互相访问。">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-openswan-ipsec-vpn" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2007/10/openswan-ipsec-vpn.html" class="article-date">
+  <time datetime="2007-10-11T09:46:43.000Z" itemprop="datePublished">2007-10-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      通过 Openswan 建立 Linux-Linux 之间的 VPN 隧道
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>写在开头的话</strong></p>
+<p>其实这个实验还没有做完，一方面虚拟机环境里面有些内容已经很难实现（可能是先天缺陷），有空的时候我会对这个实验进行抓包，来给自己排错。但目前由于公司环境需求，我必须进行 Subversion 的学习了。</p>
+<p>一、网络架构</p>
+<p>必须模拟出两个网段来做这个实验。于是就有了这样的结构：</p>
+<p><a href="http://www.yupoo.com/photos/view?id=ff808081156eca5901158e4c3bd253d0" title="来YUPOO看我的照片" target="_blank" rel="external"><img src="http://photo5.yupoo.com/20071011/170141_498158656.jpg" alt="net"></a></p>
+<p>点击图片查看大图。</p>
+<p>我们将网段分为了三个：</p>
+<p>10.10.0.0/24:模拟公网网段，两个网关可以在这里互相访问。<br>172.16.1.0/24:Left子网。<br>172.16.2.0/24:Right子网。</p>
+<p>通常我们在做实验的时候，将两个子网分别命名为 <strong>Left</strong>、<strong>Right</strong>。</p>
+<a id="more"></a>
+<p><strong>二、Openswan</strong></p>
+<p><a href="http://www.openswan.org/" target="_blank" rel="external">Openswan</a> 是一套基于 Ipsec 的 Linux 工具。类似的工具还有 <a href="http://www.strongswan.org/" target="_blank" rel="external">Strongswan</a> 和 早已停止开发的 <a href="http://www.freeswan.org/" target="_blank" rel="external">Freeswan</a>。<br>Openswan 的 wiki 详细列出了 他与 Strongswan 在功能上的<a href="http://wiki.openswan.org/index.php/Openswan/FeatureComparison" target="_blank" rel="external">区别</a>。</p>
+<p><strong>三、系统环境</strong></p>
+<p>由于我不太喜欢自己编译，所以选择了 Debian 系统。使用 CentOS 的用户可能需要自己下载源代码编译 Openswan。</p>
+<p>1. Sysctl 配置</p>
+<p>编辑 /etc/sysctl.conf ，确保有以下内容：</p>
+<p><code>net.ipv4.conf.default.rp_filter=0
+net.ipv4.conf.default.forwarding=1
+net.ipv4.conf.eth2.send_redirects=0
+net.ipv4.conf.eth1.send_redirects=0
+net.ipv4.conf.default.send_redirects=0
+net.ipv4.conf.all.send_redirects=0
+net.ipv4.conf.eth2.accept_redirects=0
+net.ipv4.conf.eth1.accept_redirects=0
+net.ipv4.conf.default.accept_redirects=0
+net.ipv4.conf.all.accept_redirects=0
+net.ipv4.conf.all.forwarding=1</code></p>
+<p>forwarding 参数大家肯定已经很熟悉了，用网关做 NAT 时肯定会用到。其他参数是我在排错的时候一点一点添加进去的。具体的用途也还不清楚。等弄懂了添加上来。</p>
+<p>若此步没有做好，在执行 ipsec verify 的时候会报错。</p>
+<p>2. 软件安装</p>
+<p><code>apt-get install openswan</code></p>
+<p><a href="http://www.yupoo.com/photos/view?id=ff8080811579ca7b01158e3dc9f365fb" title="来YUPOO看我的照片" target="_blank" rel="external"><img src="http://photo11.yupoo.com/20071011/164554_694805693.jpg" alt="openswan-1"></a></p>
+<p>安装过程中会出现一系列配置提示，一般选择默认即可。</p>
+<p><a href="http://www.yupoo.com/photos/view?id=ff8080811579ca7b01158e3dcc4765fd" title="来YUPOO看我的照片" target="_blank" rel="external"><img src="http://photo11.yupoo.com/20071011/164555_1386151475.jpg" alt="openswan-2"></a></p>
+<p>这里不用开启。</p>
+<p><a href="http://www.yupoo.com/photos/view?id=ff8080811579ca7b01158e3dceac65ff" title="来YUPOO看我的照片" target="_blank" rel="external"><img src="http://photo11.yupoo.com/20071011/164555_251233710.jpg" alt="openswan-3"></a></p>
+<p>是否创建 Host key。选择是。</p>
+<p><a href="http://www.yupoo.com/photos/view?id=ff8080811579ca7b01158e3dd1006601" title="来YUPOO看我的照片" target="_blank" rel="external"><img src="http://photo5.yupoo.com/20071011/164556_735054871.jpg" alt="openswan-4"></a></p>
+<p>Key 的加密类型。</p>
+<p><a href="http://www.yupoo.com/photos/view?id=ff8080811579ca7b01158e3dd3976603" title="来YUPOO看我的照片" target="_blank" rel="external"><img src="http://photo11.yupoo.com/20071011/164556_479812621.jpg" alt="openswan-5"></a></p>
+<p>配置 Openswan 使用key。这里“是”“否”，我都选过，其实无大碍。后面可以自己生成 key。</p>
+<p><a href="http://www.yupoo.com/photos/view?id=ff8080811579ca7b01158e3dd62b6607" title="来YUPOO看我的照片" target="_blank" rel="external"><img src="http://photo5.yupoo.com/20071011/164557_2035366831.jpg" alt="openswan-6"></a></p>
+<p>选择 Yse。</p>
+<p>基本的系统环境就已经有了。</p>
+<p>3.检查 ipsec 的状态</p>
+<p>通过 ipsec verify 命令检查状态，正常输出如下：</p>
+<blockquote>
+<p>debian:/etc# ipsec verify<br>Checking your system to see if IPsec got installed and started correctly:<br>Version check and ipsec on-path                                 [OK]<br>Linux Openswan U2.4.6/K2.6.18-4-686 (netkey)<br>Checking for IPsec support in kernel                            [OK]<br>NETKEY detected, testing for disabled ICMP send_redirects       [OK]<br>NETKEY detected, testing for disabled ICMP accept_redirects     [OK]<br>Checking for RSA private key (/etc/ipsec.secrets)               [OK]<br>Checking that pluto is running                                  [OK]<br>Two or more interfaces found, checking IP forwarding            [OK]<br>Checking NAT and MASQUERADEing                                  [N/A]<br>Checking for ‘ip’ command                                       [OK]<br>Checking for ‘iptables’ command                                 [OK]<br>Opportunistic Encryption Support                                [DISABLED]<br>若不正常，请按照 <strong>Sysctl 配置</strong> 里面的内容修改配置文件。</p>
+</blockquote>
+<p>四、配置 Openswan</p>
+<p>1. 在两台服务器上生成 Hostkey。</p>
+<p>生成 key ： <code>ipsec newhostkey --output /etc/ipsec.secrets</code><br>在 LeftSrv 上 showkey：<code>ipsec showhostkey --left</code><br>在 RightSrv 上 showkey：<code>ipsec showhostkey --right</code></p>
+<p>在 showkey 时我们会得到类似一下的输出：</p>
+<blockquote>
+<h1 id="RSA_2192_bits_ubuntu-latteye_Sun_Sep_30_08:25:11_2007_leftrsasigkey=0sAQOe8Y5AxAmgh0yki8QAMmiBGxC…-">RSA 2192 bits   ubuntu-latteye   Sun Sep 30 08:25:11 2007      leftrsasigkey=0sAQOe8Y5AxAmgh0yki8QAMmiBGxC….</h1><p>记住他，后面需要添加进 ipsec.conf 文件中。</p>
+</blockquote>
+<p>2. 配置 ipsec.conf</p>
+<p>以下是我的配置文件：</p>
+<blockquote>
+<p>conn a<br>left=10.10.0.2<br>leftsubnet=172.16.1.0/24<br>leftid=@left<br>leftrsasigkey=0sAQOe8Y5AxAmgh0yki8QA….<br>leftnexthop=%defaultroute<br>right=10.10.0.3<br>rightsubnet=172.16.2.0/24<br>rightid=@right<br>rightrsasigkey=0sAQNS9hPmgmzkwDMHqDZ…<br>rightnexthop=%defaultroute<br>auto=add<br><em>conn a</em>: 给这个连接起个名字 a<br><em>left</em>:左网关地址<br><em>right</em>:右网关地址<br><em>leftsubnet</em>:左子网环境地址<br><em>rightsubnet</em>:右子网环境地址<br><em>leftid，rightid</em>:只是标识，起个名字。<br><em>leftnexthop</em>:下一跳路由地址。<br><em>left or rightrsasigkey</em>：上面showhostkey出来的内容就添加在这后面。注意！left和right一定要区分开！<br><em>auto=add</em>：手动启动链接。</p>
+</blockquote>
+<p>五、启动链接</p>
+<p><code>ipsec auto --up a</code></p>
+<hr>
+<p>我的实验就到此为止了，由于是虚拟机，在生成 key 和 链接的时候出现了一些问题。系统没有任何反映，CPU 使用也没有增加，就卡在那里。但是真实机器并不会这样。</p>
+<p>这个实验何时能有进展，我会继续修改此文。</p>
+<p>这里的中断并不会影响 ipsec-fortigate 的实验。我已经了解了 ipsec 的工作配置方式。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2007/10/openswan-ipsec-vpn.html" data-id="ci973npgt00767opi7bqphdck" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2007/10/openswan-ipsec-vpn.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2007/10/sub-301.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          Subversion “301 Moved Permanently” 报错解释
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2007/10/cat.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">捡了只小猫</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2007/10/openswan-ipsec-vpn.html" data-title="通过 Openswan 建立 Linux-Linux 之间的 VPN 隧道" data-url="http://latteye.com/2007/10/openswan-ipsec-vpn.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

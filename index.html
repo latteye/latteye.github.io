@@ -1,0 +1,823 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.com/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main">
+  
+    <article id="post-linux-syn-backlog-and-somaxconn" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/03/linux-syn-backlog-and-somaxconn.html" class="article-date">
+  <time datetime="2014-03-12T09:26:15.000Z" itemprop="datePublished">2014-03-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SYN 包攻击是网络上比较老的一种攻击方式。在 Linux 中，可以通过开启 <code>net.ipv4.tcp_syncookies = 1</code> 来抵抗这种攻击。那么，在开启 syncookies 之后，Linux 系统做了些什么？如何做的？这是本文试图整理的内容。</p>
+<p>以下是一组常见的 syncookies 在 sysctl.conf 中的配置：</p>
+<p><code>net.ipv4.tcp_syncookies = 1  #开启 syncookies 功能 
+net.ipv4.tcp_max_syn_backlog = 262144 # 最大 SYN 缓冲内存大小
+net.ipv4.tcp_synack_retries = 2 # SYN ACK 重试次数
+net.ipv4.tcp_syn_retries = 2 # SYN 重试次数</code></p>
+<p>在 TCP 的队列上，常见的有两种实现方式。</p>
+<p>1. BSD：单队列。当系统收到一个 SYN 包，其回复 SYN/ACK 包，并将该连接加入队列中。当对应的 ACK 包收到后，在队列中将此连接的状态改为 ESTABLISHED 并交给对应的后端程序处理。所以在这个队列中，包有两个状态：SYN RECEIVED 和 ESTABLISHED。<br>2. Linux：Linux 采用了双队列。一个存放 SYN 的队列（半连接队列）[以下简称为 syn q]，一个存放已经完成连接的队列[以下简称为 accept q][somaxconn]。所以，当一个连接的状态是 SYN RECEIVED 时，他会被放在 SYN 队列中。当它的状态变为 ESTABLISHED 时，他会被转移到另一个队列。所以后端的应用程序只从已完成的连接的队列中获取请求。</p>
+<p>所以，在第一种模式下，当这个仅有的队列塞满 SYN 状态的连接后，系统就会丢包。迫使客户端再次发 SYN 请求。</p>
+<p>而在 Linux 系统中，man page 有如下解释：</p>
+<blockquote>
+<p>The behavior of the backlog argument on TCP sockets changed with Linux 2.2. Now it specifies the queue length for completely established sockets waiting to be accepted, instead of the number of incomplete connection requests. The maximum length of the queue for incomplete sockets can be set using /proc/sys/net/ipv4/tcp_max_syn_backlog.</p>
+</blockquote>
+<p>这表示有一个由系统控制大小的 syn q，和一个由应用控制大小的 accept q。</p>
+<p>所以，我们发现了有这么几个问题需要探讨：</p>
+<ol>
+<li>当 accept q 满了，syn q 中有连接完成时，需要转移进 accept q，该做什么样的处理？</li>
+<li>当 syn q 满了，系统还在不断的收到 SYN 包时，怎么处理？</li>
+</ol>
+<p><strong>Q1 , 当 accept q 满了，syn q 中有连接完成时，需要转移进 accept q，该做什么样的处理？</strong></p>
+<p>在源码 net/ipv4/tcp_minisocks.c 中，这个行为是由 tcp_check_req 函数控制的：</p>
+<blockquote>
+<p>`child = inet_csk(sk)-&gt;icsk_af_ops-&gt;syn_recv_sock(sk, skb, req, NULL);</p>
+<p>if (child == NULL)</p>
+<pre><code><span class="keyword">goto</span> listen_overflow;`
+</code></pre></blockquote>
+<p>再来看一眼 listen_overflow:</p>
+<blockquote>
+<p>`listen_overflow:</p>
+<pre><code><span class="keyword">if</span> (!sysctl_tcp_abort_on_overflow) {
+
+        inet_rsk<span class="function"><span class="params">(req)</span>-&gt;</span>acked = <span class="number">1</span>;
+
+        <span class="keyword">return</span> NULL;
+
+}`
+</code></pre></blockquote>
+<p>这说明除非设置了 /proc/sys/net/ipv4/tcp_abort_on_overflow 为 1 ，不然的话系统什么都不做。但是这个什么都不做，并不代表系统真的什么都不做了。当系统忽略了最后的 ACK，而系统中还有一个 net.ipv4.tcp_synack_retries 设置时，Linux 会重新发送 SYN ACK 包。而客户端收到多个 SYN ACK 包，则会认为之前的 ACK 丢包了。于是促使客户端再次发送 ACK ，在 accept q 有空闲的时候最终完成连接。若 accept q 始终满员，则最终客户端收到 RST 包。</p>
+<p>同时 accept q 满了，对 syn q 也有影响，在代码 net/ipv4/tcp_ipv4.c ：</p>
+<blockquote>
+<p>`/* Accept backlog is full. If we have already queued enough</p>
+<ul>
+<li><p>of warm entries in syn queue, drop request. It is better than</p>
+</li>
+<li><p>clogging syn queue with openreqs with exponentially increasing</p>
+</li>
+<li><p>timeout.</p>
+<p>*/</p>
+</li>
+</ul>
+<p>if (sk_acceptq_is_full(sk) &amp;&amp; inet_csk_reqsk_queue_young(sk) &gt; 1) {</p>
+<pre><code>NET_INC_STATS_BH<span class="list">(<span class="keyword">sock_net</span><span class="list">(<span class="keyword">sk</span>)</span>, LINUX_MIB_LISTENOVERFLOWS)</span><span class="comment">;</span>
+
+goto drop<span class="comment">;</span>
+</code></pre><p>} `</p>
+</blockquote>
+<p>这说明如果 accept q 满了，系统会开始检查 SYN 包收到的频率，并且做出限制。如果达到了其定义的限制(我还不知道是如何定义的)，变开始丢弃 syn q 中的包。我个人根据观察到的现象认为，其必须要满足 syn q 也已经被塞满这个条件，才会丢包。</p>
+<p><strong>Q2，当 syn q 满了，系统还在不断的收到 SYN 包时，怎么处理？</strong></p>
+<p>在系统 syncookies=1 时，syn q 满了以后，系统会对 SYN 返回 syncookie 包。所返回的 SYN ACK 包会产生一个新的标志位 want_cookie。这个标志位默认为 0 ，但当要验证 cookies 时，want_cookie 会设置为 1.<br>发送的 cookie 数值是通过 cookie_v4_init_sequence() 函数计算出来的，在包发送出去后不维护该连接在服务器上的状态。这么做应该是为了节约服务器资源，毕竟其目的是为了判断对方是否是恶意攻击。<br>客户端拿到 cookie 数值后，<a href="http://en.wikipedia.org/wiki/SYN_cookies" target="_blank" rel="external">通过计算</a>，返回 cookies 数值，服务端获取到返回计算该数值是否合法。从而决定是否建立连接。</p>
+<p>通过以上逻辑我们可以发现，一旦 accept q 满了，系统层面就非常容易发生丢包的情况。<br>在 man listen 能看到：</p>
+<blockquote>
+<p>The  behavior  of  the  backlog  argument  on  TCP sockets changed with Linux 2.2.  Now it specifies the queue length for completely established sockets waiting to be accepted, instead of the number of incomplete connection requests.  The maximum length of the queue for incomplete sockets can be set using /proc/sys/net/ipv4/tcp_max_syn_backlog.  When syncookies are enabled there is no logical maximum length and this setting  is  ignored.  </p>
+<p>If  the  backlog argument is greater than the value in /proc/sys/net/core/somaxconn, then it is silently truncated to that value; the default value in this file is 128.  In kernels before 2.4.25, this limit was a hard coded value, SOMAXCONN, with the value 128.</p>
+</blockquote>
+<p>accept q 受限于 “backlog” 和 “SOMAXCONN” , 所以在系统中 backlog (net.core.netdev_max_backlog?) 和 net.core.somaxconn 都要放到一个合适的数值。同时在各类应用 listen 时，通常也有自定义的 listen backlog , 如 <a href="http://httpd.apache.org/docs/current/mod/mpm_common.html#listenbacklog" target="_blank" rel="external">apache</a> 、<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#listen" target="_blank" rel="external">nginx</a> 。在 Linux 上，apache 和 nginx 都默认将 backlog 设置为 511，如果你的 SOMAXCONN 小于 511，则会应用 SOMAXCONN 的配置。在大多数现代服务器硬件上，511 并不是一个足够的数值，多半需要调整。</p>
+<p><strong>Q need A</strong><br>有多少种情况，系统会开始拒绝 syn q 接受包？有多少种情况系统会丢弃 syn q 中的包？</p>
+<p>参考文章：<br><a href="http://veithen.blogspot.com/2014/01/how-tcp-backlog-works-in-linux.html" title="How TCP backlog works in Linux" target="_blank" rel="external">How TCP backlog works in Linux</a><br><a href="http://blog.csdn.net/justlinux2010/article/details/12619761" title="SYN cookies" target="_blank" rel="external">SYN cookies机制下连接的建立</a><br><a href="http://www.piao2010.com/linux%E8%AF%A1%E5%BC%82%E7%9A%84%E5%8D%8A%E8%BF%9E%E6%8E%A5syn_recv%E9%98%9F%E5%88%97%E9%95%BF%E5%BA%A6%E4%B8%80" target="_blank" rel="external">linux诡异的半连接(SYN_RECV)队列长度</a><br><a href="http://my.oschina.net/hongsheng/blog/151136" target="_blank" rel="external">Nginx 性能优化之net.core.somaxconn</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2014/03/linux-syn-backlog-and-somaxconn.html" data-id="ci973npk800an7opii6beihkp" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2014/03/linux-syn-backlog-and-somaxconn.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html" class="article-date">
+  <time datetime="2013-06-30T09:31:43.000Z" itemprop="datePublished">2013-06-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Life/">Life</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://pic.yupoo.com/latteye/CYvzgjFL/W8VBN.jpg"><img src="http://pic.yupoo.com/latteye/CYvzgjFL/medish.jpg" alt="DSC00379"></a><br>
+        
+          <p class="article-more-link">
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html" data-id="ci973npui00kp7opik0p6lrx9" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-自动下载 shooter.cn 字幕脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html" class="article-date">
+  <time datetime="2012-10-06T10:30:00.000Z" itemprop="datePublished">2012-10-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Dev/">Dev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>此脚本原作者是 HTPC 原动力论坛的 rabbitgg，<a href="http://bbs.htpc1.com/viewthread.php?tid=75393">原帖地址</a>。<br>如果你有兴趣，可以看看作者在原帖的算法描述。<br>可能长期以来没有人有这种需求，而我只是需要一个能根据电影文件下载字幕的命令行工具。所以把部分代码从源文件剥离了出来。</p>
+<p>在我的 HomeServer 上，通过 flexget 订阅 RSS 自动下载 torrent（主要是不同的 TVShow），rtorrent 一直监控目录，自动开始下载。当下载结束，rtorrent 调用一个整理脚本，将 TVShow 与 Movie 分开，自动创建 TVShow 名称目录，自动创建 Movie 分类目录（我是按照首字母分类的）。<br>于是最后一步就是自动下载电影、连续剧字幕了。这个脚本直接跟连续剧文件路径即可，下载的字幕也会和电影文件在同一目录下。</p>
+<p>已知的问题是，很小的几率会出现下载到的 srt 文件显示“您的 SPlayer 版本过久”，暂时也没搞懂为什么会出现这个情况。</p>
+        
+          <p class="article-more-link">
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2012/10/自动下载 shooter.cn 字幕脚本.html" data-id="ci973y2jb00004gpicepb2p3u" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2012/10/自动下载 shooter.cn 字幕脚本.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-one-week-mobile-analytics-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/09/one-week-mobile-analytics-3.html" class="article-date">
+  <time datetime="2012-09-25T06:43:25.000Z" itemprop="datePublished">2012-09-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mobile/">Mobile</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <font size=5><strong>一、Apple</strong></font>
+
+<p>Apple 自从发布 iPhone 5 以来，股票一直以增长为主态。但是其中也出现过两次比较大的下跌：</p>
+<p>1. iOS 6 自带地图问题，在 21 日后，世界各地陆续发现 iOS 6 的地图简直就是<a href="http://www.nownews.com/2012/09/21/339-2856350.htm">世界的一朵奇葩</a>，连 <a href="http://tech.sina.com.cn/mobile/n/2012-09-24/08347649372.shtml">Moto</a> 和 <a href="http://www.weiphone.com/apple/news/2012-09-24/Nokia_If_dissatisfaction_iOS_6_Map__488412.shtml">Nokia</a> 都公开出来笑话 Apple。Apple 曾经一向以稳定，安全示人，这次真是丢人丢到家了。看来在去 Google 化的道路上也不好走啊。</p>
+<p>21日以 697 点附近开盘，685点收盘。<br>
+        
+          <p class="article-more-link">
+            <a href="/2012/09/one-week-mobile-analytics-3.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2012/09/one-week-mobile-analytics-3.html" data-id="ci973npgu00787opizk5rjt0f" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2012/09/one-week-mobile-analytics-3.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-one-week-mobile-analytics-2-post-apple-era" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html" class="article-date">
+  <time datetime="2012-09-17T09:18:46.000Z" itemprop="datePublished">2012-09-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mobile/">Mobile</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本月12日 Apple 发布了最新的 iPhone 5，本周移动产品分析作为 Apple iPhone 5 的专篇，详细的从硬件、市场等角度分析。希望得出合理的未来数月的市场预测、股票预测。我希望自己所写内容尽可能技术流一些，所以可能会有点枯燥。</p>
+<p>介于乔布斯教主的逝世，我将这之后的产品称之为后苹果时代产品。<br>
+        
+          <p class="article-more-link">
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2012/09/one-week-mobile-analytics-2-post-apple-era.html" data-id="ci973npgw007b7opikied3fqw" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2012/09/one-week-mobile-analytics-2-post-apple-era.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-one-week-mobile-analytics-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/09/one-week-mobile-analytics-1.html" class="article-date">
+  <time datetime="2012-09-09T15:01:27.000Z" itemprop="datePublished">2012-09-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mobile/">Mobile</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/09/one-week-mobile-analytics-1.html">一周移动产品分析(一)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从今天开始给自己的博客新开一个分类 “Mobile”，这个分类用来分析这两年火热的移动产品。一方面让自己不要太落伍，一方面尝试通过分析市场同时学习一些金融知识。这个分类坚持一周至少一更新的频率。如果你喜欢，希望各位多多留言。</p>
+<p>本周重要的移动产品如下：</p>
+<ul>
+<li>三星 Series 9 超级本</li>
+<li>Motorola Droid RAZR Maxx HD</li>
+<li>智器 Ten4、X7、U7 以及 SmartStation 二代</li>
+<li>Kindle Paperwhite</li>
+<li>Kindle Fire HD</li>
+<li>Kindle Fire</li>
+<li>Nokia Lumia 920
+        
+          <p class="article-more-link">
+            <a href="/2012/09/one-week-mobile-analytics-1.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2012/09/one-week-mobile-analytics-1.html" data-id="ci973npgy007d7opibls7go1a" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2012/09/one-week-mobile-analytics-1.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/09/zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat.html" class="article-date">
+  <time datetime="2012-09-06T07:01:44.000Z" itemprop="datePublished">2012-09-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/09/zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat.html">Zabbix 使用 JMX 方式监控 Tomcat</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Zabbix 2.0 已经将 JMX 监控加入了系统中，本身不再依赖第三方工具。这是得对 Tomcat 应用以及其他 Java 应用的监控更加简单。本文简单的介绍 Zabbix 使用 JMX 方式监控 Tomcat 的过程。</p>
+<p><font color=white><a href="http://latteye.com/2012/09/zabbix-%E4%BD%BF%E7%94%A8-jmx-%E6%96%B9%E5%BC%8F%E7%9B%91%E6%8E%A7-tomcat.html">http://latteye.com/2012/09/zabbix-%E4%BD%BF%E7%94%A8-jmx-%E6%96%B9%E5%BC%8F%E7%9B%91%E6%8E%A7-tomcat.html</a> 本文源地址 转贴请保留原帖地址</font></p>
+<blockquote>
+<p>CentOS：6.3</p>
+<p>apache-tomcat：7.0.29</p>
+<p>jdk：1.7.0_05</p>
+<p>zabbix：2.0</p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a href="/2012/09/zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2012/09/zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat.html" data-id="ci973np5r00087opibi5fbgn1" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2012/09/zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-zabbix-apache-e7-9b-91-e6-8e-a7-e6-a8-a1-e7-89-88" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/09/zabbix-apache-e7-9b-91-e6-8e-a7-e6-a8-a1-e7-89-88.html" class="article-date">
+  <time datetime="2012-09-04T09:18:31.000Z" itemprop="datePublished">2012-09-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/09/zabbix-apache-e7-9b-91-e6-8e-a7-e6-a8-a1-e7-89-88.html">zabbix apache 监控模版</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在调试 zabbix，去 wiki 转了一圈，在 <a href="http://www.zabbix.com/wiki/templates/apache">Apache Monitoring Script</a> 看到几个实现方式，我选择了方式二。就像作者说的，这种方式只需要部署在一点即可，不用每一个 agent 都有脚本。</p>
+<p>跑了一下发现脚本已经无法运行，遂做了一点 debug，适当的修改了脚本和模版，在这里贴一下。我的环境是 CentOS 6 ，Python 2.6.6，zabbix 2.0. Apache 的状态页面路径为 /server-status 。将脚本放到 server 或者 proxy 的 external scripts 目录后，对应机器添加模版即可。这个脚本还有可以优化的地方是，端口应该作为一个变量来处理。<br>
+        
+          <p class="article-more-link">
+            <a href="/2012/09/zabbix-apache-e7-9b-91-e6-8e-a7-e6-a8-a1-e7-89-88.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2012/09/zabbix-apache-e7-9b-91-e6-8e-a7-e6-a8-a1-e7-89-88.html" data-id="ci973np6g000a7opiloyl60b8" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2012/09/zabbix-apache-e7-9b-91-e6-8e-a7-e6-a8-a1-e7-89-88.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2012-ifa-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/08/2012-ifa-1.html" class="article-date">
+  <time datetime="2012-08-30T15:08:53.000Z" itemprop="datePublished">2012-08-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mobile/">Mobile</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/08/2012-ifa-1.html">2012 IFA Day One</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>IFA 即德国柏林电子消费品展 第一天已经过去了，最受我个人期待的 三星 Galaxy Note 2 也已经发布。但展会并不只有 Note 2 引人注目，众多的电子产品都可能洗牌未来的市场。为了对市场总结，以及自娱自乐，我来写几篇：</p>
+<p><strong><font size=5>平板</font></strong></p>
+<p>华为 — MediaPad 10 FHD：<em>10.1</em> IPS;1920x1200;1.2G-1.4G CPU;1G-2G RAM;800w像素摄像头;6600mAh;3G(选配) == 2299 - 2999元<br>Sony — Xperia Tablet S: <em>10.1</em> IPS;1280x800;Tegra 3;? CPU;? RAM;500万像素;6000mAH == 2500-3200 元<br>三星 — ATIV Tab: <em>10.1</em> ; 1366x768 ; 1.5G 双核；500万像素; <em>Windows 8</em>;<br>联想 — IdeaTab A2107: <em>7</em> ; 1024x600; 1G A9 双核<br>联想 — IdeaTab A2109: <em>9</em> ; 1280x800; Tegra 3; 1G RAM;300万像素 == 约 1900 元<br>爱可视 — Arnova Child Pad: <em>7</em> ; 1.5G 双核; == 1200 元左右（不含稅？）</p>
+        
+          <p class="article-more-link">
+            <a href="/2012/08/2012-ifa-1.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2012/08/2012-ifa-1.html" data-id="ci973nq0o00pp7opiqatjs2hp" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2012/08/2012-ifa-1.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-pc-low-fi-e4-b9-8b-e8-b7-af-4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/08/pc-low-fi-e4-b9-8b-e8-b7-af-4.html" class="article-date">
+  <time datetime="2012-08-30T08:24:59.000Z" itemprop="datePublished">2012-08-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Music/">Music</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/08/pc-low-fi-e4-b9-8b-e8-b7-af-4.html">PC Low-Fi 之路 4</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>距离上一篇 PC Low-Fi 之路已经过去了半年的时间，半年里面发生了很多事情，家里有一套好一点的音箱器材着实让生活质量高了很多。最近又开始零零散散的看上了一些淘宝上的小东西，简单介绍一下：</p>
+<p><strong>一、CM6631</strong><br>我的 HomeServer 没有同轴或者光纤的输出口，所以 USB 输出成了唯一的可能。看到这款 <a href="http://item.taobao.com/item.htm?spm=a1z09.5.0.40&amp;id=15255630028">CM6631</a> 转换器，感觉价格不贵就买了下来。初衷是希望解决 24bit 192kHZ 音频的播放问题。<br><img src="http://i.ebayimg.com/t/24-192-24-96-CM6631-USB-COAX-OPT-SPDIF-convertor-DAC-PCM270X-killer-/00/s/MTIwMFgxNjAw/$%28KGrHqZ,!rIE-pYlnQB6BP-oMMK8n!~~60_57.JPG" alt=""><br>这个小东西在 ebay 上居然被卖到了 50 美金左右，不得不感慨深圳那边小电子产品生产能力的强大。<br>
+        
+          <p class="article-more-link">
+            <a href="/2012/08/pc-low-fi-e4-b9-8b-e8-b7-af-4.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2012/08/pc-low-fi-e4-b9-8b-e8-b7-af-4.html" data-id="ci973npg3006a7opij6qdvgu6" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2012/08/pc-low-fi-e4-b9-8b-e8-b7-af-4.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
+  
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

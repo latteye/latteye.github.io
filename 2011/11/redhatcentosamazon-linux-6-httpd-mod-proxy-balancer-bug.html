@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RedHat&amp;CentOS&amp;Amazon Linux 6 httpd mod_proxy_balancer bug | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在 Amazon Linux 上应用 Apache httpd mod_proxy_balancer 模块，后端 tomcat 需要 session，于是使用到了 stickysession 功能，但起初无论如何都无法令其工作。于是再转入 CentOS 6 环境测试，发现效果一样。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RedHat&CentOS&Amazon Linux 6 httpd mod_proxy_balancer bug">
+<meta property="og:url" content="http://latteye.com/2011/11/redhatcentosamazon-linux-6-httpd-mod-proxy-balancer-bug.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="在 Amazon Linux 上应用 Apache httpd mod_proxy_balancer 模块，后端 tomcat 需要 session，于是使用到了 stickysession 功能，但起初无论如何都无法令其工作。于是再转入 CentOS 6 环境测试，发现效果一样。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RedHat&CentOS&Amazon Linux 6 httpd mod_proxy_balancer bug">
+<meta name="twitter:description" content="在 Amazon Linux 上应用 Apache httpd mod_proxy_balancer 模块，后端 tomcat 需要 session，于是使用到了 stickysession 功能，但起初无论如何都无法令其工作。于是再转入 CentOS 6 环境测试，发现效果一样。">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-redhatcentosamazon-linux-6-httpd-mod-proxy-balancer-bug" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/11/redhatcentosamazon-linux-6-httpd-mod-proxy-balancer-bug.html" class="article-date">
+  <time datetime="2011-11-19T14:16:16.000Z" itemprop="datePublished">2011-11-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RedHat&amp;CentOS&amp;Amazon Linux 6 httpd mod_proxy_balancer bug
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在 Amazon Linux 上应用 Apache httpd mod_proxy_balancer 模块，后端 tomcat 需要 session，于是使用到了 stickysession 功能，但起初无论如何都无法令其工作。于是再转入 CentOS 6 环境测试，发现效果一样。<a id="more"></a></p>
+<p>不工作的配置：</p>
+<pre lang="apache"> <virtualhost *:80="">
+     ProxyPass / balancer://appCluster/ stickysession=JSESSIONID
+     ProxyPassReverse / balancer://appCluster/
+ </virtualhost>
+
+ <proxy balancer:="" appcluster="">
+     BalancerMember ajp://172.16.5.154:8009 smax=5 route=jvm1 retry=60 ttl=60
+     BalancerMember ajp://172.16.5.154:8010 smax=5 route=jvm2 retry=60 ttl=60
+ </proxy>
+</pre>
+
+<p>工作的配置：</p>
+<pre lang="apache"><virtualhost *:80="">
+    ProxyPass / balancer://appCluster/
+    ProxyPassReverse / balancer://appCluster/
+</virtualhost>
+
+<proxy balancer:="" appcluster="">
+    BalancerMember ajp://172.16.5.154:8009 smax=5 route=jvm1 retry=60 ttl=60
+    BalancerMember ajp://172.16.5.154:8010 smax=5 route=jvm2 retry=60 ttl=60
+    ProxySet stickysession=JSESSIONID
+</proxy></pre>
+
+<p>按照 <a href="http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#proxyset" title="ProxySet" target="_blank" rel="external">ProxySet</a> 的解释，它也只是到了后面的一种替代配置方式。而按照 <a href="http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#proxypass" title="ProxyPass" target="_blank" rel="external">ProxyPass</a> 的说明，这两种配置方式都应该是工作的。于是我开始做跟进一步的跟踪。</p>
+<p>配置 balancer log：</p>
+<pre lang="apache">LogFormat "\"%{MYCOOKIE}C\" \"%{Set-Cookie}o\" \"%{BALANCER_SESSION_STICKY}e\" \"%{BALANCER_SESSION_ROUTE}e\" \"%{BALANCER_WORKER_ROUTE}e\" \"%{BALANCER_ROUTE_CHANGED}e\"" session
+CustomLog logs/session_log session</pre>
+
+<p>工作的 log：</p>
+<pre lang="apache">"-" "-" "-" "-" "jvm1" "1"
+"-" "-" "-" "-" "jvm2" "1"
+"-" "-" "-" "-" "jvm1" "1"
+"-" "JSESSIONID=8B23E43DC6CA0C11BFB14A7D40A3C489.jvm2; Path=/ewallet/; HttpOnly" "-" "-" "jvm2" "1"
+"-" "-" "JSESSIONID" "jvm2" "jvm2" "-"
+"-" "-" "JSESSIONID" "jvm2" "jvm2" "-"
+"-" "-" "JSESSIONID" "jvm2" "jvm2" "-"
+"-" "-" "JSESSIONID" "jvm2" "jvm2" "-"</pre>
+
+<p>不工作的 log：</p>
+<pre lang="apache">
+"-" "JSESSIONID=8277BFA34D8B787722F39251F223A837.jvm1; Path=/ewallet/; HttpOnly" "-" "-" "jvm1" "-"
+"-" "-" "-" "-" "jvm2" "-"
+"-" "-" "-" "-" "jvm1" "-"
+"-" "-" "-" "-" "jvm2" "-"</pre>
+
+<p>给我的感觉是 balancer 模块完全没有意识到需要按照 sessionid 的方式去选择 route。很明显 balancer 模块已经看到 cookie 了。</p>
+<p>全局打开 debug 模式，工作的log：</p>
+<pre lang="apache">mod_proxy_balancer.c(46): proxy: BALANCER: canonicalising URL //appCluster/ewallet/account
+mod_proxy_balancer.c(280): proxy: BALANCER: Found value AAE5BBF643F75BFFE91FA4F7841B3847.jvm1 for stickysession JSESSIONID
+mod_proxy_balancer.c(290): proxy: BALANCER: Found route jvm1
+mod_proxy_balancer.c(581): proxy: BALANCER (balancer://appcluster) worker (ajp://172.16.5.154:8009) rewritten to ajp://172.16.5.154:8009/ewallet/account</pre>
+
+<p>不工作的 log：</p>
+<pre lang="apache">mod_proxy_balancer.c(46): proxy: BALANCER: canonicalising URL //appCluster/ewallet/login.jsp
+ mod_proxy_balancer.c(1003): proxy: Entering byrequests for BALANCER (balancer://appcluster)
+ mod_proxy_balancer.c(1046): proxy: byrequests selected worker "ajp://172.16.5.154:8009" : busy 0 : lbstatus 0
+ mod_proxy_balancer.c(581): proxy: BALANCER (balancer://appcluster) worker (ajp://172.16.5.154:8009) rewritten to ajp://172.16.5.154:8009/ewallet/login.jsp</pre>
+
+<p>基本上可以确定为是一个 bug。然后我去 RedHat bugzilla 搜索了一下，看到一个类似的问题：<a href="https://bugzilla.redhat.com/show_bug.cgi?id=475787" target="_blank" rel="external">mod_proxy_balancer: strange behaviour of multiple session identifiers [NEEDINFO]</a> 。不过原提交人未再给出详细的信息了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2011/11/redhatcentosamazon-linux-6-httpd-mod-proxy-balancer-bug.html" data-id="ci973npf000547opirt0yveof" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2011/11/redhatcentosamazon-linux-6-httpd-mod-proxy-balancer-bug.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2011/11/keyboard.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          说说键盘吧
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2011/11/pc-low-fi-e4-b9-8b-e8-b7-af-3.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">PC Low-Fi 之路 3</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2011/11/redhatcentosamazon-linux-6-httpd-mod-proxy-balancer-bug.html" data-title="RedHat&amp;CentOS&amp;Amazon Linux 6 httpd mod_proxy_balancer bug" data-url="http://latteye.com/2011/11/redhatcentosamazon-linux-6-httpd-mod-proxy-balancer-bug.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

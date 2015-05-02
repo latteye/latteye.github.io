@@ -1,0 +1,2540 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Zabbix 使用 JMX 方式监控 Tomcat | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Zabbix 2.0 已经将 JMX 监控加入了系统中，本身不再依赖第三方工具。这是得对 Tomcat 应用以及其他 Java 应用的监控更加简单。本文简单的介绍 Zabbix 使用 JMX 方式监控 Tomcat 的过程。
+http://latteye.com/2012/09/zabbix-%E4%BD%BF%E7%94%A8-jmx-%E6%96%B9%E5%BC%8F%E7%9B%91%E6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zabbix 使用 JMX 方式监控 Tomcat">
+<meta property="og:url" content="http://latteye.com/2012/09/zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="Zabbix 2.0 已经将 JMX 监控加入了系统中，本身不再依赖第三方工具。这是得对 Tomcat 应用以及其他 Java 应用的监控更加简单。本文简单的介绍 Zabbix 使用 JMX 方式监控 Tomcat 的过程。
+http://latteye.com/2012/09/zabbix-%E4%BD%BF%E7%94%A8-jmx-%E6%96%B9%E5%BC%8F%E7%9B%91%E6">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Zabbix 使用 JMX 方式监控 Tomcat">
+<meta name="twitter:description" content="Zabbix 2.0 已经将 JMX 监控加入了系统中，本身不再依赖第三方工具。这是得对 Tomcat 应用以及其他 Java 应用的监控更加简单。本文简单的介绍 Zabbix 使用 JMX 方式监控 Tomcat 的过程。
+http://latteye.com/2012/09/zabbix-%E4%BD%BF%E7%94%A8-jmx-%E6%96%B9%E5%BC%8F%E7%9B%91%E6">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/09/zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat.html" class="article-date">
+  <time datetime="2012-09-06T07:01:44.000Z" itemprop="datePublished">2012-09-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Zabbix 使用 JMX 方式监控 Tomcat
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Zabbix 2.0 已经将 JMX 监控加入了系统中，本身不再依赖第三方工具。这是得对 Tomcat 应用以及其他 Java 应用的监控更加简单。本文简单的介绍 Zabbix 使用 JMX 方式监控 Tomcat 的过程。</p>
+<p><font color="white"><a href="http://latteye.com/2012/09/zabbix-%E4%BD%BF%E7%94%A8-jmx-%E6%96%B9%E5%BC%8F%E7%9B%91%E6%8E%A7-tomcat.html" target="_blank" rel="external">http://latteye.com/2012/09/zabbix-%E4%BD%BF%E7%94%A8-jmx-%E6%96%B9%E5%BC%8F%E7%9B%91%E6%8E%A7-tomcat.html</a> 本文源地址 转贴请保留原帖地址</font></p>
+<blockquote>
+<p>CentOS：6.3</p>
+<p>apache-tomcat：7.0.29</p>
+<p>jdk：1.7.0_05</p>
+<p>zabbix：2.0</p>
+</blockquote>
+<a id="more"></a>
+<p><strong>一、编译、配置 zabbix_java</strong><br><code>./configure --enable-java --prefix=/opt/zabbix_java
+make &amp;&amp; make install</code></p>
+<p>在配置文件 <code>settings.sh</code> 中，可以配置以下参数：</p>
+<pre lang="ini">LISTEN_IP="0.0.0.0"
+LISTEN_PORT=10052
+PID_FILE="/tmp/zabbix_java.pid"
+START_POLLERS=5</pre>
+
+<p>其中 LISTEN_PORT 和 LISTEN_IP 可以不配置，zabbix_java 会采用默认值。但是 PID_FILE 和 START_POLLERS 必须配置，尤其主意 START_POLLERS，若不配置 zabbix_java 依旧可以启动但是是不工作的。</p>
+<p><strong>二、配置 zabbix_server 或 zabbix_proxy</strong></p>
+<p>zabbix_server 或 zabbix_proxy 的配置文件中有以下内容需要配置：</p>
+<pre lang="ini">JavaGateway=127.0.0.1
+JavaGatewayPort=10052
+StartJavaPollers=5</pre>
+
+<p>这三项都需要配置，其中 StartJavaPollers 会被视为开关性质的参数。0 或者未配置将被系统认为不具有 Java 信息抓取能力。这点在 <a href="http://www.zabbix.com/documentation/2.0/manual/config/items/itemtypes/jmx_monitoring" target="_blank" rel="external">Zabbix JMX Monitoring Wiki</a> 中未提及，但是实际效果就是这样。同时 <a href="http://www.zabbix.com/documentation/2.0/manual/appendix/config/zabbix_proxy" target="_blank" rel="external">Zabbix Proxy 的配置文件解析</a> 中也有介绍此参数的含义。</p>
+<p><strong>三、配置 Tomcat</strong></p>
+<p>在大多数<a href="https://www.google.com/search?q=tomcat+jmx+memory+monitor&amp;ie=utf-8&amp;oe=utf-8&amp;aq=t&amp;rls=org.mozilla:zh-CN:official&amp;client=firefox-a" target="_blank" rel="external">搜索到的文章中</a>，都在使用修改 catalina.sh 脚本的方式来为 Tomcat 添加被监控的功能，包括 <a href="http://www.zabbix.com/documentation/2.0/manual/config/items/itemtypes/jmx_monitoring" target="_blank" rel="external">Zabbix Wiki</a> 也是推荐的这种方式:<br><code>-Dcom.sun.management.jmxremote
+-Dcom.sun.management.jmxremote.ssl=false
+-Dcom.sun.management.jmxremote.authenticate=false
+-Dcom.sun.management.jmxremote.port=5555</code></p>
+<p>就这种方式而言，需要注意的是 catalina.sh 中提供的默认变量名 JAVA_OPTS 和 CATALINA_OPTS。由于 JAVA_OPTS 所添加的参数会在 tomcat 开启和关闭时都运行，所以如果你把 <code>-Dcom.sun.management.jmxremote.port=5555</code> 写在 JAVA_OPTS 中，就会在关闭 tomcat 时出现如下错误：</p>
+<blockquote>
+<p>Error: Exception thrown by the agent : java.rmi.server.ExportException : Port</p>
+<p>already in use: 5555;nested exception is:</p>
+<pre><code>java<span class="class">.net</span><span class="class">.BindException</span>: Address already <span class="keyword">in</span> use: JVM_Bind
+</code></pre></blockquote>
+<p>从而无法关闭。<br>而 CATALINA_OPTS 只会在开启 tomcat 的时候运行，所以应该将这些配置写在 CATALINA_OPTS 中。这个问题在<a href="https://issues.apache.org/bugzilla/show_bug.cgi?id=36976" target="_blank" rel="external">这里</a>有被详细的讨论。</p>
+<p>但是这并不是在 tomcat 中开启 jmx 的正确方式，如果你用这种方式，紧接着就会遇到 <a href="https://support.zabbix.com/browse/ZBX-5326" target="_blank" rel="external">这样</a> 的问题。<br>正确的方式应该是这样的：</p>
+<p>1. 在 tomcat 下载页面 Extras 类别中下载 JMX Remote jar 二进制包。放在 <code>tomcat/lib</code> 下面.<br>2. 修改 tomcat server.xml 配置文件，添加以下内容：</p>
+<pre lang="ini">
+<listener classname="org.apache.catalina.mbeans.JmxRemoteLifecycleListener" rmiregistryportplatform="12345" rmiserverportplatform="12346">
+</listener></pre>
+
+<p>具体参数内容请参考 <a href="http://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#Additional_Implementations" target="_blank" rel="external">apache tomcat 文档</a>。</p>
+<p>3. 修改 tomcat/bin 目录下 catalina.sh ，添加以下内容：</p>
+<pre lang="ini">
+CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=10.32.18.1"
+</pre>
+
+<p>在这里写上 hostname 是由于 hostname 默认值为 localhost,如果你的 tomcat 未监听在 localhost，那么不写具体 ip 会引发问题。</p>
+<p>4. 确保 zabbix server 或者 proxy 和 配置文件中的端口通讯畅通。</p>
+<p>四、使用 cmdline-jmxclient 抓取信息</p>
+<p><a href="http://crawler.archive.org/cmdline-jmxclient/downloads.html" target="_blank" rel="external">下载 cmdline jmxclient</a><br>如果你有一个完美的模版，你可能可以忽略此步。但是大多数情况下你没有。况且 zabbix 默认的 tomcat 模版也不能很好的工作。<br>这时候有一个工具来调试会方便很多，cmd-jmxclient 就是这样一个小工具。</p>
+<p>简单的看几个命令：</p>
+<p><code>java -jar cmdline-jmxclient-0.10.3.jar - 10.32.18.1:12345 java.lang:type=Memory NonHeapMemoryUsage
+09/06/2012 06:42:41 +0000 org.archive.jmx.Client NonHeapMemoryUsage: 
+committed: 24444928
+init: 24313856
+max: 136314880
+used: 22648408</code></p>
+<p><code>java -jar cmdline-jmxclient-0.10.3.jar - 10.32.18.1:12345 Catalina:context=/,host=ame_app1,type=Manager maxActive
+09/06/2012 06:43:08 +0000 org.archive.jmx.Client maxActive: 0</code></p>
+<p><code>java -jar cmdline-jmxclient-0.10.3.jar - 10.32.18.1:12345 &#39;Catalina:name=&quot;ajp-apr-8009&quot;,type=GlobalRequestProcessor&#39; bytesReceived
+09/06/2012 06:44:07 +0000 org.archive.jmx.Client bytesReceived: 0</code></p>
+<p>注意上面一行命令，<code>&quot;ajp-apr-8009&quot;</code> 前后要有引号，这是唯一一种能工作的方式。下面列出我尝试过的多种不工作的方式：</p>
+<blockquote>
+<p>java -jar cmdline-jmxclient-0.10.3.jar - 10.32.18.1:12345 “Catalina:name=ajp-apr-8009,type=GlobalRequestProcessor” bytesReceived</p>
+<p>java -jar cmdline-jmxclient-0.10.3.jar - 10.32.18.1:12345 “Catalina:name=ajp-apr-8009,type=GlobalRequestProcessor” bytesReceived</p>
+<p>java -jar cmdline-jmxclient-0.10.3.jar - 10.32.18.1:12345 “Catalina:name=’ajp-apr-8009’,type=GlobalRequestProcessor” bytesReceived</p>
+<p>java -jar cmdline-jmxclient-0.10.3.jar - 10.32.18.1:12345 ‘Catalina:name=’ajp-apr-8009’,type=GlobalRequestProcessor’ bytesReceived</p>
+<p>java -jar cmdline-jmxclient-0.10.3.jar - 10.32.18.1:12345 ‘Catalina:name=”ajp-apr-8009”,type=GlobalRequestProcessor’ bytesReceived</p>
+<p>java -jar cmdline-jmxclient-0.10.3.jar - 10.32.18.1:12345 ‘Catalina:name=\”ajp-apr-8009\”,type=GlobalRequestProcessor’ bytesReceived</p>
+</blockquote>
+<p>这个细节很重要，后面做模版的时候就会体现出来了。</p>
+<p><strong>ajp-apr-8009</strong></p>
+<p>ajp-apr-8009 这样的字段取决于你的 tomcat 配置，如果你使用 jk 、bio 等等不同的 io 处理，这里的字段也会不同。甚至 tomcat server.xml 中的一些配置：比如 host=’192.168.1.1’ 这样的配置，也会影响这里 key 的字段。所以 tomcat 的 zabbix 模版就显得不是那么的通用。所以在我自己使用的时候也稍微修改了一下 zabbix 的默认 tomcat 模版。先贴一下我的 zabbix 模版：</p>
+<pre lang="xml">
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>2.0</version>
+    <date>2012-09-06T06:56:54Z</date>
+    <groups>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template JMX Tomcat</template>
+            <name>Template JMX Tomcat</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>ajp-apr-8009</name>
+                </application>
+                <application>
+                    <name>http-8080</name>
+                </application>
+                <application>
+                    <name>http-8443</name>
+                </application>
+                <application>
+                    <name>jk-8009</name>
+                </application>
+                <application>
+                    <name>Memory</name>
+                </application>
+                <application>
+                    <name>Sessions</name>
+                </application>
+                <application>
+                    <name>Tomcat</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>ajp-apr-8009 bytes received per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=\&quot;ajp-apr-8009\&quot;&quot;, bytesReceived]</key>
+                    <delay>60</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>B</units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ajp-apr-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>ajp-apr-8009 bytes sent per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=\&quot;ajp-apr-8009\&quot;&quot;,bytesSent]</key>
+                    <delay>60</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>B</units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ajp-apr-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>ajp-apr-8009 errors per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=\&quot;ajp-apr-8009\&quot;&quot;,errorCount]</key>
+                    <delay>60</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ajp-apr-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>ajp-apr-8009 request processing time</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=\&quot;ajp-apr-8009\&quot;&quot;,processingTime]</key>
+                    <delay>60</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>s</units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>0.001</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ajp-apr-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>ajp-apr-8009 requests per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=\&quot;ajp-apr-8009\&quot;&quot;,requestCount]</key>
+                    <delay>60</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ajp-apr-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>ajp-apr-8009 threads allocated</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ThreadPool,name=\&quot;ajp-apr-8009\&quot;&quot;,currentThreadCount]</key>
+                    <delay>60</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ajp-apr-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>ajp-apr-8009 threads busy</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ThreadPool,name=\&quot;ajp-apr-8009\&quot;&quot;,currentThreadsBusy]</key>
+                    <delay>60</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ajp-apr-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>ajp-apr-8009 threads max</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ThreadPool,name=\&quot;ajp-apr-8009\&quot;&quot;,maxThreads]</key>
+                    <delay>3600</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ajp-apr-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>HeapMemory Committed</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;java.lang:type=Memory&quot;,HeapMemoryUsage.committed]</key>
+                    <delay>60</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>HeapMemory Init</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;java.lang:type=Memory&quot;,HeapMemoryUsage.init]</key>
+                    <delay>60</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>HeapMemory Max</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;java.lang:type=Memory&quot;,HeapMemoryUsage.max]</key>
+                    <delay>60</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>HeapMemory Used</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;java.lang:type=Memory&quot;,HeapMemoryUsage.used]</key>
+                    <delay>60</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8080 bytes received per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=http-8080&quot;,bytesReceived]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>B</units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8080</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8080 bytes sent per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=http-8080&quot;,bytesSent]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>B</units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8080</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8080 errors per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=http-8080&quot;,errorCount]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8080</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8080 gzip compression</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ProtocolHandler,port=8080&quot;,compression]</key>
+                    <delay>3600</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>1</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8080</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8080 request processing time</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=http-8080&quot;,processingTime]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>s</units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>0.001</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8080</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8080 requests per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=http-8080&quot;,requestCount]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8080</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8080 threads allocated</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ThreadPool,name=http-8080&quot;,currentThreadCount]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8080</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8080 threads busy</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ThreadPool,name=http-8080&quot;,currentThreadsBusy]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8080</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8080 threads max</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ThreadPool,name=http-8080&quot;,maxThreads]</key>
+                    <delay>3600</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8080</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8443 bytes received per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=http-8443&quot;,bytesReceived]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>B</units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8443</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8443 bytes sent per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=http-8443&quot;, bytesSent]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>B</units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8443</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8443 errors per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=http-8443&quot;,errorCount]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8443</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8443 gzip compression</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ProtocolHandler,port=8443&quot;,compression]</key>
+                    <delay>3600</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>1</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8443</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8443 request processing time</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=http-8443&quot;,processingTime]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>s</units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>0.001</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8443</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8443 requests per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=http-8443&quot;,requestCount]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8443</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8443 threads allocated</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ThreadPool,name=http-8443&quot;,currentThreadCount]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8443</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8443 threads busy</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ThreadPool,name=http-8443&quot;,currentThreadsBusy]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8443</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>http-8443 threads max</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ThreadPool,name=http-8443&quot;,maxThreads]</key>
+                    <delay>3600</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>http-8443</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>jk-8009 bytes received per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=jk-8009&quot;, bytesReceived]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>B</units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>jk-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>jk-8009 bytes sent per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=jk-8009&quot;,bytesSent]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>B</units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>jk-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>jk-8009 errors per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=jk-8009&quot;,errorCount]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>jk-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>jk-8009 request processing time</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>1</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=jk-8009&quot;,processingTime]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>s</units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>0.001</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>jk-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>jk-8009 requests per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=jk-8009&quot;,requestCount]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>jk-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>jk-8009 threads allocated</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ThreadPool,name=jk-8009&quot;,currentThreadCount]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>jk-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>jk-8009 threads busy</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ThreadPool,name=jk-8009&quot;,currentThreadsBusy]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>jk-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>jk-8009 threads max</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=ThreadPool,name=jk-8009&quot;,maxThreads]</key>
+                    <delay>3600</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>jk-8009</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>Maximum number of active sessions so far</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=Manager,context=/,host={HOSTNAME}&quot;,maxActive]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Sessions</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>Number of active sessions at this moment</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=Manager,context=/,host={HOSTNAME}&quot;,activeSessions]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Sessions</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>Number of sessions created by this manager per second</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=Manager,context=/,host={HOSTNAME}&quot;,sessionCounter]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>1</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Sessions</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>Number of sessions we rejected due to maxActive beeing reached</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=Manager,context=/,host={HOSTNAME}&quot;,rejectedSessions]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Sessions</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>The maximum number of active Sessions allowed, or -1 for no limit</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=Manager,context=/,host={HOSTNAME}&quot;,maxActiveSessions]</key>
+                    <delay>3600</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Sessions</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+                <item>
+                    <name>Tomcat version</name>
+                    <type>16</type>
+                    <snmp_community>
+                    <multiplier>0</multiplier>
+                    <snmp_oid>
+                    <key>jmx[&quot;Catalina:type=Server&quot;,serverInfo]</key>
+                    <delay>3600</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>1</value_type>
+                    <allowed_hosts>
+                    <units>
+                    <delta>0</delta>
+                    <snmpv3_securityname>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase>
+                    <snmpv3_privpassphrase>
+                    <formula>1</formula>
+                    <delay_flex>
+                    <params>
+                    <ipmi_sensor>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username>
+                    <password>
+                    <publickey>
+                    <privatekey>
+                    <port>
+                    <description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Tomcat</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                </valuemap></description></port></privatekey></publickey></password></username></ipmi_sensor></params></delay_flex></snmpv3_privpassphrase></snmpv3_authpassphrase></snmpv3_securityname></units></allowed_hosts></snmp_oid></snmp_community></item>
+            </items>
+            <discovery_rules>
+            <macros>
+            <templates>
+            <screens>
+        </screens></templates></macros></discovery_rules></template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template JMX Tomcat:jmx[&quot;Catalina:type=ThreadPool,name=http-8080&quot;,currentThreadsBusy].last(0)} &gt; ({Template JMX Tomcat:jmx[&quot;Catalina:type=ThreadPool,name=http-8080&quot;,maxThreads].last(0)} * 0.7)</expression>
+            <name>70% http-8080 worker threads busy on {HOST.NAME}</name>
+            <url>
+            <status>0</status>
+            <priority>2</priority>
+            <description>
+            <type>0</type>
+            <dependencies>
+        </dependencies></description></url></trigger>
+        <trigger>
+            <expression>{Template JMX Tomcat:jmx[&quot;Catalina:type=ThreadPool,name=http-8443&quot;,currentThreadsBusy].last(0)} &gt; ({Template JMX Tomcat:jmx[&quot;Catalina:type=ThreadPool,name=http-8443&quot;,maxThreads].last(0)} * 0.7)</expression>
+            <name>70% http-8443 worker threads busy on {HOST.NAME}</name>
+            <url>
+            <status>0</status>
+            <priority>2</priority>
+            <description>
+            <type>0</type>
+            <dependencies>
+        </dependencies></description></url></trigger>
+        <trigger>
+            <expression>{Template JMX Tomcat:jmx[&quot;Catalina:type=ThreadPool,name=jk-8009&quot;,currentThreadsBusy].last(0)} &gt; ({Template JMX Tomcat:jmx[&quot;Catalina:type=ThreadPool,name=jk-8009&quot;,maxThreads].last(0)}  *0.7)</expression>
+            <name>70% jk-8009 worker threads busy on {HOST.NAME}</name>
+            <url>
+            <status>0</status>
+            <priority>2</priority>
+            <description>
+            <type>0</type>
+            <dependencies>
+        </dependencies></description></url></trigger>
+        <trigger>
+            <expression>{Template JMX Tomcat:jmx[&quot;Catalina:type=ProtocolHandler,port=8080&quot;,compression].str(off)} = 1</expression>
+            <name>gzip compression is off for connector http-8080 on {HOST.NAME}</name>
+            <url>
+            <status>0</status>
+            <priority>1</priority>
+            <description>
+            <type>0</type>
+            <dependencies>
+        </dependencies></description></url></trigger>
+        <trigger>
+            <expression>{Template JMX Tomcat:jmx[&quot;Catalina:type=ProtocolHandler,port=8443&quot;,compression].str(off)} = 1</expression>
+            <name>gzip compression is off for connector http-8443 on {HOST.NAME}</name>
+            <url>
+            <status>0</status>
+            <priority>1</priority>
+            <description>
+            <type>0</type>
+            <dependencies>
+        </dependencies></description></url></trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <name>ajp-apr-8009 worker threads</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>0000DD</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=ThreadPool,name=\&quot;ajp-apr-8009\&quot;&quot;,currentThreadCount]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>00C800</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=ThreadPool,name=\&quot;ajp-apr-8009\&quot;&quot;,currentThreadsBusy]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>DD0000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=ThreadPool,name=\&quot;ajp-apr-8009\&quot;&quot;,maxThreads]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>HeapMemory</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>888888</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;java.lang:type=Memory&quot;,HeapMemoryUsage.committed]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>6666FF</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;java.lang:type=Memory&quot;,HeapMemoryUsage.init]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>CC0000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;java.lang:type=Memory&quot;,HeapMemoryUsage.max]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <drawtype>1</drawtype>
+                    <color>00CC00</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;java.lang:type=Memory&quot;,HeapMemoryUsage.used]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>http-8080 worker threads</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>C80000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=ThreadPool,name=http-8080&quot;,maxThreads]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>00C800</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=ThreadPool,name=http-8080&quot;,currentThreadsBusy]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>0000C8</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=ThreadPool,name=http-8080&quot;,currentThreadCount]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>http-8443 worker threads</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>C80000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=ThreadPool,name=http-8443&quot;,maxThreads]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>00C800</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=ThreadPool,name=http-8443&quot;,currentThreadsBusy]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>0000C8</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=ThreadPool,name=http-8443&quot;,currentThreadCount]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>jk-8009 worker threads</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>C80000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=ThreadPool,name=jk-8009&quot;,maxThreads]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>00C800</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=ThreadPool,name=jk-8009&quot;,currentThreadsBusy]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>0000C8</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=ThreadPool,name=jk-8009&quot;,currentThreadCount]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>sessions /</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>C80000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=Manager,context=/,host=localhost&quot;,rejectedSessions]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>00C800</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=Manager,context=/,host=localhost&quot;,activeSessions]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>0000C8</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template JMX Tomcat</host>
+                        <key>jmx[&quot;Catalina:type=Manager,context=/,host=localhost&quot;,maxActiveSessions]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
+</pre>
+
+<p>在这模版中最主要的也就是 key 的写法：</p>
+<p><code>jmx[&quot;Catalina:type=GlobalRequestProcessor,name=\&quot;ajp-apr-8009\&quot;&quot;, bytesReceived]</code></p>
+<p><del datetime="2012-09-10T07:22:32+00:00">另外上面模版中将原先模版的 localhost 修改为 {HOSTNAME} 这是根据我自己看到的现象修改的。如果与你的实际情况不符，就改回来吧。</del><br>勘误，不应该使用 {HOSTNAME}，应该使用 localhost.</p>
+<p>有两处的双引号需要反义，如果你发现某些 key 无法获得数据，在查看 log 之余不放注意一下需要加引号的部分。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2012/09/zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat.html" data-id="ci973np5r00087opibi5fbgn1" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2012/09/zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2012/09/one-week-mobile-analytics-1.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          一周移动产品分析(一)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2012/09/zabbix-apache-e7-9b-91-e6-8e-a7-e6-a8-a1-e7-89-88.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">zabbix apache 监控模版</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2012/09/zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat.html" data-title="Zabbix 使用 JMX 方式监控 Tomcat" data-url="http://latteye.com/2012/09/zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>通向KDE4之路 十 &amp; 十一 | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="翻译：yuanjiayj（十）、三翻领 （十一）
+通向KDE4之路（十）：Oxygen美工项目和图标（2007-03-07）
+KDE4的视觉效果由于Oxygen图标集的引入kdelibs而发生翻天覆地的变化。这次的引入过程仍在继续中，其中还包括了一个影响了数千个文件的大型图标命名方案的改变。但是Oxygen美工项目不仅仅是图标集，它是KDE4中统一的美工效果。Oxygen中不可或缺的SVG部分为很">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通向KDE4之路 十 & 十一">
+<meta property="og:url" content="http://latteye.com/2007/03/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-e5-8d-81-e5-8d-81-e4-b8-80.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="翻译：yuanjiayj（十）、三翻领 （十一）
+通向KDE4之路（十）：Oxygen美工项目和图标（2007-03-07）
+KDE4的视觉效果由于Oxygen图标集的引入kdelibs而发生翻天覆地的变化。这次的引入过程仍在继续中，其中还包括了一个影响了数千个文件的大型图标命名方案的改变。但是Oxygen美工项目不仅仅是图标集，它是KDE4中统一的美工效果。Oxygen中不可或缺的SVG部分为很">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/kde4/_vol11_4x_dolphin.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/kde4/_vol11_356_konq.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/kde4/_vol11_4x_logout.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/kde4/_vol11_4x_kbounce.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/kde4/_vol12_4x_mac.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/kde4/_vol12_mockup.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/kde4/_vol12_356_amarok.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/kde4/_vol12_4x_amarok.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/kde4/_vol12_4x_services.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通向KDE4之路 十 & 十一">
+<meta name="twitter:description" content="翻译：yuanjiayj（十）、三翻领 （十一）
+通向KDE4之路（十）：Oxygen美工项目和图标（2007-03-07）
+KDE4的视觉效果由于Oxygen图标集的引入kdelibs而发生翻天覆地的变化。这次的引入过程仍在继续中，其中还包括了一个影响了数千个文件的大型图标命名方案的改变。但是Oxygen美工项目不仅仅是图标集，它是KDE4中统一的美工效果。Oxygen中不可或缺的SVG部分为很">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-e5-8d-81-e5-8d-81-e4-b8-80" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2007/03/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-e5-8d-81-e5-8d-81-e4-b8-80.html" class="article-date">
+  <time datetime="2007-03-14T10:58:54.000Z" itemprop="datePublished">2007-03-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      通向KDE4之路 十 &amp; 十一
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>翻译：yuanjiayj（十）、<a href="http://bbs.xsui.net/sanfanling/" target="_blank" rel="external">三翻领</a> （十一）</p>
+<p>通向KDE4之路（十）：Oxygen美工项目和图标（2007-03-07）</p>
+<p>KDE4的视觉效果由于<a href="http://oxygen-icons.org/" target="_blank" rel="external">Oxygen图标集</a>的引入kdelibs而发生翻天覆地的变化。这次的引入过程仍在继续中，其中还包括了一个影响了数千个文件的大型图标命名方案的改变。但是Oxygen美工项目不仅仅是图标集，它是KDE4中统一的美工效果。Oxygen中不可或缺的SVG部分为很多具备SVG显示功能的程序带来了全新的风格体验。下面是详细内容…</p>
+<a id="more"></a>
+<p>请注意我今天所展示的美工效果仍然还只是进行中的工作图而并没有完全定型，但这种从KDE的SVN库中编译出来的效果正是KDE新的默认效果。 Oxygen将是KDE4的新美工方案，但其中的各个元素仍可能变更。Oxygen团队将很乐意在评论中看到您对今天所演示的效果的任何有意义的反馈。</p>
+<p>在一月份，我在<a href="http://dot.kde.org/1167723426/" target="_blank" rel="external">第一篇通向KDE4之路文章</a>中向大家展示了一些KDE4中的SVG技术，这项技术大部分应归功于Qt的新SVG显示功能。在那篇文章中的部分美工正是Oxygen团队的作品。过了两个月了那些图形又多了很多改进，但真正最大的视觉改变还是新Oxygen图标集的被引入kdelibs，并作为新的默认图标。</p>
+<p>Oxygen实在是个庞大而远未完成的项目，图标集只是它的一部分而已。Oxygen在有句非正式的标语：“让看到您的桌面就像呼吸清新的空气”，它带来的是整个KDE环境的视觉感观的新体验。Oxygen团队由一群开发者与艺术工作者组成，他们致力于让KDE看起来很漂亮。他们不仅带来了明亮的效果，还保证KDE有一个统一的、易于辩识的界面。例如，竖立于工具栏上的图标在它们下部都有有相同的阴影，这就带来了一致的视觉效果。在美工中构建起来的调色板确保了图标之间的合谐，并仍有相当好的可辨别性。所有图标都是用Inkscape（或其它有SVG功能的程序）做出来的SVG文件，而这些SVG文件也非常易于调整。</p>
+<p>我们现在也有了一个正式的KDE4图标命名方案。以前的KDE图标命名方案都是随着KDE的发展而逐步演化生成的，所以在很多地方都显得很随意。 Oxygen团队这次直接开发了一套命名方案，而且他们是将之作为freedesktop.org的一部分来做的，这使得未来KDE与其它桌面环境在图标的命名上不会混淆了。</p>
+<p>好了，对Oxygen的文字描述告一段落，下面请看一些Oxygen的图片描述。</p>
+<p>下面是一张显示Oxygen图标的Dolphin文件管理器的截图，以及一张KDE3.5.6中Konqueror的截图，它们打开的是同一个文件夹。当然预览功能打开的时候，很多类型的文件也可以预览。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/kde4/vol11_4x_dolphin.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/kde4/_vol11_4x_dolphin.png" alt=""></a></p>
+<p><a href="http://linuxblog.cn/wp-content/images/kde4/vol11_356_konq.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/kde4/_vol11_356_konq.png" alt=""></a></p>
+<p>您可以注意到在Dolphin截图中虽然有Oxygen的新图标代替了老图标，但仍有些老图标依然可见。在Oxygen图标引入的过程中，图标的名字被改变了。老的代码也许还用着老的图标名字，还没有使用新的修正过的Oxygen图标名。当原来的水晶SVG图标从kdelibs中删掉后，老图标名的影响就会消除了，而新图标就会显得更清晰了。对于那些更喜欢老图标的朋友们，在KDE4中也将会对老图标重新命名后作为一种图标主题提供给大家的，它们将被包含在kdeartwork包中。</p>
+<p>Oxygen图标目前已被设为默认，您也将会在所有以后的“通向KDE4之路”系列文章中看到它们，而大家肯定会对这套美工的完整性表示欣赏的。当然一些图标仍有进一步提升的空间，这要多谢SVG源文件的使用了。我不会在本文中提供完整的Oxygen图标集，大家可以在<a href="http://websvn.kde.org/trunk/KDE/kdelibs/pics" target="_blank" rel="external">websvn</a>中或通过自己构建KDE4来看到它们。下一个KDE4的快照版当然会将这套图标集包含在内。</p>
+<p>但是我还是得重复这句话：Oxygen不只是一套图标集。Oxygen美工在KDE4中处处都有所体现。这是KDE4新的注销对话框的一张截图。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/kde4/vol11_4x_logout.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/kde4/_vol11_4x_logout.png" alt=""></a></p>
+<p>在整个KDE中使用Oxygen图标所带来的最大的好处是它（几乎）与图像分辨率无关。这个意思是某些程序可以缩放到任何尺寸，它的视觉表现依然很好。例如，如果您在玩KDE游戏中的KBounce，您想要让它变大或者变小，它就会调整到您想要的尺寸。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/kde4/vol11_4x_kbounce.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/kde4/_vol11_4x_kbounce.png" alt=""></a></p>
+<p>KDE4并不是一个分辨率无关的桌面环境，这也不是当前KDE的努力目标，但某些KDE组件的确建立在分辨率无关的基础上。</p>
+<p>Oxygen的另外两个部分仍在开发中，它们还没有完成。它们是Oxygen器件风格和Oxygen窗口装饰。这两个组件还没有被KDE4设为默认，因为它们远未成熟。也正是由于它们还不是KDE默认，所以我也不想现在就把它们展示出来。但大家须知Oxygen图标与相关的美工只是Oxygen项目中的一部分。Oxygen团队在程序风格和窗口装饰上有很大的进展，但整个项目实在是巨大的工程。</p>
+<p>KDE4中的其它可视化元素并不都直接由Oxygen团队完成，但那些工作也会在必要时与Oxygen项目协同工作。它们是KWin中的合成显示分支，还有Plasma的工作区主题功能等。</p>
+<p>有兴趣参与KDE的美工创作的朋友们可以访问irc.kde.org的#kde-artists频道与一些美术工作者相交流。他们非常友好，对专业或非专业人员的建设性回馈意见他们都执同一态度。</p>
+<p>单个的KDE项目也在寻找美工帮助：最近Kalzium的Carsten Niehaus发出邀请，希望有人帮助制作一些可爱的元素图标，这些图标将与一个可选的对小孩子比较友好的界面配套。有兴趣的朋友请访问#kalzium的irc频道。</p>
+<p>Amarok项目最近也告诉我他们的Amarok1.4.6（运行于KDE3.5.x系列中）也需要一些美工帮助，这些美工不需要是Oxygen风格的，因为Oxygen风格是KDE4的计划。如果有兴趣，请与#amarok中的‘markey’联系。</p>
+<p>评注旁白：我很高兴有很多朋友对KDE4的开发抱有兴趣，但也请提出有助益的反馈以帮助KDE4使之得到改进。很多开发者们查看了在 dot.kde.org上的评论，并针对用户的建议中有意义的部分在各自的程序增加了新特性。例如Peter Penz在Dolphin中实现了树状查看功能，Rafael Fernández López也通过反馈对工作进度管理器作了改进。很欢迎大家多提建议，但上周的文章帖出之后，评论乱了套，这就很难从中选出有意义的东西。不过上周也着实破了dot.kde.org的评论纪录了。很希望某天我们在欣喜KDE4进步之余再破一次纪录。下周见…</p>
+<!--page-->
+<p>通向KDE4之路（十一）：Amarok2开发起步（2007-03-12）</p>
+<p>本周我们将来看看Amarok2将出现的众多特性中的一部分，Amarok2是KDE4中的Amarok开发分支。我们在此所讨论的所有特性的开发已接近完成。下面是关于Amarok的引擎（包括Phonon），用户界面的改变，Magnatune音乐商店，OS X支持以及其它内容的详细情况。</p>
+<p>几周前，通向KDE4之路栏目介绍了Phonon。当那篇文章放出之时，Amarok2的开发工作还没开始，但Phonon开发者们在设计Phonon库的时候总是照顾到了Amarok的需要。</p>
+<p>在Amarok1.x中，开发者们不得不分出力量去维护分别针对xine，gstreamer, aKode等后端的引擎。到现在这些引擎仍然麻烦不断，在某些情况下，维护所有引擎实在是种奢望，于是现实迫使开发者们将重点只放在xine引擎上了。而像其它程序，如Noatun等不得不一次一次地重复没有效率的劳动来实现这些后端的功能。而在KDE4中，Phonon接口的设计就让Amarok这样的程序不必再去担忧引擎的事情了，只要集中精力把程序的其它方面做好就行。根据Amarok开发者们的经验，只要花上90分钟就可以使Amarok的 Phonon后端可用，然后再加几个小时就能完善它。而且使用了Phonon之后，各种应用程序都可以通过KIO技术播放支持某些网络协议的音乐，然后我们就等着看Amarok如何去挖掘Phonon的潜力了。</p>
+<p>Amarok2对Phonon的支持正在进行中。老的引擎也已移植完毕，特别是老的xine引擎仍然被积极地开发着，开发者们也没有决定废弃老的引擎。因为Amarok2的开发只进行了几周而已，决定是否废弃如xine等现有引擎还为时过早，这些引擎在过去干的很不错。</p>
+<p>在Amarok中使用Phonon的一个额外好处是它可以让Amarok获得访问底层引擎即Phonon-xine引擎中具备的视频播放功能。开发者们已经在Amarok中加入了初步的视频播放支持，但它目前只是作为音频播放功能的补充，而不是想替代其它更出色的视频播放器如Kaffeine。其想法是假设在你的音乐库中有视频文件，而你又想用Amarok来播放它，则Amarok将会将视频流看作是音乐的可视化。Amarok中加入了视频的支持并不会扰乱Amarok2的音频体验。据Dan Meltzer所说，通过Phonon在Amarok中加入视频支持其实总共只用了7行代码。</p>
+<p>当然了，KDE4的跨平台特性也使得Amarok将可运行于其它平台，不再限于Unix/X11了。Benjamin Reed的努力使开发中的Amarok2成功地首次出现在OS X中。向Windows的移植也在起步中，不过我还没搞到截图。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/kde4/vol12_4x_mac.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/kde4/_vol12_4x_mac.png" alt=""></a></p>
+<p>我个人认为Amarok在这些平台上的出现，Amarok将成为其它平台用户了解KDE这个跨操作系统的开发平台的最佳窗口，Amarok的作用是其它KDE上的程序无法替代的。因为Amarok是世界上最优秀最出色的媒体播放器，它是这一领域的最强者。</p>
+<p>如果只有跨平台与Phonon支持这两项特性的话，Amarok的新版还不足以升到2.0，它的变化多着呢。</p>
+<p>XMMS与Winamp有许多相似之处，而Amarok也在很多方面受到XMMS的启发。基本的东西如音乐播放器的多栏播放列表，它显示了媒体文件中包含的标签信息。现在虽然不同的程序添加了有趣的方式对列表进行分类，过滤以及编辑，但这些多栏播放列表在10多年中也没真正的改变过了。Amarok在分类和过滤方面做的特别出色，在标签编辑方式就稍逊色了点（JuK则拥有一个惊人的标签编辑器）。但是除非是由于延续传统的关系，这些功能中没有一个真正地限制Amarok以一种死板音乐栏的格式来显示播放列表。随着Amarok2的用户界面的重新设计，播放列表也有了革新。虽然它仍然列出了音轨，名称以及其它标签内容，但它已不再受限于旧式的播放列表栏格式。</p>
+<p>这时就需要一张图来说明描述，这里是一张概念模拟图。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/kde4/vol12_mockup.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/kde4/_vol12_mockup.png" alt=""></a></p>
+<p>你也许首先想知道的是“播放列表到哪儿去了？”最初我和我的一些伙伴在IRC上也这么问过，但如果你仔细地看了，就会发现其实右侧的列表就是播放列表，它只是在旧式的播放列表中解决出来了。而现在如果你的文件上少了一些标签的话，播放列表将简单地对那些缺少的标签进行调整，漂亮地显示文件中所含的信息。</p>
+<p>截图中最显著的就是中间部分。这个中间部分是Amarok2的焦点，开发者们试图向你提供当前所播放的文件的更多的信息，并使您能“重新发现您的音乐”，这也是开发者们的口号。除了“内容”信息被移到了中间，最左边的一栏仍然保留了它原有的功能。当然，按照KDE的传统，界面上很多部分都可以设置的。</p>
+<p>这是张Amarok1.4.5的截图，将它与上面的模拟图进行对比可以显示用户界面各组成部分的改进。上面那张模拟图是开发者们试图做到的用户界面目标图，但究竟是好是坏，他们会在权衡之后作出调整与改变。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/kde4/vol12_356_amarok.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/kde4/_vol12_356_amarok.png" alt=""></a></p>
+<p>现在给出的是开发中的运行于Linux的Amarok的截图。请注意Amarok2的开发仅仅进行了一个月，工作仍在继续中。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/kde4/vol12_4x_amarok.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/kde4/_vol12_4x_amarok.png" alt=""></a></p>
+<p>Amarok中最有前途的一个特性是Magnatune商店的集成。维基百科中的解释是：Magnatune是一个中立的唱片品牌，它公平地对待音乐家和用户。用户可以在决定是否购买之前，不用付费地在线收听并下载Mp3格式的音乐。Magnatune售出的音乐文件没有任何形式的阻止顾客复制文件的数学版权，相反Magnatune还彭励购买者与朋友们分享三份拷贝。</p>
+<p>Amarok在1.4.4版中首次加入对Magnatune的支持。从那时开始，Amarok团队就从其它商店收到了许多封邮件，表示有兴趣与 Amarok合作。但在Amarok1.4中，开发者们忙于改善对Magnatune的支持而无力开启更大的项目。在Amarok1.4.5中， Magnatune商店的第二个版本放出，开发者们对这个版本非常满意。它工作的很好，并为Magnatune带来了少量但不断增长的销售额。</p>
+<p>前进正当其时，Magnatune的主要开发者Nikolaj Hald Nielsen计划提供一个面对所有流媒体音乐商店的服务框架，把成果推进到一个更高的水平。这个服务框架可作为并有意作为添加其它音乐商店的起点，它将会提供大量的基础函数（购买，网站信息分解等），这些基础函数都是较为简单的因为每个商店都有其特定的操作这些函数的办法。尽管如此，这也是Amarok 向统一的流媒体音乐支持方面迈出的一大步，事实上CoolStreams服务已移植到这个新框架上（用一个ruby脚本），同时还带来了一个 Shoutcast浏览器。</p>
+<p>这是一张关于实验中的“Cool Streams”ruby脚本运行于服务框架的截图。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/kde4/vol12_4x_services.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/kde4/_vol12_4x_services.png" alt=""></a></p>
+<p>如果你想要参于Amarok2的开发的话，你需要安装一个KDE4的开发环境。在KDE TechBase网站你可以找到使用SVN库的指南，或者你也可以使用kdesvn-build程序来自动完成这一切。Amarok开发者们接受补丁包，如果你需要SVN访问权限加入开发的话，他们也会乐意提供的。他们也需要美术工作者们，测试者们的帮助，有意提供帮助的人们可以通过freenode的 #amarok频道与他们联系。</p>
+<p>女士们先生们，Amarok2的开发进展非常迅速。引用Amarok开发者们的领袖Mark Kretschmann的话“如果开发以这种速度继续的话，在KDE4发布的时候我们已经在做Amarok3了;)”对将来的惊喜有点心理准备，请期待Amarok团队。</p>
+<p>想及时了解Amarok的新闻的话，请察看Ljubomir Simin的Amarok通讯。特别感谢他对本文的帮助。我第一次尝试与人合作，非常顺利。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2007/03/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-e5-8d-81-e5-8d-81-e4-b8-80.html" data-id="ci973npq200gn7opik7hd3o2w" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2007/03/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-e5-8d-81-e5-8d-81-e4-b8-80.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2007/03/ubuntu-e4-bb-8e-e5-85-a5-e9-97-a8-e5-88-b0-e7-b2-be-e9-80-9a.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          开始Ubuntu Linux之旅——从新手到专家
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2007/03/e4-bd-bf-e7-94-a8-gconf-editor-e6-9b-b4-e6-8d-a2-gnome-e7-9a-84-e5-ad-97-e4-bd-93.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">使用 gconf-editor 更换 Gnome 的字体</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2007/03/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-e5-8d-81-e5-8d-81-e4-b8-80.html" data-title="通向KDE4之路 十 &amp; 十一" data-url="http://latteye.com/2007/03/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-e5-8d-81-e5-8d-81-e4-b8-80.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

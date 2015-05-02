@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>通向KDE4之路(1-6) | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="起初在 linuxtoy.org 上看到此文。转自 云帆论坛 的yuanjiayj 。细看发现此文已经翻译到了第六部分，于是都转来。这里将用页面区分各个部分。
+通向KDE4之路（一）：SVG透视技术
+自从KDE4的开发全力进行，而KDE 4.0版将在今年稍后一点的某个时间发布。我想是时候整理出一个名叫通向KDE4之路的每周栏目了。这个想法大致是把KDE4有进步的几个特性分期做几个简短的回顾。这是第">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通向KDE4之路(1-6)">
+<meta property="og:url" content="http://latteye.com/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="起初在 linuxtoy.org 上看到此文。转自 云帆论坛 的yuanjiayj 。细看发现此文已经翻译到了第六部分，于是都转来。这里将用页面区分各个部分。
+通向KDE4之路（一）：SVG透视技术
+自从KDE4的开发全力进行，而KDE 4.0版将在今年稍后一点的某个时间发布。我想是时候整理出一个名叫通向KDE4之路的每周栏目了。这个想法大致是把KDE4有进步的几个特性分期做几个简短的回顾。这是第">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol1_355_ksysguard.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol1_devel_ksysguard.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol1_355_katomic.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol1_devel_katomic.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol1_355_kmahjongg.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol1_devel_kmahjongg.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol1_355_run.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol1_devel_run.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol2_devel_kword-flake.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol2_devel_kword-scripts.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol2_devel_kspread.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol3_3x_small.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol3_mac_finder.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol3_mac_kshishen.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol3_mac_kspread.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol3_mac_konq.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol3_mac_kalzium.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol3_mac_kstars.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol4_mockup_small.jpg">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol4_devel_uiserver.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol5_355_kalzium_default.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol5_4x_kalzium_default.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol5_4x_kalzium_solver.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol5_4x_kalzium3d.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol5_355_kmplot.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol5_355_kmplot_dialog.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol5_4x_kmplot.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol5_4x_kmplot_editor.png">
+<meta property="og:image" content="http://linuxblog.cn/wp-content/images/_vol6_4x_kcmphonon.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通向KDE4之路(1-6)">
+<meta name="twitter:description" content="起初在 linuxtoy.org 上看到此文。转自 云帆论坛 的yuanjiayj 。细看发现此文已经翻译到了第六部分，于是都转来。这里将用页面区分各个部分。
+通向KDE4之路（一）：SVG透视技术
+自从KDE4的开发全力进行，而KDE 4.0版将在今年稍后一点的某个时间发布。我想是时候整理出一个名叫通向KDE4之路的每周栏目了。这个想法大致是把KDE4有进步的几个特性分期做几个简短的回顾。这是第">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af.html" class="article-date">
+  <time datetime="2007-02-08T01:43:53.000Z" itemprop="datePublished">2007-02-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      通向KDE4之路(1-6)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>起初在 linuxtoy.org 上看到此文。转自 <a href="http://www.myswear.net/forum/" target="_blank" rel="external">云帆论坛</a> 的yuanjiayj 。细看发现此文已经翻译到了第六部分，于是都转来。这里将用页面区分各个部分。</p>
+<p><strong>通向KDE4之路（一）：SVG透视技术</strong></p>
+<p>自从KDE4的开发全力进行，而KDE 4.0版将在今年稍后一点的某个时间发布。我想是时候整理出一个名叫通向KDE4之路的每周栏目了。这个想法大致是把KDE4有进步的几个特性分期做几个简短的回顾。这是第一期，目的是将伟大的SVG透视技术目前所得的结果呈现于大家的面前。下面是详细内容。</p>
+<p>很多的新特性已通过KDE Planet的众多个人博客为人所知，而我就打算写点大家不太知道或是需要大家多了解的内容。</p>
+<a id="more"></a>
+<p>首先我想要告诉大家的是KDE的构建，安装和运行等方面已相当好了，我已测试了很多从KDE3.x中移植过去的程序了，大多数程序都非常稳定。当你亲眼看到底层技术的进步所引起的那些改变的时候，那是真正令人非常开心的。今天我将介绍的是由Qt4中的SVG透视技术所带给人们的感观享受。</p>
+<p>很多其它KDE程序正在运用SVG技术所带来的好处，这会让它们更令人愉快。你可以从<a href="http://tsdgeos.blogspot.com/2006/12/svg-meets-blinken.html和http://wiki.kde.org/tiki-index.php?page=KDE+Games+SVG+status找到很多有关信息。" target="_blank" rel="external">http://tsdgeos.blogspot.com/2006/12/svg-meets-blinken.html和http://wiki.kde.org/tiki-index.php?page=KDE+Games+SVG+status找到很多有关信息。</a></p>
+<p>今天我将把一些KDE3.5.5中的一些软件和KDE4中的对应软件的截图拿出来作个对比。</p>
+<p>首先我们看到的是KDE系统守护软件（ KDE System Guard），它是KDE中一个很有用的工具。你可以输入‘ksysguard’来运行它。它收集了各种简洁的底层信息，如内存和CPU使用表以及进程表等。</p>
+<p>下面是KDE3.5.5中它的样子：</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol1_355_ksysguard.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol1_355_ksysguard.png" alt=""></a></p>
+<p>而现在KDE4的开发版中它是这样的（线条是抗锯齿的，图表是半透明的，背景是SVG）：</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol1_devel_ksysguard.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol1_devel_ksysguard.png" alt=""></a></p>
+<p>看到了吧，这种改进是否很有意思呢！</p>
+<p>下一个，我们看到的是kdegames中的几个软件。首先出场的是KAtomic，这是很个迷宫类的游戏，它很有趣，也有半教育性，它也用SVG技术改进了。看看对比吧。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol1_355_katomic.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol1_355_katomic.png" alt=""></a></p>
+<p>而在KDE中它具有了oxygen风格：</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol1_devel_katomic.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol1_devel_katomic.png" alt=""></a></p>
+<p>接下去出场的是KMahjongg，它也算是一个迷宫游戏吧。它在KDE3.5.5中的样子与Windows娱乐包中的一个软件的样子很像。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol1_355_kmahjongg.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol1_355_kmahjongg.png" alt=""></a></p>
+<p>而KDE4中，经过SVG技术改进后，麻将牌变成了这个样子：</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol1_devel_kmahjongg.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol1_devel_kmahjongg.png" alt=""></a></p>
+<p>最后要介绍的是一个很常用的KDE组件：“运行命令”对话框（Alt－F2）,KDE3.5.5中它是这样的：</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol1_355_run.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol1_355_run.png" alt=""></a></p>
+<p>而现在，在桌面界面设计中的大师Aaron Seigo的指导下，它成为了Plasma桌面中一个SVG主题式，优雅的组成部分。它还是个半成品，但下面的截图中会让你感受到这个创意的。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol1_devel_run.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol1_devel_run.png" alt=""></a></p>
+<!--page-->
+<p><strong>通向KDE4之路（二）：新KOffice技术</strong></p>
+<p>本周的KDE之路栏目所要介绍的是KOffice项目中的KWord2.0。KWord 1.6.1已经是一个强大的KDE集成的文字处理器，但应用了KDE4技术之后的KWord 2.0将成为最强大的开源文字处理品之一。以下是详细内容。</p>
+<p>KWord与Kexi不同，作为一个KDE软件，它一直都被笼罩在巨大的OpenOffice.org组件的阴影之下。但这种情况将会得到改变，新的 KDE4技术将可使它作为原生程序的形式运行如WINDOWS和Mac OSX等其它平台下。您可以从一些文件中找到KDE4程序对其它平台的支持方面的详细情况。</p>
+<p>KOffice和KWord的最大的一个功能是对OASIS OpenDocument格式标准的支持，这种格式被众多办公软件（如OpenOffice.org，Google Docs）采用。目前开发者们正全力工作以求在KWord中获得对ODF格式的全面支持。</p>
+<p>让我们看一下正在开发中的KWord。请注意界面中各个方面中良好的图形保真效果。在我的系统中，它并不比KOffice1.6.1运行的慢。 KWord2中获得最多改善的地方是它的文本格式与排版功能，这个功能也特别值得推荐。虽然它的开发还在继续中，但您从下面这张图中可以发现它比以前的版本要进步很多。您真的需要亲身体验一下新版本中移动、缩放以及旋转图层等操作时是多么地流畅。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol2_devel_kword-flake.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol2_devel_kword-flake.png" alt=""></a></p>
+<p>添入Kword中的所有对象都会被转化为新的图层库，如KFormula所生成的公式，您可以在KWord中准确无误地插入做好的数学公式。这使得 KWord可以像KPresenter那样轻松地进行页面排版，因为您不再受制于呆滞、规矩的文本格式。这些改变将使得KWord2成为受注目的基础桌面排版程序。</p>
+<p>另外在早期版本中缺少拼写检查支持的现象将得以改善，我们将使用Sonnet来完成拼写、语法检查。（在我的截图中没找到拼错了的单词吧？）</p>
+<p>但这也不是KOffice2中唯一的改进。例如在KOffice2中我们还加入了新的扩展脚本嵌入框架Kross。开发者们已为它做了很多的工作，而它也将是KOffice2中的一个杀手级特性。</p>
+<p>下图展示的是在KWord中新脚本菜单：</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol2_devel_kword-scripts.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol2_devel_kword-scripts.png" alt=""></a></p>
+<p>注意图中我是如何打开子工具栏的。我直接通过拖放就让它自动出现了。这是Qt的新特性，这样操作不会造成明显的界面不稳。</p>
+<p>当然KOffice的其它组件也能应用脚本嵌入和图层特性。KSpread和脚本功能结合的很好，对高级用户来说它实在是太强大了。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol2_devel_kspread.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol2_devel_kspread.png" alt=""></a></p>
+<p>对Kross有兴趣的朋友可以看看关于KSpread中Kross的开发与应用的这篇文章。<a href="http://wiki.koffice.org/index.php?title=KSpread/Scripting" target="_blank" rel="external">http://wiki.koffice.org/index.php?title=KSpread/Scripting</a></p>
+<p>这只是运行于KDE4平台上的KWord和KOffice中大量改进工作中的一些。当然这些截图展示的还只是开发中的版本，它还不太稳定，但在开发者的频道（如irc.freenode.org中的#koffice）中稳定性是反复强调的。在新版本发布之前还有大量的幕后工作要做。</p>
+<p>KOffice有独立的发布时刻表，所以它也许不会与KDE4同时发布。</p>
+<!--page-->
+<p><strong>通向KDE4之路（三）：完全的Mac OS X支持</strong></p>
+<p>虽然KDE的设计在Linux，FreeBSD以及其它UNIX/X11平台上均可成功移植，但这并不表示它在其它平台上就没有突破。奇趣公司在GPL协议之下发布了面向Mac，Windows甚至是嵌入式平台上的Qt新版本——Qt4。Qt是KDE开发的基础，因此KDE现在也获得了在这些平台上的原生支持。今天我主要讲的是KDE/Mac的开发情况。下面是详细内容。</p>
+<p>在我讲述之前，我想先讨论几个KDE必将面对的一些问题。在KDE3中，KDE这个术语指的是K桌面环境（Kwin，Kicker，kdesktop 等），由此当它面向Mac OS X的版本中不再出现这些组件时它还有理由被称为“KDE”吗？或者KDE是指这整个项目，按这种说法，无论Konqueror是否运行于Mac， Windows或者Enlightenment等平台，它都可被称为一个“KDE程序”。</p>
+<p>有一些关于KDE4的问题已被讨论过了。讨论的结果是“KDE”就像一把大伞，它包括KDE的所有东西。也就是说KDE应用程序，KDE开发环境（库以及技术），KDE工作空间（由KWin，Plasma等组成），这三个主要部分组成了KDE软件。当我们谈及KDE时，它所指的就是全部。</p>
+<p>这种说法也解决了一些有着独立发布时刻表的软件所带来的问题。例如Amarok有一个与KDE不同的时刻表，于是有一些人就不把它看作是KDE整体的一部分。在KDE4中的Amarok清楚地被标为是一个可限制性运行于某桌面环境中的“KDE程序”，而不存在任何的隐晦。在KDE4中，虽然Amarok有独立的开发周期，但它仍是一个KDE产品。正如Amarok的某席开发者Mark Kretschmann所说的，“如果Amarok使得更多的用户去使用KDE技术的话，那就很理想了。如果有人在其它平台上如GNOME或Mac上使用它的话，对我们来说也不错。”</p>
+<p>本文说的是非运行于于X11平台上的KDE，所以我们需要先将KDE/X11与KDE/Mac区分一下。在询问了一些开发者后，我采用这种说法： KDE/X11指的是所有KDE程序运行于X11上，开发环境搭建在X11上，KDE工作空间也在X11上。同样的，KDE/Mac是指KDE程序运行于 Mac上，KDE开发环境搭建在Mac上，而KDE工作空间则不存在于Mac上，这里没有包括它。以上说法同样适用于Windows平台。然而必须知道的是这些所谓的区别仅仅在于平台不同，最重要的是KDE源代码是相同的，并没有为某个平台将代码树分开。不存在分支或者异样的端口。</p>
+<p>新的KDE开发环境技术如Phonon和Solid可使移植变的轻松，因为与平台的整合工作发生在库的水平上。KDE程序的开发不必太在意操作平台的不同。</p>
+<p>什么是KDE/Mac？</p>
+<p>KDE/Mac是可原生运行于Mac操作系统上的KDE程序的集合，包括使这些KDE程序工作的底层技术，库等。KDE/X11与KDE/Mac只有略微的不同。最大的不同是KDE工作空间如KWin和Plasma等不会在Mac上出现。原因是KWin和Plasma的功能在OS X系统中已经存在，强行地在Mac系统上实现它们会造成KDE程序与其它Mac程序不能很好的整合在一起。因此KDE就没有把KDE/X11移植到Mac 中去了。</p>
+<p>在KDE设计之初就考虑到KDE程序与其它UNIX桌面环境（早期是指Window Maker，后来是GNOME和Enlightenment）共存的问题。KDE程序用的是共享的标准（如FreeDesktop.org的成果），可共享剪贴板数据、系统托盘，所以与其它平台的兼容问题较少。而现在由于Qt4所带来的高度可移植性，在如Mac等非X11环境中KDE的兼容性也很好。</p>
+<p>KDE程序以前就能运行于Mac平台上，它可使用苹果公司建立在OS X系统上的X11服务层，但因为KDE仍然使用Qt/X11，所以这些程序看起来与运行在普通X11平台上的样子差不多。事实上它们能良好的运行， Fink项目的出色成果功不可没。如果您有兴趣在OS X系统运行其它UNIX程序的话，去看看Fink项目吧。</p>
+<p>（其实也存在一个Qt/Mac的自由软件版本可以在Mac平台上使用KDE 3.x系列的程序，但由于稳定性的原因，通常还是使用包含Fink技术的KDE/X11。）</p>
+<p>下面是一张用Fink技术将KDE3.5运行于Mac系统的截图。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol3_3x_small.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol3_3x_small.png" alt=""></a></p>
+<p>由于建立在Qt/X11平台上，这整个KDE环境都能够运行。但可明显的发现KDE与Mac系统没什么协调性，就好像是在一个屏幕上运行了两个完全不同的计算机系统。</p>
+<p>KDE4则在移植工作中取得了巨大的进步，这很大部分要归功于Qt4，还有基于CMake的新的KDE构建系统。在“KDE on Mac OS X”网站上KDE/Mac程序的.dmg文件已作为一个标准发布包提供下载。多亏了KDE/Mac项目的头Benjamin Reed，KDE开发快照版可以很容易地运行在Mac平台上。请访问irc.freenode.org的#kde-darwin频道帮助报告和解决问题。现在KDE4还远没到可发布的程度，它还很可能崩溃。</p>
+<p>已下载的软件包被打开并被安装之后，KDE/Mac程序可以使用OS X的Finder运行，如下：</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol3_mac_finder.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol3_mac_finder.png" alt=""></a></p>
+<p>从上图可以看到大量的KDE程序已可以Mac上使用。由于这还是一个开发中的版本，有些程序很容易崩溃（就像使用SSL的程序）还有些东西看起来很丑陋。在这点上，目前运行于X11上的KDE4也是同样的，希望KDE4的开发可以在这两点可以同时改进。</p>
+<p>在移植的同时，一些非常重要的工作也发生在KDE/Mac的整合中。例如，剪贴板，键盘快捷键，其它语言输入等。还有鼠标拖放仍然很粗糙。KDE/Mac的开发者们需要任何了解KDE和Mac技术的伙伴来帮助他们解决这样的小问题。</p>
+<p>这就是你们所期待的：在截图中大家都看到了目前KDE4移植工作的进展情况。Mac用户对其中的一些程序也是赞赏有加。</p>
+<p>由于我们使用SVG技术，我就先贴一张在Mac平台上的SVG截图。下面是Shisen Sho，这是一个板块游戏。Shisen Sho与KMahjongg共享了SVG板块。这个游戏在Mac上看起来很漂亮，风格也很一致。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol3_mac_kshishen.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol3_mac_kshishen.png" alt=""></a></p>
+<p>上周有人问起KOffice是否也支持其它平台。我现在可以愉快地告诉你们，KWord，KSpread以及KOffice的其它组件在KDE/Mac上运行的很好。我在上周测试了开发中的KOffice2，KWord与它在KDE/X11中的版本运行的一样好。同时我还运行了其它一些KOffice程序看它们是否工作。下面是一张运行于Mac系统上的KSpread向导及KDE4文件对话框的截图。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol3_mac_kspread.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol3_mac_kspread.png" alt=""></a></p>
+<p>还请注意下KSpread图标在OS X底栏上的显示。它可不像运行于Fink技术上的KDE那样（在桌面左方会出现一个KDE边栏，可调置为自动隐藏。已运行的程序图标显示在边栏上。）</p>
+<p>当然也许有人会问：konqueror能运行吗？答案是可以。KDE4版本的Konqueror主要是KDE3.5中的Konqueror的移植工作，但其后端库如KHTML渲染引擎和Javascript支持都获得了大量的改进。在Mac上，由于Qt4实现的OS X风格，我们使用的是当中的标签浏览，如下：</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol3_mac_konq.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol3_mac_konq.png" alt=""></a></p>
+<p>Mac自称是图形与多媒体程序第一平台。但此快照版中没有找到KDE图形包，所以我就不能抓张图出来看看了。</p>
+<p>但education包里的小程序还是可以让Mac显露一点锋芒的。下面是包含在KDE-Edu项目中的两个优秀的程序：Kalzium和KStars。在KDE-Edu项目中的新特性容我以后介绍。现在还是让我们看看KDE/Mac中的这两个华丽而又功能完备的程序。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol3_mac_kalzium.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol3_mac_kalzium.png" alt=""></a></p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol3_mac_kstars.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol3_mac_kstars.png" alt=""></a></p>
+<p>图片就贴到这里了，当KDE运行于其它平台时，就总会出现一些其它问题的。</p>
+<p>当我考虑这篇文章的时候，我遇到很多人，它们反对在一个非自由平台上运行KDE程序。他们在IRC上露出这样的情绪“无论何时你在一个非自由的平台上运行自由软件，上帝就会杀死一只小动物。甚至会杀死一只伶俐的小动物。”</p>
+<p>但KDE有其支持其它平台的好理由：吸引开发者，鼓励互操作性以及形成标准。世界上有大量的Mac和Windows的开发者，支持了Mac和 Windows就可以使大量的程序利用KDE技术。支持其它平台使KDE技术受益的最好例子是KHTML/WebKit。现在世界上有很多用户使用基于 KHTML的网络浏览器，各网站不得不提高他们与标准的兼容性，这就意味着更多的网站使用Konqueror。同样的事也将会发生，如KOffice之与 OpenDocument格式，Kontact之与自由软件组件系统，这都将是双赢的。</p>
+<!--page-->
+<p><strong>通向KDE4之路（四）:新的工作进度管理器</strong></p>
+<p>你有过这样的经历了吗，10个程序的任务栏同时出现在你的桌面上，只有等某个任务结束时其任务栏才会消失？文档打印进度，K3b CD烧制对话框，KAudioCreator的音频编码器，Konqueror的文件传输，Kopete，KTorrent，KMail正在检查邮件…而KDE4中新的工作进度管理器将统一显示这些任务了，这将使您更轻松地察看和管理你的系统中正在进行的任务。下面是详细内容。</p>
+<p>设想下Firefox的下载管理器与KDE的打印队列管理器，除了工作类型外并没有什么实质上的差别。每个KDE 4程序在有任务时都会在一个进度管理器对话框内添加一个叫作观察器（Observer）的标记。然后这个独立的程序就能观察到任何正在进行中的任务了，并且能像原来的进度对话框那样显示进度甚至添加某些可回馈到原程序的操作按钮（如“取消下载”等）。有些程序如K3b，它已具备了非常良好的进度报告系统，那它们的对话框就会保留下来，但其进度仍将被新的进度管理器观察到，于是所有的任务进度条都被放在了同一个地方。</p>
+<p>在<a href="http://ereslibre.livejournal.com/" target="_blank" rel="external">Rafael Fernandez Lopez</a>的努力下，工作进度管理器原本作为一项<a href="http://www.kde-look.org/content/show.php?content=33673" target="_blank" rel="external">虚拟的KDE4改进设想</a>通过<a href="http://www.kde-look.org/" target="_blank" rel="external">KDE-Look.org</a>逐渐成为一个功能完备的KDE4整合项目。大量程序已通过修改支持了这个新管理器，很多的进度条集合在了一起。上周二的“二进制不兼容变化”日中，大量的改变被正式地提交到KDE4仓库中了。</p>
+<p>下图是KDE用户及KDE-look.org的贡献者kiras所制的原始模拟图。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol4_mockup_small.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol4_mockup_small.jpg" alt=""></a></p>
+<p>应注意的是上图还只是个模拟图，并不是KDE4,Plasma或Konqueror的最终的真正的样子。</p>
+<p>目前它已被做成一个标准的系统托盘程序（就像KDE3.5.5中的打印队列管理器那样），它与GNOME的托盘可相互配合使用。但它目前还只能观察到 KDE程序，所以目前监视Firefox的下载进度还不支持。不过也不能说以后不会支持，因为使用D-Bus交互进程序通讯构架后非KDE程序的进度应该是能被观察到的。目前已有意向与GNOME下的<a href="http://tw.apinc.org/weblog/2006/08/22" target="_blank" rel="external">Mathusalem</a>团队合作开发了，这是个类似的项目。</p>
+<p>下图是目前已实现的监视程序的截图，只要点击下托盘图标，它就会显示出来。您可以看到，它已经相当实用了。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol4_devel_uiserver.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol4_devel_uiserver.png" alt=""></a></p>
+<p>您可以看到Kopete的按钮位置已被预留住了，它还没什么意义只是为了做测试用的。不过只要你点击某个按钮中的，它就会回传给Kopete一个信号，然后Kopete就跳出一个更小的对话框。</p>
+<p>您所看到的Konqueror的下载进度条显示的是一个真实文件的下载进度。当Konqueror关闭后，它们仍会继续工作。而像“中断下载”之类有用的操作按钮正在实现中。</p>
+<p>如果您想要参与KDE4的开发工作，为KDE程序添加新的Kjobs进度监视支持是相当容易的切入点。它只需要几行代码就可以使得应用程序在进度管理器上显示进度，也只要几行代码就可以实现操作按钮的功能。</p>
+<p>这个新的进度监视技术将整合入Konqueror（如模型中的那样）、桌面托盘程序，其它程序将直接使用D-Bus。我甚至可以想像到一个小的网络程序可以让您远程监测进度…</p>
+<p>Rafael的目标是在最初的功能实现之后，就添加项目保留功能，这样当一个工作结束之后，它就可以随意地保留在队列中直到被用户关闭为止。他也在寻求人们对这个工具的反馈以及可实现的改进。</p>
+<p>期待有更多的文章罗列出KDE4伟大的技术。</p>
+<p>方法论上的一个小便条：我确保在我的截图上使用KDE默认的风格，即使它很丑陋我也要这么做，因为这样你就可以对KDE的进展有一个更好的理解并可以清晰地看到它的进步。另外作为一种准则，我到目前为止所演示的各种特性都是可用的，任何人都可以通过下载SVN上的源代码进行编译安装重现我的演示。而今天的文章，我不得不弄了一些简单的代码以使这个正在开发中的程序可用，这是我一直坚守的准则的一个例外。另外，Kopete进度支持还没放入官方的SVN库，但Rafael已用它来测试特性了。</p>
+<!--page-->
+<p><strong>通向KDE4之路（五）：Kalzium和KmPlot</strong></p>
+<p>并不是所有的KDE4程序开发还处于基础建设阶段，本周的主题是来自KDE-Edu项目组中的两个应用程序：多用途化学相关软件Kalzium，以及功能强大的数学方程式绘图程序KmPlot，详述见下。</p>
+<p>我们的诸多教学工具软件在KDE4的整体发展中已经进行了很多的工作，在这其中Kalzium和KmPlot的进展又尤为迅速，它们的变化之大简直令人惊讶。</p>
+<p>Kalzium（对应的德语单词是Calcium）自KDE 3.1开始就是标准发行中的一个组件，现在它已经是KDE-Edu小组开发的众多程序中用户最多的产品之一。最初它只是一个用于显示化学周期表的程序，至多一旁再显示着几个如原子量、沸点这样的科学数据。但在不久之后，它逐步拓展加入了许多元素背景方面以及更多细节上的化学信息（如光谱图），这就使得它在化学相关的一些应用场合越来越实用。</p>
+<p>在KDE 3.5.5中（这是我抓图时所用的版本，然而本周3.5.6也该发布了），Kalzium在第一次启动时的样子是这样的。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol5_355_kalzium_default.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol5_355_kalzium_default.png" alt=""></a></p>
+<p>您可以发现这个界面相当简单，但却展示了很多的信息。如果您在任意元素上点击，还将会有更多的元素属性被陈列出来。</p>
+<p>在KDE4中，程序的主界面将会有所不同。除了Qt4为我们引入了一些观感上的差异以外，还有些图标被改置到了工具栏（图中有些没显示出来）。在此让我们先窥视一下KDE4开发分支下的Kalzium的模样。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol5_4x_kalzium_default.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol5_4x_kalzium_default.png" alt=""></a></p>
+<p>Kalzium将来要达到的视觉效果会和图示的越来越接近。然而，在这KDE4抓图中最值得瞩目的一点是工具菜单，在KDE 3.5.5中，这个菜单只包含“绘制数据”和“专业词典”两个项目（译注：这里说错了，完整的工具菜单还应包括“化学方程式配平器”这条，但因Ocaml依赖的缘故这个功能在很多预编译包中都不提供）。</p>
+<p>“绘制数据”的用途是以多种模式来绘制一个元素的坐标图，例如可以基于质量、原子半斤、电负性等模式来工作。而“专业词典”则能给出许多常用化学专业用语的精确定义，不过上面提到的“电负性”一次似乎被遗漏了……总之，很显然这个程序还有充分的改进空间，而对于“专业词典”的改进将为KDE4中的 Kalzium提供一个能促进非程序员的化学爱好者也能为其作出贡献的良好契机。</p>
+<p>不管怎么说，还是让我们先回过来看看一些新的工具，我将着重介绍这些新开发出的东西，它将使Kalzium在KDE4中变得更加有用。</p>
+<p>新的Kalzium将有一个同位素表能为您显示出一份同位素的清单及其衰变模式──假设我是一名地质师，认识到钾-40这种物质通常会因为电子俘获而产生衰变可是非常重要的事项。</p>
+<p>新的化学方程式配平其也相当值得一用，正如现在的Kalzium项目开发领导Carsten Niehaus给我们带来的这张抓图所显示的那样：</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol5_4x_kalzium_solver.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol5_4x_kalzium_solver.png" alt=""></a></p>
+<p>基本上您只需要在配平方程式时写上正确的字母，您所期待的相应数字就会被程序反馈出来。在高中的化学授课中，学生往往被要求手动去解出一连串的方程式，但就像大多数方程式那样，一旦您解过很多方程式，会感到这种任务越来越乏味，这种时候这个方程式配平器将会为您节省下很多本该用于处理那些复杂的方程式的时间。</p>
+<p>最后，未来的Kalzium最值得注意的改变莫过于Kalzium里的三维效果，程序会藉此拥有一个三维的分子查看器。这个机制本来是由Kalzium的开发者所设计并打算只用于这个程序，但是一些协作开发者也将其纳入了libavogadro函数库，这样Kalzium和Avogadro的开发者将会一起共同研发这个特性。</p>
+<p>根据Kalzium开发者们当前的进度描述，现在要做的事是通过libavogadro函数库去移植3D建模器，Donald Curtis正致力于这项工作，这将提供一个基于Qt和OpenGL的更通用更强大的分子渲染生成引擎，工作成果将被Kalzium和Avogadro （或许更多）共同享用。Avogadro是一个更高阶的分子建模程序，可被用于创建真实的分子文件以及量子化学领域，Kalzium 3D将只是单纯地作为一个能查看此程序所构建的图像的查看工具。</p>
+<p>Kalzium的开发者Benoît Jacob提交了一幅抓图来展现使用了Kalzium 3D功能的三维分子查看器工作状况预览。在本文发表时，此功能已经进入了SVN代码仓库，当然它是和libavogadro函数库集成运作的。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol5_4x_kalzium3d.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol5_4x_kalzium3d.png" alt=""></a></p>
+<p>Kalzium以后有可能会和一批由BlueObelisk项目提供的常见分子数据共同发布以供您查看，感谢OpenBabel项目，它可以帮助我们能去打开一大批各种各样的分子文件格式（据统计已支持文件格式就达62种）。</p>
+<p>现在轮到了下一个KDE-Edu成员：KmPlot。正如现在已知的那样，此应用程序具备绘制一般函数图、参数函数图还有极坐标函数图的能力，还有一些衍生的显示功能和的其它趣味特性。它是一个颇有用的的方程式绘图工具，只是现有的界面未免太拙劣了，甚至还有很多凌乱的对话框会充填屏幕空间。</p>
+<p>下面您所看到的是KDE 3.5.5中使用默认设定的KmPlot启动界面，上面已经绘制了三个函数，每个的形状都不同：</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol5_355_kmplot.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol5_355_kmplot.png" alt=""></a></p>
+<p>这个对话框是用于撰写像上面的那样要绘制的函数式的，不过对每一个函数形状都会有一个独立对话框。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol5_355_kmplot_dialog.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol5_355_kmplot_dialog.png" alt=""></a></p>
+<p>这里还有一张新版KmPlot的界面一瞥，上面同样绘制了那三个函数图，不过不会再有那么多对话框来占据空间，而且加上Qt4提供的精致的反锯齿触感，这些线条甚至可以和方形一样平滑！</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol5_4x_kmplot.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol5_4x_kmplot.png" alt=""></a></p>
+<p>对KmPlot的工作现在正紧锣密鼓地开展，我们相信它将会成为KDE4的杀手级程序之一，无论是学生还是工程师还是其他人都有理由喜欢上它。现在它甚至可以绘制微分函数，而且拥有了一个新设计的函数编辑器，并且会为您提供如何校正函数式的即时提示（如上图所示）。</p>
+<p>新的函数编辑器如下图所示，对微分函数的编辑支持也包含其中：</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol5_4x_kmplot_editor.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol5_4x_kmplot_editor.png" alt=""></a></p>
+<p>如您所见，现在输入函数式会比以往更加简单，当您在操作时函数编辑器还会实施友好的语法检查。在本文中还有许许多多KmPlot的进步没有被提到，如果您有兴趣了解更多消息，请查阅这个开发状态页面。</p>
+<p>总的来说，KDE-Edu还是一个成长中的项目，许多优秀的应用程序是涵盖了各个年龄层的开发组的产物，它们还需能支持Windows和Mac操作系统，要感谢Qt4的改进与KDE4类库能让这些程序更加大众化。现在，还有不少很棒的工作在不断取得进展，请期待以后的文章为您带来更多的KDE-Edu软件巡礼。</p>
+<!--page-->
+<p><strong>通向KDE4之路（六）：令多媒体技术更轻松的Phonon</strong></p>
+<p>继续我们的‘通向KDE4之路’栏目，今天我们要介绍的是精巧的新多媒体技术<a href="http://phonon.kde.org/" target="_blank" rel="external">Phonon</a>。Phonon的设计是为了在KDE4中编写多媒体程序可以简单化，并保证这些程序可以在多个平台上及多种声音体系上工作。不走运的是，写这种关于声音类技术的文章很难配上相应的截图，所以呢，今天就多讲些技术细节吧。</p>
+<p>Phonon是一项新的KDE技术，它为多媒体程序播放音频或视频时提供了一套应用程序接口（API）。这套接口被设计成Qt函数的风格，这样KDE开发者们使用它时就不会觉得很陌生了。（如果您对Phonon的API感兴趣的话，请看看这些<a href="http://www.englishbreakfastnetwork.org/apidocs/apidox-kde-4.0/kdelibs-apidocs/phonon/html/index.html" target="_blank" rel="external">在线文档</a>，这些文档可能还是最近更新的，不过不能保证）。</p>
+<p>首先要指出的是Phonon不是一个新的音乐系统服务器，它不会与<a href="http://xinehq.de/" target="_blank" rel="external">xine</a>，<a href="http://gstreamer.freedesktop.org/" target="_blank" rel="external">GStreamer</a>，ESD，<a href="http://www.arts-project.org/" target="_blank" rel="external">aRts</a>等构成竞争关系。相反，由于这些多媒体程序接口常常会不断变动，Phonon以这些其它多媒体技术为后端，提供了一套不变的API。这样就方便了，比如当 GStreamer的API改变了，只要Phonon做相应的调整就可以了，其它使用Phonon的KDE程序都不会受到影响。</p>
+<p>Phonon的功能来源于开发者们所谓的“引擎”，每一种引擎支持一种后端。目前开发中的引擎有四种：xine，<a href="http://www.networkmultimedia.org/" target="_blank" rel="external">NMM</a>，GStreamer以及<a href="http://websvn.kde.org/branches/work/avkode/" target="_blank" rel="external">avKode</a>（<a href="http://carewolf.com/akode/index.html" target="_blank" rel="external">aKode</a>的继承者）。可以肯定的是aRts光荣退休了，针对它的引擎是不会被开发的了。不过aRts还会在其它领域继续存在的。KDE 4.0的目标是实现一个‘保证可用’的引擎，外加一些可选用的引擎。</p>
+<p>已被建议开发的引擎还有MPlayer，DirectShow（在Windows平台上的），和QuickTime（在Mac OS X平台上的）。这些额外的引擎的开发工作还没开始，因为Phonon的核心开发者们更关心的是确保目前开发的这个API功能完备。如果Phonon的开发者在当前这个API还很垃圾的情况下，就去忙于其它引擎的编写工作，那整个项目不乱套才怪呢（如果您想要出力编写一个引擎的话，请到 irc.freenode.org的#phonon露个脸吧）。</p>
+<p>当用户或程序选用了某个引擎之后，Phonon就会使用这个已选中的引擎来确定各个后端所支持的文件格式和解码器，然后自动允许KDE程序播放多媒体文件。目前的KDE 3系列中，用户不得不手动在各个程序（如Kaffeine，Amarok，Juk等）中更改引擎，而不是通过KDE来选用引擎。</p>
+<p>一旦Phonon选定了引擎，它就会使程序配合该引擎进行标准的多媒体运转。这里的标准的多媒体运转包括媒体播放器中常用操作，如播放，停止，暂停，寻找等。Phonon也支持更高级的功能，如定义两个音轨之间跳转的方式等，这样不同的程序就可以共享这项功能而不用每次都去重新实现它。当然，一些程序想要在跳转时能有更多的控制，自己设计也没什么不可以的。</p>
+<p>目前各个引擎中完成进度都好的是xine，我在我的电脑上已经装上去并可以工作了。我也尝试过编译NMM（出了名的难编译、难安装）和GStreamer 引擎，可惜没有成功，另外那个avKode默认就是‘停用’。我本来还想拿几张Juk或Noatun采用Phonon播放音频的截图出来贴一下，但它们与 KDE3系列版本中看起来也没什么两样（有些界面还更丑一点！）。等它们漂亮点的时候，我就在后续文章中把它们贴出来。</p>
+<p>Matthias Kretz提供了一个较短的<a href="http://static.kdenews.org/danimo/phonon_device_switching.ogm" target="_blank" rel="external">视频文件</a>，说的是在看电影时打开您的扬声器，验证设备的切换。Phonon可以使您的原音频设备在切换后停止工作，从而您可以听到声音突从耳机中消失而在音箱中响起。</p>
+<p>Matthias也提供了下面这张使用Phonon设置模块选择输出设备的截图。这还在改进中，所以看起来还很粗糙。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/vol6_4x_kcmphonon.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_vol6_4x_kcmphonon.png" alt=""></a></p>
+<p>很难用截图来反映Phonon的工作情况（音频框架的截图实在难搞），但我可以描述下使用Phonon之后灵巧的一面：网络透明化。KDE使用 KIOSlaves来访问网络上的文件，这轻松的好像这些文件在自己的电脑上一样。多媒体程序如JuK或Amarok也能够在自己的收藏中非常透明地共享网络音频文件，开发者在实现这个功能时还不必去考虑后端引擎是否明白如何与ioslaves互操作这个问题。这项功能在KDE4中已经部分地实现了，已可通过音频缩略图进行可视化操作了。很多人都可以使用任何KIO协议，包括sftp://和fish://这两个KDE强人们非常喜欢的协议进行文件共享。在我的电脑上自行编译的fish://KIOslave还很不稳定，不过据#phonon　IRC上的开发者宣称，这个功能的将很快结束编写并投入使用，届时它的稳定性就没问题了。</p>
+<p>正在开发中的Phonon将成为KDE程序的一项支柱性技术，它会使开发者的工作更轻松，并可避免多媒体后端的变动对各应用程序带来繁杂工作以及不稳定性，更使得KDE程序对其它平台的支持变得轻而易举。这就意味着那些开发者们可以在他们程序的其它部分花更多的时间，KDE多媒体程序也将会变得比现在的更出色。（插句话，比如QQ的协议如果可以稳定一点，云帆的eva 0.5,0.6甚至1.0恐怕早就发布了）</p>
+<p>一些小消息：<a href="http://amarok.kde.org/" target="_blank" rel="external">Amarok</a>的首席开发者Mark Kretschmann在本周正式开始了对<a href="http://lists.kde.org/?l=kde-commits&amp;m=117041944607084&amp;w=2" target="_blank" rel="external">Amarok 2.0</a>的开发，而且他对Phonon对Amarok2.0能起到的作用很感兴趣。Amarok开发小组还是与他们在1.4系列版本中做的那样，还在开发自己的引擎。不过，就Phonon目前的开发状态来说，Phonon还是可以通过调整来满足Amarok的需要的。</p>
+<p>Phonon开发者们的老大Matthias Kretz正在寻找有人可以为Phonon维护他们的网站，如果您想在非编程方面帮助KDE的话，不妨考虑一下。</p>
+<p>….下周见</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af.html" data-id="ci973nppt00gf7opi8x11av82" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2007/02/linuxblog-e6-94-b9-e7-89-88-e5-ae-8c-e6-88-90.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          LinuxBlog 改版完成
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2007/02/wallpapers-by-effigiem.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Wallpapers by Effigiem</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af.html" data-title="通向KDE4之路(1-6)" data-url="http://latteye.com/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

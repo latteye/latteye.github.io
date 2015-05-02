@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>十五分钟介绍 Redis 数据结构 | Water is</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文转载自 1001i blog。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="十五分钟介绍 Redis 数据结构">
+<meta property="og:url" content="http://latteye.com/2011/11/15-minutes-introduction-to-redis-data-types.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="本文转载自 1001i blog。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="十五分钟介绍 Redis 数据结构">
+<meta name="twitter:description" content="本文转载自 1001i blog。">
+  
+    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Water is</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">latte</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="latteye.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-15-minutes-introduction-to-redis-data-types" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/11/15-minutes-introduction-to-redis-data-types.html" class="article-date">
+  <time datetime="2011-11-24T09:12:59.000Z" itemprop="datePublished">2011-11-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      十五分钟介绍 Redis 数据结构
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文转载自 <a href="http://blog.1001i.com/databases/redis/introduce-redis" title="1001i blog" target="_blank" rel="external">1001i blog</a>。<a id="more"></a><br>你也许已经知道Redis并不是简单的 key-value 存储，实际上他是一个数据结构服务器，支持不同类型的值。也就是说，你不必仅仅把字符串当作键所指向的值。下列这些数据类型都可作为值类型。</p>
+<ul>
+<li>二进制安全的 字符串 string</li>
+<li>二进制安全的 字符串列表 list of string</li>
+<li>二进制安全的 字符串集合 set of string，换言之：它是一组无重复未排序的element。可以把它看成Ruby中的 hash–其key等于element，value 都等于‘true’。</li>
+<li>有序集合sorted set of string，类似于集合set，但其中每个元素都和一个浮点数score（评分）关联。element根据score排序。可以把它看成Ruby中的 hash–其key等于element，value等于score，但元素总是按score的顺序排列，无需额外的排序操作。</li>
+</ul>
+<p><strong>Redis 键</strong></p>
+<p>Redis key值是二进制安全的，这意味着可以用任何二进制序列作为key值，从形如”foo”的简单字符串到一个JPEG文件的内容都可以。空字符串也是有效key值。</p>
+<p>关于key的几条规则：</p>
+<ul>
+<li>太长的键值不是个好主意，例如1024字节的键值就不是个好主意，不仅因为消耗内存，而且在数据中查找这类键值的计算成本很高。</li>
+<li>太短的键值通常也不是好主意，如果你要用”u:1000:pwd”来代替”user:1000:password”，这没有什么问题，但后者更易阅读，并且由此增加的空间消耗相对于key object和value object本身来说很小。当然，没人阻止您一定要用更短的键值节省一丁点儿空间。</li>
+<li>最好坚持一种模式。例如：”object-type:id:field”就是个不错的注意，像这样”user:1000:password”。我喜欢对多单词的字段名中加上一个点，就像这样：”comment:1234:reply.to”。</li>
+</ul>
+<p><strong>字符串类型</strong></p>
+<p>这是最简单Redis类型。如果你只用这种类型，Redis就像一个可以持久化的memcached服务器（注：memcache的数据仅保存在内存中，服务器重启后，数据将丢失）。<br>我们来玩儿一下字符串类型：</p>
+<p><code>$ redis-cli set mykey &quot;my binary safe value&quot;
+OK
+$ redis-cli get mykey
+my binary safe value</code></p>
+<p>正如你所见到的，通常用SET command 和 GET command来设置和获取字符串值。<br>值可以是任何种类的字符串（包括二进制数据），例如你可以在一个键下保存一副jpeg图片。值的长度不能超过1GB。<br>虽然字符串是Redis的基本值类型，但你仍然能通过它完成一些有趣的操作。例如：原子递增：</p>
+<p><code>$ redis-cli set counter 100
+OK $ redis-cli incr counter
+(integer) 101
+$ redis-cli incr counter
+(integer) 102
+$ redis-cli incrby counter 10
+(integer) 112</code></p>
+<p><a href="http://blog.1001i.com/databases/redis-command/strings/incr" title="INCR Command" target="_blank" rel="external">INCR</a> 命令将字符串值解析成整型，将其加一，最后将结果保存为新的字符串值，类似的命令有<a href="http://blog.1001i.com/databases/redis-command/strings/incrby" title="INCRBY Command" target="_blank" rel="external">INCRBY</a>, <a href="http://blog.1001i.com/databases/redis-command/strings/decr" title="DCER Command" target="_blank" rel="external">DECR</a> and <a href="http://blog.1001i.com/databases/redis-command/strings/decrby" title="DCERBY Command" target="_blank" rel="external">DECRBY</a>。实际上他们在内部就是同一个命令，只是看上去有点儿不同。</p>
+<p>INCR是原子操作意味着什么呢？就是说即使多个客户端对同一个key发出INCR命令，也决不会导致竞争的情况。例如如下情况永远不可能发生：『客户端1和客户端2同时读出“10”，他们俩都对其加到11，然后将新值设置为11』。最终的值一定是12，read-increment-set操作完成时，其他客户端不会在同一时间执行任何命令。</p>
+<p>对字符串，另一个的令人感兴趣的操作是<a href="http://blog.1001i.com/databases/redis-command/strings/getset" title="GETSET Command" target="_blank" rel="external">GETSET</a>命令，行如其名：他为key设置新值并且返回原值。这有什么用处呢？例如：你的系统每当有新用户访问时就用INCR命令操作一个Redis key。你希望每小时对这个信息收集一次。你就可以GETSET这个key并给其赋值0并读取原值。</p>
+<p><strong>列表类型</strong></p>
+<p>要说清楚列表数据类型，最好先讲一点儿理论背景，在信息技术界List这个词常常被使用不当。例如”Python Lists”就名不副实（名为Linked Lists），但他们实际上是数组（同样的数据类型在Ruby中叫数组）</p>
+<p>一般意义上讲，列表就是有序元素的序列：10,20,1,2,3就是一个列表。但用数组实现的List和用Linked List实现的List，在属性方面大不相同。</p>
+<p>Redis lists基于Linked Lists实现。这意味着即使在一个list中有数百万个元素，在头部或尾部添加一个元素的操作，其时间复杂度也是常数级别的。用 <a href="http://redis.io/commands/lpush" title="LPUSH Command" target="_blank" rel="external">LPUSH</a> 命令在十个元素的list头部添加新元素，和在千万元素list头部添加新元素的速度相同。</p>
+<p>那么，坏消息是什么？在数组实现的list中利用索引访问元素的速度极快，而同样的操作在linked list实现的list上没有那么快。</p>
+<blockquote>
+<p>Redis Lists are implemented with linked lists because for a database system it is crucial to be able to add elements to a very long list in a very fast way. Another strong advantage is, as you’ll see in a moment, that Redis Lists can be taken at constant length in constant time.</p>
+</blockquote>
+<p>Redis Lists用linked list实现的原因是：对于数据库系统来说，至关重要的特性是：能非常快的在很大的列表上添加元素。另一个重要因素是，正如你将要看到的：Redis lists能在常数时间取得常数长度。</p>
+<p><strong>Redis lists 入门</strong></p>
+<p>LPUSH 命令可向list的左边（头部）添加一个新元素，而RPUSH命令可向list的右边（尾部）添加一个新元素。最后LRANGE 命令可从list中取出一定范围的元素</p>
+<p><code>$ redis-cli rpush messages &quot;Hello how are you?&quot;
+OK
+$ redis-cli rpush messages &quot;Fine thanks. I‘m having fun with Redis&quot;
+OK
+$ redis-cli rpush messages &quot;I should look into this NOSQL thing ASAP&quot;
+OK
+$ redis-cli lrange messages 0 2
+1\. Hello how are you?
+2\. Fine thanks. I‘m having fun with Redis
+3\. I should look into this NOSQL thing ASAP</code></p>
+<p>注意LRANGE 带有两个索引，一定范围的第一个和最后一个元素。这两个索引都可以为负来告知Redis从尾部开始计数，因此-1表示最后一个元素，-2表示list中的倒数第二个元素，以此类推。</p>
+<blockquote>
+<p>As you can guess from the example above, lists can be used, for instance, in order to implement a chat system. Another use is as queues in order to route messages between different processes. But the key point is that you can use Redis lists every time you require to access data in the same order they are added. This will not require any SQL ORDER BY operation, will be very fast, and will scale to millions of elements even with a toy Linux box.</p>
+</blockquote>
+<p>正如你可以从上面的例子中猜到的，list可被用来实现聊天系统。还可以作为不同进程间传递消息的队列。关键是，你可以每次都以原先添加的顺序访问数据。这不需要任何SQL ORDER BY 操作，将会非常快，也会很容易扩展到百万级别元素的规模。</p>
+<p>例如在评级系统中，比如社会化新闻网站 reddit.com，你可以把每个新提交的链接添加到一个list，用LRANGE可简单的对结果分页。</p>
+<p>在博客引擎实现中，你可为每篇日志设置一个list，在该list中推入进博客评论，等等。</p>
+<p><strong>向Redis list压入ID而不是实际的数据</strong></p>
+<p>在上面的例子里 ，我们将“对象”（此例中是简单消息）直接压入Redis list，但通常不应这么做，由于对象可能被多次引用：例如在一个list中维护其时间顺序，在一个集合中保存它的类别，只要有必要，它还会出现在其他list中，等等。</p>
+<p>让我们回到reddit.com的例子，将用户提交的链接（新闻）添加到list中，有更可靠的方法如下所示：</p>
+<p><code>$ redis-cli incr next.news.id
+(integer) 1
+$ redis-cli set news:1:title &quot;Redis is simple&quot;
+OK
+$ redis-cli set news:1:url &quot;http://code.google.com/p/redis&quot;
+OK
+$ redis-cli lpush submitted.news 1
+OK</code></p>
+<p>我们自增一个key，很容易得到一个独一无二的自增ID，然后通过此ID创建对象–为对象的每个字段设置一个key。最后将新对象的ID压入submitted.news list。</p>
+<p>这只是牛刀小试。在<a href="http://redis.io/commands" target="_blank" rel="external">命令参考文档</a>中可以读到所有和list有关的命令。你可以删除元素，旋转list，根据索引获取和设置元素，当然也可以用LLEN得到list的长度。</p>
+<p><strong>Redis 集合</strong></p>
+<p>Redis集合是未排序的集合，其元素是二进制安全的字符串。SADD命令可以向集合添加一个新元素。和sets相关的操作也有许多，比如检测某个元素是否存在，以及实现交集，并集，差集等等。一例胜千言：</p>
+<p><code>$ redis-cli sadd myset 1
+(integer) 1
+$ redis-cli sadd myset 2
+(integer) 1
+$ redis-cli sadd myset 3
+(integer) 1
+$ redis-cli smembers myset
+1\. 3
+2\. 1
+3\. 2</code></p>
+<p>我向集合中添加了三个元素，并让Redis返回所有元素。如你所见它们是无序的。</p>
+<p>现在让我们检查某个元素是否存在：</p>
+<p><code>$ redis-cli sismember myset 3
+(integer) 1
+$ redis-cli sismember myset 30
+(integer) 0</code></p>
+<p>“3″是这个集合的成员，而“30”不是。集合特别适合表现对象之间的关系。例如用Redis集合可以很容易实现标签功能。</p>
+<p>下面是一个简单的方案：对每个想加标签的对象，用一个标签ID集合与之关联，并且对每个已有的标签，一组对象ID与之关联。</p>
+<p>例如假设我们的新闻ID 1000被加了三个标签tag 1,2,5和77，就可以设置下面两个集合：</p>
+<p><code>$ redis-cli sadd news:1000:tags 1
+(integer) 1
+$ redis-cli sadd news:1000:tags 2
+(integer) 1
+$ redis-cli sadd news:1000:tags 5
+(integer) 1
+$ redis-cli sadd news:1000:tags 77
+(integer) 1
+$ redis-cli sadd tag:1:objects 1000
+(integer) 1
+$ redis-cli sadd tag:2:objects 1000
+(integer) 1
+$ redis-cli sadd tag:5:objects 1000
+(integer) 1
+$ redis-cli sadd tag:77:objects 1000
+(integer) 1</code></p>
+<p>要获取一个对象的所有标签，如此简单：</p>
+<p><code>$ redis-cli smembers news:1000:tags
+1\. 5
+2\. 1
+3\. 77
+4\. 2</code></p>
+<p>而有些看上去并不简单的操作仍然能使用相应的Redis命令轻松实现。例如我们也许想获得一份同时拥有标签1, 2, 10和27的对象列表。这可以用SINTER命令来做，他可以在不同集合之间取出交集。因此为达目的我们只需：</p>
+<p><code>$ redis-cli sinter tag:1:objects tag:2:objects tag:10:objects tag:27:objects
+... no result in our dataset composed of just one object ;) ...</code></p>
+<p>在命令参考文档中可以找到和集合相关的其他命令，令人感兴趣的一抓一大把。一定要留意SORT命令，Redis集合和list都是可排序的。</p>
+<p><strong>题外话：如何为字符串获取唯一标识</strong></p>
+<p>在标签的例子里，我们用到了标签ID，却没有提到ID从何而来。基本上你得为每个加入系统的标签分配一个唯一标识。你也希望在多个客户端同时试着添加同样的标签时不要出现竞争的情况。此外，如果标签已存在，你希望返回他的ID，否则创建一个新的唯一标识并将其与此标签关联。</p>
+<p>Redis 1.4将增加Hash类型。有了它，字符串和唯一ID关联的事儿将不值一提，但如今我们如何用现有Redis命令可靠的解决它呢？</p>
+<p>我们首先的尝试（以失败告终）可能如下。假设想为标签“redis”获取一个唯一ID：</p>
+<ul>
+<li>为了让算法是二进制安全的（意即不考虑字符串的编码或空格等等，只将注意力放在标签上）我们对标签做SHA1签名。SHA1(redis)=b840fc02d524045429941cc15f59e41cb7be6c52。</li>
+<li>检查这个标签是否已与一个唯一ID关联，用命令GET tag:b840fc02d524045429941cc15f59e41cb7be6c52:id</li>
+<li>如果上面的GET操作返回一个ID，则将其返回给用户。标签已经存在了。</li>
+<li>否则… 用INCR next.tag.id命令生成一个新的唯一ID（假定它返回123456）。</li>
+<li>最后关联标签和新的ID，SET tag:b840fc02d524045429941cc15f59e41cb7be6c52:id 123456</li>
+<li>并将新ID返回给调用者。</li>
+</ul>
+<p>多美妙，或许更好…等等！当两个客户端同时使用这组指令尝试为标签“redis”获取唯一ID时会发生什么呢？如果时间凑巧，他们俩都会从GET操作获得nil，都将对next.tag.id key做自增操作，这个key会被自增两次。其中一个客户端会将错误的ID返回给调用者。幸运的是修复这个算法并不难，这是明智的版本：</p>
+<ul>
+<li>为了让算法是二进制安全的（意即不考虑字符串的编码或空格等等，只将注意力放在标签上）我们对标签做SHA1签名。SHA1(redis)=b840fc02d524045429941cc15f59e41cb7be6c52。</li>
+<li>检查这个标签是否已与一个唯一ID关联，用命令GET tag:b840fc02d524045429941cc15f59e41cb7be6c52:id</li>
+<li>如果上面的GET操作返回一个ID，则将其返回给用户。标签已经存在了。</li>
+<li>否则… 用INCR next.tag.id命令生成一个新的唯一ID（假定它返回123456）。</li>
+<li>下面关联标签和新的ID，(注意用到一个新的命令)</li>
+</ul>
+<p>SETNX tag:b840fc02d524045429941cc15f59e41cb7be6c52:id 123456。如果另一个客户端比当前客户端更快，SETNX将不会设置key。而且，当key被成功设置时SETNX返回1，否则返回0。那么…让我们再做最后一步运算。</p>
+<ul>
+<li>如果SETNX返回1（key设置成功）则将123456返回给调用者，这就是我们的标签ID，否则执行GET tag:b840fc02d524045429941cc15f59e41cb7be6c52:id 并将其结果返回给调用者。</li>
+</ul>
+<p><strong>有序集合</strong></p>
+<p>集合是使用频率很高的数据类型，但是…对许多问题来说他们也有点儿太不讲顺序了;)因此Redis1.2引入了有序集合。他和集合非常相似，也是二进制安全的字符串集合，但是这次带有关联的score，以及一个类似LRANGE的操作可以返回有序元素，此操作只能作用于有序集合，它就是，ZRANGE 命令。</p>
+<p>从某种程度上说，有序集合是SQL世界的索引在Redis中的等价物。例如在刚才的reddit.com例子中，并没有提到如何根据用户投票和时间因素将新闻组合生成首页。下面我们会用有序集合解决这个问题，我们先从最简单的事情开始，阐明这个高级数据类型是如何工作的。让我们添加几个黑客，并将他们的生日作为“score”。</p>
+<p><code>$ redis-cli zadd hackers 1940 &quot;Alan Kay&quot;
+(integer) 1
+$ redis-cli zadd hackers 1953 &quot;Richard Stallman&quot;
+(integer) 1
+$ redis-cli zadd hackers 1965 &quot;Yukihiro Matsumoto&quot;
+(integer) 1
+$ redis-cli zadd hackers 1916 &quot;Claude Shannon&quot;
+(integer) 1
+$ redis-cli zadd hackers 1969 &quot;Linus Torvalds&quot;
+(integer) 1
+$ redis-cli zadd hackers 1912 &quot;Alan Turing&quot;
+(integer) 1</code></p>
+<p>对有序集合来说，按生日排序返回这些黑客易如反掌，因为他们已经是有序的。有序集合是通过一个dual-ported 数据结构实现的，它包含一个精简的有序列表和一个hash table，因此添加一个元素的时间复杂度是O(log(N))。这还行，但当我们需要访问有序的元素时，Redis不必再做任何事情，它已经是有序的了：</p>
+<p><code>$ redis-cli zrange hackers 0 -1
+1\. Alan Turing
+2\. Claude Shannon
+3\. Alan Kay
+4\. Richard Stallman
+5\. Yukihiro Matsumoto
+6\. Linus Torvalds</code></p>
+<p>你知道Linus比Yukihiro年轻吗 ;)</p>
+<p>无论如何，我想反向对这些元素排序，这次就用 ZREVRANGE 代替 ZRANGE 吧：</p>
+<p><code>$ redis-cli zrevrange hackers 0 -1
+1\. Linus Torvalds
+2\. Yukihiro Matsumoto
+3\. Richard Stallman
+4\. Alan Kay
+5\. Claude Shannon
+6\. Alan Turing</code></p>
+<p>一个非常重要的小贴士，ZSets只是有一个“默认的”顺序，但你仍然可以用 SORT 命令对有序集合做不同的排序（但这次服务器要耗费CPU了）。要想得到多种排序，一种可选方案是同时将每个元素加入多个有序集合。</p>
+<p><strong>区间操作</strong></p>
+<p>有序集合之能不止于此，他能在区间上操作。例如获取所有1950年之前出生的人。我们用 ZRANGEBYSCORE 命令来做：</p>
+<p><code>$ redis-cli zrangebyscore hackers -inf 1950
+1\. Alan Turing
+2\. Claude Shannon
+3\. Alan Kay</code></p>
+<p>我们请求Redis返回score介于负无穷到1950年之间的元素（两个极值也包含了）。</p>
+<p>也可以删除区间内的元素。例如从有序集合中删除生日介于1940到1960年之间的黑客。</p>
+<p><a href="http://redis.io/commands/zremrangebyscore" target="_blank" rel="external">ZREMRANGEBYSCORE</a> 这个名字虽然不算好，但他却非常有用，还会返回已删除的元素数量。</p>
+<p><strong>回到Reddit的例子</strong></p>
+<p>最后，回到 Reddit的例子。现在我们有个基于有序集合的像样方案来生成首页。用一个有序集合来包含最近几天的新闻（用 ZREMRANGEBYSCORE 不时的删除旧新闻）。用一个后台任务从有序集合中获取所有元素，根据用户投票和新闻时间计算score，然后用新闻IDs和scores关联生成 reddit.home.page 有序集合。要显示首页，我们只需闪电般的调用 ZRANGE。</p>
+<p>不时的从 reddit.home.page 有序集合中删除过旧的新闻也是为了让我们的系统总是工作在有限的新闻集合之上。</p>
+<p><strong>更新有序集合的scores</strong></p>
+<p>结束这篇指南之前还有最后一个小贴士。有序集合scores可以在任何时候更新。只要用 ZADD 对有序集合内的元素操作就会更新它的score（和位置），时间复杂度是O(log(N))，因此即使大量更新，有序集合也是合适的。</p>
+<p>这篇指南远未尽言，这只是从Redis开始的基础，欲深入之请读命令参考文档。</p>
+<p>谢谢阅读。Salvatore。</p>
+<p>本文整理在 <a href="http://latteye.com/doc" title="文档" target="_blank" rel="external">latteye doc 页面</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.com/2011/11/15-minutes-introduction-to-redis-data-types.html" data-id="ci973nq0t00pt7opima2dk2i7" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.com/2011/11/15-minutes-introduction-to-redis-data-types.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2011/11/redis-replication.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          Redis Replication
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2011/11/keyboard.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">说说键盘吧</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2011/11/15-minutes-introduction-to-redis-data-types.html" data-title="十五分钟介绍 Redis 数据结构" data-url="http://latteye.com/2011/11/15-minutes-introduction-to-redis-data-types.html"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
+          </li>
+        
+          <li>
+            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/自动下载 shooter.cn 字幕脚本.html">自动下载 shooter.cn 字幕脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-3.html">一周移动产品分析 - (三)</a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/one-week-mobile-analytics-2-post-apple-era.html">一周移动产品分析 (二) - 后苹果时代</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 latteye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"latteye"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>
