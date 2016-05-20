@@ -72,6 +72,53 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-jboss-cluster-e9-85-8d-e7-bd-ae-e5-b0-8f-e7-bb-93" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2008/10/jboss-cluster-e9-85-8d-e7-bd-ae-e5-b0-8f-e7-bb-93.html" class="article-date">
+  <time datetime="2008-10-24T03:13:13.000Z" itemprop="datePublished">2008-10-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Work/">Work</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2008/10/jboss-cluster-e9-85-8d-e7-bd-ae-e5-b0-8f-e7-bb-93.html">jboss cluster配置小结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本周做了一个jboss cluster，配置过程不说了，网上多的是，讲讲容易出现问题的地方:<br>1  jboss的监听地址一定要写网卡绑定的ip，要跟前端apache mod_jk配置中指定的ip一致，不要偷懒写0.0.0.0，否则出现问题的时候会让你抓狂。<br>2  jboss cluster最好取个名字，不要使用默认的，否则同网段其他jboss的服务器也可能会加入进来，带来麻烦。<br>    自定义名字也很简单，只需要在jboss启动脚本中加入“-Djboss.partition.name=yourcluster”, yourcluster改成你要的名字。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://latteye.me/2008/10/jboss-cluster-e9-85-8d-e7-bd-ae-e5-b0-8f-e7-bb-93.html" data-id="ciofgkfd400cueypi2iyu7xlt" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://latteye.me/2008/10/jboss-cluster-e9-85-8d-e7-bd-ae-e5-b0-8f-e7-bb-93.html#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-sun-fire-t2000g-configure" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2008/10/sun-fire-t2000g-configure.html" class="article-date">
@@ -108,7 +155,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://latteye.me/2008/10/sun-fire-t2000g-configure.html" data-id="cil6drrrd003trgpir83l1q6l" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://latteye.me/2008/10/sun-fire-t2000g-configure.html" data-id="ciofgkf42003teypifdg8xhlb" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -159,7 +206,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://latteye.me/2008/10/learning-perl-ch-7-a.html" data-id="cil6drryn00c0rgpii975yk1m" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://latteye.me/2008/10/learning-perl-ch-7-a.html" data-id="ciofgkfcf00c0eypipfr2gh3d" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -207,7 +254,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://latteye.me/2008/10/10-1-wuxi.html" data-id="cil6drsam00qbrgpirkjygv2l" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://latteye.me/2008/10/10-1-wuxi.html" data-id="ciofgkfrw00qeeypipsr5xm0z" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -256,7 +303,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://latteye.me/2008/10/shoppin.html" data-id="cil6drrry004hrgpisdupzjhs" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://latteye.me/2008/10/shoppin.html" data-id="ciofgkf4w004heypifcxw00pm" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -308,7 +355,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://latteye.me/2008/10/configure-firefox-font-in-linux.html" data-id="cil6drs7500mcrgpija5l3k47" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://latteye.me/2008/10/configure-firefox-font-in-linux.html" data-id="ciofgkfmx00mceypiw0ltpth3" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -365,7 +412,7 @@ keytool -genkey -alias tomcat -keyalg RSA -keystore <span class="label">$SavePat
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://latteye.me/2008/09/config-tomcat-use-ssl.html" data-id="cil6drs7a00mergpisbw5kilh" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://latteye.me/2008/09/config-tomcat-use-ssl.html" data-id="ciofgkfn000meeypimpx8ldiy" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -414,7 +461,7 @@ keytool -genkey -alias tomcat -keyalg RSA -keystore <span class="label">$SavePat
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://latteye.me/2008/09/qmail-toaster-idhost.html" data-id="cil6drrt8005vrgpi5l0zmo12" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://latteye.me/2008/09/qmail-toaster-idhost.html" data-id="ciofgkf6n005veypi8p5n9f1p" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -463,7 +510,7 @@ keytool -genkey -alias tomcat -keyalg RSA -keystore <span class="label">$SavePat
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://latteye.me/2008/09/qmail-toaster-defaulthost.html" data-id="cil6drrtd005zrgpicbk1o5ow" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://latteye.me/2008/09/qmail-toaster-defaulthost.html" data-id="ciofgkf6t005zeypikd8wgenp" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -514,60 +561,11 @@ keytool -genkey -alias tomcat -keyalg RSA -keystore <span class="label">$SavePat
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://latteye.me/2008/09/qmail-toaster-defaultdomain-and-plusdomain.html" data-id="cil6drrtf0061rgpimsaj2dr0" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://latteye.me/2008/09/qmail-toaster-defaultdomain-and-plusdomain.html" data-id="ciofgkf710061eypi827y57fi" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
         <a href="http://latteye.me/2008/09/qmail-toaster-defaultdomain-and-plusdomain.html#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-qmail-toaster-logsize" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2008/09/qmail-toaster-logsize.html" class="article-date">
-  <time datetime="2008-09-16T02:41:55.000Z" itemprop="datePublished">2008-09-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Work/">Work</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2008/09/qmail-toaster-logsize.html">QMail-Toaster Logsize</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>logsize 同样为 multilog 的一个参数。通过 -s数字来定义。在 Qmail Toaster 系统中被 /var/qmail/supervise/<module>/log/run 脚本调用。</module></p>
-<p>Qmail-Toaster 默认设置其为 1000000（等同1M）</p>
-<p>-s数字 设置了日志文件的最大大小。multilog 会判断当前日志文件是否已经达到最大设置。(在距离最大数值只有 2000 字节时，multilog 也会尝试将其结束。（不知道翻译的对不对）multilog will also decide that current is big enough if it sees a newline within 2000 bytes of the maximum file size; it tries to finish log files at line boundaries.) 大小设置必须在 4096 和 16777215之间。其默认值为 99999.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://latteye.me/2008/09/qmail-toaster-logsize.html" data-id="cil6drrt6005trgpitclro9r6" class="article-share-link" data-share="baidu">分享到</a>
-      
-
-      
-        <a href="http://latteye.me/2008/09/qmail-toaster-logsize.html#ds-thread" class="article-comment-link">评论</a>
       
 
       
@@ -600,7 +598,7 @@ keytool -genkey -alias tomcat -keyalg RSA -keystore <span class="label">$SavePat
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSRange/">NSRange</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSRegularExpression/">NSRegularExpression</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSTextCheckingResult/">NSTextCheckingResult</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regex/">Regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/as/">as</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSRange/">NSRange</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSRegularExpression/">NSRegularExpression</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSTextCheckingResult/">NSTextCheckingResult</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regex/">Regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/">Unity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/as/">as</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -609,7 +607,7 @@ keytool -genkey -alias tomcat -keyalg RSA -keystore <span class="label">$SavePat
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/NSRange/" style="font-size: 10px;">NSRange</a><a href="/tags/NSRegularExpression/" style="font-size: 10px;">NSRegularExpression</a><a href="/tags/NSTextCheckingResult/" style="font-size: 10px;">NSTextCheckingResult</a><a href="/tags/Regex/" style="font-size: 10px;">Regex</a><a href="/tags/Swift/" style="font-size: 20px;">Swift</a><a href="/tags/as/" style="font-size: 10px;">as</a><a href="/tags/swift/" style="font-size: 10px;">swift</a>
+      <a href="/tags/NSRange/" style="font-size: 10px;">NSRange</a><a href="/tags/NSRegularExpression/" style="font-size: 10px;">NSRegularExpression</a><a href="/tags/NSTextCheckingResult/" style="font-size: 10px;">NSTextCheckingResult</a><a href="/tags/Regex/" style="font-size: 10px;">Regex</a><a href="/tags/Swift/" style="font-size: 20px;">Swift</a><a href="/tags/Unity/" style="font-size: 10px;">Unity</a><a href="/tags/as/" style="font-size: 10px;">as</a><a href="/tags/swift/" style="font-size: 10px;">swift</a>
     </div>
   </div>
 
@@ -618,7 +616,7 @@ keytool -genkey -alias tomcat -keyalg RSA -keystore <span class="label">$SavePat
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
     </div>
   </div>
 
@@ -628,6 +626,10 @@ keytool -genkey -alias tomcat -keyalg RSA -keystore <span class="label">$SavePat
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/05/Unity-Content-Size-Fitter.html">Unity Content Size Fitter</a>
+          </li>
         
           <li>
             <a href="/2015/08/Swift-as-Operator.html">Swift 中 的 as! 操作符</a>
@@ -643,10 +645,6 @@ keytool -genkey -alias tomcat -keyalg RSA -keystore <span class="label">$SavePat
         
           <li>
             <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
-          </li>
-        
-          <li>
-            <a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">上海植物园花卉一组</a>
           </li>
         
       </ul>
