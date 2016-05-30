@@ -25,6 +25,7 @@
     <link rel="icon" href="/favicon.png">
   
   <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
   
 </head>
@@ -119,7 +120,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://latteye.me/2006/11/e5-a4-a7-e5-ad-a6-e5-9b-9b-e5-b9-b4-e7-9a-84-e5-bf-83-e5-be-97.html" data-id="ciofgkfk100jqeypix7r1ts8g" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://latteye.me/2006/11/e5-a4-a7-e5-ad-a6-e5-9b-9b-e5-b9-b4-e7-9a-84-e5-bf-83-e5-be-97.html" data-id="ciotyiz0w00jqdfpi11jporek" class="article-share-link" data-share="baidu" data-title="大学四年的心得">分享到</a>
       
 
       
@@ -284,7 +285,7 @@ var duoshuoQuery = {short_name:"latteye"};
     ds.type = 'text/javascript';ds.async = true;
     ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
     ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
+    (document.getElementsByTagName('head')[0]
      || document.getElementsByTagName('body')[0]).appendChild(ds);
   })();
   </script>
@@ -302,7 +303,20 @@ var duoshuoQuery = {short_name:"latteye"};
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 

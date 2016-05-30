@@ -28,6 +28,7 @@ Apache 自然可以和 PAM 结合，于是 Subversion 也可以通过 PAM 来进
     <link rel="icon" href="/favicon.png">
   
   <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
   
 </head>
@@ -144,7 +145,7 @@ Apache 自然可以和 PAM 结合，于是 Subversion 也可以通过 PAM 来进
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://latteye.me/2007/09/subversion-apache-pam.html" data-id="ciofgkf46003zeypixc4nj0wr" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://latteye.me/2007/09/subversion-apache-pam.html" data-id="ciotyiymw003zdfpiz8lbtlsr" class="article-share-link" data-share="baidu" data-title="Subversion 通过 Apache 结合 PAM 达到域验证">分享到</a>
       
 
       
@@ -309,7 +310,7 @@ var duoshuoQuery = {short_name:"latteye"};
     ds.type = 'text/javascript';ds.async = true;
     ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
     ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
+    (document.getElementsByTagName('head')[0]
      || document.getElementsByTagName('body')[0]).appendChild(ds);
   })();
   </script>
@@ -327,7 +328,20 @@ var duoshuoQuery = {short_name:"latteye"};
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 
