@@ -1,119 +1,4 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>如何在 Mandriva 环境下编译内核 | Water is</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="每个发行版本都有一些特殊的工具方便大家从源文件编译内核，本文介绍如何在 mandriva 环境下编译内核。本文介绍了如何从www.kernel.org上下载最新的内核并定制它适合自己的机器，从而你可以不再以来发行版本中所带的内核版本。本文也介绍了如何给内核添加补丁以增加那些没有启用的功能。
-本文在 Mandriva Free 2007 上通过测试。
-首先我想说的是这并不是唯一编译内核的方法。有许多">
-<meta property="og:type" content="article">
-<meta property="og:title" content="如何在 Mandriva 环境下编译内核">
-<meta property="og:url" content="http://latteye.me/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8-mandriva-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html">
-<meta property="og:site_name" content="Water is">
-<meta property="og:description" content="每个发行版本都有一些特殊的工具方便大家从源文件编译内核，本文介绍如何在 mandriva 环境下编译内核。本文介绍了如何从www.kernel.org上下载最新的内核并定制它适合自己的机器，从而你可以不再以来发行版本中所带的内核版本。本文也介绍了如何给内核添加补丁以增加那些没有启用的功能。
-本文在 Mandriva Free 2007 上通过测试。
-首先我想说的是这并不是唯一编译内核的方法。有许多">
-<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/buildubuntukernel/_1.png">
-<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/buildubuntukernel/_2.png">
-<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/buildmandrivakernel/_3.png">
-<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/buildmandrivakernel/_4.png">
-<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/buildmandrivakernel/_5.png">
-<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/buildmandrivakernel/_6.png">
-<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/buildubuntukernel/_3.png">
-<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/buildmandrivakernel/_8.jpg">
-<meta property="og:updated_time" content="2015-05-02T13:11:34.412Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何在 Mandriva 环境下编译内核">
-<meta name="twitter:description" content="每个发行版本都有一些特殊的工具方便大家从源文件编译内核，本文介绍如何在 mandriva 环境下编译内核。本文介绍了如何从www.kernel.org上下载最新的内核并定制它适合自己的机器，从而你可以不再以来发行版本中所带的内核版本。本文也介绍了如何给内核添加补丁以增加那些没有启用的功能。
-本文在 Mandriva Free 2007 上通过测试。
-首先我想说的是这并不是唯一编译内核的方法。有许多">
-<meta name="twitter:image" content="http://www.linuxblog.cn/wp-content/images/buildubuntukernel/_1.png">
-  
-    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
-  
-</head>
-<body>
-<div id="container">
-  <div id="wrap">
-    <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Water is</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">latte</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
-          <input type="submit" value="" class="search-form-submit">
-          <input name=tn type=hidden value="bds">
-          <input name=cl type=hidden value="3">
-          <input name=ct type=hidden value="2097152">
-          <input type="hidden" name="si" value="latteye.me">
-        </form>
-      </div>
-    </div>
-  </div>
-</header>
-    <div class="outer">
-      <section id="main"><article id="post-e5-a6-82-e4-bd-95-e5-9c-a8-mandriva-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8-mandriva-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html" class="article-date">
-  <time datetime="2006-11-30T01:35:55.000Z" itemprop="datePublished">2006-11-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Work/">Work</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      如何在 Mandriva 环境下编译内核
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>每个发行版本都有一些特殊的工具方便大家从源文件编译内核，本文介绍如何在 mandriva 环境下编译内核。本文介绍了如何从www.kernel.org上下载最新的内核并定制它适合自己的机器，从而你可以不再以来发行版本中所带的内核版本。本文也介绍了如何给内核添加补丁以增加那些没有启用的功能。</p>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 如何在 Mandriva 环境下编译内核 · Water is</title><meta name="description" content="如何在 Mandriva 环境下编译内核 - latteye"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">如何在 Mandriva 环境下编译内核</h1><div class="post-info">2006年11月30日</div><div class="post-content"><p>每个发行版本都有一些特殊的工具方便大家从源文件编译内核，本文介绍如何在 mandriva 环境下编译内核。本文介绍了如何从www.kernel.org上下载最新的内核并定制它适合自己的机器，从而你可以不再以来发行版本中所带的内核版本。本文也介绍了如何给内核添加补丁以增加那些没有启用的功能。</p>
 <p>本文在 Mandriva Free 2007 上通过测试。</p>
 <p>首先我想说的是这并不是唯一编译内核的方法。有许多种方法可以达到相同的目的，这只是我所使用的一种方法。并且我保证我的方法不会出问题。<br><a id="more"></a><br>1.初步笔记</p>
 <p>本指南的目标是将内核编译成可以直接安装在系统上的 rpm 包，这样你就可以将 rpm 包与别人分享，安装在任一 Mandriva 系统上。</p>
@@ -146,7 +31,7 @@ bzip2 -dc /usr/src/patch-2.6.19-rc4.bz2 | patch -p1</code></p>
 <p><code>make menuconfig</code></p>
 <p>  这将出现一个配置菜单。选择Load an Alternate Configuration File，并且选择我们复制过来的.config文件：<br><a href="http://latteye.com/wp-content/images/buildubuntukernel/1.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/buildubuntukernel/_1.png" alt=""></a></p>
 <p><a href="http://latteye.com/wp-content/images/buildubuntukernel/2.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/buildubuntukernel/_2.png" alt=""></a></p>
-<p>  接着浏览菜单中的选项，并且修改你的选择。当你结束选择并且按下Exit，回答下列问题，选择Yes。（Do you wish to save your new kernel configuration?）你必须在 <em>General Setup —-&gt; () Local version - append to kernel release</em> 指定一个内核版本。我添加了 <strong>-default</strong> 所以我的内核 rpm 包最后会被命名为 kernel-2.6.18.3default-1.i386.rpm 。你可以将此处空着或者用另外可以帮助你识别的词汇标记。（比如 -custom）</p>
+<p>  接着浏览菜单中的选项，并且修改你的选择。当你结束选择并且按下Exit，回答下列问题，选择Yes。（Do you wish to save your new kernel configuration?）你必须在 <em>General Setup —&gt; () Local version - append to kernel release</em> 指定一个内核版本。我添加了 <strong>-default</strong> 所以我的内核 rpm 包最后会被命名为 kernel-2.6.18.3default-1.i386.rpm 。你可以将此处空着或者用另外可以帮助你识别的词汇标记。（比如 -custom）</p>
 <p>  <strong>注意：</strong>当你安装过 kernel-2.6.18.3default-1.i386.rpm 之后，再次编译内核时，命名就变得尤为重要！你必须设定一个不同的版本号，比如： -default1， -default2，显然你无法同时安装两个版本号相同的内核包。</p>
 <p><a href="http://www.linuxblog.cn/wp-content/images/buildmandrivakernel/3.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/buildmandrivakernel/_3.png" alt=""></a></p>
 <p><a href="http://www.linuxblog.cn/wp-content/images/buildmandrivakernel/4.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/buildmandrivakernel/_4.png" alt=""></a></p>
@@ -179,7 +64,7 @@ rpm -ivh kernel-2.6.18.3default-1.i386.rpm</code></p>
 <p><code>vi /etc/lilo.conf</code></p>
 <p>以下是我修改前的lilo配置文件：</p>
 <blockquote>
-<h1 id="File_generated_by_DrakX/drakboot">File generated by DrakX/drakboot</h1><h1 id="WARNING:_do_not_forget_to_run_lilo_after_modifying_this_file">WARNING: do not forget to run lilo after modifying this file</h1><p>default=”linux”</p>
+<h1 id="File-generated-by-DrakX-drakboot"><a href="#File-generated-by-DrakX-drakboot" class="headerlink" title="File generated by DrakX/drakboot"></a>File generated by DrakX/drakboot</h1><h1 id="WARNING-do-not-forget-to-run-lilo-after-modifying-this-file"><a href="#WARNING-do-not-forget-to-run-lilo-after-modifying-this-file" class="headerlink" title="WARNING: do not forget to run lilo after modifying this file"></a>WARNING: do not forget to run lilo after modifying this file</h1><p>default=”linux”</p>
 <p>boot=/dev/sda</p>
 <p>map=/boot/map</p>
 <p>keytable=/boot/us.klt</p>
@@ -190,35 +75,35 @@ rpm -ivh kernel-2.6.18.3default-1.i386.rpm</code></p>
 <p>timeout=100</p>
 <p>message=/boot/message</p>
 <p>image=/boot/vmlinuz</p>
-<pre><code><span class="setting">label=<span class="value"><span class="string">"linux"</span></span></span>
+<pre><code>label=&quot;linux&quot;
 
-<span class="setting">root=<span class="value">/dev/sda6</span></span>
+root=/dev/sda6
 
-<span class="setting">initrd=<span class="value">/boot/initrd.img</span></span>
+initrd=/boot/initrd.img
 
-<span class="setting">append=<span class="value"><span class="string">" resume=/dev/sda5 splash=silent"</span></span></span>
+append=&quot; resume=/dev/sda5 splash=silent&quot;
 
-<span class="setting">vga=<span class="value"><span class="number">788</span></span></span>
+vga=788
 </code></pre><p>image=/boot/vmlinuz</p>
-<pre><code><span class="setting">label=<span class="value"><span class="string">"linux-nonfb"</span></span></span>
+<pre><code>label=&quot;linux-nonfb&quot;
 
-<span class="setting">root=<span class="value">/dev/sda6</span></span>
+root=/dev/sda6
 
-<span class="setting">initrd=<span class="value">/boot/initrd.img</span></span>
+initrd=/boot/initrd.img
 
-<span class="setting">append=<span class="value"><span class="string">" resume=/dev/sda5"</span></span></span>
+append=&quot; resume=/dev/sda5&quot;
 </code></pre><p>image=/boot/vmlinuz</p>
-<pre><code><span class="setting">label=<span class="value"><span class="string">"failsafe"</span></span></span>
+<pre><code>label=&quot;failsafe&quot;
 
-<span class="setting">root=<span class="value">/dev/sda6</span></span>
+root=/dev/sda6
 
-<span class="setting">initrd=<span class="value">/boot/initrd.img</span></span>
+initrd=/boot/initrd.img
 
-<span class="setting">append=<span class="value"><span class="string">" failsafe resume=/dev/sda5"</span></span></span>
+append=&quot; failsafe resume=/dev/sda5&quot;
 </code></pre></blockquote>
 <p>接着是我添加了新项目之后的 lilo 配置文件：</p>
 <blockquote>
-<h1 id="File_generated_by_DrakX/drakboot-1">File generated by DrakX/drakboot</h1><h1 id="WARNING:_do_not_forget_to_run_lilo_after_modifying_this_file-1">WARNING: do not forget to run lilo after modifying this file</h1><p>default=”linux-2.6.18.3-default”</p>
+<h1 id="File-generated-by-DrakX-drakboot-1"><a href="#File-generated-by-DrakX-drakboot-1" class="headerlink" title="File generated by DrakX/drakboot"></a>File generated by DrakX/drakboot</h1><h1 id="WARNING-do-not-forget-to-run-lilo-after-modifying-this-file-1"><a href="#WARNING-do-not-forget-to-run-lilo-after-modifying-this-file-1" class="headerlink" title="WARNING: do not forget to run lilo after modifying this file"></a>WARNING: do not forget to run lilo after modifying this file</h1><p>default=”linux-2.6.18.3-default”</p>
 <p>boot=/dev/sda</p>
 <p>map=/boot/map</p>
 <p>keytable=/boot/us.klt</p>
@@ -229,41 +114,41 @@ rpm -ivh kernel-2.6.18.3default-1.i386.rpm</code></p>
 <p>timeout=100</p>
 <p>message=/boot/message</p>
 <p>image=/boot/vmlinuz-2.6.18.3-default</p>
-<pre><code><span class="setting">label=<span class="value"><span class="string">"linux-2.6.18.3-default"</span></span></span>
+<pre><code>label=&quot;linux-2.6.18.3-default&quot;
 
-<span class="setting">root=<span class="value">/dev/sda6</span></span>
+root=/dev/sda6
 
-<span class="setting">initrd=<span class="value">/boot/initrd-<span class="number">2.6</span>.<span class="number">18.3</span>-default.img</span></span>
+initrd=/boot/initrd-2.6.18.3-default.img
 
-<span class="setting">append=<span class="value"><span class="string">" resume=/dev/sda5 splash=silent"</span></span></span>
+append=&quot; resume=/dev/sda5 splash=silent&quot;
 
-<span class="setting">vga=<span class="value"><span class="number">788</span></span></span>
+vga=788
 </code></pre><p>image=/boot/vmlinuz</p>
-<pre><code><span class="setting">label=<span class="value"><span class="string">"linux"</span></span></span>
+<pre><code>label=&quot;linux&quot;
 
-<span class="setting">root=<span class="value">/dev/sda6</span></span>
+root=/dev/sda6
 
-<span class="setting">initrd=<span class="value">/boot/initrd.img</span></span>
+initrd=/boot/initrd.img
 
-<span class="setting">append=<span class="value"><span class="string">" resume=/dev/sda5 splash=silent"</span></span></span>
+append=&quot; resume=/dev/sda5 splash=silent&quot;
 
-<span class="setting">vga=<span class="value"><span class="number">788</span></span></span>
+vga=788
 </code></pre><p>image=/boot/vmlinuz</p>
-<pre><code><span class="setting">label=<span class="value"><span class="string">"linux-nonfb"</span></span></span>
+<pre><code>label=&quot;linux-nonfb&quot;
 
-<span class="setting">root=<span class="value">/dev/sda6</span></span>
+root=/dev/sda6
 
-<span class="setting">initrd=<span class="value">/boot/initrd.img</span></span>
+initrd=/boot/initrd.img
 
-<span class="setting">append=<span class="value"><span class="string">" resume=/dev/sda5"</span></span></span>
+append=&quot; resume=/dev/sda5&quot;
 </code></pre><p>image=/boot/vmlinuz</p>
-<pre><code><span class="setting">label=<span class="value"><span class="string">"failsafe"</span></span></span>
+<pre><code>label=&quot;failsafe&quot;
 
-<span class="setting">root=<span class="value">/dev/sda6</span></span>
+root=/dev/sda6
 
-<span class="setting">initrd=<span class="value">/boot/initrd.img</span></span>
+initrd=/boot/initrd.img
 
-<span class="setting">append=<span class="value"><span class="string">" failsafe resume=/dev/sda5"</span></span></span>
+append=&quot; failsafe resume=/dev/sda5&quot;
 </code></pre></blockquote>
 <p>接着运行：</p>
 <p><code>lilo</code></p>
@@ -277,218 +162,4 @@ rpm -ivh kernel-2.6.18.3default-1.i386.rpm</code></p>
 <p><a href="http://www.linuxblog.cn/wp-content/images/buildmandrivakernel/8.jpg" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/buildmandrivakernel/_8.jpg" alt=""></a></p>
 <p>之后你就可以重新在老内核中编译新内核，别忘记重新配置 lilo 的配置文件，并且运行：</p>
 <p><code>lilo</code></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://latteye.me/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8-mandriva-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html" data-id="ciotzts0r00710zpiihbyx9o7" class="article-share-link" data-share="baidu" data-title="如何在 Mandriva 环境下编译内核">分享到</a>
-      
-
-      
-        <a href="http://latteye.me/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8-mandriva-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2006/11/kernel-26183-deb-e4-b8-8b-e8-bd-bd.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          kernel 2.6.18.3 deb 下载
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2006/11/mail-notification.html" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">Mail Notification</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-  <section id="comments">
-    <div id="ds-thread" class="ds-thread" data-thread-key="2006/11/e5-a6-82-e4-bd-95-e5-9c-a8-mandriva-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html" data-title="如何在 Mandriva 环境下编译内核" data-url="http://latteye.me/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8-mandriva-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html"></div>
-  </section>
-</section>
-      
-      <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSRange/">NSRange</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSRegularExpression/">NSRegularExpression</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSTextCheckingResult/">NSTextCheckingResult</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regex/">Regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/">Unity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/as/">as</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/NSRange/" style="font-size: 10px;">NSRange</a> <a href="/tags/NSRegularExpression/" style="font-size: 10px;">NSRegularExpression</a> <a href="/tags/NSTextCheckingResult/" style="font-size: 10px;">NSTextCheckingResult</a> <a href="/tags/Regex/" style="font-size: 10px;">Regex</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/Unity/" style="font-size: 10px;">Unity</a> <a href="/tags/as/" style="font-size: 10px;">as</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">近期文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2016/05/Unity-Content-Size-Fitter.html">Unity Content Size Fitter</a>
-          </li>
-        
-          <li>
-            <a href="/2015/08/Swift-as-Operator.html">Swift 中 的 as! 操作符</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/Swift-Trouble-Shooting-Return-from-initializer-without-initializing-all-stored-properties.html">Swift 排错一则</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/swift-regex-basic.html">Swift 中的正则表达式基础</a>
-          </li>
-        
-          <li>
-            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">友情链接</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="http://www.zhihu.com/people/yuan-hao-yang" target="_blank">知乎</a>
-          </li>
-        
-          <li>
-            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-      
-    </div>
-    <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 latteye<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-      .
-      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
-    </div>
-  </div>
-</footer>
-  </div>
-  <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-  <!-- totop start -->
-<div id="totop">
-<a title="返回顶部"><img src="/img/scrollup.png"/></a>
-</div>
-
-<!-- totop end -->
-
-<!-- 多说公共js代码 start -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"latteye"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0]
-     || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-  </script>
-<!-- 多说公共js代码 end -->
-
-
-<!-- 百度分享 start -->
-
-<div id="article-share-box" class="article-share-box">
-  <div id="bdshare" class="bdsharebuttonbox article-share-links">
-    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
-    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
-    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
-    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
-    <a class="article-share-more" data-cmd="more" title="更多"></a>
-  </div>
-</div>
-<script>
-  function SetShareData(cmd, config) {
-    if (shareDataTitle && shareDataUrl) {
-      config.bdText = shareDataTitle;
-      config.bdUrl = shareDataUrl;
-    }
-    return config;
-  }
-  window._bd_share_config={
-    "common":{onBeforeClick: SetShareData},
-    "share":{"bdCustomStyle":"/css/bdshare.css"}
-  };
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-
-<!-- 百度分享 end -->
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-</div>
-</body>
-</html>
+</div></article></div></main><footer><div class="paginator"><a href="/2006/11/kernel-26183-deb-e4-b8-8b-e8-bd-bd.html" class="prev">PREV</a><a href="/2006/11/mail-notification.html" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>

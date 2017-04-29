@@ -1,104 +1,4 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>[转]Linux系统中网络配置详解 | Water is</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="从linux诞生的那一天起,就注定了它的网络功能空前地强大.所以在linux系统中如何配置网络,使其高效,安全的工作就显得十分重要.下面我们就从网络设备的安装,网络服务的设置和网络安全性三个方面来介绍一下linux系统中网络的设置.">
-<meta property="og:type" content="article">
-<meta property="og:title" content="[转]Linux系统中网络配置详解">
-<meta property="og:url" content="http://latteye.me/2006/11/e8-bd-aclinux-e7-b3-bb-e7-bb-9f-e4-b8-ad-e7-bd-91-e7-bb-9c-e9-85-8d-e7-bd-ae-e8-af-a6-e8-a7-a3.html">
-<meta property="og:site_name" content="Water is">
-<meta property="og:description" content="从linux诞生的那一天起,就注定了它的网络功能空前地强大.所以在linux系统中如何配置网络,使其高效,安全的工作就显得十分重要.下面我们就从网络设备的安装,网络服务的设置和网络安全性三个方面来介绍一下linux系统中网络的设置.">
-<meta property="og:updated_time" content="2015-05-02T13:11:34.415Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[转]Linux系统中网络配置详解">
-<meta name="twitter:description" content="从linux诞生的那一天起,就注定了它的网络功能空前地强大.所以在linux系统中如何配置网络,使其高效,安全的工作就显得十分重要.下面我们就从网络设备的安装,网络服务的设置和网络安全性三个方面来介绍一下linux系统中网络的设置.">
-  
-    <link rel="alternative" href="/atom.xml" title="Water is" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
-  
-</head>
-<body>
-<div id="container">
-  <div id="wrap">
-    <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Water is</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">latte</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
-          <input type="submit" value="" class="search-form-submit">
-          <input name=tn type=hidden value="bds">
-          <input name=cl type=hidden value="3">
-          <input name=ct type=hidden value="2097152">
-          <input type="hidden" name="si" value="latteye.me">
-        </form>
-      </div>
-    </div>
-  </div>
-</header>
-    <div class="outer">
-      <section id="main"><article id="post-e8-bd-aclinux-e7-b3-bb-e7-bb-9f-e4-b8-ad-e7-bd-91-e7-bb-9c-e9-85-8d-e7-bd-ae-e8-af-a6-e8-a7-a3" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2006/11/e8-bd-aclinux-e7-b3-bb-e7-bb-9f-e4-b8-ad-e7-bd-91-e7-bb-9c-e9-85-8d-e7-bd-ae-e8-af-a6-e8-a7-a3.html" class="article-date">
-  <time datetime="2006-11-23T08:18:29.000Z" itemprop="datePublished">2006-11-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Work/">Work</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      [转]Linux系统中网络配置详解
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>从linux诞生的那一天起,就注定了它的网络功能空前地强大.所以在linux系统中如何配置网络,使其高效,安全的工作就显得十分重要.下面我们就从网络设备的安装,网络服务的设置和网络安全性三个方面来介绍一下linux系统中网络的设置.</p>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> [转]Linux系统中网络配置详解 · Water is</title><meta name="description" content="[转]Linux系统中网络配置详解 - latteye"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">[转]Linux系统中网络配置详解</h1><div class="post-info">2006年11月23日</div><div class="post-content"><p>从linux诞生的那一天起,就注定了它的网络功能空前地强大.所以在linux系统中如何配置网络,使其高效,安全的工作就显得十分重要.下面我们就从网络设备的安装,网络服务的设置和网络安全性三个方面来介绍一下linux系统中网络的设置.</p>
 <a id="more"></a>
 <p><strong>一.安装和配置网络设备</strong></p>
 <p>　　在安装linux时,如果你有网卡,安装程序将会提示你给出tcp/ip网络的配置参数,如本机的ip地址,缺省网关的ip地址,DNS的ip地址等等.根据这些配置参数,安装程序将会自动把网卡(linux系统首先要支持)驱动程序编译到内核中去.但是我们一定要了解加载网卡驱动程序的过程,那么在以后改变网卡,使用多个网卡的时候我们就会很容易的操作.网卡的驱动程序是作为模块加载到内核中去的,所有linux支持的网卡驱动程序都是存放在目录 /lib/modules/(linux版本号)/net/ ,例如inter的82559系列10/100M自适应的引导网卡的驱动程序是eepro100.o,3COM的3C509 ISA网卡的驱动程序是3C509.o,DLINK的pci 10网卡的驱动程序是via-rhine.o,NE2000兼容性网卡的驱动程序是ne2k-pci.o和ne.o.在了解了这些基本的驱动程序之后,我们就可以通过修改模块配置文件来更换网卡或者增加网卡.</p>
@@ -112,7 +12,7 @@
 <p>　　所以，我们也可以修改这个文件来进行linux下网络参数的改变。</p>
 <p>二 网络服务的配置:</p>
 <p>　　在这一部分,我们并不是详细的介绍具体的网络服务器(DNS,FTP,WWW,SENDMAIL)的配置(那将是巨大的篇幅),而是介绍一下与linux网络服务的配置相关的文件.</p>
-<p>1. LILO的配置文件<br>　　在linux系统中,有一个系统引导程序,那就是lilo(linux loadin),利用lilo可以实现多操作系统的选择启动.它的配置文件是/etc/lilo.conf.在这个配置文件中,lilo的配置参数主要分为两个部分,一个是全局配置参数,包括设置启动设备等等.另一个是局部配置参数,包括每个引导影像文件的配置参数.在这里我就不详细介绍每个参数,特别的仅仅说明两个重要的参数————password和restricted选项,password选项为每个引导的影像文件加入口令保护.我们都知道,在linux系统中有一个运行模式是单用户模式,在这个模式下,用户是以超级用户的身份登录到linux系统中.人们可以通过在lilo引导的时候加入参数(linux single 或linux init 0)就可以不需要口令直接进入单用户模式的超级用户环境中,这将是十分危险的.所以在lilo.conf中增加了password的配置选项来为每个影像文件增加口令保护.你可以在全局模式中使用password选项(对所有影像文件都加入相同的口令),或者为每个单独的影像文件加入口令.这样一来,在每次系统启动时,都会要求用户输入口令.也许你觉得每次都要输入口令很麻烦,可以使用restricted选项,它可以使lilo仅仅在linux启动时输入了参数(例如 linux single)的时候才会检验密码.这两个选项可以极大的增加系统的安全性,建议在lilo.conf文件中设置它们.由于password在 /etc/lilo.conf文件是以明文存放的,所以必须要将/etc/lilo.conf文件的属性改为仅仅root可读(0400).<br>　　另外,在lilo的早期版本中,存在着引导扇区必须存放到前1024柱面的限制,在lilo的2.51版本中已经突破了这个限制,同时引导界面也变成了图形界面更加直观.最新版本的下载站点:<br>　　ftp://166.111.136.3/pub/linux/lilo/lilo-2.51.tar.gz<br>　　下载解压后,使用命令make install即可完成安装.<br>　　注意: 物理安全才是最基本的安全,即使在lilo.conf中增加了口令保护,如果没有物理安全,恶意闯入者可以使用启动软盘启动linux系统.</p>
+<p>1. LILO的配置文件<br>　　在linux系统中,有一个系统引导程序,那就是lilo(linux loadin),利用lilo可以实现多操作系统的选择启动.它的配置文件是/etc/lilo.conf.在这个配置文件中,lilo的配置参数主要分为两个部分,一个是全局配置参数,包括设置启动设备等等.另一个是局部配置参数,包括每个引导影像文件的配置参数.在这里我就不详细介绍每个参数,特别的仅仅说明两个重要的参数——–password和restricted选项,password选项为每个引导的影像文件加入口令保护.我们都知道,在linux系统中有一个运行模式是单用户模式,在这个模式下,用户是以超级用户的身份登录到linux系统中.人们可以通过在lilo引导的时候加入参数(linux single 或linux init 0)就可以不需要口令直接进入单用户模式的超级用户环境中,这将是十分危险的.所以在lilo.conf中增加了password的配置选项来为每个影像文件增加口令保护.你可以在全局模式中使用password选项(对所有影像文件都加入相同的口令),或者为每个单独的影像文件加入口令.这样一来,在每次系统启动时,都会要求用户输入口令.也许你觉得每次都要输入口令很麻烦,可以使用restricted选项,它可以使lilo仅仅在linux启动时输入了参数(例如 linux single)的时候才会检验密码.这两个选项可以极大的增加系统的安全性,建议在lilo.conf文件中设置它们.由于password在 /etc/lilo.conf文件是以明文存放的,所以必须要将/etc/lilo.conf文件的属性改为仅仅root可读(0400).<br>　　另外,在lilo的早期版本中,存在着引导扇区必须存放到前1024柱面的限制,在lilo的2.51版本中已经突破了这个限制,同时引导界面也变成了图形界面更加直观.最新版本的下载站点:<br>　　ftp://166.111.136.3/pub/linux/lilo/lilo-2.51.tar.gz<br>　　下载解压后,使用命令make install即可完成安装.<br>　　注意: 物理安全才是最基本的安全,即使在lilo.conf中增加了口令保护,如果没有物理安全,恶意闯入者可以使用启动软盘启动linux系统.</p>
 <p>2. 域名服务的配置文件<br>　　(1)/etc/HOSTNAME 在这个文件中保存着linux系统的主机名和域名.范例文件</p>
 <p>　　ice.xanet.edu.cn</p>
 <p>　　这个文件表明了主机名ice,域名是xanet.edu.cn<br>　　(2)/etc/hosts和/etc/networks文件在域名服务系统中,有着主机表机制,/etc/hosts和/etc/networks就是主机表发展而来在/etc/hosts中存放着你不需要DNS 系统查询而得的主机ip地址和主机名的对应,下面是一个范例文件:<br>　　# ip 地址 主机名 别名<br>　　127.0.0.1 　　　　　localhosts 　　　　　　　loopback<br>　　202.117.1.13　　　　www.xjtu.edu.cn　　　　　www<br>　　202.117.1.24 　　　 ftp.xjtu.edu.cn 　　　　 ftp</p>
@@ -124,262 +24,79 @@
 <p>　　option domain-name “chinapub.com”;<br>　　use-host-decl-names off;<br>　　subnet 210.27.48.0 netmask 255.255.255.192 {<br>　　　　　　filename “/tmp/image”;<br>　　　　　　host dial_server {<br>　　　　　　　　　　　hardware ethernet 00:02:b3:11:f2:30;<br>　　　　　　　　　　　fixed-address 210.27.48.8;<br>　　　　　　　　　　　filename “/tmp/image”;<br>　　　　　　}<br>　　}</p>
 <p>　　在这个文件中，最主要的是通过设置的硬件地址来鉴别局域网中的主机，并分配给它指定的ip地址，hardware ethernet 00:02:b3:11:f2:30指定要动态分配ip的主机得网卡的MAC地址，fixed-address 210.27.48.8指定分配其ip地址。filename “/tmp/image”是通过tftp服务，主机所要得到的影像文件，可以通过得到的影像文件来引导主机启动。</p>
 <p>4. 超级守候进程inetd的配置<br>　　在linux系统中有一个超级守候进程inetd,inetd监听由文件/etc/services指定的服务的端口,inetd根据网络连接请求,调用相应的服务进程来相应请求.在这里有两个文件十分重要,/etc/inetd.conf和/etc/services,文件/etc/services 定义linu系统中所有服务的名称,协议类型,服务的端口等等信息,/etc/inetd.conf是inetd的配置文件,由它来指定那些服务可以由 inetd来监听,以及相应的服务进程的调用命令.首先介绍一下/etc/services文件,/etc/services文件是一个服务名和服务端口对应的数据库文件,如下面所示:</p>
-<h1 id="/etc/services:">/etc/services:</h1><h1 id="$Id:_services,v_1-4_2000/01/23_21:03:36_notting_Exp_$">$Id: services,v 1.4 2000/01/23 21:03:36 notting Exp $</h1><p>#</p>
-<h1 id="Network_services,_Internet_style">Network services, Internet style</h1><p>#</p>
-<h1 id="Note_that_it_is_presently_the_policy_of_IANA_to_assign_a_single_well-known">Note that it is presently the policy of IANA to assign a single well-known</h1><h1 id="port_number_for_both_TCP_and_UDP;_hence,_most_entries_here_have_two_entries">port number for both TCP and UDP; hence, most entries here have two entries</h1><h1 id="even_if_the_protocol_doesn’t_support_UDP_operations-">even if the protocol doesn’t support UDP operations.</h1><h1 id="Updated_from_RFC_1700,_``Assigned_Numbers’’_(October_1994)-_Not_all_ports">Updated from RFC 1700, ``Assigned Numbers’’ (October 1994). Not all ports</h1><h1 id="are_included,_only_the_more_common_ones-">are included, only the more common ones.</h1><h1 id="名称_端口/协议_别名_注释">名称 　　　端口/协议　　　　 别名 　　　　　　　注释</h1><p>tcpmux 　　 1/tcp 　　　　　　　　　　　　　　　# TCP port service multiplexer<br>echo 　　　 7/tcp<br>echo 　　　 7/udp<br>discard 　　9/tcp 　　　　　sink null<br>discard 　　9/udp 　　　　　sink null<br>systat　　　11/tcp 　　　　 users<br>daytime 　　13/tcp<br>daytime 　　13/udp<br>netstat 　　15/tcp<br>qotd 　　　 17/tcp 　　　　　quote<br>msp 　　　　18/tcp 　　　　　　　　　　　　　　　　# message send protocol<br>msp 　　　　18/udp　　　　　　　　　　　　　　　　 # message send protocol<br>chargen 　　19/tcp 　　　　ttytst source<br>chargen　　 19/udp　　　　 ttytst source<br>ftp-data 　 20/tcp<br>ftp　　　　 21/tcp<br>fsp　　　　21/udp　　　　　 fspd<br>ssh 　　　　22/tcp 　　　　　　　　　　　　　　　　# SSH Remote Login Protocol<br>ssh　　　　22/udp　　　　　　　　　　　　　　　　　# SSH Remote Login Protocol<br>telnet 　　23/tcp</p>
-<h1 id="24_-_private">24 - private</h1><p>smtp 　　　25/tcp 　　　　　mail</p>
-<h1 id="26_-_unassigned">26 - unassigned</h1><p>time　　　　37/tcp　　　　 timserver<br>time 　　　37/udp 　　　　　timserver<br>rlp 　　　　39/udp　　　　　 resource　　　　　　　　 # resource location<br>nameserver 42/tcp 　　　　　name　　　　　　　　　　　# IEN 116<br>whois 　　　43/tcp 　　　　　nicname<br>re-mail-ck 　50/tcp 　　　　　　　　　　　　　　　　　# Remote Mail Checking Protocol<br>re-mail-ck　50/udp 　　　　　　　　　　　　　　　　　 # Remote Mail Checking Protocol<br>domain 　　 53/tcp 　　　　nameserver 　　　　　　　　# name-domain server<br>domain　　　53/udp 　　　　nameserver<br>mtp 　　　　57/tcp　　　　　　　　　　　　　　　　　　 # deprecated<br>bootps 　　 67/tcp 　　　　　　　　　　　　　　　　　　# BOOTP server<br>bootps 　　 67/udp<br>bootpc 　　 68/tcp 　　　　　　　　　　　　　　　　　　# BOOTP client<br>bootpc 　　 68/udp<br>tftp 　　　 69/udp<br>gopher 　　 70/tcp # Internet Gopher<br>gopher 　　 70/udp<br>rje 　　　　77/tcp netrjs<br>finger 　　 79/tcp<br>www 　　　　80/tcp 　　　　http　　　　　　　　　　　　 # WorldWideWeb HTTP<br>www　　　　 80/udp 　　　　　　　　　　　　　　　　　　 # HyperText Transfer Protocol<br>link 　　　 87/tcp 　　　　ttylink<br>kerberos 　 88/tcp 　　　　kerberos5 krb5 　　　　　　　# Kerberos v5<br>kerberos 　 88/udp 　　　　kerberos5 krb5 　　　　　　　# Kerberos v5<br>supdup　　　95/tcp</p>
-<h1 id="100_-_reserved">100 - reserved</h1><p>hostnames 　101/tcp 　　　　hostname 　　　　　　　　　　# usually from sri-nic<br>iso-tsap 　102/tcp　　　　　tsap 　　　　　　　　　　　　# part of ISODE.<br>csnet-ns 　105/tcp 　　　　cso-ns　　　　　　　　　　　　 # also used by CSO name server<br>csnet-ns 　105/udp　　　　 cso-ns<br>rtelnet 　　107/tcp 　　　　　　　　　　　　　　　　　　　# Remote Telnet<br>rtelnet 　　107/udp<br>pop2 　　　　109/tcp 　　　pop-2 postoffice　　　　　　　 # POP version 2<br>pop2 　　　　109/udp　　　 pop-2<br>pop3 　　　　110/tcp 　　　pop-3　　　　　　　　　　　　　 # POP version 3<br>pop3　　　　 110/udp　　　 pop-3<br>sunrpc 　　　111/tcp 　　portmapper　　　　　　　　　　　 # RPC 4.0 portmapper TCP<br>sunrpc 　　　111/udp 　　portmapper 　　　　　　　　　　　# RPC 4.0 portmapper UDP<br>auth 　　　　113/tcp　　 authentication tap ident<br>sftp 　　　　115/tcp<br>uucp-path 　　117/tcp<br>nntp 　　　　119/tcp 　　　readnews untp　　　　　　　　　 # USENET News Transfer Protocol<br>ntp 　　　　　123/tcp<br>ntp 　　　　　123/udp　　　　　　　　　　　　　　　　　　　# Network Time Protocol<br>netbios-ns 　　137/tcp　　　　　　　　　　　　　　　　　　 # NETBIOS Name Service<br>netbios-ns 　　137/udp<br>netbios-dgm 　　138/tcp 　　　　　　　　　　　　　　　　　　# NETBIOS Datagram Service<br>netbios-dgm 　　138/udp<br>netbios-ssn 　　139/tcp　　　　　　　　　　　　　　　　　　　# NETBIOS session service<br>netbios-ssn 　　139/udp<br>imap2 　　　　　143/tcp 　　imap 　　　　　　　　　　　　　　# Interim Mail Access Proto v2<br>imap2 　　　　　143/udp　　 imap</p>
+<h1 id="etc-services"><a href="#etc-services" class="headerlink" title="/etc/services:"></a>/etc/services:</h1><h1 id="Id-services-v-1-4-2000-01-23-21-03-36-notting-Exp"><a href="#Id-services-v-1-4-2000-01-23-21-03-36-notting-Exp" class="headerlink" title="$Id: services,v 1.4 2000/01/23 21:03:36 notting Exp $"></a>$Id: services,v 1.4 2000/01/23 21:03:36 notting Exp $</h1><p>#</p>
+<h1 id="Network-services-Internet-style"><a href="#Network-services-Internet-style" class="headerlink" title="Network services, Internet style"></a>Network services, Internet style</h1><p>#</p>
+<h1 id="Note-that-it-is-presently-the-policy-of-IANA-to-assign-a-single-well-known"><a href="#Note-that-it-is-presently-the-policy-of-IANA-to-assign-a-single-well-known" class="headerlink" title="Note that it is presently the policy of IANA to assign a single well-known"></a>Note that it is presently the policy of IANA to assign a single well-known</h1><h1 id="port-number-for-both-TCP-and-UDP-hence-most-entries-here-have-two-entries"><a href="#port-number-for-both-TCP-and-UDP-hence-most-entries-here-have-two-entries" class="headerlink" title="port number for both TCP and UDP; hence, most entries here have two entries"></a>port number for both TCP and UDP; hence, most entries here have two entries</h1><h1 id="even-if-the-protocol-doesn’t-support-UDP-operations"><a href="#even-if-the-protocol-doesn’t-support-UDP-operations" class="headerlink" title="even if the protocol doesn’t support UDP operations."></a>even if the protocol doesn’t support UDP operations.</h1><h1 id="Updated-from-RFC-1700-Assigned-Numbers’’-October-1994-Not-all-ports"><a href="#Updated-from-RFC-1700-Assigned-Numbers’’-October-1994-Not-all-ports" class="headerlink" title="Updated from RFC 1700, ``Assigned Numbers’’ (October 1994). Not all ports"></a>Updated from RFC 1700, ``Assigned Numbers’’ (October 1994). Not all ports</h1><h1 id="are-included-only-the-more-common-ones"><a href="#are-included-only-the-more-common-ones" class="headerlink" title="are included, only the more common ones."></a>are included, only the more common ones.</h1><p>#名称 　　　端口/协议　　　　 别名 　　　　　　　注释<br>tcpmux 　　 1/tcp 　　　　　　　　　　　　　　　# TCP port service multiplexer<br>echo 　　　 7/tcp<br>echo 　　　 7/udp<br>discard 　　9/tcp 　　　　　sink null<br>discard 　　9/udp 　　　　　sink null<br>systat　　　11/tcp 　　　　 users<br>daytime 　　13/tcp<br>daytime 　　13/udp<br>netstat 　　15/tcp<br>qotd 　　　 17/tcp 　　　　　quote<br>msp 　　　　18/tcp 　　　　　　　　　　　　　　　　# message send protocol<br>msp 　　　　18/udp　　　　　　　　　　　　　　　　 # message send protocol<br>chargen 　　19/tcp 　　　　ttytst source<br>chargen　　 19/udp　　　　 ttytst source<br>ftp-data 　 20/tcp<br>ftp　　　　 21/tcp<br>fsp　　　　21/udp　　　　　 fspd<br>ssh 　　　　22/tcp 　　　　　　　　　　　　　　　　# SSH Remote Login Protocol<br>ssh　　　　22/udp　　　　　　　　　　　　　　　　　# SSH Remote Login Protocol<br>telnet 　　23/tcp</p>
+<h1 id="24-private"><a href="#24-private" class="headerlink" title="24 - private"></a>24 - private</h1><p>smtp 　　　25/tcp 　　　　　mail</p>
+<h1 id="26-unassigned"><a href="#26-unassigned" class="headerlink" title="26 - unassigned"></a>26 - unassigned</h1><p>time　　　　37/tcp　　　　 timserver<br>time 　　　37/udp 　　　　　timserver<br>rlp 　　　　39/udp　　　　　 resource　　　　　　　　 # resource location<br>nameserver 42/tcp 　　　　　name　　　　　　　　　　　# IEN 116<br>whois 　　　43/tcp 　　　　　nicname<br>re-mail-ck 　50/tcp 　　　　　　　　　　　　　　　　　# Remote Mail Checking Protocol<br>re-mail-ck　50/udp 　　　　　　　　　　　　　　　　　 # Remote Mail Checking Protocol<br>domain 　　 53/tcp 　　　　nameserver 　　　　　　　　# name-domain server<br>domain　　　53/udp 　　　　nameserver<br>mtp 　　　　57/tcp　　　　　　　　　　　　　　　　　　 # deprecated<br>bootps 　　 67/tcp 　　　　　　　　　　　　　　　　　　# BOOTP server<br>bootps 　　 67/udp<br>bootpc 　　 68/tcp 　　　　　　　　　　　　　　　　　　# BOOTP client<br>bootpc 　　 68/udp<br>tftp 　　　 69/udp<br>gopher 　　 70/tcp # Internet Gopher<br>gopher 　　 70/udp<br>rje 　　　　77/tcp netrjs<br>finger 　　 79/tcp<br>www 　　　　80/tcp 　　　　http　　　　　　　　　　　　 # WorldWideWeb HTTP<br>www　　　　 80/udp 　　　　　　　　　　　　　　　　　　 # HyperText Transfer Protocol<br>link 　　　 87/tcp 　　　　ttylink<br>kerberos 　 88/tcp 　　　　kerberos5 krb5 　　　　　　　# Kerberos v5<br>kerberos 　 88/udp 　　　　kerberos5 krb5 　　　　　　　# Kerberos v5<br>supdup　　　95/tcp</p>
+<h1 id="100-reserved"><a href="#100-reserved" class="headerlink" title="100 - reserved"></a>100 - reserved</h1><p>hostnames 　101/tcp 　　　　hostname 　　　　　　　　　　# usually from sri-nic<br>iso-tsap 　102/tcp　　　　　tsap 　　　　　　　　　　　　# part of ISODE.<br>csnet-ns 　105/tcp 　　　　cso-ns　　　　　　　　　　　　 # also used by CSO name server<br>csnet-ns 　105/udp　　　　 cso-ns<br>rtelnet 　　107/tcp 　　　　　　　　　　　　　　　　　　　# Remote Telnet<br>rtelnet 　　107/udp<br>pop2 　　　　109/tcp 　　　pop-2 postoffice　　　　　　　 # POP version 2<br>pop2 　　　　109/udp　　　 pop-2<br>pop3 　　　　110/tcp 　　　pop-3　　　　　　　　　　　　　 # POP version 3<br>pop3　　　　 110/udp　　　 pop-3<br>sunrpc 　　　111/tcp 　　portmapper　　　　　　　　　　　 # RPC 4.0 portmapper TCP<br>sunrpc 　　　111/udp 　　portmapper 　　　　　　　　　　　# RPC 4.0 portmapper UDP<br>auth 　　　　113/tcp　　 authentication tap ident<br>sftp 　　　　115/tcp<br>uucp-path 　　117/tcp<br>nntp 　　　　119/tcp 　　　readnews untp　　　　　　　　　 # USENET News Transfer Protocol<br>ntp 　　　　　123/tcp<br>ntp 　　　　　123/udp　　　　　　　　　　　　　　　　　　　# Network Time Protocol<br>netbios-ns 　　137/tcp　　　　　　　　　　　　　　　　　　 # NETBIOS Name Service<br>netbios-ns 　　137/udp<br>netbios-dgm 　　138/tcp 　　　　　　　　　　　　　　　　　　# NETBIOS Datagram Service<br>netbios-dgm 　　138/udp<br>netbios-ssn 　　139/tcp　　　　　　　　　　　　　　　　　　　# NETBIOS session service<br>netbios-ssn 　　139/udp<br>imap2 　　　　　143/tcp 　　imap 　　　　　　　　　　　　　　# Interim Mail Access Proto v2<br>imap2 　　　　　143/udp　　 imap</p>
 <p>(实际上,以上仅仅是/etc/services的一部分,限于篇幅没有全部写出)<br>在这个文件中,为了安全考虑,我们可以修改一些常用服务的端口地址,例如我们可以把telnet服务的端口地址改为52323,www的端口改为8080,ftp端口地址改为2121等等,这样仅仅需要在应用程序中修改相应的端口即可.这样可以提高系统的安全性.<br>/etc/inetd.conf文件是inetd的配置文件, 首先要了解一下linux服务器到底要提供哪些服务。一个很好的原则是” 禁止所有不需要的服务”，这样黑客就少了一些攻击系统的机会./etc/inetd.conf范例文件如下:<br>#</p>
-<h1 id="inetd-conf_This_file_describes_the_services_that_will_be_available">inetd.conf　　　　This file describes the services that will be available</h1><h1 id="through_the_INETD_TCP/IP_super_server-_To_re-configure">　　　　　　　　　through the INETD TCP/IP super server. To re-configure</h1><h1 id="the_running_INETD_process,_edit_this_file,_then_send_the">　　　　　　　　　the running INETD process, edit this file, then send the</h1><h1 id="NETD_process_a_SIGHUP_signal-">　　　　　　　　　NETD process a SIGHUP signal.</h1><p>#</p>
-<h1 id="Version:_@(#)/etc/inetd-conf_3-10_05/27/93">Version:　　　 @(#)/etc/inetd.conf 　　3.10 　　05/27/93</h1><p>#</p>
-<h1 id="Authors:_Original_taken_from_BSD_UNIX_4-3/TAHOE-">Authors: 　　　Original taken from BSD UNIX 4.3/TAHOE.</h1><h1 id="Fred_N-_van_Kempen,_&#119;&#x61;&#108;&#x74;&#x6a;&#x65;&#x40;&#x75;&#119;&#97;&#108;&#116;&#x2e;&#110;&#x6c;&#46;&#109;&#x75;&#x67;&#x6e;&#101;&#116;&#46;&#111;&#114;&#103;">　　　　　　　　Fred N. van Kempen, <a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#119;&#x61;&#108;&#x74;&#x6a;&#x65;&#x40;&#x75;&#119;&#97;&#108;&#116;&#x2e;&#110;&#x6c;&#46;&#109;&#x75;&#x67;&#x6e;&#101;&#116;&#46;&#111;&#114;&#103;">&#119;&#x61;&#108;&#x74;&#x6a;&#x65;&#x40;&#x75;&#119;&#97;&#108;&#116;&#x2e;&#110;&#x6c;&#46;&#109;&#x75;&#x67;&#x6e;&#101;&#116;&#46;&#111;&#114;&#103;</a></h1><p>#</p>
-<h1 id="Modified_for_Debian_Linux_by_Ian_A-_Murdock_&#105;&#x6d;&#117;&#114;&#x64;&#x6f;&#x63;&#x6b;&#x40;&#x73;&#104;&#101;&#x6c;&#108;&#x2e;&#x70;&#x6f;&#x72;&#x74;&#97;&#x6c;&#46;&#99;&#111;&#x6d;">Modified for Debian Linux by Ian A. Murdock <a href="&#109;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#105;&#x6d;&#117;&#114;&#x64;&#x6f;&#x63;&#x6b;&#x40;&#x73;&#104;&#101;&#x6c;&#108;&#x2e;&#x70;&#x6f;&#x72;&#x74;&#97;&#x6c;&#46;&#99;&#111;&#x6d;">&#105;&#x6d;&#117;&#114;&#x64;&#x6f;&#x63;&#x6b;&#x40;&#x73;&#104;&#101;&#x6c;&#108;&#x2e;&#x70;&#x6f;&#x72;&#x74;&#97;&#x6c;&#46;&#99;&#111;&#x6d;</a></h1><p>#</p>
-<h1 id="Modified_for_RHS_Linux_by_Marc_Ewing_&#x6d;&#x61;&#114;&#99;&#64;&#x72;&#x65;&#100;&#x68;&#x61;&#x74;&#46;&#x63;&#111;&#109;">Modified for RHS Linux by Marc Ewing <a href="&#109;&#97;&#105;&#x6c;&#116;&#x6f;&#58;&#x6d;&#x61;&#114;&#99;&#64;&#x72;&#x65;&#100;&#x68;&#x61;&#x74;&#46;&#x63;&#111;&#109;">&#x6d;&#x61;&#114;&#99;&#64;&#x72;&#x65;&#100;&#x68;&#x61;&#x74;&#46;&#x63;&#111;&#109;</a></h1><p>#</p>
-<h1 id="<service_name>_<sock_type>_<server_path>"><service_name> <sock_type> <proto> <flags> <user> <server_path> <args></args></server_path></user></flags></proto></sock_type></service_name></h1><h1 id="服务名_socket类型_协议_动作_拥有者_服务进程路径名_掉用参数">服务名 socket类型 协议 动作 拥有者 服务进程路径名 掉用参数</h1><h1 id="nowait_表示在相应一个网络连接之后,服务进程在释放旧的联接之前可以接受">nowait 表示在相应一个网络连接之后,服务进程在释放旧的联接之前可以接受</h1><h1 id="新的连接请求,wait_则表示必须在旧连接清除之后才能接收新的连接-">新的连接请求,wait 则表示必须在旧连接清除之后才能接收新的连接.</h1><h1 id="Echo,_discard,_daytime,_and_chargen_are_used_primarily_for_testing-">Echo, discard, daytime, and chargen are used primarily for testing.</h1><h1 id="To_re-read_this_file_after_changes,_just_do_a_‘killall_-HUP_inetd’">To re-read this file after changes, just do a ‘killall -HUP inetd’</h1><p>#</p>
-<h1 id="echo_stream_tcp_nowait_root_internal">echo 　stream 　tcp　 nowait　 root 　internal</h1><h1 id="echo_dgram_udp_wait_root_internal">echo 　dgram 　　udp　 wait 　　root 　internal</h1><h1 id="discard_stream_tcp_nowait_root_internal">discard　　　 stream 　tcp　 nowait　 root 　internal</h1><h1 id="discard_dgram_udp_wait_root_internal">discard　　　 dgram 　　udp 　wait 　　root 　internal</h1><h1 id="daytime_stream_tcp_nowait_root_internal">daytime stream　 tcp　　 nowait　　 root 　　internal</h1><h1 id="daytime_dgram_udp_wait_root_internal">daytime dgram　　udp 　　wait 　　　root 　　internal</h1><h1 id="chargen_stream_tcp_nowait_root_internal">chargen 　　　　stream 　tcp 　　nowait 　root 　internal</h1><h1 id="chargen_dgram_udp_wait_root_internal">chargen 　　　　dgram 　udp 　wait　　 root 　　internal</h1><h1 id="time_stream_tcp_nowait_root_internal">time 　　stream 　　tcp 　　nowait 　　root 　internal</h1><h1 id="time_dgram_udp_wait_root_internal">time 　　dgram　　 udp 　　wait 　　root 　　internal</h1><p>#</p>
-<h1 id="These_are_standard_services-">These are standard services.</h1><p>#<br>ftp 　　stream　　 tcp　　 nowait　　 root　　 /usr/sbin/tcpd 　　in.wuftpd -l -a<br>telnet　stream 　　tcp 　　nowait 　　root 　　/usr/sbin/tcpd 　　in.telnetd<br>#</p>
-<h1 id="Shell,_login,_exec,_comsat_and_talk_are_BSD_protocols-">Shell, login, exec, comsat and talk are BSD protocols.</h1><p>#</p>
-<h1 id="shell_stream_tcp_nowait_root_/usr/sbin/tcpd_in-rshd">shell 　stream　 tcp 　nowait 　root 　　/usr/sbin/tcpd 　　in.rshd</h1><h1 id="login_stream_tcp_nowait_root_/usr/sbin/tcpd_in-rlogind">login 　stream　 tcp　 nowait　 root　　 /usr/sbin/tcpd 　　in.rlogind</h1><h1 id="exec_stream_tcp_nowait_root_/usr/sbin/tcpd_in-rexecd">exec 　stream 　tcp　 nowait　 root 　　/usr/sbin/tcpd　　 in.rexecd</h1><h1 id="comsat_dgram_udp_wait_root_/usr/sbin/tcpd_in-comsat">comsat dgram　 udp 　wait 　　root　　 /usr/sbin/tcpd　　 in.comsat</h1><h1 id="talk_dgram_udp_wait_root_/usr/sbin/tcpd_in-talkd">talk 　dgram 　udp 　wait 　　root　　 /usr/sbin/tcpd 　　in.talkd</h1><h1 id="ntalk_dgram_udp_wait_root_/usr/sbin/tcpd_in-ntalkd">ntalk　 dgram 　udp　wait 　　root 　　/usr/sbin/tcpd 　　in.ntalkd</h1><h1 id="dtalk_stream_tcp_waut_nobody_/usr/sbin/tcpd_in-dtalkd">dtalk　 stream　tcp　 waut　　 nobody 　/usr/sbin/tcpd 　　in.dtalkd</h1><h1 id="Pop_and_imap_mail_services_et_al">Pop and imap mail services et al</h1><p>#</p>
-<h1 id="pop-2_stream_tcp_nowait_root_/usr/sbin/tcpd_ipop2d">pop-2 stream tcp nowait root /usr/sbin/tcpd ipop2d</h1><h1 id="pop-3_stream_tcp_nowait_root_/usr/sbin/tcpd_ipop3d">pop-3 stream tcp nowait root /usr/sbin/tcpd ipop3d</h1><h1 id="imap_stream_tcp_nowait_root_/usr/sbin/tcpd_imapd">imap stream tcp nowait root /usr/sbin/tcpd imapd</h1><p>#</p>
-<h1 id="The_Internet_UUCP_service-">The Internet UUCP service.</h1><p>#</p>
-<h1 id="uucp_stream_tcp_nowait_uucp_/usr/sbin/tcpd_/usr/lib/uucp/uucico_-l">uucp stream tcp nowait uucp /usr/sbin/tcpd /usr/lib/uucp/uucico -l</h1><p>#</p>
-<h1 id="Tftp_service_is_provided_primarily_for_booting-_Most_sites">Tftp service is provided primarily for booting. Most sites</h1><h1 id="run_this_only_on_machines_acting_as_“boot_servers-”_Do_not_uncomment">run this only on machines acting as “boot servers.” Do not uncomment</h1><h1 id="this_unless_you_need_it-">this unless you <em>need</em> it.</h1><p>#</p>
-<h1 id="tftp_dgram_udp_wait_root_/usr/sbin/tcpd_in-tftpd">tftp 　dgram 　udp　 wait 　root 　/usr/sbin/tcpd 　in.tftpd</h1><h1 id="bootps_dgram_udp_wait_root_/usr/sbin/tcpd_bootpd">bootps dgram　 udp　 wait　 root 　/usr/sbin/tcpd　 bootpd</h1><h1 id="">　</h1><h1 id="Finger,_systat_and_netstat_give_out_user_information_which_may_be">Finger, systat and netstat give out user information which may be</h1><h1 id="valuable_to_potential_“system_crackers-”_Many_sites_choose_to_disable">valuable to potential “system crackers.” Many sites choose to disable</h1><h1 id="some_or_all_of_these_services_to_improve_security-">some or all of these services to improve security.</h1><p>#</p>
-<h1 id="finger_stream_tcp_nowait_root_/usr/sbin/tcpd_in-fingerd">finger stream　 tcp 　　nowait 　　root 　　/usr/sbin/tcpd 　　in.fingerd</h1><h1 id="cfinger_stream_tcp_nowait_root_/usr/sbin/tcpd_in-cfingerd">cfinger stream 　tcp 　　nowait　　 root 　　/usr/sbin/tcpd 　　in.cfingerd</h1><h1 id="systat_stream_tcp_nowait_guest_/usr/sbin/tcpd_/bin/ps_-auwwx">systat stream　 tcp　　 nowait 　　guest 　　/usr/sbin/tcpd /bin/ps -auwwx</h1><h1 id="netstat_stream_tcp_nowait_guest_/usr/sbin/tcpd_/bin/netstat_-f_inet">netstat stream 　tcp　　 nowait 　　guest 　　/usr/sbin/tcpd /bin/netstat 　-f inet</h1><p>#</p>
-<h1 id="Authentication">Authentication</h1><p>#</p>
-<h1 id="auth_stream_tcp_nowait_nobody_/usr/sbin/in-identd_in-identd_-l_-e_-o">auth　　　 stream 　tcp 　nowait　 nobody 　/usr/sbin/in.identd in.identd -l -e -o</h1><h1 id="linuxconf_stream_tcp_wait_root_/bin/linuxconf_linuxconf_-http">linuxconf stream　　 tcp 　wait 　　root 　　/bin/linuxconf linuxconf -http</h1><p>　　大家看到的这个文件已经修改过的文件,除了telnet 和ftp服务,其他所有的服务都被禁止了.在修改了/etc/inetd.conf之后,使用命令kill -HUP (inetd的进程号),使inetd重新读取配置文件并重新启动即可.</p>
+<h1 id="inetd-conf-This-file-describes-the-services-that-will-be-available"><a href="#inetd-conf-This-file-describes-the-services-that-will-be-available" class="headerlink" title="inetd.conf　　　　This file describes the services that will be available"></a>inetd.conf　　　　This file describes the services that will be available</h1><h1 id="through-the-INETD-TCP-IP-super-server-To-re-configure"><a href="#through-the-INETD-TCP-IP-super-server-To-re-configure" class="headerlink" title="　　　　　　　　　through the INETD TCP/IP super server. To re-configure"></a>　　　　　　　　　through the INETD TCP/IP super server. To re-configure</h1><h1 id="the-running-INETD-process-edit-this-file-then-send-the"><a href="#the-running-INETD-process-edit-this-file-then-send-the" class="headerlink" title="　　　　　　　　　the running INETD process, edit this file, then send the"></a>　　　　　　　　　the running INETD process, edit this file, then send the</h1><h1 id="NETD-process-a-SIGHUP-signal"><a href="#NETD-process-a-SIGHUP-signal" class="headerlink" title="　　　　　　　　　NETD process a SIGHUP signal."></a>　　　　　　　　　NETD process a SIGHUP signal.</h1><p>#</p>
+<h1 id="Version-etc-inetd-conf-3-10-05-27-93"><a href="#Version-etc-inetd-conf-3-10-05-27-93" class="headerlink" title="Version:　　　 @(#)/etc/inetd.conf 　　3.10 　　05/27/93"></a>Version:　　　 @(#)/etc/inetd.conf 　　3.10 　　05/27/93</h1><p>#</p>
+<h1 id="Authors-Original-taken-from-BSD-UNIX-4-3-TAHOE"><a href="#Authors-Original-taken-from-BSD-UNIX-4-3-TAHOE" class="headerlink" title="Authors: 　　　Original taken from BSD UNIX 4.3/TAHOE."></a>Authors: 　　　Original taken from BSD UNIX 4.3/TAHOE.</h1><h1 id="Fred-N-van-Kempen-119-x61-x6c-116-x6a-101-64-117-119-x61-x6c-x74-46-x6e-108-x2e-x6d-117-x67-x6e-x65-x74-46-111-114-103"><a href="#Fred-N-van-Kempen-119-x61-x6c-116-x6a-101-64-117-119-x61-x6c-x74-46-x6e-108-x2e-x6d-117-x67-x6e-x65-x74-46-111-114-103" class="headerlink" title="　　　　　　　　Fred N. van Kempen, &#119;&#x61;&#x6c;&#116;&#x6a;&#101;&#64;&#117;&#119;&#x61;&#x6c;&#x74;&#46;&#x6e;&#108;&#x2e;&#x6d;&#117;&#x67;&#x6e;&#x65;&#x74;&#46;&#111;&#114;&#103;"></a>　　　　　　　　Fred N. van Kempen, <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#119;&#x61;&#x6c;&#116;&#x6a;&#101;&#64;&#117;&#119;&#x61;&#x6c;&#x74;&#46;&#x6e;&#108;&#x2e;&#x6d;&#117;&#x67;&#x6e;&#x65;&#x74;&#46;&#111;&#114;&#103;">&#119;&#x61;&#x6c;&#116;&#x6a;&#101;&#64;&#117;&#119;&#x61;&#x6c;&#x74;&#46;&#x6e;&#108;&#x2e;&#x6d;&#117;&#x67;&#x6e;&#x65;&#x74;&#46;&#111;&#114;&#103;</a></h1><p>#</p>
+<h1 id="Modified-for-Debian-Linux-by-Ian-A-Murdock-x69-109-x75-114-x64-x6f-x63-x6b-x40-x73-104-x65-108-x6c-x2e-x70-111-114-116-97-108-46-99-x6f-109"><a href="#Modified-for-Debian-Linux-by-Ian-A-Murdock-x69-109-x75-114-x64-x6f-x63-x6b-x40-x73-104-x65-108-x6c-x2e-x70-111-114-116-97-108-46-99-x6f-109" class="headerlink" title="Modified for Debian Linux by Ian A. Murdock &#x69;&#109;&#x75;&#114;&#x64;&#x6f;&#x63;&#x6b;&#x40;&#x73;&#104;&#x65;&#108;&#x6c;&#x2e;&#x70;&#111;&#114;&#116;&#97;&#108;&#46;&#99;&#x6f;&#109;"></a>Modified for Debian Linux by Ian A. Murdock <a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#58;&#x69;&#109;&#x75;&#114;&#x64;&#x6f;&#x63;&#x6b;&#x40;&#x73;&#104;&#x65;&#108;&#x6c;&#x2e;&#x70;&#111;&#114;&#116;&#97;&#108;&#46;&#99;&#x6f;&#109;">&#x69;&#109;&#x75;&#114;&#x64;&#x6f;&#x63;&#x6b;&#x40;&#x73;&#104;&#x65;&#108;&#x6c;&#x2e;&#x70;&#111;&#114;&#116;&#97;&#108;&#46;&#99;&#x6f;&#109;</a></h1><p>#</p>
+<h1 id="Modified-for-RHS-Linux-by-Marc-Ewing-109-97-x72-x63-64-x72-101-100-104-97-x74-46-99-x6f-x6d"><a href="#Modified-for-RHS-Linux-by-Marc-Ewing-109-97-x72-x63-64-x72-101-100-104-97-x74-46-99-x6f-x6d" class="headerlink" title="Modified for RHS Linux by Marc Ewing &#109;&#97;&#x72;&#x63;&#64;&#x72;&#101;&#100;&#104;&#97;&#x74;&#46;&#99;&#x6f;&#x6d;"></a>Modified for RHS Linux by Marc Ewing <a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#58;&#109;&#97;&#x72;&#x63;&#64;&#x72;&#101;&#100;&#104;&#97;&#x74;&#46;&#99;&#x6f;&#x6d;">&#109;&#97;&#x72;&#x63;&#64;&#x72;&#101;&#100;&#104;&#97;&#x74;&#46;&#99;&#x6f;&#x6d;</a></h1><p>#</p>
+<h1 id=""><a href="#" class="headerlink" title="      "></a><service_name> <sock_type> <proto> <flags> <user> <server_path> <args></args></server_path></user></flags></proto></sock_type></service_name></h1><p>#服务名 socket类型 协议 动作 拥有者 服务进程路径名 掉用参数</p>
+<p>#nowait 表示在相应一个网络连接之后,服务进程在释放旧的联接之前可以接受</p>
+<p>#新的连接请求,wait 则表示必须在旧连接清除之后才能接收新的连接.</p>
+<h1 id="Echo-discard-daytime-and-chargen-are-used-primarily-for-testing"><a href="#Echo-discard-daytime-and-chargen-are-used-primarily-for-testing" class="headerlink" title="Echo, discard, daytime, and chargen are used primarily for testing."></a>Echo, discard, daytime, and chargen are used primarily for testing.</h1><h1 id="To-re-read-this-file-after-changes-just-do-a-‘killall-HUP-inetd’"><a href="#To-re-read-this-file-after-changes-just-do-a-‘killall-HUP-inetd’" class="headerlink" title="To re-read this file after changes, just do a ‘killall -HUP inetd’"></a>To re-read this file after changes, just do a ‘killall -HUP inetd’</h1><p>#</p>
+<p>#echo 　stream 　tcp　 nowait　 root 　internal</p>
+<p>#echo 　dgram 　　udp　 wait 　　root 　internal</p>
+<p>#discard　　　 stream 　tcp　 nowait　 root 　internal</p>
+<p>#discard　　　 dgram 　　udp 　wait 　　root 　internal</p>
+<p>#daytime stream　 tcp　　 nowait　　 root 　　internal</p>
+<p>#daytime dgram　　udp 　　wait 　　　root 　　internal</p>
+<p>#chargen 　　　　stream 　tcp 　　nowait 　root 　internal</p>
+<p>#chargen 　　　　dgram 　udp 　wait　　 root 　　internal</p>
+<p>#time 　　stream 　　tcp 　　nowait 　　root 　internal</p>
+<p>#time 　　dgram　　 udp 　　wait 　　root 　　internal<br>#</p>
+<h1 id="These-are-standard-services"><a href="#These-are-standard-services" class="headerlink" title="These are standard services."></a>These are standard services.</h1><p>#<br>ftp 　　stream　　 tcp　　 nowait　　 root　　 /usr/sbin/tcpd 　　in.wuftpd -l -a<br>telnet　stream 　　tcp 　　nowait 　　root 　　/usr/sbin/tcpd 　　in.telnetd<br>#</p>
+<h1 id="Shell-login-exec-comsat-and-talk-are-BSD-protocols"><a href="#Shell-login-exec-comsat-and-talk-are-BSD-protocols" class="headerlink" title="Shell, login, exec, comsat and talk are BSD protocols."></a>Shell, login, exec, comsat and talk are BSD protocols.</h1><p>#</p>
+<p>#shell 　stream　 tcp 　nowait 　root 　　/usr/sbin/tcpd 　　in.rshd</p>
+<p>#login 　stream　 tcp　 nowait　 root　　 /usr/sbin/tcpd 　　in.rlogind</p>
+<p>#exec 　stream 　tcp　 nowait　 root 　　/usr/sbin/tcpd　　 in.rexecd</p>
+<p>#comsat dgram　 udp 　wait 　　root　　 /usr/sbin/tcpd　　 in.comsat</p>
+<p>#talk 　dgram 　udp 　wait 　　root　　 /usr/sbin/tcpd 　　in.talkd</p>
+<p>#ntalk　 dgram 　udp　wait 　　root 　　/usr/sbin/tcpd 　　in.ntalkd</p>
+<p>#dtalk　 stream　tcp　 waut　　 nobody 　/usr/sbin/tcpd 　　in.dtalkd</p>
+<h1 id="Pop-and-imap-mail-services-et-al"><a href="#Pop-and-imap-mail-services-et-al" class="headerlink" title="Pop and imap mail services et al"></a>Pop and imap mail services et al</h1><p>#</p>
+<p>#pop-2 stream tcp nowait root /usr/sbin/tcpd ipop2d</p>
+<p>#pop-3 stream tcp nowait root /usr/sbin/tcpd ipop3d</p>
+<p>#imap stream tcp nowait root /usr/sbin/tcpd imapd<br>#</p>
+<h1 id="The-Internet-UUCP-service"><a href="#The-Internet-UUCP-service" class="headerlink" title="The Internet UUCP service."></a>The Internet UUCP service.</h1><p>#</p>
+<p>#uucp stream tcp nowait uucp /usr/sbin/tcpd /usr/lib/uucp/uucico -l<br>#</p>
+<h1 id="Tftp-service-is-provided-primarily-for-booting-Most-sites"><a href="#Tftp-service-is-provided-primarily-for-booting-Most-sites" class="headerlink" title="Tftp service is provided primarily for booting. Most sites"></a>Tftp service is provided primarily for booting. Most sites</h1><h1 id="run-this-only-on-machines-acting-as-“boot-servers-”-Do-not-uncomment"><a href="#run-this-only-on-machines-acting-as-“boot-servers-”-Do-not-uncomment" class="headerlink" title="run this only on machines acting as “boot servers.” Do not uncomment"></a>run this only on machines acting as “boot servers.” Do not uncomment</h1><h1 id="this-unless-you-need-it"><a href="#this-unless-you-need-it" class="headerlink" title="this unless you need it."></a>this unless you <em>need</em> it.</h1><p>#</p>
+<p>#tftp 　dgram 　udp　 wait 　root 　/usr/sbin/tcpd 　in.tftpd</p>
+<p>#bootps dgram　 udp　 wait　 root 　/usr/sbin/tcpd　 bootpd</p>
+<p>#　</p>
+<h1 id="Finger-systat-and-netstat-give-out-user-information-which-may-be"><a href="#Finger-systat-and-netstat-give-out-user-information-which-may-be" class="headerlink" title="Finger, systat and netstat give out user information which may be"></a>Finger, systat and netstat give out user information which may be</h1><h1 id="valuable-to-potential-“system-crackers-”-Many-sites-choose-to-disable"><a href="#valuable-to-potential-“system-crackers-”-Many-sites-choose-to-disable" class="headerlink" title="valuable to potential “system crackers.” Many sites choose to disable"></a>valuable to potential “system crackers.” Many sites choose to disable</h1><h1 id="some-or-all-of-these-services-to-improve-security"><a href="#some-or-all-of-these-services-to-improve-security" class="headerlink" title="some or all of these services to improve security."></a>some or all of these services to improve security.</h1><p>#</p>
+<p>#finger stream　 tcp 　　nowait 　　root 　　/usr/sbin/tcpd 　　in.fingerd</p>
+<p>#cfinger stream 　tcp 　　nowait　　 root 　　/usr/sbin/tcpd 　　in.cfingerd</p>
+<p>#systat stream　 tcp　　 nowait 　　guest 　　/usr/sbin/tcpd /bin/ps -auwwx</p>
+<p>#netstat stream 　tcp　　 nowait 　　guest 　　/usr/sbin/tcpd /bin/netstat 　-f inet<br>#</p>
+<h1 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h1><p>#</p>
+<p>#auth　　　 stream 　tcp 　nowait　 nobody 　/usr/sbin/in.identd in.identd -l -e -o</p>
+<p>#linuxconf stream　　 tcp 　wait 　　root 　　/bin/linuxconf linuxconf -http</p>
+<p>　　大家看到的这个文件已经修改过的文件,除了telnet 和ftp服务,其他所有的服务都被禁止了.在修改了/etc/inetd.conf之后,使用命令kill -HUP (inetd的进程号),使inetd重新读取配置文件并重新启动即可.</p>
 <p>5. ip route的配置<br>　　利用linux,一台普通的微机也可以实现高性价比的路由器.首先让我们了解一下linux的查看路由信息的命令:<br>　　[root@ice /etc]# route -n<br>　　Kernel IP routing table<br>　　Destination　　　 Gateway　　　 Genmask 　　　　Flags Metric Ref　　 Use Iface<br>　　202.112.13.204　　0.0.0.0 　　　255.255.255.255 UH 　0　 0 　0 　　　　eth0<br>　　202.117.48.43 　　0.0.0.0　　　 255.255.255.255 UH　 0　 0　 0 　　　　eth1<br>　　202.112.13.192　 202.112.13.204 255.255.255.192 UG　 0 　0 　0 　　　　eth0<br>　　202.112.13.192 　0.0.0.0　　　　255.255.255.192 U 　0 　0 　0　　　　　 eth0<br>　　202.117.48.0　　 202.117.48.43　255.255.255.0 　UG 　0 　0　 0 　　　　eth1<br>　　202.117.48.0　　 0.0.0.0　　　　 255.255.255.0　 U 　0　 0　 0　　　　 eth1<br>　　127.0.0.0 　　　0.0.0.0 　　　　255.0.0.0　　　　 U 　0 　0 　0 　　　　lo<br>　　0.0.0.0 　　　　202.117.48.1　　 0.0.0.0 　　　　UG 　0 　0　 0 　　　　eth1<br>　　命令netstat -r n 得到输出结果和route -n是一样的.它们操作的都是linux 内核的路由表.<br>　　命令cat /proc/net/route的输出结果是以十六进制表示的路由表.<br>[root@ice /etc]# cat /proc/net/route<br>Iface　 Destination　　 Gateway 　Flags 　RefCnt 　Use　　 Metric Mask<br>eth0 　CC0D70CA　　　　 00000000 0005 　0 　　0 　　　0 　　　　FFFFFFF<br>eth1 　2B3075CA　　　　 00000000 0005 　0　　 0　　　 0 　　　　FFFFFFF<br>eth0　 C00D70CA 　　　　CC0D70CA 0003 　0　　 0 　　　0 　　　　C0FFFFF<br>eth0 　C00D70CA 　　　　00000000 0001　 0　　 0 　　　0 　　　　C0FFFFF<br>eth1　 003075CA　　　　 2B3075CA 0003　 0　 　0 　　　0 　　　　00FFFFF<br>eth1　　003075CA　　　　 00000000 0001 　0 　　0 　　　0 　　　　00FFFFF<br>lo 　　0000007F 　　　　　00000000 0001　 0　　 0 　　　0　　　 000000F<br>eth1　　 00000000 　　　　　013075CA 0003　 0　 0 　　　0　　　　 0000000<br>　　通过计算可以知道,下面的这个路由表(十六进制)和前面的路由表(十进制)是一致的.<br>　　我们还可以通过命令route add (del )来操作路由表,增加和删除路由信息.<br>除了上面的静态路由,linux还可以通过routed来实现rip协议的动态路由.我们只需要打开linux的路由转发功能,在/proc/sys/net/ipv4/ip_forward文件中增加一个字符1.</p>
 <p>三.网络的安全设置</p>
 <p>　　在这一部分,再次强调一定要修改/etc/inetd.conf,安全的策略是禁止所有不需要的服务.除此之外,还有以下几个文件和网络安全相关.</p>
 <p>　　(1)./etc/ftpusers ftp服务是一个不太安全的服务,所以/etc/ftpusers限定了不允许通过ftp访问linux主机的用户列表.当一个ftp请求传送到 ftpd,ftpd首先检查用户名,如果用户名在/etc/ftpusers中,则ftpd将不会允许该用户继续连接.范例文件如下:</p>
-<h1 id="/etc/ftpusers_-_users_not_allowed_to_login_via_ftp">/etc/ftpusers - users not allowed to login via ftp</h1><p>root<br>bin<br>daemon<br>adm<br>lp<br>sync<br>shutdown<br>halt<br>mail<br>news<br>uucp<br>operator<br>games<br>nobody<br>nadmin</p>
+<h1 id="etc-ftpusers-users-not-allowed-to-login-via-ftp"><a href="#etc-ftpusers-users-not-allowed-to-login-via-ftp" class="headerlink" title="/etc/ftpusers - users not allowed to login via ftp"></a>/etc/ftpusers - users not allowed to login via ftp</h1><p>root<br>bin<br>daemon<br>adm<br>lp<br>sync<br>shutdown<br>halt<br>mail<br>news<br>uucp<br>operator<br>games<br>nobody<br>nadmin</p>
 <p>　　(2)/etc/securetty 在linux系统中,总共有六个终端控制台,我们可以在/etc/securetty中设置哪个终端允许root登录,所有其他没有写入文件中的终端都不允许root登录.范例文件如下:</p>
-<h1 id="/etc/securetty_-_tty’s_on_which_root_is_allowed_to_login">/etc/securetty - tty’s on which root is allowed to login</h1><p>tty1<br>tty2<br>tty3<br>tty4</p>
+<h1 id="etc-securetty-tty’s-on-which-root-is-allowed-to-login"><a href="#etc-securetty-tty’s-on-which-root-is-allowed-to-login" class="headerlink" title="/etc/securetty - tty’s on which root is allowed to login"></a>/etc/securetty - tty’s on which root is allowed to login</h1><p>tty1<br>tty2<br>tty3<br>tty4</p>
 <p>(3)tcpd的控制登录文件/etc/hosts.allow和/etc/hosts.deny<br>　　在tcpd服务进程中,通过在/etc/hosts.allow和/etc/hosts.deny中的访问控制规则来控制外部对linux主机的访问.它们的格式都是<br>　　service-list : hosts-list [ : command]<br>　　服务进程的名称 : 主机列表 可选,当规则满足时的操作<br>　　在主机表中可以使用域名或ip地址,ALL表示匹配所有项,EXCEPT表示除了某些项, PARANOID表示当ip地址和域名不匹配时(域名伪装)匹配该项.<br>　　范例文件如下:</p>
 <p>#</p>
-<h1 id="hosts-allow_This_file_describes_the_names_of_the_hosts_which_are">hosts.allow This file describes the names of the hosts which are</h1><h1 id="allowed_to_use_the_local_INET_services,_as_decided">allowed to use the local INET services, as decided</h1><h1 id="by_the_‘/usr/sbin/tcpd’_server-">by the ‘/usr/sbin/tcpd’ server.</h1><p>#<br>ALL : 202.112.13.0/255.255.255.0<br>ftpd: 202.117.13.196<br>in.telnetd: 202.117.48.33<br>ALL : 127.0.0.1</p>
+<h1 id="hosts-allow-This-file-describes-the-names-of-the-hosts-which-are"><a href="#hosts-allow-This-file-describes-the-names-of-the-hosts-which-are" class="headerlink" title="hosts.allow This file describes the names of the hosts which are"></a>hosts.allow This file describes the names of the hosts which are</h1><h1 id="allowed-to-use-the-local-INET-services-as-decided"><a href="#allowed-to-use-the-local-INET-services-as-decided" class="headerlink" title="allowed to use the local INET services, as decided"></a>allowed to use the local INET services, as decided</h1><h1 id="by-the-‘-usr-sbin-tcpd’-server"><a href="#by-the-‘-usr-sbin-tcpd’-server" class="headerlink" title="by the ‘/usr/sbin/tcpd’ server."></a>by the ‘/usr/sbin/tcpd’ server.</h1><p>#<br>ALL : 202.112.13.0/255.255.255.0<br>ftpd: 202.117.13.196<br>in.telnetd: 202.117.48.33<br>ALL : 127.0.0.1</p>
 <p>　　在这个文件中,网段202.112.13.0/24可以访问linux系统中所有的网络服务,主机202.117.13.196只能访问ftpd服务,主机202.117.48.33只能访问telnetd服务.本机自身可以访问所有网络服务.<br>　　在/etc/hosts.deny文件中禁止所有其他情况:<br>　　#/etc/hosts.deny<br>　　ALL : DENY : spawn (/usr/bin/finger -lp @%h &#124; /bin/mail -s “Port Denial noted in %d-%h” root)</p>
 <p>　　在/etc/hosts.allow中,定义了在所有其他情况下,linux所应该执行的操作.spawn选项允许linux系统在匹配规则中执行指定的shell命令,在我们的例子中,linux系统在发现无授权的访问时,将会发送给超级用户一封主题是”Port Denial noted in %d-%h”的邮件,在这里,我们先要介绍一下allow和deny文件中的变量扩展.</p>
 <p>　　(4)/etc/issue和/etc/issue.net<br>　　在我们登录linux系统中的时候,我们常常可以看到我们linux系统的版本号等敏感信息.在如今的网络攻击行为中,许多黑客首先要收集目标系统的信息,版本号等就是十分重要的信息,所以在linux系统中一般要把这些信息隐藏起来./etc/issue和/etc/issue.net就是存放这些信息的文件.我们可以修改这些文件来隐藏版本信息.<br>另外,在每次linux重新启动的时候,都会在脚本/etc/rc.d/rc.local中再次覆盖上面那两个文件./etc/rc.d/rc.local文件的范例如下:</p>
-<h1 id="This_script_will_be_executed_after_all_the_other_init_scripts-">This script will be executed <em>after</em> all the other init scripts.</h1><h1 id="You_can_put_your_own_initialization_stuff_in_here_if_you_don’t">You can put your own initialization stuff in here if you don’t</h1><h1 id="want_to_do_the_full_Sys_V_style_init_stuff-">want to do the full Sys V style init stuff.</h1><p>if [ -f /etc/redhat-release ]; then<br>R=$(cat /etc/redhat-release)</p>
+<h1 id="This-script-will-be-executed-after-all-the-other-init-scripts"><a href="#This-script-will-be-executed-after-all-the-other-init-scripts" class="headerlink" title="This script will be executed after all the other init scripts."></a>This script will be executed <em>after</em> all the other init scripts.</h1><h1 id="You-can-put-your-own-initialization-stuff-in-here-if-you-don’t"><a href="#You-can-put-your-own-initialization-stuff-in-here-if-you-don’t" class="headerlink" title="You can put your own initialization stuff in here if you don’t"></a>You can put your own initialization stuff in here if you don’t</h1><h1 id="want-to-do-the-full-Sys-V-style-init-stuff"><a href="#want-to-do-the-full-Sys-V-style-init-stuff" class="headerlink" title="want to do the full Sys V style init stuff."></a>want to do the full Sys V style init stuff.</h1><p>if [ -f /etc/redhat-release ]; then<br>R=$(cat /etc/redhat-release)</p>
 <p>arch=$(uname -m)<br>a=”a”<br>case “_$arch” in<br>_a<em>) a=”an”;;<br>_i</em>) a=”an”;;<br>esac</p>
 <p>NUMPROC=<code>egrep -c &quot;^cpu[0-9]+&quot; /proc/stat</code><br>if [ “$NUMPROC” -gt “1” ]; then<br>SMP=”$NUMPROC-processor “<br>if [ “$NUMPROC” = “8” -o “$NUMPROC” = “11” ]; then<br>a=”an”<br>else<br>a=”a”<br>fi<br>fi</p>
-<h1 id="This_will_overwrite_/etc/issue_at_every_boot-_So,_make_any_changes_you">This will overwrite /etc/issue at every boot. So, make any changes you</h1><h1 id="want_to_make_to_/etc/issue_here_or_you_will_lose_them_when_you_reboot-">want to make to /etc/issue here or you will lose them when you reboot.</h1><h1 id="echo_“”_&gt;_/etc/issue">echo “” &gt; /etc/issue</h1><h1 id="echo_“$R”_&gt;&gt;_/etc/issue">echo “$R” &gt;&gt; /etc/issue</h1><h1 id="echo_“Kernel_$(uname_-r)_on_$a_$SMP$(uname_-m)”_&gt;&gt;_/etc/issue">echo “Kernel $(uname -r) on $a $SMP$(uname -m)” &gt;&gt; /etc/issue</h1><p>cp -f /etc/issue /etc/issue.net<br>echo &gt;&gt; /etc/issue</p>
+<h1 id="This-will-overwrite-etc-issue-at-every-boot-So-make-any-changes-you"><a href="#This-will-overwrite-etc-issue-at-every-boot-So-make-any-changes-you" class="headerlink" title="This will overwrite /etc/issue at every boot. So, make any changes you"></a>This will overwrite /etc/issue at every boot. So, make any changes you</h1><h1 id="want-to-make-to-etc-issue-here-or-you-will-lose-them-when-you-reboot"><a href="#want-to-make-to-etc-issue-here-or-you-will-lose-them-when-you-reboot" class="headerlink" title="want to make to /etc/issue here or you will lose them when you reboot."></a>want to make to /etc/issue here or you will lose them when you reboot.</h1><p>#echo “” &gt; /etc/issue</p>
+<p>#echo “$R” &gt;&gt; /etc/issue</p>
+<h1 id="echo-“Kernel-uname-r-on-a-SMP-uname-m-”-gt-gt-etc-issue"><a href="#echo-“Kernel-uname-r-on-a-SMP-uname-m-”-gt-gt-etc-issue" class="headerlink" title="echo “Kernel $(uname -r) on $a $SMP$(uname -m)” &gt;&gt; /etc/issue"></a>echo “Kernel $(uname -r) on $a $SMP$(uname -m)” &gt;&gt; /etc/issue</h1><p>cp -f /etc/issue /etc/issue.net<br>echo &gt;&gt; /etc/issue</p>
 <p>　　在文件中黑体的部分就是得到系统版本信息的地方.一定要将他们注释掉.</p>
 <p>　　(5)其他配置<br>　　在普通微机中,都可以通过ctl+alt+del三键的组合来重新启动linux.这样是十分不安全的,所以要在　　　　/etc/inittab文件中注释该功能:<br>　　# Trap CTRL-ALT-DELETE<br>　　#ca::ctrlaltdel:/sbin/shutdown -t3 -r now</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://latteye.me/2006/11/e8-bd-aclinux-e7-b3-bb-e7-bb-9f-e4-b8-ad-e7-bd-91-e7-bb-9c-e9-85-8d-e7-bd-ae-e8-af-a6-e8-a7-a3.html" data-id="ciotzts2b009j0zpibfi9b6kn" class="article-share-link" data-share="baidu" data-title="[转]Linux系统中网络配置详解">分享到</a>
-      
-
-      
-        <a href="http://latteye.me/2006/11/e8-bd-aclinux-e7-b3-bb-e7-bb-9f-e4-b8-ad-e7-bd-91-e7-bb-9c-e9-85-8d-e7-bd-ae-e8-af-a6-e8-a7-a3.html#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2006/11/vsftp-e8-af-a6-e7-bb-86-e8-ae-be-e7-bd-ae.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          VSFtp详细设置
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2006/11/e7-bb-b4-e7-93-a6-e5-b0-94-e7-ac-ac-vivaldi-e3-80-8a-e5-9b-9b-e5-ad-a3-e3-80-8bthe-four-seasons1970-e5-b9-b4argo-e9-87-91-e7-a2-9f-e7-89-88.html" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">维瓦尔第 Vivaldi -《四季》(The Four Seasons)1970年Argo金碟版</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-  <section id="comments">
-    <div id="ds-thread" class="ds-thread" data-thread-key="2006/11/e8-bd-aclinux-e7-b3-bb-e7-bb-9f-e4-b8-ad-e7-bd-91-e7-bb-9c-e9-85-8d-e7-bd-ae-e8-af-a6-e8-a7-a3.html" data-title="[转]Linux系统中网络配置详解" data-url="http://latteye.me/2006/11/e8-bd-aclinux-e7-b3-bb-e7-bb-9f-e4-b8-ad-e7-bd-91-e7-bb-9c-e9-85-8d-e7-bd-ae-e8-af-a6-e8-a7-a3.html"></div>
-  </section>
-</section>
-      
-      <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/Music/">Music</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile/">Mobile</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Music/">Music</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">292</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSRange/">NSRange</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSRegularExpression/">NSRegularExpression</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSTextCheckingResult/">NSTextCheckingResult</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regex/">Regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/">Unity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/as/">as</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/NSRange/" style="font-size: 10px;">NSRange</a> <a href="/tags/NSRegularExpression/" style="font-size: 10px;">NSRegularExpression</a> <a href="/tags/NSTextCheckingResult/" style="font-size: 10px;">NSTextCheckingResult</a> <a href="/tags/Regex/" style="font-size: 10px;">Regex</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/Unity/" style="font-size: 10px;">Unity</a> <a href="/tags/as/" style="font-size: 10px;">as</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">十月 2011</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">八月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">四月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">十一月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/03/">三月 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">十一月 2007</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/10/">十月 2007</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/09/">九月 2007</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/07/">七月 2007</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/06/">六月 2007</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/05/">五月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/04/">四月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/03/">三月 2007</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/02/">二月 2007</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/01/">一月 2007</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/12/">十二月 2006</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/11/">十一月 2006</a><span class="archive-list-count">74</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/10/">十月 2006</a><span class="archive-list-count">33</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">近期文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2016/05/Unity-Content-Size-Fitter.html">Unity Content Size Fitter</a>
-          </li>
-        
-          <li>
-            <a href="/2015/08/Swift-as-Operator.html">Swift 中 的 as! 操作符</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/Swift-Trouble-Shooting-Return-from-initializer-without-initializing-all-stored-properties.html">Swift 排错一则</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/swift-regex-basic.html">Swift 中的正则表达式基础</a>
-          </li>
-        
-          <li>
-            <a href="/2014/03/linux-syn-backlog-and-somaxconn.html">Linux SYN Backlog and somaxconn</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">友情链接</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="http://www.zhihu.com/people/yuan-hao-yang" target="_blank">知乎</a>
-          </li>
-        
-          <li>
-            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-      
-    </div>
-    <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 latteye<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-      .
-      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
-    </div>
-  </div>
-</footer>
-  </div>
-  <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-  <!-- totop start -->
-<div id="totop">
-<a title="返回顶部"><img src="/img/scrollup.png"/></a>
-</div>
-
-<!-- totop end -->
-
-<!-- 多说公共js代码 start -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"latteye"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0]
-     || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-  </script>
-<!-- 多说公共js代码 end -->
-
-
-<!-- 百度分享 start -->
-
-<div id="article-share-box" class="article-share-box">
-  <div id="bdshare" class="bdsharebuttonbox article-share-links">
-    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
-    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
-    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
-    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
-    <a class="article-share-more" data-cmd="more" title="更多"></a>
-  </div>
-</div>
-<script>
-  function SetShareData(cmd, config) {
-    if (shareDataTitle && shareDataUrl) {
-      config.bdText = shareDataTitle;
-      config.bdUrl = shareDataUrl;
-    }
-    return config;
-  }
-  window._bd_share_config={
-    "common":{onBeforeClick: SetShareData},
-    "share":{"bdCustomStyle":"/css/bdshare.css"}
-  };
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-
-<!-- 百度分享 end -->
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-</div>
-</body>
-</html>
+</div></article></div></main><footer><div class="paginator"><a href="/2006/11/vsftp-e8-af-a6-e7-bb-86-e8-ae-be-e7-bd-ae.html" class="prev">PREV</a><a href="/2006/11/e7-bb-b4-e7-93-a6-e5-b0-94-e7-ac-ac-vivaldi-e3-80-8a-e5-9b-9b-e5-ad-a3-e3-80-8bthe-four-seasons1970-e5-b9-b4argo-e9-87-91-e7-a2-9f-e7-89-88.html" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
