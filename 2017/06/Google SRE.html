@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 笔记 - Google SRE · Water is</title><meta name="description" content="笔记 - Google SRE - latteye"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">笔记 - Google SRE</h1><div class="post-info">2017年6月5日</div><div class="post-content"><p>Google SRE 读书笔记</p>
+<a id="more"></a>
+<h1 id="第一章-介绍"><a href="#第一章-介绍" class="headerlink" title="第一章 介绍"></a>第一章 介绍</h1><ul>
+<li>Dev/Ops 分离带来的问题<ul>
+<li>直接成本：系统复杂度增加，部署规模扩大，团队大小也要相应扩大</li>
+<li>间接成本：沟通难度大，信任、分歧、知识面不同、发布速度期望不同</li>
+</ul>
+</li>
+<li>解决方式 SRE:软件工程师来设计运维团队<ul>
+<li>将 50% 的精力用于开发</li>
+<li>SRE 需要承担的工作内容:<ul>
+<li>可用性改进</li>
+<li>延迟优化</li>
+<li>性能优化</li>
+<li>效率优化</li>
+<li>变更管理</li>
+<li>监控</li>
+<li>紧急事务管理</li>
+<li>容量规划与管理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SRE 方法论<ul>
+<li>8-12 小时 OnCall 期间最多处理两个事件</li>
+<li><strong>{SLO}(Service Level Objectives)</strong>:(<a href="https://en.wikipedia.org/wiki/Service_level_objective" target="_blank" rel="external">https://en.wikipedia.org/wiki/Service_level_objective</a>)</li>
+<li><strong>{SLA}(service level agreement)</strong></li>
+<li><a href="http://searchcio.techtarget.com/answer/Whats-the-difference-between-SLO-and-SLA" target="_blank" rel="external">What’s the difference between SLO vs. SLA?</a></li>
+<li><a href="http://www.yunweipai.com/archives/10703.html#!" target="_blank" rel="external">深度剖析什么是 SLI、SLO和SLA？</a></li>
+<li>保障SLO前提下最大化迭代速度<ul>
+<li>不可能 100%</li>
+<li>需要和产品一起讨论</li>
+</ul>
+</li>
+<li>监控系统<ul>
+<li>紧急警报</li>
+<li>工单</li>
+<li>日志</li>
+</ul>
+</li>
+<li>应急事件处理<ul>
+<li>可靠性 = MTTF（平均失败事件）和 MTTR(平均恢复事件)相关。MTTR 是评价的指标。</li>
+<li>任何需要人工处理的都会延长恢复事件</li>
+<li>通过事先预案并且将处理最佳方法记录在运维手册</li>
+</ul>
+</li>
+<li>变更管理：采用自动化<ul>
+<li>渐进式发布</li>
+<li>迅速而准确的检测到问题的发生</li>
+<li>当出现问题时候，安全迅速的回退改动</li>
+</ul>
+</li>
+<li>需求预测和容量规划<ul>
+<li>必须有一个准确的自然增长需求预测模型，需求预测的事件应该超过资源获取的时间</li>
+<li>规划中必须有准确的非自然增长的需求来源统计</li>
+<li>必须有周期性压力测试、以便准确的将系统原始资源与业务容量对应起来</li>
+</ul>
+</li>
+<li>资源部署<ul>
+<li>快速</li>
+<li>准确</li>
+<li>测试</li>
+</ul>
+</li>
+<li>效率与性能<ul>
+<li>？？<h1 id="第六章-分布式的监控系统"><a href="#第六章-分布式的监控系统" class="headerlink" title="第六章 分布式的监控系统"></a>第六章 分布式的监控系统</h1></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>术语<ul>
+<li>白盒监控:利用系统内部暴露出的接口监控</li>
+<li>黑盒监控：用户可见的外部接口</li>
+<li>Dashboard 监控台:提供各种过滤、选择、显示</li>
+<li>警报</li>
+<li>根源问题</li>
+<li>节点或者机器</li>
+<li>推送</li>
+</ul>
+</li>
+<li>为何要监控<ul>
+<li>分析长期趋势</li>
+<li>跨时间范围的比较、分类的比较</li>
+<li>报警</li>
+<li>显示服务指标(Dashboard)</li>
+<li>在线分析</li>
+</ul>
+</li>
+<li>现象与原因: 最好能持续整理问题的现象与原因，做成表格？</li>
+<li>黑盒与白盒</li>
+<li>4个黄金指标<ul>
+<li>延迟</li>
+<li>流量</li>
+<li>错误</li>
+<li>饱和度：网络、IO、CPU 等等是否满，是否够用</li>
+</ul>
+</li>
+<li>长尾问题：很多时候用平均数据是不可靠，无意义的，需要对数据进行分组。</li>
+<li><p>度量指标精度：不同的SLO，不同的资源类型，要采用合适的精度。对于 99.9% 的 SLO 采用 1分钟或者2分钟的精度是没有必要的。</p>
+<blockquote>
+<p>365 x 24 x 60 = 525600 分钟 ， 0.1% 的故障时间 = 525 分钟 = 8.76 小时</p>
+</blockquote>
+</li>
+<li><p>简化</p>
+<ul>
+<li>最能反映真实故障的规则越简化越好</li>
+<li>不常用的数据、汇总、报警应该定时删除</li>
+<li>收集的信息，但是没有暴露给任何报警、Dashboard 应该删除</li>
+</ul>
+</li>
+<li>整合上述理念<ul>
+<li>该规则是否能检测到一个目前检测不到的、紧急的、有操作性的，并且即将发生或者已经发生的故障</li>
+<li>是否可以忽略这个警报</li>
+<li>报警了是否就是用户受到影响</li>
+<li>收到报警后是否需要某个操作，操作可否自动化</li>
+<li>是否有其他人收到这个警报，是否是不必要的</li>
+</ul>
+</li>
+</ul>
+<h1 id="第十章-基于时间序列数据进行有效报警"><a href="#第十章-基于时间序列数据进行有效报警" class="headerlink" title="第十章 基于时间序列数据进行有效报警"></a>第十章 基于时间序列数据进行有效报警</h1><ul>
+<li>一个大型系统不应该要求运维人员持续关注其中使用的无数个小组件，而是应该自动汇总所有的信息，自动抛弃其中的异常情况。监控系统应该主要从高级服务质量目标层面进行监控，但是也应该保持足够的颗粒度，可以追踪到某个具体组件。<ul>
+<li>标准数据分析模型</li>
+<li>为监控制定标准格式</li>
+<li>KV 格式 和 MAP 格式</li>
+</ul>
+</li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/05/kubernetes-x509-auth.html" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>

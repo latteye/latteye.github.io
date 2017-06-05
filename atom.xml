@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://latteye.me/"/>
-  <updated>2017-05-02T13:57:16.784Z</updated>
+  <updated>2017-06-05T13:33:06.000Z</updated>
   <id>http://latteye.me/</id>
   
   <author>
@@ -16,11 +16,158 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>笔记 - Google SRE</title>
+    <link href="http://latteye.me/2017/06/Google%20SRE.html"/>
+    <id>http://latteye.me/2017/06/Google SRE.html</id>
+    <published>2017-06-05T13:10:00.000Z</published>
+    <updated>2017-06-05T13:33:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Google SRE 读书笔记</p>
+<a id="more"></a>
+<h1 id="第一章-介绍"><a href="#第一章-介绍" class="headerlink" title="第一章 介绍"></a>第一章 介绍</h1><ul>
+<li>Dev/Ops 分离带来的问题<ul>
+<li>直接成本：系统复杂度增加，部署规模扩大，团队大小也要相应扩大</li>
+<li>间接成本：沟通难度大，信任、分歧、知识面不同、发布速度期望不同</li>
+</ul>
+</li>
+<li>解决方式 SRE:软件工程师来设计运维团队<ul>
+<li>将 50% 的精力用于开发</li>
+<li>SRE 需要承担的工作内容:<ul>
+<li>可用性改进</li>
+<li>延迟优化</li>
+<li>性能优化</li>
+<li>效率优化</li>
+<li>变更管理</li>
+<li>监控</li>
+<li>紧急事务管理</li>
+<li>容量规划与管理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SRE 方法论<ul>
+<li>8-12 小时 OnCall 期间最多处理两个事件</li>
+<li><strong>{SLO}(Service Level Objectives)</strong>:(<a href="https://en.wikipedia.org/wiki/Service_level_objective" target="_blank" rel="external">https://en.wikipedia.org/wiki/Service_level_objective</a>)</li>
+<li><strong>{SLA}(service level agreement)</strong></li>
+<li><a href="http://searchcio.techtarget.com/answer/Whats-the-difference-between-SLO-and-SLA" target="_blank" rel="external">What’s the difference between SLO vs. SLA?</a></li>
+<li><a href="http://www.yunweipai.com/archives/10703.html#!" target="_blank" rel="external">深度剖析什么是 SLI、SLO和SLA？</a></li>
+<li>保障SLO前提下最大化迭代速度<ul>
+<li>不可能 100%</li>
+<li>需要和产品一起讨论</li>
+</ul>
+</li>
+<li>监控系统<ul>
+<li>紧急警报</li>
+<li>工单</li>
+<li>日志</li>
+</ul>
+</li>
+<li>应急事件处理<ul>
+<li>可靠性 = MTTF（平均失败事件）和 MTTR(平均恢复事件)相关。MTTR 是评价的指标。</li>
+<li>任何需要人工处理的都会延长恢复事件</li>
+<li>通过事先预案并且将处理最佳方法记录在运维手册</li>
+</ul>
+</li>
+<li>变更管理：采用自动化<ul>
+<li>渐进式发布</li>
+<li>迅速而准确的检测到问题的发生</li>
+<li>当出现问题时候，安全迅速的回退改动</li>
+</ul>
+</li>
+<li>需求预测和容量规划<ul>
+<li>必须有一个准确的自然增长需求预测模型，需求预测的事件应该超过资源获取的时间</li>
+<li>规划中必须有准确的非自然增长的需求来源统计</li>
+<li>必须有周期性压力测试、以便准确的将系统原始资源与业务容量对应起来</li>
+</ul>
+</li>
+<li>资源部署<ul>
+<li>快速</li>
+<li>准确</li>
+<li>测试</li>
+</ul>
+</li>
+<li>效率与性能<ul>
+<li>？？<h1 id="第六章-分布式的监控系统"><a href="#第六章-分布式的监控系统" class="headerlink" title="第六章 分布式的监控系统"></a>第六章 分布式的监控系统</h1></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>术语<ul>
+<li>白盒监控:利用系统内部暴露出的接口监控</li>
+<li>黑盒监控：用户可见的外部接口</li>
+<li>Dashboard 监控台:提供各种过滤、选择、显示</li>
+<li>警报</li>
+<li>根源问题</li>
+<li>节点或者机器</li>
+<li>推送</li>
+</ul>
+</li>
+<li>为何要监控<ul>
+<li>分析长期趋势</li>
+<li>跨时间范围的比较、分类的比较</li>
+<li>报警</li>
+<li>显示服务指标(Dashboard)</li>
+<li>在线分析</li>
+</ul>
+</li>
+<li>现象与原因: 最好能持续整理问题的现象与原因，做成表格？</li>
+<li>黑盒与白盒</li>
+<li>4个黄金指标<ul>
+<li>延迟</li>
+<li>流量</li>
+<li>错误</li>
+<li>饱和度：网络、IO、CPU 等等是否满，是否够用</li>
+</ul>
+</li>
+<li>长尾问题：很多时候用平均数据是不可靠，无意义的，需要对数据进行分组。</li>
+<li><p>度量指标精度：不同的SLO，不同的资源类型，要采用合适的精度。对于 99.9% 的 SLO 采用 1分钟或者2分钟的精度是没有必要的。</p>
+<blockquote>
+<p>365 x 24 x 60 = 525600 分钟 ， 0.1% 的故障时间 = 525 分钟 = 8.76 小时</p>
+</blockquote>
+</li>
+<li><p>简化</p>
+<ul>
+<li>最能反映真实故障的规则越简化越好</li>
+<li>不常用的数据、汇总、报警应该定时删除</li>
+<li>收集的信息，但是没有暴露给任何报警、Dashboard 应该删除</li>
+</ul>
+</li>
+<li>整合上述理念<ul>
+<li>该规则是否能检测到一个目前检测不到的、紧急的、有操作性的，并且即将发生或者已经发生的故障</li>
+<li>是否可以忽略这个警报</li>
+<li>报警了是否就是用户受到影响</li>
+<li>收到报警后是否需要某个操作，操作可否自动化</li>
+<li>是否有其他人收到这个警报，是否是不必要的</li>
+</ul>
+</li>
+</ul>
+<h1 id="第十章-基于时间序列数据进行有效报警"><a href="#第十章-基于时间序列数据进行有效报警" class="headerlink" title="第十章 基于时间序列数据进行有效报警"></a>第十章 基于时间序列数据进行有效报警</h1><ul>
+<li>一个大型系统不应该要求运维人员持续关注其中使用的无数个小组件，而是应该自动汇总所有的信息，自动抛弃其中的异常情况。监控系统应该主要从高级服务质量目标层面进行监控，但是也应该保持足够的颗粒度，可以追踪到某个具体组件。<ul>
+<li>标准数据分析模型</li>
+<li>为监控制定标准格式</li>
+<li>KV 格式 和 MAP 格式</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Google SRE 读书笔记&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="知识图谱, google, sre, slo, sla" scheme="http://latteye.me/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-google-sre-slo-sla/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Kubernetes 基于 X509 证书的验证环境</title>
     <link href="http://latteye.me/2017/05/kubernetes-x509-auth.html"/>
     <id>http://latteye.me/2017/05/kubernetes-x509-auth.html</id>
     <published>2017-05-02T13:03:00.000Z</published>
-    <updated>2017-05-02T13:57:16.784Z</updated>
+    <updated>2017-05-02T13:57:16.000Z</updated>
     
     <content type="html"><![CDATA[<p>Kubernetes 有多种验证方式。其中，基于x509证书的验证方式，无疑是安全性最高的。本文记录了生成 ca 以及 apiserver , kubelet, kube-proxy , kubectl 所需证书的过程，以及可能遇到的问题。</p>
 <a id="more"></a>
@@ -72,7 +219,7 @@
     <link href="http://latteye.me/2016/05/Unity-Content-Size-Fitter.html"/>
     <id>http://latteye.me/2016/05/Unity-Content-Size-Fitter.html</id>
     <published>2016-05-20T00:03:22.000Z</published>
-    <updated>2016-05-20T08:21:35.565Z</updated>
+    <updated>2016-05-20T08:21:35.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><p>Content Size Fitter 的作用是调整该层布局本身的尺寸。而尺寸是由该 Game Object 上的布局组件的最小值或者最合适的值来调整。</p>
 <p>请记住，当一个 Rect Transform 改变了大小，无论是通过 Content Size Fitter 还是别的控件，大小的改变都是基于中心点的。这意味着可以通过中心点来发出改变大小的指令。</p>
@@ -137,7 +284,7 @@
     <link href="http://latteye.me/2015/08/Swift-as-Operator.html"/>
     <id>http://latteye.me/2015/08/Swift-as-Operator.html</id>
     <published>2015-08-03T15:17:01.000Z</published>
-    <updated>2015-08-03T15:43:40.792Z</updated>
+    <updated>2015-08-03T15:43:40.000Z</updated>
     
     <content type="html"><![CDATA[<p>在 Swift 1.2 版本之前，<code>as</code> 操作符被用在两种不同的类型转换场合，取决于不同的转换源与目标，他会有不同的行为。</p>
 <ul>
@@ -172,7 +319,7 @@
     <link href="http://latteye.me/2015/05/Swift-Trouble-Shooting-Return-from-initializer-without-initializing-all-stored-properties.html"/>
     <id>http://latteye.me/2015/05/Swift-Trouble-Shooting-Return-from-initializer-without-initializing-all-stored-properties.html</id>
     <published>2015-05-27T15:30:19.000Z</published>
-    <updated>2015-05-27T15:52:08.468Z</updated>
+    <updated>2015-05-27T15:52:08.000Z</updated>
     
     <content type="html"><![CDATA[<p>先贴一段简单的代码：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Cocoa;</div><div class="line"><span class="keyword">import</span> SQLite;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DB</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> appDirPath:<span class="type">String</span> = <span class="type">NSHomeDirectory</span>() + <span class="string">"/Library/Application Support/ABC"</span></div><div class="line">    <span class="keyword">var</span> dbFilePath:<span class="type">String</span> = <span class="type">NSHomeDirectory</span>() + <span class="string">"/Library/Application Support/ABC/db.sqlite"</span></div><div class="line">    <span class="keyword">var</span> db:<span class="type">Database</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">initDB</span> <span class="params">()</span></span> -&gt; <span class="type">Database</span> &#123;</div><div class="line">        <span class="keyword">let</span> new_site = <span class="keyword">self</span>.db[<span class="string">"new_site"</span>]</div><div class="line">        <span class="keyword">let</span> id = <span class="type">Expression</span>&lt;<span class="type">Int64</span>&gt;(<span class="string">"id"</span>)</div><div class="line">        <span class="keyword">let</span> name = <span class="type">Expression</span>&lt;<span class="type">String</span>?&gt;(<span class="string">"name"</span>)</div><div class="line">        </div><div class="line">        db.create(table: new_site) &#123; t <span class="keyword">in</span></div><div class="line">            t.column(id, primaryKey: <span class="literal">true</span>)</div><div class="line">            t.column(name)</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> db</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">init</span> () &#123;</div><div class="line">        <span class="keyword">var</span> fm = <span class="type">NSFileManager</span>.defaultManager()</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (!fm.fileExistsAtPath(appDirPath)) &#123;</div><div class="line">            fm.createDirectoryAtPath(appDirPath, withIntermediateDirectories: <span class="literal">false</span>, attributes: <span class="literal">nil</span>, error: <span class="literal">nil</span>)</div><div class="line">        &#125; <span class="comment">// Need to check if the DIR is a file, need to remove the file recreate the DIR</span></div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (!fm.fileExistsAtPath(<span class="keyword">self</span>.dbFilePath)) &#123;</div><div class="line">            <span class="keyword">self</span>.db = <span class="type">Database</span>(<span class="type">NSHomeDirectory</span>() + <span class="string">"/Library/Application Support/ABC/db.sqlite"</span>)</div><div class="line">            <span class="keyword">self</span>.db = <span class="keyword">self</span>.initDB()</div><div class="line">        &#125; </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">printPath</span> <span class="params">()</span></span> &#123;</div><div class="line">        <span class="built_in">println</span>(<span class="keyword">self</span>.dbFilePath)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -205,7 +352,7 @@
     <link href="http://latteye.me/2015/05/swift-regex-basic.html"/>
     <id>http://latteye.me/2015/05/swift-regex-basic.html</id>
     <published>2015-05-19T14:11:48.000Z</published>
-    <updated>2015-05-19T15:27:06.261Z</updated>
+    <updated>2015-05-19T15:27:06.000Z</updated>
     
     <content type="html"><![CDATA[<p>在 Swift 中并没有对正则的专门支持。而且明显在使用上不如 Perl、Python 来的方便。<br>目前在 Swift 中使用正则只能通过 NSRegularExpression 类来实现，而该类目前也只有 Objective-C 的实现，所以调用起来也有点小小的麻烦。<br>在使用 NSRegularExpression 之前先要熟悉一下 NSRange 和 NSTextCheckingResult 类。<br><a id="more"></a></p>
 <h1 id="NSRange"><a href="#NSRange" class="headerlink" title="NSRange"></a>NSRange</h1><p>NSRange 是一个结构<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">NSRange</span> &#123;</span></div><div class="line">      NSUInteger location;</div><div class="line">      NSUInteger length;</div><div class="line">&#125; NSRange;</div></pre></td></tr></table></figure></p>
@@ -260,7 +407,7 @@
     <link href="http://latteye.me/2014/03/linux-syn-backlog-and-somaxconn.html"/>
     <id>http://latteye.me/2014/03/linux-syn-backlog-and-somaxconn.html</id>
     <published>2014-03-12T09:26:15.000Z</published>
-    <updated>2015-05-02T17:30:54.545Z</updated>
+    <updated>2015-05-02T17:30:54.000Z</updated>
     
     <content type="html"><![CDATA[<p>SYN 包攻击是网络上比较老的一种攻击方式。在 Linux 中，可以通过开启 <code>net.ipv4.tcp_syncookies = 1</code> 来抵抗这种攻击。那么，在开启 syncookies 之后，Linux 系统做了些什么？如何做的？这是本文试图整理的内容。</p>
 <a id="more"></a>
@@ -319,7 +466,7 @@ net.ipv4.tcp_syn_retries = 2 # SYN 重试次数</code></p>
     <link href="http://latteye.me/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html"/>
     <id>http://latteye.me/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html</id>
     <published>2013-06-30T09:31:43.000Z</published>
-    <updated>2015-05-02T13:11:34.409Z</updated>
+    <updated>2015-05-02T13:11:34.000Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://pic.yupoo.com/latteye/CYvzgjFL/W8VBN.jpg" target="_blank" rel="external"><img src="http://pic.yupoo.com/latteye/CYvzgjFL/medish.jpg" alt="DSC00379"></a><br><a id="more"></a><br><a href="http://pic.yupoo.com/latteye/CYvzdiR0/135qJ8.jpg" target="_blank" rel="external"><img src="http://pic.yupoo.com/latteye/CYvzdiR0/medish.jpg" alt="DSC00384"></a></p>
 <p><a href="http://pic.yupoo.com/latteye/CYvBl67m/mzZgX.jpg" target="_blank" rel="external"><img src="http://pic.yupoo.com/latteye/CYvBl67m/medish.jpg" alt="DSC00385"></a></p>
@@ -352,7 +499,7 @@ net.ipv4.tcp_syn_retries = 2 # SYN 重试次数</code></p>
     <link href="http://latteye.me/2012/10/%E8%87%AA%E5%8A%A8%E4%B8%8B%E8%BD%BD%20shooter.cn%20%E5%AD%97%E5%B9%95%E8%84%9A%E6%9C%AC.html"/>
     <id>http://latteye.me/2012/10/自动下载 shooter.cn 字幕脚本.html</id>
     <published>2012-10-06T10:30:00.000Z</published>
-    <updated>2015-05-02T14:14:25.402Z</updated>
+    <updated>2015-05-02T14:14:25.000Z</updated>
     
     <content type="html"><![CDATA[<p>此脚本原作者是 HTPC 原动力论坛的 rabbitgg，<a href="http://bbs.htpc1.com/viewthread.php?tid=75393" target="_blank" rel="external">原帖地址</a>。<br>如果你有兴趣，可以看看作者在原帖的算法描述。<br>可能长期以来没有人有这种需求，而我只是需要一个能根据电影文件下载字幕的命令行工具。所以把部分代码从源文件剥离了出来。</p>
 <p>在我的 HomeServer 上，通过 flexget 订阅 RSS 自动下载 torrent（主要是不同的 TVShow），rtorrent 一直监控目录，自动开始下载。当下载结束，rtorrent 调用一个整理脚本，将 TVShow 与 Movie 分开，自动创建 TVShow 名称目录，自动创建 Movie 分类目录（我是按照首字母分类的）。<br>于是最后一步就是自动下载电影、连续剧字幕了。这个脚本直接跟连续剧文件路径即可，下载的字幕也会和电影文件在同一目录下。</p>
@@ -379,7 +526,7 @@ net.ipv4.tcp_syn_retries = 2 # SYN 重试次数</code></p>
     <link href="http://latteye.me/2012/09/one-week-mobile-analytics-3.html"/>
     <id>http://latteye.me/2012/09/one-week-mobile-analytics-3.html</id>
     <published>2012-09-25T06:43:25.000Z</published>
-    <updated>2015-05-02T13:11:34.429Z</updated>
+    <updated>2015-05-02T13:11:34.000Z</updated>
     
     <content type="html"><![CDATA[<font size="5"><strong>一、Apple</strong></font>
 
@@ -436,7 +583,7 @@ net.ipv4.tcp_syn_retries = 2 # SYN 重试次数</code></p>
     <link href="http://latteye.me/2012/09/one-week-mobile-analytics-2-post-apple-era.html"/>
     <id>http://latteye.me/2012/09/one-week-mobile-analytics-2-post-apple-era.html</id>
     <published>2012-09-17T09:18:46.000Z</published>
-    <updated>2015-05-02T13:11:34.425Z</updated>
+    <updated>2015-05-02T13:11:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>本月12日 Apple 发布了最新的 iPhone 5，本周移动产品分析作为 Apple iPhone 5 的专篇，详细的从硬件、市场等角度分析。希望得出合理的未来数月的市场预测、股票预测。我希望自己所写内容尽可能技术流一些，所以可能会有点枯燥。</p>
 <p>介于乔布斯教主的逝世，我将这之后的产品称之为后苹果时代产品。<br><a id="more"></a></p>
@@ -471,7 +618,7 @@ net.ipv4.tcp_syn_retries = 2 # SYN 重试次数</code></p>
     <link href="http://latteye.me/2012/09/one-week-mobile-analytics-1.html"/>
     <id>http://latteye.me/2012/09/one-week-mobile-analytics-1.html</id>
     <published>2012-09-09T15:01:27.000Z</published>
-    <updated>2015-05-02T13:11:34.425Z</updated>
+    <updated>2015-05-02T13:11:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>从今天开始给自己的博客新开一个分类 “Mobile”，这个分类用来分析这两年火热的移动产品。一方面让自己不要太落伍，一方面尝试通过分析市场同时学习一些金融知识。这个分类坚持一周至少一更新的频率。如果你喜欢，希望各位多多留言。</p>
 <p>本周重要的移动产品如下：</p>
@@ -547,7 +694,7 @@ net.ipv4.tcp_syn_retries = 2 # SYN 重试次数</code></p>
     <link href="http://latteye.me/2012/09/zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat.html"/>
     <id>http://latteye.me/2012/09/zabbix-e4-bd-bf-e7-94-a8-jmx-e6-96-b9-e5-bc-8f-e7-9b-91-e6-8e-a7-tomcat.html</id>
     <published>2012-09-06T07:01:44.000Z</published>
-    <updated>2015-05-02T19:22:16.291Z</updated>
+    <updated>2015-05-02T19:22:16.000Z</updated>
     
     <content type="html"><![CDATA[<p>Zabbix 2.0 已经将 JMX 监控加入了系统中，本身不再依赖第三方工具。这是得对 Tomcat 应用以及其他 Java 应用的监控更加简单。本文简单的介绍 Zabbix 使用 JMX 方式监控 Tomcat 的过程。</p>
 <p><font color="white"><a href="http://latteye.com/2012/09/zabbix-%E4%BD%BF%E7%94%A8-jmx-%E6%96%B9%E5%BC%8F%E7%9B%91%E6%8E%A7-tomcat.html" target="_blank" rel="external">http://latteye.com/2012/09/zabbix-%E4%BD%BF%E7%94%A8-jmx-%E6%96%B9%E5%BC%8F%E7%9B%91%E6%8E%A7-tomcat.html</a> 本文源地址 转贴请保留原帖地址</font></p>
@@ -648,7 +795,7 @@ used: 22648408</code></p>
     <link href="http://latteye.me/2012/09/zabbix-apache-e7-9b-91-e6-8e-a7-e6-a8-a1-e7-89-88.html"/>
     <id>http://latteye.me/2012/09/zabbix-apache-e7-9b-91-e6-8e-a7-e6-a8-a1-e7-89-88.html</id>
     <published>2012-09-04T09:18:31.000Z</published>
-    <updated>2015-05-02T20:17:34.617Z</updated>
+    <updated>2015-05-02T20:17:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近在调试 zabbix，去 wiki 转了一圈，在 <a href="http://www.zabbix.com/wiki/templates/apache" target="_blank" rel="external">Apache Monitoring Script</a> 看到几个实现方式，我选择了方式二。就像作者说的，这种方式只需要部署在一点即可，不用每一个 agent 都有脚本。</p>
 <p>跑了一下发现脚本已经无法运行，遂做了一点 debug，适当的修改了脚本和模版，在这里贴一下。我的环境是 CentOS 6 ，Python 2.6.6，zabbix 2.0. Apache 的状态页面路径为 /server-status 。将脚本放到 server 或者 proxy 的 external scripts 目录后，对应机器添加模版即可。这个脚本还有可以优化的地方是，端口应该作为一个变量来处理。<br><a id="more"></a></p>
@@ -673,7 +820,7 @@ used: 22648408</code></p>
     <link href="http://latteye.me/2012/08/2012-ifa-1.html"/>
     <id>http://latteye.me/2012/08/2012-ifa-1.html</id>
     <published>2012-08-30T15:08:53.000Z</published>
-    <updated>2015-05-02T13:11:34.402Z</updated>
+    <updated>2015-05-02T13:11:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>IFA 即德国柏林电子消费品展 第一天已经过去了，最受我个人期待的 三星 Galaxy Note 2 也已经发布。但展会并不只有 Note 2 引人注目，众多的电子产品都可能洗牌未来的市场。为了对市场总结，以及自娱自乐，我来写几篇：</p>
 <p><strong><font size="5">平板</font></strong></p>
@@ -712,7 +859,7 @@ used: 22648408</code></p>
     <link href="http://latteye.me/2012/08/pc-low-fi-e4-b9-8b-e8-b7-af-4.html"/>
     <id>http://latteye.me/2012/08/pc-low-fi-e4-b9-8b-e8-b7-af-4.html</id>
     <published>2012-08-30T08:24:59.000Z</published>
-    <updated>2015-05-02T13:11:34.429Z</updated>
+    <updated>2015-05-02T13:11:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>距离上一篇 PC Low-Fi 之路已经过去了半年的时间，半年里面发生了很多事情，家里有一套好一点的音箱器材着实让生活质量高了很多。最近又开始零零散散的看上了一些淘宝上的小东西，简单介绍一下：</p>
 <p><strong>一、CM6631</strong><br>我的 HomeServer 没有同轴或者光纤的输出口，所以 USB 输出成了唯一的可能。看到这款 <a href="http://item.taobao.com/item.htm?spm=a1z09.5.0.40&amp;id=15255630028" target="_blank" rel="external">CM6631</a> 转换器，感觉价格不贵就买了下来。初衷是希望解决 24bit 192kHZ 音频的播放问题。<br><img src="http://i.ebayimg.com/t/24-192-24-96-CM6631-USB-COAX-OPT-SPDIF-convertor-DAC-PCM270X-killer-/00/s/MTIwMFgxNjAw/$%28KGrHqZ,!rIE-pYlnQB6BP-oMMK8n!~~60_57.JPG" alt=""><br>这个小东西在 ebay 上居然被卖到了 50 美金左右，不得不感慨深圳那边小电子产品生产能力的强大。<br><a id="more"></a></p>
@@ -759,7 +906,7 @@ used: 22648408</code></p>
     <link href="http://latteye.me/2012/08/linux-mpd-e6-92-ad-e6-94-be-e9-9f-b3-e4-b9-90-e9-80-9f-e5-ba-a6-e5-bf-ab-e9-97-ae-e9-a2-98-e4-b8-80-e5-88-99.html"/>
     <id>http://latteye.me/2012/08/linux-mpd-e6-92-ad-e6-94-be-e9-9f-b3-e4-b9-90-e9-80-9f-e5-ba-a6-e5-bf-ab-e9-97-ae-e9-a2-98-e4-b8-80-e5-88-99.html</id>
     <published>2012-08-13T02:42:01.000Z</published>
-    <updated>2015-05-02T13:11:34.422Z</updated>
+    <updated>2015-05-02T13:11:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>上周买了一个 CM6631 放在 DAC 前面，用来解决 USB 转出 24bit 192KHz 音频的问题。同时购买了 Micro USB OTG 线，发现接在手机（Samsung Galaxy S III）上播放音乐的时候声音变快了，出来的效果很有喜感！<br>前两天 ArchLinux 崩溃，换上了 Debian，在更新为 testing 后，aplay -l 命令可以识别声卡设备。但是 mpd 播放出来的效果和手机一样稍稍变快非常幽默。</p>
 <p>折腾了一番找到了问题，原来 CM6631 默认以 48000 频率来接受PCM数据，而 MPD 的默认配置以 44100 来输出，自然 CM6631 1秒钟拿到的数据是实际超过一秒钟的。于是听起来就觉得播放速度变快了。</p>
@@ -789,7 +936,7 @@ used: 22648408</code></p>
     <link href="http://latteye.me/2012/08/arch-linux-e4-bd-a0-e5-92-8b-e5-9c-b0-e4-ba-86-ef-bc-9f.html"/>
     <id>http://latteye.me/2012/08/arch-linux-e4-bd-a0-e5-92-8b-e5-9c-b0-e4-ba-86-ef-bc-9f.html</id>
     <published>2012-08-10T04:32:46.000Z</published>
-    <updated>2015-05-02T13:11:34.405Z</updated>
+    <updated>2015-05-02T13:11:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>昨天晚上接在 HomeServer 上的 USB 音频解码器不出声音了，开始找问题。接着习惯性的 <code>pacman -Syu</code> 一下，提示 “已经存在 /lib 目录，无法继续”。瞄了一眼觉得可能是维护人员弄了低级的 bug，任何系统都有 /lib 目录啊，遂 <code>pacman -Su --force</code> ，谁知道紧接着就是 glibc 安装错误，然后所有的系统命令都提示不存在了。这时候连 reboot 命令都没有了…</p>
 <p>到 <a href="http://www.linuxsir.org/bbs/forum96.html" target="_blank" rel="external">linuxsir 的 Arch 板块</a>看了两页，报错的帖子占了很多，其中的一类就是将 /lib 转移到 /usr/lib, 或者是 /lib 和 /lib64 合并。真不知道 Arch 这是怎么了，虽然以前 Arch 也出过问题，但是也没将系统弄崩溃过。也没深看下去，不知道官方想合并 lib 目录的用意何在。但无论如何，这绝对是一个危险的动作。我相信大多数发行版本都会将这个动作作为 dist upgrade 来处理。但是 Arch 没有这个概念… 于是铤而走险？</p>
@@ -814,7 +961,7 @@ used: 22648408</code></p>
     <link href="http://latteye.me/2011/12/e5-9c-a8-mac-os-e3-80-81linux-e4-b8-8b-e4-bd-bf-e7-94-a8-keepassx-e8-87-aa-e5-8a-a8-e5-a1-ab-e5-86-99-e8-a1-a8-e5-8d-95.html"/>
     <id>http://latteye.me/2011/12/e5-9c-a8-mac-os-e3-80-81linux-e4-b8-8b-e4-bd-bf-e7-94-a8-keepassx-e8-87-aa-e5-8a-a8-e5-a1-ab-e5-86-99-e8-a1-a8-e5-8d-95.html</id>
     <published>2011-12-26T14:17:00.000Z</published>
-    <updated>2015-05-02T13:11:34.412Z</updated>
+    <updated>2015-05-02T13:11:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近几天众多网站数据库都被爆出，现在这里鄙视一下这些网站的技术负责人！你们是猪啊，密码做单向加密是常识中的常识！多调用一个函数会死啊！<br>现在我已经不相信国内绝大多数的网站，尽管已经修改过一批密码，但还是不放心。最安全的方式则是使用无规则密码，且各个网站都不同。但是这样无疑在使用上麻烦了许多。<br>以前我用 KeePass 或者 KeePassX 的时候都是复制粘贴密码，而大多数浏览网页的时候也不需要使用 KeePass，通过网站类型的不同，自己设定几个不同等级的密码即可–这个方式现在看来已经不够安全了。<br>Google 个2个小时，发现了 KeePassX 在 MacOS 下自动填写表单功能，记录流水帐一片。<a id="more"></a></p>
 <font size="3"><strong>配置方式</strong></font>
@@ -864,7 +1011,7 @@ used: 22648408</code></p>
     <link href="http://latteye.me/2011/12/amazon-ec2-disk-performence.html"/>
     <id>http://latteye.me/2011/12/amazon-ec2-disk-performence.html</id>
     <published>2011-12-14T05:22:31.000Z</published>
-    <updated>2015-05-02T14:36:21.978Z</updated>
+    <updated>2015-05-02T14:36:21.000Z</updated>
     
     <content type="html"><![CDATA[<p>本文的目的是为了测试 Amazon EC2 的磁盘性能，从而为数据库搭建做性能估算。使用的测试工具为 <a href="http://sysbench.sourceforge.net/" target="_blank" rel="external">sysbench</a> ，这款软件已经很久没更新了。所以全当得出数据为“比较值”。<br>Amazon 的 Elastic Storage 为 EC2 Instance 提供了软 Raid 的可能性，但是，其 Raid 除了具有数据保障性外，是否有性能提升？提升多少？这是这次实验的目的。<br><a id="more"></a></p>
 <p>参考别处资料写了一个 sysbench 测试脚本：</p>
@@ -933,58 +1080,6 @@ REWR=Read&Write
     </summary>
     
       <category term="Work" scheme="http://latteye.me/categories/Work/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Linux 上搭建 Mac TimeMachine Server</title>
-    <link href="http://latteye.me/2011/12/mac-timemachine-server-base-on-arch-linux.html"/>
-    <id>http://latteye.me/2011/12/mac-timemachine-server-base-on-arch-linux.html</id>
-    <published>2011-12-09T07:58:36.000Z</published>
-    <updated>2015-05-02T13:11:34.425Z</updated>
-    
-    <content type="html"><![CDATA[<p>在接触 Mac TimeMachine 之前已经用过了 Windows Home Server。HomeServer 的备份效果几乎和 TimeMachine 是一样的。不过你可以更加灵活的定制自己想要备份的频率。虽然 Mac 备份的频率不可调节，但也足够了：<a id="more"></a></p>
-<p><img src="http://pic.yupoo.com/latteye/BzWQV20V/medish.jpg" alt="TimeMachine"></p>
-<p>也就是说你会有 24+29(+1)+N月*4 份快照。如果 TimeMachine 的备份原理和 HomeServer 是一样的话，完全不必担心容量问题。基于Block层面的增量备份可是非常小的。<br>首次备份可能会占用你一点时间，但随后的增量备份快到你几乎感觉不到。除非你突然增加了50G的文件。对于Macbook Air的小硬盘来说，突然有这么大的文件我也不会留在笔记本上。</p>
-<p>同时几个虚拟机文件转移到一个移动硬盘上，在家里也基本上一直插着，外出根据需要咯。</p>
-<p>话说，进入到 TimeMachine 里面的效果确实很赞啊，苹果做的东西的确蛮好看的，屏幕右侧就是一个时间轴，选取一点就会显示出那个时间点的 Home 目录：</p>
-<p><a href="http://www.yupoo.com/photos/latteye/83821744/" target="_blank" rel="external"><img src="http://pic.yupoo.com/latteye/BzWW02Nd/medish.jpg" alt="TimeMachine"></a></p>
-<p><strong>Finder</strong><br>在 Finder 中会多出来一个 TimeMachine 卷：</p>
-<p><img src="http://pic.yupoo.com/latteye/BzX47V1j/medish.jpg" alt=""></p>
-<p>在这个卷中，可以浏览到自己所有的快照节点,这些都是我每小时的节点：</p>
-<p><img src="http://pic.yupoo.com/latteye/BzX49qJR/medish.jpg" alt=""></p>
-<p>值得参考的文章：<br><a href="http://www.kremalicious.com/2008/06/ubuntu-as-mac-file-server-and-time-machine-volume/" target="_blank" rel="external"><br>HowTo: Make Ubuntu A Perfect Mac File Server And Time Machine Volume</a><br><a href="http://www.gracecode.com/archives/3057/" target="_blank" rel="external">自建基于 Linux 的 Time Capsule 服务</a></p>
-<p>在 Arch Linux 上磕磕碰碰遇到的问题：</p>
-<p><strong>1.备份时遇到 “网络备份磁盘不支持所要求的 AFP 功能” 报错</strong></p>
-<p>我尝试了多种配置文件，最终能正常工作的配置文件如下：</p>
-<p>afpd.conf</p>
-<pre lang="ini">
-- -tcp -noddp -uamlist uams_dhx.so,uams_dhx2.so -nosavepassword
-</pre>
-
-<p>AppleVolumes.default:</p>
-<pre lang="ini">/media/main/TimeMachine TimeMachine allow:latteye cnidscheme:cdb options:tm,usedots,upriv</pre>
-
-<p>netatalk.conf</p>
-<pre lang="ini">ATALKD_RUN=no
-PAPD_RUN=no
-TIMELORD_RUN=no
-A2BOOT_RUN=no
-CNID_METAD_RUN=yes
-AFPD_RUN=yes</pre>
-
-<p><strong>2. netatalk 服务缺少 atalkd 执行文件</strong></p>
-<p>在 Arch 上打了N次包都不见 atalkd 二进制文件，搞不清楚什么原因。最后自己在 netatalk 2.2.1 源码目录下找到 atalkd 源码目录 make 出来拷贝到系统中。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在接触 Mac TimeMachine 之前已经用过了 Windows Home Server。HomeServer 的备份效果几乎和 TimeMachine 是一样的。不过你可以更加灵活的定制自己想要备份的频率。虽然 Mac 备份的频率不可调节，但也足够了：
-    
-    </summary>
-    
-      <category term="Life" scheme="http://latteye.me/categories/Life/"/>
     
     
   </entry>
