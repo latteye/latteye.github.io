@@ -137,7 +137,15 @@
         
         <tags>
             
-            <tag> 知识图谱, google, sre, slo, sla </tag>
+            <tag> 知识图谱 </tag>
+            
+            <tag> google </tag>
+            
+            <tag> sre </tag>
+            
+            <tag> slo </tag>
+            
+            <tag> sla </tag>
             
         </tags>
         
@@ -183,7 +191,15 @@
         
         <tags>
             
-            <tag> kubernetes,ca,ssl,openssl,x509 </tag>
+            <tag> kubernetes </tag>
+            
+            <tag> ca </tag>
+            
+            <tag> ssl </tag>
+            
+            <tag> openssl </tag>
+            
+            <tag> x509 </tag>
             
         </tags>
         
@@ -13858,20 +13874,20 @@ gpg --export --armor 521A9C7C | sudo apt-key add -</code></p>
       <content type="html"><![CDATA[<p>今天才注意到fcitx已经出了3.4.1版本了。ubuntu源内依然是3.3的版本。<br>  记得作者Yuking曾经提到3.4可能是最后一个版本，没想到又有更新了。本站提供了for ubuntu edgy deb<a href="http://www.live-share.com/files/107595/fcitx-3.4.1-1_i386.deb.html" target="_blank" rel="external">下载</a>。</p>
 <p>  更新内容：</p>
 <blockquote>
-<p>2006-11-01: Yuking <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#58;&#x79;&#117;&#107;&#x69;&#110;&#x67;&#x5f;&#110;&#101;&#116;&#64;&#115;&#x6f;&#104;&#117;&#46;&#x63;&#111;&#109;">&#x79;&#117;&#107;&#x69;&#110;&#x67;&#x5f;&#110;&#101;&#116;&#64;&#115;&#x6f;&#104;&#117;&#46;&#x63;&#111;&#109;</a></p>
+<p>2006-11-01: Yuking <a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#x79;&#117;&#107;&#x69;&#x6e;&#103;&#x5f;&#x6e;&#101;&#116;&#x40;&#x73;&#x6f;&#x68;&#x75;&#46;&#x63;&#x6f;&#x6d;">&#x79;&#117;&#107;&#x69;&#x6e;&#103;&#x5f;&#x6e;&#101;&#116;&#x40;&#x73;&#x6f;&#x68;&#x75;&#46;&#x63;&#x6f;&#x6d;</a></p>
 <pre><code>    * tools/txt2mb.c: 修正码表排序的一个问题
 * src/xim.c,tools.c: 给输入条的位置设置了X/Y的偏移量
 * 版本 &apos;GirlDog&apos; 3.4.1
-</code></pre><p>2006-10-23: Yuking <a href="&#109;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x79;&#117;&#107;&#x69;&#110;&#x67;&#x5f;&#110;&#101;&#116;&#64;&#115;&#111;&#104;&#x75;&#x2e;&#x63;&#x6f;&#109;">&#x79;&#117;&#107;&#x69;&#110;&#x67;&#x5f;&#110;&#101;&#116;&#64;&#115;&#111;&#104;&#x75;&#x2e;&#x63;&#x6f;&#109;</a></p>
+</code></pre><p>2006-10-23: Yuking <a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#121;&#x75;&#x6b;&#x69;&#x6e;&#x67;&#95;&#110;&#x65;&#116;&#64;&#115;&#111;&#x68;&#117;&#x2e;&#99;&#111;&#x6d;">&#121;&#x75;&#x6b;&#x69;&#x6e;&#x67;&#95;&#110;&#x65;&#116;&#64;&#115;&#111;&#x68;&#117;&#x2e;&#99;&#111;&#x6d;</a></p>
 <pre><code>* 恢复速度的显示
-</code></pre><p>2006-10-21: Yuking <a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x79;&#117;&#107;&#105;&#x6e;&#x67;&#95;&#110;&#101;&#116;&#x40;&#115;&#x6f;&#x68;&#x75;&#46;&#x63;&#111;&#x6d;">&#x79;&#117;&#107;&#105;&#x6e;&#x67;&#95;&#110;&#101;&#116;&#x40;&#115;&#x6f;&#x68;&#x75;&#46;&#x63;&#111;&#x6d;</a></p>
+</code></pre><p>2006-10-21: Yuking <a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#121;&#x75;&#x6b;&#105;&#110;&#x67;&#x5f;&#110;&#x65;&#116;&#64;&#115;&#x6f;&#x68;&#117;&#46;&#99;&#x6f;&#109;">&#121;&#x75;&#x6b;&#105;&#110;&#x67;&#x5f;&#110;&#x65;&#116;&#64;&#115;&#x6f;&#x68;&#117;&#46;&#99;&#x6f;&#109;</a></p>
 <pre><code>* 将拼音和区位的显示名称设为可定义
-</code></pre><p>2006-10-20: Yuking <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#121;&#117;&#107;&#x69;&#110;&#x67;&#x5f;&#x6e;&#101;&#116;&#64;&#115;&#111;&#x68;&#x75;&#46;&#x63;&#x6f;&#109;">&#121;&#117;&#107;&#x69;&#110;&#x67;&#x5f;&#x6e;&#101;&#116;&#64;&#115;&#111;&#x68;&#x75;&#46;&#x63;&#x6f;&#109;</a></p>
+</code></pre><p>2006-10-20: Yuking <a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x79;&#x75;&#x6b;&#105;&#x6e;&#x67;&#x5f;&#x6e;&#x65;&#116;&#x40;&#115;&#x6f;&#104;&#x75;&#46;&#99;&#111;&#109;">&#x79;&#x75;&#x6b;&#105;&#x6e;&#x67;&#x5f;&#x6e;&#x65;&#116;&#x40;&#115;&#x6f;&#104;&#x75;&#46;&#99;&#111;&#109;</a></p>
 <pre><code>    * src/ime.c: 将全角的输入方式恢复为原来的样子
 * src/table.c: 改进码表输入法中的自动组词
-</code></pre><p>2006-10-13: Yuking <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#121;&#x75;&#107;&#x69;&#x6e;&#103;&#95;&#110;&#x65;&#116;&#x40;&#115;&#111;&#x68;&#117;&#x2e;&#99;&#x6f;&#109;">&#121;&#x75;&#107;&#x69;&#x6e;&#103;&#95;&#110;&#x65;&#116;&#x40;&#115;&#111;&#x68;&#117;&#x2e;&#99;&#x6f;&#109;</a></p>
+</code></pre><p>2006-10-13: Yuking <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#x79;&#x75;&#107;&#105;&#x6e;&#103;&#x5f;&#x6e;&#x65;&#116;&#64;&#x73;&#x6f;&#104;&#117;&#x2e;&#99;&#111;&#x6d;">&#x79;&#x75;&#107;&#105;&#x6e;&#103;&#x5f;&#x6e;&#x65;&#116;&#64;&#x73;&#x6f;&#104;&#117;&#x2e;&#99;&#111;&#x6d;</a></p>
 <pre><code>* data/pyphrase.org: 将“陷井”修正为“陷阱”
-</code></pre><p>2006-10-10: Yuking <a href="&#109;&#x61;&#x69;&#108;&#x74;&#111;&#x3a;&#x79;&#117;&#x6b;&#x69;&#110;&#103;&#x5f;&#x6e;&#101;&#116;&#64;&#115;&#111;&#x68;&#117;&#x2e;&#x63;&#x6f;&#109;">&#x79;&#117;&#x6b;&#x69;&#110;&#103;&#x5f;&#x6e;&#101;&#116;&#64;&#115;&#111;&#x68;&#117;&#x2e;&#x63;&#x6f;&#109;</a></p>
+</code></pre><p>2006-10-10: Yuking <a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x79;&#117;&#x6b;&#105;&#x6e;&#103;&#95;&#x6e;&#x65;&#x74;&#64;&#115;&#x6f;&#104;&#x75;&#46;&#x63;&#x6f;&#109;">&#x79;&#117;&#x6b;&#105;&#x6e;&#103;&#95;&#x6e;&#x65;&#x74;&#64;&#115;&#x6f;&#104;&#x75;&#46;&#x63;&#x6f;&#109;</a></p>
 <pre><code>* src/table.c: 码表输入方式下，记录每次生成的自动词组
 </code></pre></blockquote>
 ]]></content>
@@ -15690,9 +15706,9 @@ exit 0</code></p>
 <p>(实际上,以上仅仅是/etc/services的一部分,限于篇幅没有全部写出)<br>在这个文件中,为了安全考虑,我们可以修改一些常用服务的端口地址,例如我们可以把telnet服务的端口地址改为52323,www的端口改为8080,ftp端口地址改为2121等等,这样仅仅需要在应用程序中修改相应的端口即可.这样可以提高系统的安全性.<br>/etc/inetd.conf文件是inetd的配置文件, 首先要了解一下linux服务器到底要提供哪些服务。一个很好的原则是” 禁止所有不需要的服务”，这样黑客就少了一些攻击系统的机会./etc/inetd.conf范例文件如下:<br>#</p>
 <h1 id="inetd-conf-This-file-describes-the-services-that-will-be-available"><a href="#inetd-conf-This-file-describes-the-services-that-will-be-available" class="headerlink" title="inetd.conf　　　　This file describes the services that will be available"></a>inetd.conf　　　　This file describes the services that will be available</h1><h1 id="through-the-INETD-TCP-IP-super-server-To-re-configure"><a href="#through-the-INETD-TCP-IP-super-server-To-re-configure" class="headerlink" title="　　　　　　　　　through the INETD TCP/IP super server. To re-configure"></a>　　　　　　　　　through the INETD TCP/IP super server. To re-configure</h1><h1 id="the-running-INETD-process-edit-this-file-then-send-the"><a href="#the-running-INETD-process-edit-this-file-then-send-the" class="headerlink" title="　　　　　　　　　the running INETD process, edit this file, then send the"></a>　　　　　　　　　the running INETD process, edit this file, then send the</h1><h1 id="NETD-process-a-SIGHUP-signal"><a href="#NETD-process-a-SIGHUP-signal" class="headerlink" title="　　　　　　　　　NETD process a SIGHUP signal."></a>　　　　　　　　　NETD process a SIGHUP signal.</h1><p>#</p>
 <h1 id="Version-etc-inetd-conf-3-10-05-27-93"><a href="#Version-etc-inetd-conf-3-10-05-27-93" class="headerlink" title="Version:　　　 @(#)/etc/inetd.conf 　　3.10 　　05/27/93"></a>Version:　　　 @(#)/etc/inetd.conf 　　3.10 　　05/27/93</h1><p>#</p>
-<h1 id="Authors-Original-taken-from-BSD-UNIX-4-3-TAHOE"><a href="#Authors-Original-taken-from-BSD-UNIX-4-3-TAHOE" class="headerlink" title="Authors: 　　　Original taken from BSD UNIX 4.3/TAHOE."></a>Authors: 　　　Original taken from BSD UNIX 4.3/TAHOE.</h1><h1 id="Fred-N-van-Kempen-x77-x61-x6c-116-106-x65-x40-117-x77-x61-108-x74-46-x6e-108-46-109-x75-103-x6e-x65-116-x2e-x6f-x72-x67"><a href="#Fred-N-van-Kempen-x77-x61-x6c-116-106-x65-x40-117-x77-x61-108-x74-46-x6e-108-46-109-x75-103-x6e-x65-116-x2e-x6f-x72-x67" class="headerlink" title="　　　　　　　　Fred N. van Kempen, &#x77;&#x61;&#x6c;&#116;&#106;&#x65;&#x40;&#117;&#x77;&#x61;&#108;&#x74;&#46;&#x6e;&#108;&#46;&#109;&#x75;&#103;&#x6e;&#x65;&#116;&#x2e;&#x6f;&#x72;&#x67;"></a>　　　　　　　　Fred N. van Kempen, <a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#58;&#x77;&#x61;&#x6c;&#116;&#106;&#x65;&#x40;&#117;&#x77;&#x61;&#108;&#x74;&#46;&#x6e;&#108;&#46;&#109;&#x75;&#103;&#x6e;&#x65;&#116;&#x2e;&#x6f;&#x72;&#x67;">&#x77;&#x61;&#x6c;&#116;&#106;&#x65;&#x40;&#117;&#x77;&#x61;&#108;&#x74;&#46;&#x6e;&#108;&#46;&#109;&#x75;&#103;&#x6e;&#x65;&#116;&#x2e;&#x6f;&#x72;&#x67;</a></h1><p>#</p>
-<h1 id="Modified-for-Debian-Linux-by-Ian-A-Murdock-x69-109-x75-x72-x64-111-x63-107-64-115-104-x65-x6c-108-x2e-x70-x6f-x72-x74-97-108-46-x63-111-x6d"><a href="#Modified-for-Debian-Linux-by-Ian-A-Murdock-x69-109-x75-x72-x64-111-x63-107-64-115-104-x65-x6c-108-x2e-x70-x6f-x72-x74-97-108-46-x63-111-x6d" class="headerlink" title="Modified for Debian Linux by Ian A. Murdock &#x69;&#109;&#x75;&#x72;&#x64;&#111;&#x63;&#107;&#64;&#115;&#104;&#x65;&#x6c;&#108;&#x2e;&#x70;&#x6f;&#x72;&#x74;&#97;&#108;&#46;&#x63;&#111;&#x6d;"></a>Modified for Debian Linux by Ian A. Murdock <a href="&#x6d;&#x61;&#105;&#108;&#116;&#111;&#x3a;&#x69;&#109;&#x75;&#x72;&#x64;&#111;&#x63;&#107;&#64;&#115;&#104;&#x65;&#x6c;&#108;&#x2e;&#x70;&#x6f;&#x72;&#x74;&#97;&#108;&#46;&#x63;&#111;&#x6d;">&#x69;&#109;&#x75;&#x72;&#x64;&#111;&#x63;&#107;&#64;&#115;&#104;&#x65;&#x6c;&#108;&#x2e;&#x70;&#x6f;&#x72;&#x74;&#97;&#108;&#46;&#x63;&#111;&#x6d;</a></h1><p>#</p>
-<h1 id="Modified-for-RHS-Linux-by-Marc-Ewing-109-x61-114-x63-64-x72-x65-100-x68-97-x74-46-x63-111-109"><a href="#Modified-for-RHS-Linux-by-Marc-Ewing-109-x61-114-x63-64-x72-x65-100-x68-97-x74-46-x63-111-109" class="headerlink" title="Modified for RHS Linux by Marc Ewing &#109;&#x61;&#114;&#x63;&#64;&#x72;&#x65;&#100;&#x68;&#97;&#x74;&#46;&#x63;&#111;&#109;"></a>Modified for RHS Linux by Marc Ewing <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#109;&#x61;&#114;&#x63;&#64;&#x72;&#x65;&#100;&#x68;&#97;&#x74;&#46;&#x63;&#111;&#109;">&#109;&#x61;&#114;&#x63;&#64;&#x72;&#x65;&#100;&#x68;&#97;&#x74;&#46;&#x63;&#111;&#109;</a></h1><p>#</p>
+<h1 id="Authors-Original-taken-from-BSD-UNIX-4-3-TAHOE"><a href="#Authors-Original-taken-from-BSD-UNIX-4-3-TAHOE" class="headerlink" title="Authors: 　　　Original taken from BSD UNIX 4.3/TAHOE."></a>Authors: 　　　Original taken from BSD UNIX 4.3/TAHOE.</h1><h1 id="Fred-N-van-Kempen-119-x61-x6c-116-x6a-x65-64-117-119-x61-108-x74-46-110-108-46-109-x75-x67-x6e-101-116-46-x6f-x72-x67"><a href="#Fred-N-van-Kempen-119-x61-x6c-116-x6a-x65-64-117-119-x61-108-x74-46-110-108-46-109-x75-x67-x6e-101-116-46-x6f-x72-x67" class="headerlink" title="　　　　　　　　Fred N. van Kempen, &#119;&#x61;&#x6c;&#116;&#x6a;&#x65;&#64;&#117;&#119;&#x61;&#108;&#x74;&#46;&#110;&#108;&#46;&#109;&#x75;&#x67;&#x6e;&#101;&#116;&#46;&#x6f;&#x72;&#x67;"></a>　　　　　　　　Fred N. van Kempen, <a href="&#x6d;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#119;&#x61;&#x6c;&#116;&#x6a;&#x65;&#64;&#117;&#119;&#x61;&#108;&#x74;&#46;&#110;&#108;&#46;&#109;&#x75;&#x67;&#x6e;&#101;&#116;&#46;&#x6f;&#x72;&#x67;">&#119;&#x61;&#x6c;&#116;&#x6a;&#x65;&#64;&#117;&#119;&#x61;&#108;&#x74;&#46;&#110;&#108;&#46;&#109;&#x75;&#x67;&#x6e;&#101;&#116;&#46;&#x6f;&#x72;&#x67;</a></h1><p>#</p>
+<h1 id="Modified-for-Debian-Linux-by-Ian-A-Murdock-x69-x6d-117-114-100-111-99-107-x40-115-104-101-x6c-x6c-x2e-x70-x6f-x72-x74-97-108-46-99-x6f-x6d"><a href="#Modified-for-Debian-Linux-by-Ian-A-Murdock-x69-x6d-117-114-100-111-99-107-x40-115-104-101-x6c-x6c-x2e-x70-x6f-x72-x74-97-108-46-99-x6f-x6d" class="headerlink" title="Modified for Debian Linux by Ian A. Murdock &#x69;&#x6d;&#117;&#114;&#100;&#111;&#99;&#107;&#x40;&#115;&#104;&#101;&#x6c;&#x6c;&#x2e;&#x70;&#x6f;&#x72;&#x74;&#97;&#108;&#46;&#99;&#x6f;&#x6d;"></a>Modified for Debian Linux by Ian A. Murdock <a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#x69;&#x6d;&#117;&#114;&#100;&#111;&#99;&#107;&#x40;&#115;&#104;&#101;&#x6c;&#x6c;&#x2e;&#x70;&#x6f;&#x72;&#x74;&#97;&#108;&#46;&#99;&#x6f;&#x6d;">&#x69;&#x6d;&#117;&#114;&#100;&#111;&#99;&#107;&#x40;&#115;&#104;&#101;&#x6c;&#x6c;&#x2e;&#x70;&#x6f;&#x72;&#x74;&#97;&#108;&#46;&#99;&#x6f;&#x6d;</a></h1><p>#</p>
+<h1 id="Modified-for-RHS-Linux-by-Marc-Ewing-x6d-97-114-x63-x40-x72-x65-x64-x68-x61-x74-x2e-x63-111-x6d"><a href="#Modified-for-RHS-Linux-by-Marc-Ewing-x6d-97-114-x63-x40-x72-x65-x64-x68-x61-x74-x2e-x63-111-x6d" class="headerlink" title="Modified for RHS Linux by Marc Ewing &#x6d;&#97;&#114;&#x63;&#x40;&#x72;&#x65;&#x64;&#x68;&#x61;&#x74;&#x2e;&#x63;&#111;&#x6d;"></a>Modified for RHS Linux by Marc Ewing <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#x6d;&#97;&#114;&#x63;&#x40;&#x72;&#x65;&#x64;&#x68;&#x61;&#x74;&#x2e;&#x63;&#111;&#x6d;">&#x6d;&#97;&#114;&#x63;&#x40;&#x72;&#x65;&#x64;&#x68;&#x61;&#x74;&#x2e;&#x63;&#111;&#x6d;</a></h1><p>#</p>
 <h1 id=""><a href="#" class="headerlink" title="      "></a><service_name> <sock_type> <proto> <flags> <user> <server_path> <args></args></server_path></user></flags></proto></sock_type></service_name></h1><p>#服务名 socket类型 协议 动作 拥有者 服务进程路径名 掉用参数</p>
 <p>#nowait 表示在相应一个网络连接之后,服务进程在释放旧的联接之前可以接受</p>
 <p>#新的连接请求,wait 则表示必须在旧连接清除之后才能接收新的连接.</p>

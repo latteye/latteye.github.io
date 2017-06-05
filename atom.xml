@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://latteye.me/"/>
-  <updated>2017-06-05T13:40:44.000Z</updated>
+  <updated>2017-06-05T14:04:07.000Z</updated>
   <id>http://latteye.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://latteye.me/2017/06/Google%20SRE.html"/>
     <id>http://latteye.me/2017/06/Google SRE.html</id>
     <published>2017-06-05T13:10:00.000Z</published>
-    <updated>2017-06-05T13:40:44.000Z</updated>
+    <updated>2017-06-05T14:04:07.000Z</updated>
     
     <content type="html"><![CDATA[<p>Google SRE 读书笔记</p>
 <a id="more"></a>
@@ -158,7 +158,15 @@
     </summary>
     
     
-      <category term="知识图谱, google, sre, slo, sla" scheme="http://latteye.me/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-google-sre-slo-sla/"/>
+      <category term="知识图谱" scheme="http://latteye.me/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
+    
+      <category term="google" scheme="http://latteye.me/tags/google/"/>
+    
+      <category term="sre" scheme="http://latteye.me/tags/sre/"/>
+    
+      <category term="slo" scheme="http://latteye.me/tags/slo/"/>
+    
+      <category term="sla" scheme="http://latteye.me/tags/sla/"/>
     
   </entry>
   
@@ -167,7 +175,7 @@
     <link href="http://latteye.me/2017/05/kubernetes-x509-auth.html"/>
     <id>http://latteye.me/2017/05/kubernetes-x509-auth.html</id>
     <published>2017-05-02T13:03:00.000Z</published>
-    <updated>2017-05-02T13:57:16.000Z</updated>
+    <updated>2017-06-05T14:03:53.000Z</updated>
     
     <content type="html"><![CDATA[<p>Kubernetes 有多种验证方式。其中，基于x509证书的验证方式，无疑是安全性最高的。本文记录了生成 ca 以及 apiserver , kubelet, kube-proxy , kubectl 所需证书的过程，以及可能遇到的问题。</p>
 <a id="more"></a>
@@ -210,7 +218,15 @@
     </summary>
     
     
-      <category term="kubernetes,ca,ssl,openssl,x509" scheme="http://latteye.me/tags/kubernetes-ca-ssl-openssl-x509/"/>
+      <category term="kubernetes" scheme="http://latteye.me/tags/kubernetes/"/>
+    
+      <category term="ca" scheme="http://latteye.me/tags/ca/"/>
+    
+      <category term="ssl" scheme="http://latteye.me/tags/ssl/"/>
+    
+      <category term="openssl" scheme="http://latteye.me/tags/openssl/"/>
+    
+      <category term="x509" scheme="http://latteye.me/tags/x509/"/>
     
   </entry>
   
