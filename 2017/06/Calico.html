@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="Calico"/>
+
+
+
+
+  <meta name="keywords" content="kubernetes,calico,cni,知识图谱," />
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/2017/06/Calico.html"/>
+
+
+<meta name="description" content="Calico 知识图谱">
+<meta name="keywords" content="kubernetes,calico,cni,知识图谱">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Calico">
+<meta property="og:url" content="http://latteye.me/2017/06/Calico.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="Calico 知识图谱">
+<meta property="og:updated_time" content="2017-06-05T14:17:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Calico">
+<meta name="twitter:description" content="Calico 知识图谱">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Calico · Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Calico
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年6月5日
+        </span>
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hosted-安装（通过DaemonSet"><span class="toc-text">Hosted 安装（通过DaemonSet)</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>Calico 知识图谱<br><a id="more"></a></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<li><p>Calico 可以在 k8s 下用 yaml 的方式安装，但是需要特权和 hostNetwork.</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
+<li>kubelet <code>--network-plugin=cni</code> <code>--cni-bin-dir=/opt/cni/bin</code> (文档缺乏 )</li>
+<li>kube-proxy 必须以 iptables 方式工作，1.2 之后默认</li>
+<li>kube-proxy 必须<strong>不使用</strong> <code>--masquerade-all</code> 参数</li>
+</ul>
+<h2 id="Hosted-安装（通过DaemonSet"><a href="#Hosted-安装（通过DaemonSet" class="headerlink" title="Hosted 安装（通过DaemonSet)"></a>Hosted 安装（通过DaemonSet)</h2><ul>
+<li>通过下载定制的 yaml 文件直接部署，包含了多个内容，service account, deployment, daemonset 等。</li>
+<li><p>遇到问题:</p>
+<ul>
+<li><p>kubelet log:</p>
+<blockquote>
+<p>NetworkPlugin cni failed on the status hook for pod ‘foo-r3rg5’ - Unexpected command output nsenter: cannot open /proc/5875/ns/net: No such file or directory\n with error: exit status 1</p>
+</blockquote>
+<ul>
+<li><p>结论:</p>
+<p>这是由于没有给出正确的 cni-bin 目录导致找不到二进制文件 <code>--cni-bin-dir=/opt/cni/bin</code></p>
+</li>
+</ul>
+</li>
+<li><p>kubelet log:</p>
+<blockquote>
+<p>Error while adding to cni network: the server has asked for the client to provide credentials</p>
+</blockquote>
+</li>
+<li><p>kubectl describe:</p>
+<blockquote>
+<p>Error creating: No API token found for service account “calico-node”, retry after the token is automatically created and adde</p>
+</blockquote>
+</li>
+<li><p>目前解决思路:</p>
+<blockquote>
+<p><a href="https://kubernetes.io/docs/admin/service-accounts-admin/" target="_blank" rel="external">https://kubernetes.io/docs/admin/service-accounts-admin/</a></p>
+<p>You must pass a service account private key file to the token controller in the controller-manager by using the –service-account-private-key-file option. The private key will be used to sign generated service account tokens. Similarly, you must pass the corresponding public key to the kube-apiserver using the –service-account-key-file option. The public key will be used to verify the tokens during authentication.</p>
+</blockquote>
+<ul>
+<li><p>结论:</p>
+<p>这个现象确实是通过上面的思路解决的，当启用了证书验证时候，service account 就需要 token 来验证，而签发 token 的 controller-manager 需要配置私有证书。同时需要根据该私有证书，生成公钥证书给 apiserver 用来验证所签发的 token。<br><a href="http://www.cnblogs.com/amylis_chen/p/6055650.html" target="_blank" rel="external">如何生成公钥</a></p>
+</li>
+</ul>
+</li>
+<li><p>calico controller 问题:</p>
+<blockquote>
+<p>17-05-27 16:42:21,784 7 WARNING Connection error: Pod …hostname ‘kubernetes.default’ doesn’t match ‘10.16.15.11’<br>2017-05-27 16:42:21,784 7 INFO Restarting watch on resource: Pod<br>2017-05-27 16:42:22,700 7 INFO Syncing ‘NetworkPolicy’ objects<br>2017-05-27 16:42:22,701 7 INFO Syncing ‘Namespace’ objects<br>2017-05-27 16:42:22,707 7 WARNING Connection error: NetworkPolicy …hostname ‘kubernetes.default’ doesn’t match ‘10.16.15.11’<br>2017-05-27 16:42:22,707 7 INFO Restarting watch on resource: NetworkPolicy<br>2017-05-27 16:42:22,708 7 WARNING Connection error: Namespace …hostname ‘kubernetes.default’ doesn’t match ‘10.16.15.11’<br>2017-05-27 16:42:22,708 7 INFO Restarting watch on resource: Namespace<br>2017-05-27 16:42:22,785 7 INFO Syncing ‘Pod’ objects</p>
+</blockquote>
+<ul>
+<li>原因: yaml 中的 policy controller 在连接 apiserver 的时候，使用了 kubernetes.default 域名，通过这个解析到当前的 apiserver，如果当前的 apiserver 的 ssl 证书中的域名不包括这个域名，那么就会出现上面的错误。</li>
+<li>解决方式，要么将 SSL 证书中的域名加入。要么将 yaml 中的配置改成对应的域名或者 IP。当这个问题未解决的时候各个应该能连通的 container 由于缺乏 Network Policy , 变得无法连通。</li>
+<li>一开始看到网络无法连通的时候，逆向想到 是 policy controller 是比较困难的，这需要对 k8s netwrok policy 和 calico network policy 都有一定的知识才能反应过来，这个地方我整整卡了 4 个小时多。<br>当看到<a href="https://github.com/projectcalico/k8s-policy" target="_blank" rel="external">这个网页的时候</a>，有一定的联想。随后才想起看 policy controller 的 log。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>作者: </span>
+      <span>latteye</span>
+    </p>
+    <p class="copyright-item">
+      <span>来源: </span>
+      <a href="http://latteye.me">http://latteye.me</a>
+    </p>
+    <p class="copyright-item">
+      <span>链接: </span>
+      <a href="http://latteye.me/2017/06/Calico.html">http://latteye.me/2017/06/Calico.html</a>
+    </p>
+
+    <p class="copyright-item lincese">
+      
+      本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+    </p>
+  </div>
+
+
+
+      
+      
+  <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code">
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/wechat.png" title="wechat">
+        </label>
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/alipay.png" title="alipay">
+        </label>
+      
+    </div>
+  </div>
+
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/kubernetes/">kubernetes</a>
+            
+              <a href="/tags/calico/">calico</a>
+            
+              <a href="/tags/cni/">cni</a>
+            
+              <a href="/tags/知识图谱/">知识图谱</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2017/06/Google SRE.html">
+        <span class="next-text nav-default">笔记 - Google SRE</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "7c27380789354d14af755b0b00464371",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

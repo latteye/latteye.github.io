@@ -150,6 +150,47 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2008/12/configure-multi-master-replication-with-fedora-ds.html">configure multi-master replication with fedora-ds</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年12月17日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>1. Create Supplier Bind DN Entry<br><a href="http://www.redhat.com/docs/manuals/dir-server/ag/8.0/Creating_the_Supplier_Bind_DN_Entry.html" target="_blank" rel="external">http://www.redhat.com/docs/manuals/dir-server/ag/8.0/Creating_the_Supplier_Bind_DN_Entry.html
+</a></p>
+<p>2. Configuring Multi-Master Replication<br><a href="http://www.redhat.com/docs/manuals/dir-server/ag/8.0/Managing_Replication-Configuring_Multi_Master_Replication.html" target="_blank" rel="external">http://www.redhat.com/docs/manuals/dir-server/ag/8.0/Managing_Replication-Configuring_Multi_Master_Replication.html</a></p>
+<p>Notes:<br>1). make sure replication ID is unique.<br>2). if you get error message <code>Unable to acquire replica: permission denied. The bind dn &quot;uid=ssghtst03,cn=config&quot; does not have permission to supply replication updates to the replica. Will retry later.</code>, chances are that you did not specify a correct Supplier Bind DN Entry. check your replicat setting<br>3). useful tool for Configuring Multimaster Replication<br><a href="http://directory.fedoraproject.org/wiki/Howto:MultiMasterReplication" target="_blank" rel="external">http://directory.fedoraproject.org/wiki/Howto:MultiMasterReplication</a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2008/12/bearaudio-begin.html">开始写 BearAudio</a>
         
       </h1>
@@ -534,48 +575,6 @@ while (<>) {
           <p>公司两台服务器用RHCS做HA， 最近出了问题， HA状态显示failed。无奈重启node1后发现cman起不来，报错：<br>Oct 29 14:14:51  ccsd[5232]: Cluster is not quorate.  Refusing connection.<br>Oct 29 14:14:51  ccsd[5232]: Error while processing connect: Connection refused<br>Oct 29 14:14:51  kernel: CMAN: sending membership request<br>fence进程也启动不了</p>
 <p>查阅资料无数， 解决方法如下：<br>把node2上cluster进程全部关闭，然后依次重新启动服务，顺序如下<br>service rgmanager stop<br>service fenced stop<br>service cman stop<br>service ccsd stop<br>然后按相反的顺序启动service，即<br>node2上 service ccsd start<br>node1上 service ccsd start<br>node2上 service cman start<br>node1上 service cman start<br>………<br>………<br>总算干净了</p>
 
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2008/10/telnet-email-sending.html">Telnet带验证的邮件发送过程</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2008年10月28日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>本文记录一次 telnet email server 发邮件的过程。邮件排错中，通常用这种方式比较直观，同时更容易看到“返回信息”，来帮助管理员工作。对 email 发送的过程也可以有了解。</p>
-          <div class="read-more">
-            <a href="/2008/10/telnet-email-sending.html" class="read-more-link">Read more..</a>
-          </div>
         
       
     </div>

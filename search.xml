@@ -3,6 +3,84 @@
   
     
     <entry>
+      <title><![CDATA[Calico]]></title>
+      <url>/2017/06/Calico.html</url>
+      <content type="html"><![CDATA[<p>Calico 知识图谱<br><a id="more"></a></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<li><p>Calico 可以在 k8s 下用 yaml 的方式安装，但是需要特权和 hostNetwork.</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
+<li>kubelet <code>--network-plugin=cni</code> <code>--cni-bin-dir=/opt/cni/bin</code> (文档缺乏 )</li>
+<li>kube-proxy 必须以 iptables 方式工作，1.2 之后默认</li>
+<li>kube-proxy 必须<strong>不使用</strong> <code>--masquerade-all</code> 参数</li>
+</ul>
+<h2 id="Hosted-安装（通过DaemonSet"><a href="#Hosted-安装（通过DaemonSet" class="headerlink" title="Hosted 安装（通过DaemonSet)"></a>Hosted 安装（通过DaemonSet)</h2><ul>
+<li>通过下载定制的 yaml 文件直接部署，包含了多个内容，service account, deployment, daemonset 等。</li>
+<li><p>遇到问题:</p>
+<ul>
+<li><p>kubelet log:</p>
+<blockquote>
+<p>NetworkPlugin cni failed on the status hook for pod ‘foo-r3rg5’ - Unexpected command output nsenter: cannot open /proc/5875/ns/net: No such file or directory\n with error: exit status 1</p>
+</blockquote>
+<ul>
+<li><p>结论:</p>
+<p>这是由于没有给出正确的 cni-bin 目录导致找不到二进制文件 <code>--cni-bin-dir=/opt/cni/bin</code></p>
+</li>
+</ul>
+</li>
+<li><p>kubelet log:</p>
+<blockquote>
+<p>Error while adding to cni network: the server has asked for the client to provide credentials</p>
+</blockquote>
+</li>
+<li><p>kubectl describe:</p>
+<blockquote>
+<p>Error creating: No API token found for service account “calico-node”, retry after the token is automatically created and adde</p>
+</blockquote>
+</li>
+<li><p>目前解决思路:</p>
+<blockquote>
+<p><a href="https://kubernetes.io/docs/admin/service-accounts-admin/" target="_blank" rel="external">https://kubernetes.io/docs/admin/service-accounts-admin/</a></p>
+<p>You must pass a service account private key file to the token controller in the controller-manager by using the –service-account-private-key-file option. The private key will be used to sign generated service account tokens. Similarly, you must pass the corresponding public key to the kube-apiserver using the –service-account-key-file option. The public key will be used to verify the tokens during authentication.</p>
+</blockquote>
+<ul>
+<li><p>结论:</p>
+<p>这个现象确实是通过上面的思路解决的，当启用了证书验证时候，service account 就需要 token 来验证，而签发 token 的 controller-manager 需要配置私有证书。同时需要根据该私有证书，生成公钥证书给 apiserver 用来验证所签发的 token。<br><a href="http://www.cnblogs.com/amylis_chen/p/6055650.html" target="_blank" rel="external">如何生成公钥</a></p>
+</li>
+</ul>
+</li>
+<li><p>calico controller 问题:</p>
+<blockquote>
+<p>17-05-27 16:42:21,784 7 WARNING Connection error: Pod …hostname ‘kubernetes.default’ doesn’t match ‘10.16.15.11’<br>2017-05-27 16:42:21,784 7 INFO Restarting watch on resource: Pod<br>2017-05-27 16:42:22,700 7 INFO Syncing ‘NetworkPolicy’ objects<br>2017-05-27 16:42:22,701 7 INFO Syncing ‘Namespace’ objects<br>2017-05-27 16:42:22,707 7 WARNING Connection error: NetworkPolicy …hostname ‘kubernetes.default’ doesn’t match ‘10.16.15.11’<br>2017-05-27 16:42:22,707 7 INFO Restarting watch on resource: NetworkPolicy<br>2017-05-27 16:42:22,708 7 WARNING Connection error: Namespace …hostname ‘kubernetes.default’ doesn’t match ‘10.16.15.11’<br>2017-05-27 16:42:22,708 7 INFO Restarting watch on resource: Namespace<br>2017-05-27 16:42:22,785 7 INFO Syncing ‘Pod’ objects</p>
+</blockquote>
+<ul>
+<li>原因: yaml 中的 policy controller 在连接 apiserver 的时候，使用了 kubernetes.default 域名，通过这个解析到当前的 apiserver，如果当前的 apiserver 的 ssl 证书中的域名不包括这个域名，那么就会出现上面的错误。</li>
+<li>解决方式，要么将 SSL 证书中的域名加入。要么将 yaml 中的配置改成对应的域名或者 IP。当这个问题未解决的时候各个应该能连通的 container 由于缺乏 Network Policy , 变得无法连通。</li>
+<li>一开始看到网络无法连通的时候，逆向想到 是 policy controller 是比较困难的，这需要对 k8s netwrok policy 和 calico network policy 都有一定的知识才能反应过来，这个地方我整整卡了 4 个小时多。<br>当看到<a href="https://github.com/projectcalico/k8s-policy" target="_blank" rel="external">这个网页的时候</a>，有一定的联想。随后才想起看 policy controller 的 log。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> kubernetes </tag>
+            
+            <tag> calico </tag>
+            
+            <tag> cni </tag>
+            
+            <tag> 知识图谱 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[笔记 - Google SRE]]></title>
       <url>/2017/06/Google%20SRE.html</url>
       <content type="html"><![CDATA[<p>Google SRE 读书笔记</p>
@@ -13874,20 +13952,20 @@ gpg --export --armor 521A9C7C | sudo apt-key add -</code></p>
       <content type="html"><![CDATA[<p>今天才注意到fcitx已经出了3.4.1版本了。ubuntu源内依然是3.3的版本。<br>  记得作者Yuking曾经提到3.4可能是最后一个版本，没想到又有更新了。本站提供了for ubuntu edgy deb<a href="http://www.live-share.com/files/107595/fcitx-3.4.1-1_i386.deb.html" target="_blank" rel="external">下载</a>。</p>
 <p>  更新内容：</p>
 <blockquote>
-<p>2006-11-01: Yuking <a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#x79;&#117;&#107;&#x69;&#x6e;&#103;&#x5f;&#x6e;&#101;&#116;&#x40;&#x73;&#x6f;&#x68;&#x75;&#46;&#x63;&#x6f;&#x6d;">&#x79;&#117;&#107;&#x69;&#x6e;&#103;&#x5f;&#x6e;&#101;&#116;&#x40;&#x73;&#x6f;&#x68;&#x75;&#46;&#x63;&#x6f;&#x6d;</a></p>
+<p>2006-11-01: Yuking <a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#121;&#117;&#107;&#105;&#110;&#x67;&#x5f;&#x6e;&#x65;&#x74;&#64;&#115;&#111;&#x68;&#x75;&#x2e;&#x63;&#x6f;&#x6d;">&#121;&#117;&#107;&#105;&#110;&#x67;&#x5f;&#x6e;&#x65;&#x74;&#64;&#115;&#111;&#x68;&#x75;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
 <pre><code>    * tools/txt2mb.c: 修正码表排序的一个问题
 * src/xim.c,tools.c: 给输入条的位置设置了X/Y的偏移量
 * 版本 &apos;GirlDog&apos; 3.4.1
-</code></pre><p>2006-10-23: Yuking <a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#121;&#x75;&#x6b;&#x69;&#x6e;&#x67;&#95;&#110;&#x65;&#116;&#64;&#115;&#111;&#x68;&#117;&#x2e;&#99;&#111;&#x6d;">&#121;&#x75;&#x6b;&#x69;&#x6e;&#x67;&#95;&#110;&#x65;&#116;&#64;&#115;&#111;&#x68;&#117;&#x2e;&#99;&#111;&#x6d;</a></p>
+</code></pre><p>2006-10-23: Yuking <a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#x79;&#117;&#107;&#x69;&#x6e;&#x67;&#x5f;&#110;&#x65;&#x74;&#x40;&#115;&#111;&#104;&#117;&#x2e;&#99;&#x6f;&#x6d;">&#x79;&#117;&#107;&#x69;&#x6e;&#x67;&#x5f;&#110;&#x65;&#x74;&#x40;&#115;&#111;&#104;&#117;&#x2e;&#99;&#x6f;&#x6d;</a></p>
 <pre><code>* 恢复速度的显示
-</code></pre><p>2006-10-21: Yuking <a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#121;&#x75;&#x6b;&#105;&#110;&#x67;&#x5f;&#110;&#x65;&#116;&#64;&#115;&#x6f;&#x68;&#117;&#46;&#99;&#x6f;&#109;">&#121;&#x75;&#x6b;&#105;&#110;&#x67;&#x5f;&#110;&#x65;&#116;&#64;&#115;&#x6f;&#x68;&#117;&#46;&#99;&#x6f;&#109;</a></p>
+</code></pre><p>2006-10-21: Yuking <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#x3a;&#121;&#117;&#x6b;&#x69;&#110;&#103;&#95;&#110;&#101;&#x74;&#x40;&#x73;&#x6f;&#104;&#x75;&#46;&#99;&#x6f;&#x6d;">&#121;&#117;&#x6b;&#x69;&#110;&#103;&#95;&#110;&#101;&#x74;&#x40;&#x73;&#x6f;&#104;&#x75;&#46;&#99;&#x6f;&#x6d;</a></p>
 <pre><code>* 将拼音和区位的显示名称设为可定义
-</code></pre><p>2006-10-20: Yuking <a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x79;&#x75;&#x6b;&#105;&#x6e;&#x67;&#x5f;&#x6e;&#x65;&#116;&#x40;&#115;&#x6f;&#104;&#x75;&#46;&#99;&#111;&#109;">&#x79;&#x75;&#x6b;&#105;&#x6e;&#x67;&#x5f;&#x6e;&#x65;&#116;&#x40;&#115;&#x6f;&#104;&#x75;&#46;&#99;&#111;&#109;</a></p>
+</code></pre><p>2006-10-20: Yuking <a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#x79;&#x75;&#x6b;&#x69;&#x6e;&#103;&#x5f;&#110;&#101;&#x74;&#x40;&#x73;&#x6f;&#x68;&#117;&#46;&#x63;&#x6f;&#109;">&#x79;&#x75;&#x6b;&#x69;&#x6e;&#103;&#x5f;&#110;&#101;&#x74;&#x40;&#x73;&#x6f;&#x68;&#117;&#46;&#x63;&#x6f;&#109;</a></p>
 <pre><code>    * src/ime.c: 将全角的输入方式恢复为原来的样子
 * src/table.c: 改进码表输入法中的自动组词
-</code></pre><p>2006-10-13: Yuking <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#x79;&#x75;&#107;&#105;&#x6e;&#103;&#x5f;&#x6e;&#x65;&#116;&#64;&#x73;&#x6f;&#104;&#117;&#x2e;&#99;&#111;&#x6d;">&#x79;&#x75;&#107;&#105;&#x6e;&#103;&#x5f;&#x6e;&#x65;&#116;&#64;&#x73;&#x6f;&#104;&#117;&#x2e;&#99;&#111;&#x6d;</a></p>
+</code></pre><p>2006-10-13: Yuking <a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x79;&#117;&#x6b;&#x69;&#110;&#x67;&#x5f;&#110;&#x65;&#116;&#x40;&#115;&#111;&#x68;&#117;&#46;&#99;&#x6f;&#109;">&#x79;&#117;&#x6b;&#x69;&#110;&#x67;&#x5f;&#110;&#x65;&#116;&#x40;&#115;&#111;&#x68;&#117;&#46;&#99;&#x6f;&#109;</a></p>
 <pre><code>* data/pyphrase.org: 将“陷井”修正为“陷阱”
-</code></pre><p>2006-10-10: Yuking <a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x79;&#117;&#x6b;&#105;&#x6e;&#103;&#95;&#x6e;&#x65;&#x74;&#64;&#115;&#x6f;&#104;&#x75;&#46;&#x63;&#x6f;&#109;">&#x79;&#117;&#x6b;&#105;&#x6e;&#103;&#95;&#x6e;&#x65;&#x74;&#64;&#115;&#x6f;&#104;&#x75;&#46;&#x63;&#x6f;&#109;</a></p>
+</code></pre><p>2006-10-10: Yuking <a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#121;&#x75;&#x6b;&#x69;&#x6e;&#103;&#x5f;&#110;&#x65;&#x74;&#x40;&#115;&#x6f;&#x68;&#117;&#46;&#99;&#x6f;&#109;">&#121;&#x75;&#x6b;&#x69;&#x6e;&#103;&#x5f;&#110;&#x65;&#x74;&#x40;&#115;&#x6f;&#x68;&#117;&#46;&#99;&#x6f;&#109;</a></p>
 <pre><code>* src/table.c: 码表输入方式下，记录每次生成的自动词组
 </code></pre></blockquote>
 ]]></content>
@@ -15706,9 +15784,9 @@ exit 0</code></p>
 <p>(实际上,以上仅仅是/etc/services的一部分,限于篇幅没有全部写出)<br>在这个文件中,为了安全考虑,我们可以修改一些常用服务的端口地址,例如我们可以把telnet服务的端口地址改为52323,www的端口改为8080,ftp端口地址改为2121等等,这样仅仅需要在应用程序中修改相应的端口即可.这样可以提高系统的安全性.<br>/etc/inetd.conf文件是inetd的配置文件, 首先要了解一下linux服务器到底要提供哪些服务。一个很好的原则是” 禁止所有不需要的服务”，这样黑客就少了一些攻击系统的机会./etc/inetd.conf范例文件如下:<br>#</p>
 <h1 id="inetd-conf-This-file-describes-the-services-that-will-be-available"><a href="#inetd-conf-This-file-describes-the-services-that-will-be-available" class="headerlink" title="inetd.conf　　　　This file describes the services that will be available"></a>inetd.conf　　　　This file describes the services that will be available</h1><h1 id="through-the-INETD-TCP-IP-super-server-To-re-configure"><a href="#through-the-INETD-TCP-IP-super-server-To-re-configure" class="headerlink" title="　　　　　　　　　through the INETD TCP/IP super server. To re-configure"></a>　　　　　　　　　through the INETD TCP/IP super server. To re-configure</h1><h1 id="the-running-INETD-process-edit-this-file-then-send-the"><a href="#the-running-INETD-process-edit-this-file-then-send-the" class="headerlink" title="　　　　　　　　　the running INETD process, edit this file, then send the"></a>　　　　　　　　　the running INETD process, edit this file, then send the</h1><h1 id="NETD-process-a-SIGHUP-signal"><a href="#NETD-process-a-SIGHUP-signal" class="headerlink" title="　　　　　　　　　NETD process a SIGHUP signal."></a>　　　　　　　　　NETD process a SIGHUP signal.</h1><p>#</p>
 <h1 id="Version-etc-inetd-conf-3-10-05-27-93"><a href="#Version-etc-inetd-conf-3-10-05-27-93" class="headerlink" title="Version:　　　 @(#)/etc/inetd.conf 　　3.10 　　05/27/93"></a>Version:　　　 @(#)/etc/inetd.conf 　　3.10 　　05/27/93</h1><p>#</p>
-<h1 id="Authors-Original-taken-from-BSD-UNIX-4-3-TAHOE"><a href="#Authors-Original-taken-from-BSD-UNIX-4-3-TAHOE" class="headerlink" title="Authors: 　　　Original taken from BSD UNIX 4.3/TAHOE."></a>Authors: 　　　Original taken from BSD UNIX 4.3/TAHOE.</h1><h1 id="Fred-N-van-Kempen-119-x61-x6c-116-x6a-x65-64-117-119-x61-108-x74-46-110-108-46-109-x75-x67-x6e-101-116-46-x6f-x72-x67"><a href="#Fred-N-van-Kempen-119-x61-x6c-116-x6a-x65-64-117-119-x61-108-x74-46-110-108-46-109-x75-x67-x6e-101-116-46-x6f-x72-x67" class="headerlink" title="　　　　　　　　Fred N. van Kempen, &#119;&#x61;&#x6c;&#116;&#x6a;&#x65;&#64;&#117;&#119;&#x61;&#108;&#x74;&#46;&#110;&#108;&#46;&#109;&#x75;&#x67;&#x6e;&#101;&#116;&#46;&#x6f;&#x72;&#x67;"></a>　　　　　　　　Fred N. van Kempen, <a href="&#x6d;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#119;&#x61;&#x6c;&#116;&#x6a;&#x65;&#64;&#117;&#119;&#x61;&#108;&#x74;&#46;&#110;&#108;&#46;&#109;&#x75;&#x67;&#x6e;&#101;&#116;&#46;&#x6f;&#x72;&#x67;">&#119;&#x61;&#x6c;&#116;&#x6a;&#x65;&#64;&#117;&#119;&#x61;&#108;&#x74;&#46;&#110;&#108;&#46;&#109;&#x75;&#x67;&#x6e;&#101;&#116;&#46;&#x6f;&#x72;&#x67;</a></h1><p>#</p>
-<h1 id="Modified-for-Debian-Linux-by-Ian-A-Murdock-x69-x6d-117-114-100-111-99-107-x40-115-104-101-x6c-x6c-x2e-x70-x6f-x72-x74-97-108-46-99-x6f-x6d"><a href="#Modified-for-Debian-Linux-by-Ian-A-Murdock-x69-x6d-117-114-100-111-99-107-x40-115-104-101-x6c-x6c-x2e-x70-x6f-x72-x74-97-108-46-99-x6f-x6d" class="headerlink" title="Modified for Debian Linux by Ian A. Murdock &#x69;&#x6d;&#117;&#114;&#100;&#111;&#99;&#107;&#x40;&#115;&#104;&#101;&#x6c;&#x6c;&#x2e;&#x70;&#x6f;&#x72;&#x74;&#97;&#108;&#46;&#99;&#x6f;&#x6d;"></a>Modified for Debian Linux by Ian A. Murdock <a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#x69;&#x6d;&#117;&#114;&#100;&#111;&#99;&#107;&#x40;&#115;&#104;&#101;&#x6c;&#x6c;&#x2e;&#x70;&#x6f;&#x72;&#x74;&#97;&#108;&#46;&#99;&#x6f;&#x6d;">&#x69;&#x6d;&#117;&#114;&#100;&#111;&#99;&#107;&#x40;&#115;&#104;&#101;&#x6c;&#x6c;&#x2e;&#x70;&#x6f;&#x72;&#x74;&#97;&#108;&#46;&#99;&#x6f;&#x6d;</a></h1><p>#</p>
-<h1 id="Modified-for-RHS-Linux-by-Marc-Ewing-x6d-97-114-x63-x40-x72-x65-x64-x68-x61-x74-x2e-x63-111-x6d"><a href="#Modified-for-RHS-Linux-by-Marc-Ewing-x6d-97-114-x63-x40-x72-x65-x64-x68-x61-x74-x2e-x63-111-x6d" class="headerlink" title="Modified for RHS Linux by Marc Ewing &#x6d;&#97;&#114;&#x63;&#x40;&#x72;&#x65;&#x64;&#x68;&#x61;&#x74;&#x2e;&#x63;&#111;&#x6d;"></a>Modified for RHS Linux by Marc Ewing <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#x6d;&#97;&#114;&#x63;&#x40;&#x72;&#x65;&#x64;&#x68;&#x61;&#x74;&#x2e;&#x63;&#111;&#x6d;">&#x6d;&#97;&#114;&#x63;&#x40;&#x72;&#x65;&#x64;&#x68;&#x61;&#x74;&#x2e;&#x63;&#111;&#x6d;</a></h1><p>#</p>
+<h1 id="Authors-Original-taken-from-BSD-UNIX-4-3-TAHOE"><a href="#Authors-Original-taken-from-BSD-UNIX-4-3-TAHOE" class="headerlink" title="Authors: 　　　Original taken from BSD UNIX 4.3/TAHOE."></a>Authors: 　　　Original taken from BSD UNIX 4.3/TAHOE.</h1><h1 id="Fred-N-van-Kempen-x77-x61-108-116-106-101-64-117-119-x61-108-116-46-110-x6c-x2e-109-x75-x67-110-101-116-46-x6f-114-103"><a href="#Fred-N-van-Kempen-x77-x61-108-116-106-101-64-117-119-x61-108-116-46-110-x6c-x2e-109-x75-x67-110-101-116-46-x6f-114-103" class="headerlink" title="　　　　　　　　Fred N. van Kempen, &#x77;&#x61;&#108;&#116;&#106;&#101;&#64;&#117;&#119;&#x61;&#108;&#116;&#46;&#110;&#x6c;&#x2e;&#109;&#x75;&#x67;&#110;&#101;&#116;&#46;&#x6f;&#114;&#103;"></a>　　　　　　　　Fred N. van Kempen, <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#x77;&#x61;&#108;&#116;&#106;&#101;&#64;&#117;&#119;&#x61;&#108;&#116;&#46;&#110;&#x6c;&#x2e;&#109;&#x75;&#x67;&#110;&#101;&#116;&#46;&#x6f;&#114;&#103;">&#x77;&#x61;&#108;&#116;&#106;&#101;&#64;&#117;&#119;&#x61;&#108;&#116;&#46;&#110;&#x6c;&#x2e;&#109;&#x75;&#x67;&#110;&#101;&#116;&#46;&#x6f;&#114;&#103;</a></h1><p>#</p>
+<h1 id="Modified-for-Debian-Linux-by-Ian-A-Murdock-105-x6d-x75-114-x64-111-x63-107-64-x73-104-101-108-108-46-x70-x6f-x72-116-97-x6c-46-99-x6f-x6d"><a href="#Modified-for-Debian-Linux-by-Ian-A-Murdock-105-x6d-x75-114-x64-111-x63-107-64-x73-104-101-108-108-46-x70-x6f-x72-116-97-x6c-46-99-x6f-x6d" class="headerlink" title="Modified for Debian Linux by Ian A. Murdock &#105;&#x6d;&#x75;&#114;&#x64;&#111;&#x63;&#107;&#64;&#x73;&#104;&#101;&#108;&#108;&#46;&#x70;&#x6f;&#x72;&#116;&#97;&#x6c;&#46;&#99;&#x6f;&#x6d;"></a>Modified for Debian Linux by Ian A. Murdock <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#x3a;&#105;&#x6d;&#x75;&#114;&#x64;&#111;&#x63;&#107;&#64;&#x73;&#104;&#101;&#108;&#108;&#46;&#x70;&#x6f;&#x72;&#116;&#97;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#105;&#x6d;&#x75;&#114;&#x64;&#111;&#x63;&#107;&#64;&#x73;&#104;&#101;&#108;&#108;&#46;&#x70;&#x6f;&#x72;&#116;&#97;&#x6c;&#46;&#99;&#x6f;&#x6d;</a></h1><p>#</p>
+<h1 id="Modified-for-RHS-Linux-by-Marc-Ewing-x6d-x61-x72-99-x40-x72-101-100-x68-x61-116-46-x63-111-x6d"><a href="#Modified-for-RHS-Linux-by-Marc-Ewing-x6d-x61-x72-99-x40-x72-101-100-x68-x61-116-46-x63-111-x6d" class="headerlink" title="Modified for RHS Linux by Marc Ewing &#x6d;&#x61;&#x72;&#99;&#x40;&#x72;&#101;&#100;&#x68;&#x61;&#116;&#46;&#x63;&#111;&#x6d;"></a>Modified for RHS Linux by Marc Ewing <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#x6d;&#x61;&#x72;&#99;&#x40;&#x72;&#101;&#100;&#x68;&#x61;&#116;&#46;&#x63;&#111;&#x6d;">&#x6d;&#x61;&#x72;&#99;&#x40;&#x72;&#101;&#100;&#x68;&#x61;&#116;&#46;&#x63;&#111;&#x6d;</a></h1><p>#</p>
 <h1 id=""><a href="#" class="headerlink" title="      "></a><service_name> <sock_type> <proto> <flags> <user> <server_path> <args></args></server_path></user></flags></proto></sock_type></service_name></h1><p>#服务名 socket类型 协议 动作 拥有者 服务进程路径名 掉用参数</p>
 <p>#nowait 表示在相应一个网络连接之后,服务进程在释放旧的联接之前可以接受</p>
 <p>#新的连接请求,wait 则表示必须在旧连接清除之后才能接收新的连接.</p>

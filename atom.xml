@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://latteye.me/"/>
-  <updated>2017-06-05T14:04:07.000Z</updated>
+  <updated>2017-06-05T14:17:17.000Z</updated>
   <id>http://latteye.me/</id>
   
   <author>
@@ -14,6 +14,90 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Calico</title>
+    <link href="http://latteye.me/2017/06/Calico.html"/>
+    <id>http://latteye.me/2017/06/Calico.html</id>
+    <published>2017-06-05T14:10:00.000Z</published>
+    <updated>2017-06-05T14:17:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Calico 知识图谱<br><a id="more"></a></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<li><p>Calico 可以在 k8s 下用 yaml 的方式安装，但是需要特权和 hostNetwork.</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
+<li>kubelet <code>--network-plugin=cni</code> <code>--cni-bin-dir=/opt/cni/bin</code> (文档缺乏 )</li>
+<li>kube-proxy 必须以 iptables 方式工作，1.2 之后默认</li>
+<li>kube-proxy 必须<strong>不使用</strong> <code>--masquerade-all</code> 参数</li>
+</ul>
+<h2 id="Hosted-安装（通过DaemonSet"><a href="#Hosted-安装（通过DaemonSet" class="headerlink" title="Hosted 安装（通过DaemonSet)"></a>Hosted 安装（通过DaemonSet)</h2><ul>
+<li>通过下载定制的 yaml 文件直接部署，包含了多个内容，service account, deployment, daemonset 等。</li>
+<li><p>遇到问题:</p>
+<ul>
+<li><p>kubelet log:</p>
+<blockquote>
+<p>NetworkPlugin cni failed on the status hook for pod ‘foo-r3rg5’ - Unexpected command output nsenter: cannot open /proc/5875/ns/net: No such file or directory\n with error: exit status 1</p>
+</blockquote>
+<ul>
+<li><p>结论:</p>
+<p>这是由于没有给出正确的 cni-bin 目录导致找不到二进制文件 <code>--cni-bin-dir=/opt/cni/bin</code></p>
+</li>
+</ul>
+</li>
+<li><p>kubelet log:</p>
+<blockquote>
+<p>Error while adding to cni network: the server has asked for the client to provide credentials</p>
+</blockquote>
+</li>
+<li><p>kubectl describe:</p>
+<blockquote>
+<p>Error creating: No API token found for service account “calico-node”, retry after the token is automatically created and adde</p>
+</blockquote>
+</li>
+<li><p>目前解决思路:</p>
+<blockquote>
+<p><a href="https://kubernetes.io/docs/admin/service-accounts-admin/" target="_blank" rel="external">https://kubernetes.io/docs/admin/service-accounts-admin/</a></p>
+<p>You must pass a service account private key file to the token controller in the controller-manager by using the –service-account-private-key-file option. The private key will be used to sign generated service account tokens. Similarly, you must pass the corresponding public key to the kube-apiserver using the –service-account-key-file option. The public key will be used to verify the tokens during authentication.</p>
+</blockquote>
+<ul>
+<li><p>结论:</p>
+<p>这个现象确实是通过上面的思路解决的，当启用了证书验证时候，service account 就需要 token 来验证，而签发 token 的 controller-manager 需要配置私有证书。同时需要根据该私有证书，生成公钥证书给 apiserver 用来验证所签发的 token。<br><a href="http://www.cnblogs.com/amylis_chen/p/6055650.html" target="_blank" rel="external">如何生成公钥</a></p>
+</li>
+</ul>
+</li>
+<li><p>calico controller 问题:</p>
+<blockquote>
+<p>17-05-27 16:42:21,784 7 WARNING Connection error: Pod …hostname ‘kubernetes.default’ doesn’t match ‘10.16.15.11’<br>2017-05-27 16:42:21,784 7 INFO Restarting watch on resource: Pod<br>2017-05-27 16:42:22,700 7 INFO Syncing ‘NetworkPolicy’ objects<br>2017-05-27 16:42:22,701 7 INFO Syncing ‘Namespace’ objects<br>2017-05-27 16:42:22,707 7 WARNING Connection error: NetworkPolicy …hostname ‘kubernetes.default’ doesn’t match ‘10.16.15.11’<br>2017-05-27 16:42:22,707 7 INFO Restarting watch on resource: NetworkPolicy<br>2017-05-27 16:42:22,708 7 WARNING Connection error: Namespace …hostname ‘kubernetes.default’ doesn’t match ‘10.16.15.11’<br>2017-05-27 16:42:22,708 7 INFO Restarting watch on resource: Namespace<br>2017-05-27 16:42:22,785 7 INFO Syncing ‘Pod’ objects</p>
+</blockquote>
+<ul>
+<li>原因: yaml 中的 policy controller 在连接 apiserver 的时候，使用了 kubernetes.default 域名，通过这个解析到当前的 apiserver，如果当前的 apiserver 的 ssl 证书中的域名不包括这个域名，那么就会出现上面的错误。</li>
+<li>解决方式，要么将 SSL 证书中的域名加入。要么将 yaml 中的配置改成对应的域名或者 IP。当这个问题未解决的时候各个应该能连通的 container 由于缺乏 Network Policy , 变得无法连通。</li>
+<li>一开始看到网络无法连通的时候，逆向想到 是 policy controller 是比较困难的，这需要对 k8s netwrok policy 和 calico network policy 都有一定的知识才能反应过来，这个地方我整整卡了 4 个小时多。<br>当看到<a href="https://github.com/projectcalico/k8s-policy" target="_blank" rel="external">这个网页的时候</a>，有一定的联想。随后才想起看 policy controller 的 log。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Calico 知识图谱&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="kubernetes" scheme="http://latteye.me/tags/kubernetes/"/>
+    
+      <category term="calico" scheme="http://latteye.me/tags/calico/"/>
+    
+      <category term="cni" scheme="http://latteye.me/tags/cni/"/>
+    
+      <category term="知识图谱" scheme="http://latteye.me/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
+    
+  </entry>
   
   <entry>
     <title>笔记 - Google SRE</title>
@@ -1018,84 +1102,6 @@ used: 22648408</code></p>
     </summary>
     
       <category term="Life" scheme="http://latteye.me/categories/Life/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Amazon EC2 Disk Performence</title>
-    <link href="http://latteye.me/2011/12/amazon-ec2-disk-performence.html"/>
-    <id>http://latteye.me/2011/12/amazon-ec2-disk-performence.html</id>
-    <published>2011-12-14T05:22:31.000Z</published>
-    <updated>2015-05-02T14:36:21.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文的目的是为了测试 Amazon EC2 的磁盘性能，从而为数据库搭建做性能估算。使用的测试工具为 <a href="http://sysbench.sourceforge.net/" target="_blank" rel="external">sysbench</a> ，这款软件已经很久没更新了。所以全当得出数据为“比较值”。<br>Amazon 的 Elastic Storage 为 EC2 Instance 提供了软 Raid 的可能性，但是，其 Raid 除了具有数据保障性外，是否有性能提升？提升多少？这是这次实验的目的。<br><a id="more"></a></p>
-<p>参考别处资料写了一个 sysbench 测试脚本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="built_in">set</span> -u</div><div class="line"><span class="built_in">set</span> -x</div><div class="line"><span class="built_in">set</span> <span class="_">-e</span></div><div class="line"><span class="keyword">for</span> size <span class="keyword">in</span> 2G 4G 8G;<span class="keyword">do</span></div><div class="line">    <span class="keyword">for</span> mode <span class="keyword">in</span> seqwr seqrd seqrewr rndrd rndwr rndrw;<span class="keyword">do</span></div><div class="line">        <span class="keyword">for</span> blksize <span class="keyword">in</span> 16384 ; <span class="keyword">do</span></div><div class="line">            sysbench --test=fileio --file-num=32 --file-total-size=<span class="variable">$size</span> prepare</div><div class="line">            <span class="keyword">for</span> threads <span class="keyword">in</span> 1 4 8 16 32; <span class="keyword">do</span></div><div class="line">                <span class="built_in">echo</span> <span class="string">"===== testing <span class="variable">$blksize</span> in $ <span class="variable">$threads</span> threads"</span></div><div class="line">                <span class="built_in">echo</span> PARAMS <span class="variable">$size</span> <span class="variable">$mode</span> <span class="variable">$threads</span> <span class="variable">$blksize</span> &gt; sysbench-size-<span class="variable">$size</span>-mode-<span class="variable">$mode</span>-threads-<span class="variable">$threads</span>-blksz-<span class="variable">$blksize</span></div><div class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> 1 2 3 ; <span class="keyword">do</span></div><div class="line">                    sysbench --test=fileio --file-total-size=<span class="variable">$size</span> --file-test-mode=<span class="variable">$mode</span> --max-time=180 --max-requests=100000000 --num-threads=<span class="variable">$threads</span> --init-rng=on --file-num=32 --file-extra-flags=direct --file-fsync-freq=0 --file-block-size=<span class="variable">$blksize</span> run | tee <span class="_">-a</span> sysbench-size-<span class="variable">$size</span>-mode-<span class="variable">$mode</span>-threads-<span class="variable">$threads</span>-blksz-<span class="variable">$blksize</span> 2&gt;&amp;1</div><div class="line">                <span class="keyword">done</span></div><div class="line">            <span class="keyword">done</span></div><div class="line">            sysbench --test=fileio --file-total-size=<span class="variable">$size</span> cleanup</div><div class="line">        <span class="keyword">done</span></div><div class="line">    <span class="keyword">done</span></div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
-<font size="3"><strong>基础数值</strong></font>
-
-<p>首先，来一款手头上的普通三星 160G 硬盘，将其作为一个参考数值。</p>
-<p><strong><font color="Teal">Form 1 – </font>fsync at end of test</strong></p>
-<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th>RndWR</th><br><th>RndReWr</th><br></tr><br><tr><br><th>Trd 1</th><br><td>3481\54M</td><br><td>3771\58M</td><br><td>4152\64M</td><br><td>114\1.7M</td><br><td>181\2.8M</td><br><td>123\1.9M</td><br></tr><br><tr><br><th>Trd 4</th><br><td>1951\30M</td><br><td>4403\68M</td><br><td>2324\36M</td><br><td>114\1.7M</td><br><td>181\2.8M</td><br><td>124\1.9M</td><br></tr><br><tr><br><th>Trd 8</th><br><td>1289\20M</td><br><td>4287\66M</td><br><td>2630\41M</td><br><td>114\1.7M</td><br><td>181\2.8M</td><br><td>&nbsp;</td><br></tr><br><tr><br><th>Trd 16</th><br><td>1600\25M</td><br><td>4133\64M</td><br><td>1727\26M</td><br><td>115\1.7M</td><br><td>181\2.8M</td><br><td>&nbsp;</td><br></tr><br><tr><br><th>Trd 32</th><br><td>1939\30M</td><br><td>3952\61M</td><br><td>2080\32M</td><br><td>115\1.8M</td><br><td>182\2.8M</td><br><td>&nbsp;</td><br></tr><br></table>
-
-<p><strong><font color="Teal">Form 2 – </font><font color="red">fsync per write request</font></strong></p>
-<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th>RndWR</th><br><th>RndReWr</th><br></tr><br><tr><br><th>Trd 1</th><br><td>33\543Kb</td><br><td>3842\60Mb</td><br><td>36\576Kb</td><br><td>110\1.7Mb</td><br><td>17\280Kb</td><br><td>31\510Kb</td><br></tr><br><tr><br><th>Trd 4</th><br><td>35\575Kb</td><br><td>4400\68Mb</td><br><td>34\556Kb</td><br><td>109\1.7Mb</td><br><td>26\418Kb</td><br><td>43\694Kb</td><br></tr><br><tr><br><th>Trd 8</th><br><td>34\545Kb</td><br><td>4267\66Mb</td><br><td>30\485Kb</td><br><td>111\1.7Mb</td><br><td>28\452Kb</td><br><td>47\756Kb</td><br></tr><br><tr><br><th>Trd 16</th><br><td>33\541Kb</td><br><td>4138\64Mb</td><br><td>34\545Kb</td><br><td>110\1.7Mb</td><br><td>30\481Kb</td><br><td>50\813Kb</td><br></tr><br><tr><br><th>Trd 32</th><br><td>33\532Kb</td><br><td>3942\61Mb</td><br><td>34\558Kb</td><br><td>110\1.7Mb</td><br><td>50\813Kb</td><br><td>65\1.0Mb</td><br></tr><br></table>
-
-<p>一些缩写解释如下：</p>
-<pre lang="ini">
-Req&Trans/s=Request & Transferred/sec
-TRD=Threads
-SEQ=sequency
-RD=read
-WR=Write
-RND=Random
-REWR=Read&Write
-</pre>
-
-<p>你看到的是一块非常普通的硬盘，他的顺序写也只有每秒54M，而现在好一些的硬盘都可以做到每秒80M以上的顺序写了。<br>来看看 Amazon 的测试数据吧。</p>
-<font size="3"><strong>Amazon Micro Instance with Single Elastic Storage</strong></font>
-
-<p><strong><font color="Teal">Form 3 – </font>fsync at end of test</strong></p>
-<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th><font color="red">RndRD</font></th><br><th><font color="red">RndWR</font></th><br><th><font color="red">RndReWr</font></th><br></tr><br><tr><br><th>Trd 1</th><br><td>235\3.6M</td><br><td>1521\23M</td><br><td>256\4.0M</td><br><td><font color="red">1525\23M</font></td><br><td><font color="red">222\3.4M</font></td><br><td><font color="red">523\8.1M</font></td><br></tr><br><tr><br><th>Trd 4</th><br><td>247\3.8M</td><br><td>2480\38M</td><br><td>253\3.9M</td><br><td><font color="red">3138\49M</font></td><br><td><font color="red">1005\15M</font></td><br><td><font color="red">1698\26M</font></td><br></tr><br><tr><br><th>Trd 8</th><br><td>256\4.0M</td><br><td>3483\54M</td><br><td>251\3.9M</td><br><td><font color="red">8482\81M</font></td><br><td><font color="red">1691\26M</font></td><br><td><font color="red">1653\25M</font></td><br></tr><br><tr><br><th>Trd 16</th><br><td>251\3.9M</td><br><td><font color="red">5959\93M</font></td><br><td>243\3.7M</td><br><td><font color="red">1594\24M</font></td><br><td><font color="red">1888\29M</font></td><br><td><font color="red">1386\21M</font></td><br></tr><br><tr><br><th>Trd 32</th><br><td>251\3.9M</td><br><td><font color="red">6387\99M</font></td><br><td>260\4.0M</td><br><td><font color="red">5452\85M</font></td><br><td><font color="red">1303\20M</font></td><br><td>&nbsp;</td><br></tr><br></table>
-
-<p>请注意看红色的部分，Amazon 磁盘的测试结果，写操作差的一塌糊涂，几乎和个U盘一样，但是只要有读操作！尤其是随机读取操作，数据就牛逼的一塌糊涂。其中随机读取最佳成绩为 5452\85M，而单个物理硬盘仅为 115\1.8M 。天壤之别！<br>而且 RndWr 的写入比 SeqWr 要快了很多，这肯定是因为逻辑磁盘到物理磁盘之间存在数据分片。</p>
-<p><strong>猜测：</strong><br>1.Elastic Storage 和EC2 instance 之间很可能是走网络的。<br>2.一定有数据冗余机制，但估计不是 RAID。<br>3.有很大的 cache 在前面。很可能在用 SSD 做 cache。</p>
-<p>这测试结果，你说好么，写入速度慢成这样…这鸟样也太过分了一点。你说他差么，随机读牛成这样… 没办法形容了。</p>
-<font size="3"><strong>Amazon Micro Instance with Raid 0 （2 disk）</strong></font>
-
-<p><strong><font color="Teal">Form 4 – </font>fsync at end of test</strong></p>
-<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th><font color="red">RndWR</font></th><br><th><font color="red">RndReWr</font></th><br></tr><br><tr><br><th>Trd 1</th><br><td><font color="blue">194\3.0M</font></td><br><td>1440\22M</td><br><td>289\4.5M</td><br><td>1430\22M</td><br><td>188\2.9M</td><br><td>494\7.7M</td><br></tr><br><tr><br><th>Trd 4</th><br><td><font color="blue">182\2.7M</font></td><br><td>2631\41M</td><br><td>320\3.1M</td><br><td>3226\50M</td><br><td>650\10M</td><br><td>1248\19M</td><br></tr><br><tr><br><th>Trd 8</th><br><td><font color="blue">190\2.9M</font></td><br><td>3753\58M</td><br><td>297\3.2M</td><br><td>4330\67M</td><br><td>1612\25M</td><br><td><font color="red">2781\43M</font></td><br></tr><br><tr><br><th>Trd 16</th><br><td><font color="blue">182\2.8M</font></td><br><td>2895\45M</td><br><td>199\5.0M</td><br><td>3124\48M</td><br><td><font color="red">2121\33M</font></td><br><td><font color="red">2875\44M</font></td><br></tr><br><tr><br><th>Trd 32</th><br><td><font color="blue">190\2.9M</font></td><br><td>2465\38M</td><br><td>206\4.6M</td><br><td>4161\65M</td><br><td><font color="red">2158\33M</font></td><br><td><font color="red">3671\57M</font></td><br></tr><br></table>
-
-<p>2 Disks Raid0 几乎和单硬盘没有什么太大变化，SeqWr 的数值全线微幅下降，可能是由于系统做软 Raid，系统层面有所开销所致。RndWr 在 16 线程和 32线程略微高一点。但也不是本质性提升。<br>RndRW 8、16、32 有明显提高，但是很难判断是某个时间段 Amazon IO 比较空闲所致，还是 Raid0 的帮助。有一种可能是我做 md 的时候使用的默认 chunk 为 64，而 Amazon 本身的 chunk 比 64 大，所以我这么操作以后造成了更加分散的数据分布，所以 RndRW 会略好一点。但也很难解释为什么 RndRd 没有明显高起来。</p>
-<p>同时我还做了 6 Disk Raid0 测试，由于数据和 2 Disk 实在是没啥差距，就不贴上来了。<br>总的感觉 Amazon 上做 Raid 是件无意义的事情。这与国外一个人的测试[ <a href="http://af-design.com/blog/2009/02/27/amazon-ec2-disk-performance/" target="_blank" rel="external">1</a> <a href="http://af-design.com/blog/2010/03/02/honesty-box-ebs-performance-revisited/" target="_blank" rel="external">2</a> ]相去甚远。不止是结论差异，性能也有差异，他在 6 Disk Raid0 的情况下 Seq Input 居然可以走到接近 110M 的速度，但是他的 Rnd Seek 在8Disk 的情况下最高也只走到 4000左右。我怀疑这是 Instance 差异导致，接下来看看 m1.large 的测试数据。</p>
-<font size="3"><strong>Amazon EC2 m1.large NoRaid</strong></font>
-
-<p><strong><font color="Teal">Form 5 – </font>fsync at end of test</strong></p>
-<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th>RndWR</th><br><th>RndReWr</th><br></tr><br><tr><br><th>Trd 1</th><br><td>1084\16M</td><br><td>2330\36M</td><br><td>1149\17M</td><br><td>2134\33M</td><br><td>1124\17M</td><br><td>1378\21M</td><br></tr><br><tr><br><th>Trd 4</th><br><td>1058\16M</td><br><td>5445\85M</td><br><td>1113\17M</td><br><td>5586\87M</td><br><td>2039\31M</td><br><td>2904\45M</td><br></tr><br><tr><br><th>Trd 8</th><br><td>1053\16M</td><br><td>6509\101M</td><br><td>1147\17M</td><br><td>6569\102M</td><br><td>2112\33M</td><br><td>3054\47M</td><br></tr><br><tr><br><th>Trd 16</th><br><td>1026\16M</td><br><td>6195\96M</td><br><td>1122\17M</td><br><td>6486\101M</td><br><td>2144\33M</td><br><td>3802\59M</td><br></tr><br><tr><br><th>Trd 32</th><br><td>1034\16M</td><br><td>5985\93M</td><br><td>1158\18M</td><br><td>6490\101M</td><br><td>2149\33M</td><br><td>3859\60M</td><br></tr><br></table>
-
-<p><strong><font color="Teal">Form 6 – </font><font color="red">fsync every 64 times write(1M)</font></strong></p>
-<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th>RndWR</th><br><th>RndReWr</th><br></tr><br><tr><br><th>Trd 1</th><br><td>1112\17M</td><br><td>2122\33M</td><br><td>1117\17M</td><br><td>2139\33M</td><br><td>1097\17M</td><br><td>1385\21M</td><br></tr><br><tr><br><th>Trd 4</th><br><td>1073\16M</td><br><td>5598\87M</td><br><td>1097\17M</td><br><td>5759\89M</td><br><td>2263\35M</td><br><td>3179\49M</td><br></tr><br><tr><br><th>Trd 8</th><br><td>1064\16M</td><br><td>6453\100M</td><br><td>1122\17M</td><br><td>6563\102M</td><br><td>2164\33M</td><br><td>3740\58M</td><br></tr><br><tr><br><th>Trd 16</th><br><td>1118\17M</td><br><td>6511\101M</td><br><td>1138\17M</td><br><td>6607\103M</td><br><td>2060\32M</td><br><td>3763\58M</td><br></tr><br><tr><br><th>Trd 32</th><br><td>1083\16M</td><br><td>6715\1044M</td><br><td>1173\18M</td><br><td>6713\104M</td><br><td>1997\31M</td><br><td>3880\60M</td><br></tr><br></table>
-
-<p><strong><font color="Teal">Form 7 – </font><font color="red">fsync per write request</font></strong></p>
-<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th>RndWR</th><br><th>RndReWr</th><br></tr><br><tr><br><th>Trd 1</th><br><td>353\5.5M</td><br><td>1808\28M</td><br><td>371\5.8M</td><br><td>2017\31M</td><br><td>289\4.5M</td><br><td>677\10M</td><br></tr><br><tr><br><th>Trd 4</th><br><td>352\5.5M</td><br><td>5003\78M</td><br><td>395\6.1M</td><br><td>5256\82M</td><br><td>1237\19M</td><br><td>1634\25M</td><br></tr><br><tr><br><th>Trd 8</th><br><td>350\5.4M</td><br><td>6071\94M</td><br><td>388\6.0M</td><br><td>5825\91M</td><br><td>1589\24M</td><br><td>2879\44M</td><br></tr><br><tr><br><th>Trd 16</th><br><td>355\5.5M</td><br><td>6420\100M</td><br><td>360\5.6M</td><br><td>6172\96M</td><br><td>1607\25M</td><br><td>3104\48M</td><br></tr><br><tr><br><th>Trd 32</th><br><td>349\5.4M</td><br><td>6507\101M</td><br><td>374\5.8M</td><br><td>6248\97M</td><br><td>1703\26M</td><br><td>3156\49M</td><br></tr><br></table>
-
-<font size="3"><strong>Amazon EC2 m1.large 6 Disk Raid 0</strong></font>
-
-<p><strong><font color="Teal">Form 8 – </font><font color="red">fsync per write request</font></strong></p>
-<table border="1"><br><tr><br><td>Req&amp;Trans/s</td><br><th>SeqWR</th><br><th>SeqRD</th><br><th>SeqReWr</th><br><th>RndRD</th><br><th>RndWR</th><br><th>RndReWr</th><br></tr><br><tr><br><th>Trd 1</th><br><td>164\2.5M</td><br><td>1605\25M</td><br><td>225\3.5M</td><br><td>1338\20M</td><br><td>238\3.7M</td><br><td>280\4.3M</td><br></tr><br><tr><br><th>Trd 4</th><br><td>177\2.7M</td><br><td>3707\57M</td><br><td>242\3.7M</td><br><td>4730\73M</td><br><td>649\10M</td><br><td>671\10M</td><br></tr><br><tr><br><th>Trd 8</th><br><td>176\2.7M</td><br><td>5043\78M</td><br><td>237\3.7M</td><br><td>7538\117M</td><br><td>948\14M</td><br><td>1083\16M</td><br></tr><br><tr><br><th>Trd 16</th><br><td>163\2.5M</td><br><td>5927\92M</td><br><td>233\3.6M</td><br><td>9168\143M</td><br><td>1006\15M</td><br><td>1273\19M</td><br></tr><br><tr><br><th>Trd 32</th><br><td>152\2.3M</td><br><td>9210\143M</td><br><td>240\3.7M</td><br><td>10025\156M</td><br><td>573\8.9M</td><br><td>1369\21M</td><br></tr><br></table>
-
-<p>根据这些数据可以得到以下结论：</p>
-<p>1. Large 比 Micro 在 IO 方面性能好。<br>2. RAID 无意义。<br>3. 瓶颈在连续写。<br>4. Amazon 机器即使在 fsync per write request 的情况下，随机写也可以达到 1000/s ，而随机读在 5000-6000/s。其随机性能比得上 SSD 了。<br>5. 由于 MySQL Dirty Page 有两次写，两次写空间为 2M，每写1M sync 一次，所以上面专门有 64 times sync 的测试数据。其连续写数据，我觉得可以做为 Amazon Large MySQL 写入瓶颈数值参考。<br>6. 不要轻易相信别人的神化！</p>
-<p>很多 MySQL 的参数设置还需要结合很多信息才能确定，单靠磁盘监测还不够。以后再开别的文章来探讨吧。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文的目的是为了测试 Amazon EC2 的磁盘性能，从而为数据库搭建做性能估算。使用的测试工具为 &lt;a href=&quot;http://sysbench.sourceforge.net/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;sysbench&lt;/a&gt; ，这款软件已经很久没更新了。所以全当得出数据为“比较值”。&lt;br&gt;Amazon 的 Elastic Storage 为 EC2 Instance 提供了软 Raid 的可能性，但是，其 Raid 除了具有数据保障性外，是否有性能提升？提升多少？这是这次实验的目的。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Work" scheme="http://latteye.me/categories/Work/"/>
     
     
   </entry>

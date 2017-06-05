@@ -150,6 +150,51 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2007/10/bug-with-winbind-id.html">Winbind ID 与用户、组映射关系混乱</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年10月26日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>有两台机器的 Winbind ID 与真实的用户映射关系混乱了。虽然不知道是什么引起的，但感觉 Winbind 还是很容易有这个 Bug 的。</p>
+<p>如何解决呢？</p>
+<p>Winbind 将所有的缓存信息都<a href="http://us3.samba.org/samba/docs/man/Samba-HOWTO-Collection/winbind.html#id412710" target="_blank" rel="external">保存在了 tdb 文件中</a>。只要将 tdb 全部删除，重启 Winbind 服务即可。默认 tdb 文件保存在 /var/cache/samba/ 目录。</p>
+<p>在重启 Winbind 之后，就会发现所有域用户文件属性变成了 uid 显示。而不是用户名。执行：</p>
+<p><code>id username</code></p>
+<p>之后， Winbind 重新向 PDC 请求信息。这时重新建立 UID 与用户直接的关系。</p>
+<p>需要注意的是，某些以特定用户运行的程序可能这时需要重启，由于用户映射的改变，可能会导致权限问题。</p>
+<p>关于 Winbind ，您可以参考 <a href="http://linuxblog.cn/2007/09/add-linux-to-windows-domain-with-winbind.html" target="_blank" rel="external">此文</a> 。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2007/10/cygwin-sshd.html">Cygwin 下将 SSH 加为服务</a>
         
       </h1>
@@ -525,48 +570,6 @@
 
 <p>玩法：随便在心里默想一个两位数，不要说出来，也不要写下来，选好之后做如下运算：两位数字-（十位数字+个位数字）=得到的数字. 这个时候，到右侧去找到得到的这个数字，看准后面对应的图案，在心里记下来. 例子：你心里想的是56，那么56-(5+6)=45，找到右边45对应的图片.屏住呼吸！神奇的事情要发生了！点击左边的水晶球，看看显示出来的图案是不是你心里记下的那个！要是不敢相信，那就换数字再测！记住，整个过程只要在心里完成.为什么？谁能解开其中奥妙？</p>
 
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2007/09/learn-fortigate.html">Fortigate 防火墙</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2007年9月18日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p><img src="http://www.fortinet.com.cn/images/logo_home.gif" alt="fortigate"><br>Fortigate 防火墙是美国 <a href="http://www.fortinet.com.cn/" target="_blank" rel="external">飞塔</a> 公司的防火墙/路由器产品。功能还是很强大的。<br>
-          <div class="read-more">
-            <a href="/2007/09/learn-fortigate.html" class="read-more-link">Read more..</a>
-          </div>
         
       
     </div>
