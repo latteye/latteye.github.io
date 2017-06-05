@@ -1,12 +1,701 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/avant-window-navigator-ubuntu-linuxblog-sources.html" class="post-title-link">Avant Window Navigator 镜像源发布</a></h2><div class="post-info">2007年8月31日</div><div class="post-content"><p>几天前就答应过要搭建 <a href="http://code.google.com/p/avant-window-navigator/" target="_blank" rel="external">Avant Window Navigator </a>的镜像源，今天总算是做掉了。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/23/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/23/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/avant-window-navigator-ubuntu-linuxblog-sources.html">Avant Window Navigator 镜像源发布</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月31日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>几天前就答应过要搭建 <a href="http://code.google.com/p/avant-window-navigator/" target="_blank" rel="external">Avant Window Navigator </a>的镜像源，今天总算是做掉了。</p>
 <p><strong>1. 获取密钥</strong></p>
 <p><code>wget http://down.linuxblog.cn/syzygy42/8434D43A.gpg -O- | sudo apt-key add -</code></p>
 <p>2.添加源地址</p>
 <p>编辑 /etc/apt/sources.list 文件，加入以下地址：</p>
 <p><code>deb http://down.linuxblog.cn/syzygy42/ feisty avant-window-navigator
-deb-src http://down.linuxblog.cn/syzygy42/ feisty avant-window-navigator</code><br></div><a href="/2007/08/avant-window-navigator-ubuntu-linuxblog-sources.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/smoothcattp-theme-gnome.html" class="post-title-link">SmoothCatTP</a></h2><div class="post-info">2007年8月31日</div><div class="post-content"></div><a href="/2007/08/smoothcattp-theme-gnome.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/x-moto.html" class="post-title-link">X-Moto</a></h2><div class="post-info">2007年8月31日</div><div class="post-content"></div><a href="/2007/08/x-moto.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/change-rss-address.html" class="post-title-link">RSS 订阅地址更换</a></h2><div class="post-info">2007年8月30日</div><div class="post-content"></div><a href="/2007/08/change-rss-address.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/weather-wallpaper.html" class="post-title-link">让你的壁纸显示天气</a></h2><div class="post-info">2007年8月29日</div><div class="post-content"></div><a href="/2007/08/weather-wallpaper.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/use-pptp-client-connect-vpn-server.html" class="post-title-link">使用pptp客户端连接VPN服务器</a></h2><div class="post-info">2007年8月28日</div><div class="post-content"><p>网上很多文章都是通过 pptp-config 这个软件配置的，出于惯性思维我也努力的寻找了一下。很辛苦的找到了，也用上了。<br>后来居然还被人笑话，说 pptp 如此好的工具，居然还要用个 config ，画蛇添足。为什么这么说呢？</p>
+deb-src http://down.linuxblog.cn/syzygy42/ feisty avant-window-navigator</code><br>
+          <div class="read-more">
+            <a href="/2007/08/avant-window-navigator-ubuntu-linuxblog-sources.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/smoothcattp-theme-gnome.html">SmoothCatTP</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月31日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://linuxblog.cn/wp-content/images/gnome/65263-1.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/gnome/_65263-1.jpg" alt=""></a></p>
+<p><a href="http://linuxblog.cn/wp-content/images/gnome/65263-2.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/gnome/_65263-2.jpg" alt=""></a></p>
+<p>SmoothCatTP 是一款基于灰色的平滑主题，搭配了深蓝色的背景，目前看起来没有太多的质感，但还是很耐看、舒服的。</p>
+<p>今天该主题发布了 0.01 版，喜欢的朋友可以试用。</p>
+<p><a href="http://www.gnome-look.org/content/download.php?content=65263&amp;id=1&amp;PHPSESSID=910ceeb8aa42069d9d082bbe9f9e6aee" target="_blank" rel="external">点击下载</a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/x-moto.html">X-Moto</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月31日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><img src="http://linuxblog.cn/wp-content/images/game/media.php.png" alt=""></p>
+<p><a href="http://xmoto.tuxfamily.org/" target="_blank" rel="external">X-Moto</a> 是一款2D的摩托车游戏，你在玩的时候需要考虑许多“物理因素”。如果想要通关，还是蛮难的。<br>个人感觉，这个画面是2D，但是总是在往3D的贴图上靠，有点奇怪。</p>
+<p>X-Moto 是一款跨平台的游戏，你可以在其主页上下载到 exe 、源码、deb 等格式的软件包。目前最新的版本为 0.3.3。</p>
+<p><a href="http://wiki.xmoto.tuxfamily.org/index.php?title=Main_Page" title="Main_Page" target="_blank" rel="external">官方的 Wiki</a> 也可以很好的指导你如何游戏。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/change-rss-address.html">RSS 订阅地址更换</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月30日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://news.mydrivers.com/1/90/90099.htm" target="_blank" rel="external">FeedBurner 被干掉了。</a></p>
+<p>更换了 RSS 订阅地址，点击右侧的订阅彩色图标即可。</p>
+<p>或者在你的RSS阅读器中添加以下地址：</p>
+<p><a href="http://feed.feedsky.com/linuxblog" target="_blank" rel="external">http://feed.feedsky.com/linuxblog</a></p>
+<p>劳烦诸位。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/weather-wallpaper.html">让你的壁纸显示天气</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月29日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><img src="http://linuxblog.cn/wp-content/images/weatherwall/weatherwall.png" alt=""></p>
+<p>Weather wallpaper 是一款很有趣的桌面小工具，它能为你创建天气壁纸，自动显示在你的桌面上。</p>
+<p>同时他可以在状态栏上显示当前和服务器连接状态（天气预报服务器）。</p>
+<p>目前该软件已经发布了0.1版。</p>
+<p><a href="http://www.gnomefiles.org/download.php?soft_id=2135&amp;where=http%3A%2F%2Fmundogeek.net%2Fweather-wallpaper%2Freleases%2Fweather-wallpaper-0.1.0.deb" target="_blank" rel="external">deb </a></p>
+<p><a href="http://www.gnomefiles.org/download.php?soft_id=2135&amp;where=http%3A%2F%2Fmundogeek.net%2Fweather-wallpaper%2Freleases%2Fweather-wallpaper-0.1.0.tar.gz" target="_blank" rel="external">源码包</a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/use-pptp-client-connect-vpn-server.html">使用pptp客户端连接VPN服务器</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月28日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>网上很多文章都是通过 pptp-config 这个软件配置的，出于惯性思维我也努力的寻找了一下。很辛苦的找到了，也用上了。<br>后来居然还被人笑话，说 pptp 如此好的工具，居然还要用个 config ，画蛇添足。为什么这么说呢？</p>
 <p>因为 pptp client 单独使用的时候，可以将通往vpn网络之外的流量全部走自己的线路，而不通过vpn隧道走。就好比你一边开着驴子，一边连接到公司的网络，驴子并不会占用公司的带宽！</p>
-<p>这实在是个好东西阿，花了点时间，找到配置文件的格式，还不知道每个参数的含义，贴出来分享给大家。</p></div><a href="/2007/08/use-pptp-client-connect-vpn-server.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/aticompiz-fusion-shell-test.html" class="post-title-link">ATI+Compiz Fusion 自动安装脚本</a></h2><div class="post-info">2007年8月27日</div><div class="post-content"><p>出于兴趣，想写个自动安装ATI显卡+Compiz Fusion的脚本。<br>今天一边上班一边忙着写，稍微有点雏形。<br>此脚本目前不建议大家使用，有兴趣的朋友可以帮忙排错。暂时还未加入容错能力。只是一个简单的架构：<br></div><a href="/2007/08/aticompiz-fusion-shell-test.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/brasero-061.html" class="post-title-link">Brasero 0.6.1</a></h2><div class="post-info">2007年8月26日</div><div class="post-content"></div><a href="/2007/08/brasero-061.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/orangelinstablackplastic.html" class="post-title-link">OrangeLiNstaBlackPlastic</a></h2><div class="post-info">2007年8月26日</div><div class="post-content"><p>OrangeLiNstaBlackPlastic 是一款根据 LiNsta 修改而来的主题。在以前使用 LiNsta 时我最头痛的就是他的菜单栏色彩太深，导致黑色的字无法看清楚。</p>
+<p>这实在是个好东西阿，花了点时间，找到配置文件的格式，还不知道每个参数的含义，贴出来分享给大家。</p>
+          <div class="read-more">
+            <a href="/2007/08/use-pptp-client-connect-vpn-server.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/aticompiz-fusion-shell-test.html">ATI+Compiz Fusion 自动安装脚本</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月27日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>出于兴趣，想写个自动安装ATI显卡+Compiz Fusion的脚本。<br>今天一边上班一边忙着写，稍微有点雏形。<br>此脚本目前不建议大家使用，有兴趣的朋友可以帮忙排错。暂时还未加入容错能力。只是一个简单的架构：<br>
+          <div class="read-more">
+            <a href="/2007/08/aticompiz-fusion-shell-test.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/brasero-061.html">Brasero 0.6.1</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月26日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>Brasero 大家已经很熟悉了，Gnome下常用的 GUI 刻录软件也就这么几款，以前一直搞不懂 Brasero 和 Baker 有什么不同。昨天终于发现了一点 Brasero 的优点。</p>
+<p>当我刻录单个文件大于2G的文件时，无法使用 Baker 刻录（拖拉不进去）。而 Brasero 就没有这个问题。但是 Brasero 却将8x的盘只能4x刻录……</p>
+<p>正好 <a href="http://www.getdeb.net/download.php?release=1318&amp;fpos=0" target="_blank" rel="external">0.6.1 deb</a> 包出来了，再用着比比吧。</p>
+<p>不知道我遇到的问题，有没有朋友有办法解决的。赐教！</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/orangelinstablackplastic.html">OrangeLiNstaBlackPlastic</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月26日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>OrangeLiNstaBlackPlastic 是一款根据 LiNsta 修改而来的主题。在以前使用 LiNsta 时我最头痛的就是他的菜单栏色彩太深，导致黑色的字无法看清楚。</p>
 <p>OrangeLiNstaBlackPlastic 使用了深桔红，没有了这个问题，颜色搭配也非常协调，推荐使用。</p>
 <p><a href="http://www.gnome-look.org/content/download.php?content=62434&amp;id=1" target="_blank" rel="external">点击下载</a></p>
-<p><a href="http://linuxblog.cn/wp-content/images/gnome/62434-1.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/gnome/_62434-1.jpg" alt=""></a><br></div><a href="/2007/08/orangelinstablackplastic.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/3v1deb-update.html" class="post-title-link">3v1deb 镜像源完整发布</a></h2><div class="post-info">2007年8月25日</div><div class="post-content"></div><a href="/2007/08/3v1deb-update.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/22/" class="prev">PREV</a><a href="/page/24/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<p><a href="http://linuxblog.cn/wp-content/images/gnome/62434-1.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/gnome/_62434-1.jpg" alt=""></a><br>
+          <div class="read-more">
+            <a href="/2007/08/orangelinstablackplastic.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/3v1deb-update.html">3v1deb 镜像源完整发布</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月25日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>出于很多因素，我调整了源的地址，并且修改了内容。目前源还没有同步完成（feisty 用户依然可以正常使用）。</p>
+<p>由于增加了内容，所以减少同步次数。每天开始同步时间为下午5点半。预计6点大家可以访问到当日最新的源。</p>
+<p>这次调整的目的是：</p>
+<p>1. 使镜像源更加完整，计划同步 3v1dev 的所有内容。包括 dapper、edgy、feisty 系统。</p>
+<p>2. 更改目录结构，使得 down.linuxblog.cn 有可能添加更多的源。</p>
+<p>请通过以下方式使用 3v1deb 镜像:</p>
+<p>添加GPG</p>
+<p><code>wget http://down.linuxblog.cn/3v1deb/DD800CD9.gpg -O- | sudo apt-key add -</code></p>
+<p>添加以下内容到  <em>/etc/apt/sources.list</em>:(feisty-i386)</p>
+<p><code>deb http://down.linuxblog.cn/3v1deb feisty eyecandy 3v1n0 suspend2</code></p>
+<p>feisty-amd64</p>
+<p><code>deb http://down.linuxblog.cn/3v1deb feisty eyecandy-amd64</code></p>
+<p>Enjoy!</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/22/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/24/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

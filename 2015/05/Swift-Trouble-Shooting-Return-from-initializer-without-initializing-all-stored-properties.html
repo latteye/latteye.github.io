@@ -1,4 +1,174 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Swift 排错一则 · Water is</title><meta name="description" content="Swift 排错一则 - latteye"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Swift 排错一则</h1><div class="post-info">2015年5月27日</div><div class="post-content"><p>先贴一段简单的代码：</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="Swift 排错一则"/>
+
+
+
+
+  <meta name="keywords" content="Swift," />
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/2015/05/Swift-Trouble-Shooting-Return-from-initializer-without-initializing-all-stored-properties.html"/>
+
+
+<meta name="description" content="先贴一段简单的代码： 12345678910111213141516171819202122232425262728293031323334353637import Cocoa;import SQLite;class DB &amp;#123;    var appDirPath:String = NSHomeDirectory() + &quot;/Library/Application Support/ABC&quot;">
+<meta name="keywords" content="Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 排错一则">
+<meta property="og:url" content="http://latteye.me/2015/05/Swift-Trouble-Shooting-Return-from-initializer-without-initializing-all-stored-properties.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="先贴一段简单的代码： 12345678910111213141516171819202122232425262728293031323334353637import Cocoa;import SQLite;class DB &amp;#123;    var appDirPath:String = NSHomeDirectory() + &quot;/Library/Application Support/ABC&quot;">
+<meta property="og:updated_time" content="2015-05-27T15:52:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 排错一则">
+<meta name="twitter:description" content="先贴一段简单的代码： 12345678910111213141516171819202122232425262728293031323334353637import Cocoa;import SQLite;class DB &amp;#123;    var appDirPath:String = NSHomeDirectory() + &quot;/Library/Application Support/ABC&quot;">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Swift 排错一则 · Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Swift 排错一则
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015年5月27日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        <p>先贴一段简单的代码：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Cocoa;</div><div class="line"><span class="keyword">import</span> SQLite;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DB</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> appDirPath:<span class="type">String</span> = <span class="type">NSHomeDirectory</span>() + <span class="string">"/Library/Application Support/ABC"</span></div><div class="line">    <span class="keyword">var</span> dbFilePath:<span class="type">String</span> = <span class="type">NSHomeDirectory</span>() + <span class="string">"/Library/Application Support/ABC/db.sqlite"</span></div><div class="line">    <span class="keyword">var</span> db:<span class="type">Database</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">initDB</span> <span class="params">()</span></span> -&gt; <span class="type">Database</span> &#123;</div><div class="line">        <span class="keyword">let</span> new_site = <span class="keyword">self</span>.db[<span class="string">"new_site"</span>]</div><div class="line">        <span class="keyword">let</span> id = <span class="type">Expression</span>&lt;<span class="type">Int64</span>&gt;(<span class="string">"id"</span>)</div><div class="line">        <span class="keyword">let</span> name = <span class="type">Expression</span>&lt;<span class="type">String</span>?&gt;(<span class="string">"name"</span>)</div><div class="line">        </div><div class="line">        db.create(table: new_site) &#123; t <span class="keyword">in</span></div><div class="line">            t.column(id, primaryKey: <span class="literal">true</span>)</div><div class="line">            t.column(name)</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> db</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">init</span> () &#123;</div><div class="line">        <span class="keyword">var</span> fm = <span class="type">NSFileManager</span>.defaultManager()</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (!fm.fileExistsAtPath(appDirPath)) &#123;</div><div class="line">            fm.createDirectoryAtPath(appDirPath, withIntermediateDirectories: <span class="literal">false</span>, attributes: <span class="literal">nil</span>, error: <span class="literal">nil</span>)</div><div class="line">        &#125; <span class="comment">// Need to check if the DIR is a file, need to remove the file recreate the DIR</span></div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (!fm.fileExistsAtPath(<span class="keyword">self</span>.dbFilePath)) &#123;</div><div class="line">            <span class="keyword">self</span>.db = <span class="type">Database</span>(<span class="type">NSHomeDirectory</span>() + <span class="string">"/Library/Application Support/ABC/db.sqlite"</span>)</div><div class="line">            <span class="keyword">self</span>.db = <span class="keyword">self</span>.initDB()</div><div class="line">        &#125; </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">printPath</span> <span class="params">()</span></span> &#123;</div><div class="line">        <span class="built_in">println</span>(<span class="keyword">self</span>.dbFilePath)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>这段代码会在 xcode 中报错：<code>Return from initializer without initializing all stored properties</code> ，Google 了一下，在<a href="http://numbbbbb.gitbooks.io/-the-swift-programming-language-/content/chapter2/14_Initialization.html" target="_blank" rel="external">Swift文档中</a> 明确提到了常量是必须在 init 里面被明确赋值的。</p>
@@ -10,4 +180,208 @@
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (!fm.fileExistsAtPath(<span class="keyword">self</span>.dbFilePath)) &#123;</div><div class="line">    <span class="keyword">self</span>.db = <span class="type">Database</span>(<span class="type">NSHomeDirectory</span>() + <span class="string">"/Library/Application Support/Bearead/db.sqlite"</span>)</div><div class="line">    <span class="keyword">self</span>.db = <span class="keyword">self</span>.initDB()</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">self</span>.db = <span class="type">Database</span>(<span class="type">NSHomeDirectory</span>() + <span class="string">"/Library/Application Support/Bearead/db.sqlite"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这样就妥妥的了。</p>
 <p>但是，如果存在一个可能，你的 init 就是不能保证给所有的属性赋值，应该怎么办？<a href="http://stackoverflow.com/questions/26495586/best-practice-to-implement-a-failable-initializer-in-swift" target="_blank" rel="external">Stackoverflow</a> 上有人提到了这点,并且给出了不错的解决方法。</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2015/08/Swift-as-Operator.html" class="prev">PREV</a><a href="/2015/05/swift-regex-basic.html" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>作者: </span>
+      <span>latteye</span>
+    </p>
+    <p class="copyright-item">
+      <span>来源: </span>
+      <a href="http://latteye.me">http://latteye.me</a>
+    </p>
+    <p class="copyright-item">
+      <span>链接: </span>
+      <a href="http://latteye.me/2015/05/Swift-Trouble-Shooting-Return-from-initializer-without-initializing-all-stored-properties.html">http://latteye.me/2015/05/Swift-Trouble-Shooting-Return-from-initializer-without-initializing-all-stored-properties.html</a>
+    </p>
+
+    <p class="copyright-item lincese">
+      
+      本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+    </p>
+  </div>
+
+
+
+      
+      
+  <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code">
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/wechat.png" title="wechat">
+        </label>
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/alipay.png" title="alipay">
+        </label>
+      
+    </div>
+  </div>
+
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Swift/">Swift</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/08/Swift-as-Operator.html">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Swift 中 的 as! 操作符</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/05/swift-regex-basic.html">
+        <span class="next-text nav-default">Swift 中的正则表达式基础</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "7c27380789354d14af755b0b00464371",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

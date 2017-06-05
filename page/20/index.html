@@ -1,12 +1,695 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/11/change-gcc-from-3x-to-4x.html" class="post-title-link">将 Ubuntu Gutsy GCC 版本从 4.x 切换为 3.x</a></h2><div class="post-info">2007年11月4日</div><div class="post-content"><p>Gutsy 安装时默认安装了 gcc 4.1。但是这个版本在编译很多东西的时候都容易报错。另外也比较担心新版本的兼容性（明明不懂编译器，瞎操心。）</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/20/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/20/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/11/change-gcc-from-3x-to-4x.html">将 Ubuntu Gutsy GCC 版本从 4.x 切换为 3.x</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年11月4日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>Gutsy 安装时默认安装了 gcc 4.1。但是这个版本在编译很多东西的时候都容易报错。另外也比较担心新版本的兼容性（明明不懂编译器，瞎操心。）</p>
 <p>编译 aMule 的时候除了很多问题。于是将编译器版本切换为 3.x。</p>
 <p>首先在安装上以下包的 3.x 版本：</p>
 <blockquote>
 <p>gcc<br>g++<br>cpp</p>
-</blockquote></div><a href="/2007/11/change-gcc-from-3x-to-4x.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/11/armorforsleep-smileforthem.html" class="post-title-link">Armor For Sleep - Smile For Them</a></h2><div class="post-info">2007年11月4日</div><div class="post-content"><p><img src="http://photo11.yupoo.com/20071104/143021_665369673.jpg" alt=""></p>
+</blockquote>
+          <div class="read-more">
+            <a href="/2007/11/change-gcc-from-3x-to-4x.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/11/armorforsleep-smileforthem.html">Armor For Sleep - Smile For Them</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年11月4日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><img src="http://photo11.yupoo.com/20071104/143021_665369673.jpg" alt=""></p>
 <p>纯粹的朋克，纯粹的理念。没有一丝 pop …… 自始至终的贯彻爆发。已经很少听到这样纯粹的东西了，那些迎合市场出来的家伙却充斥了整个世界。Simple Plan 这样的乐队也就只能红一、两张专辑吧……</p>
-<p>当然，新金属是很难消失的。因为他们是新金属，他们会自己不断演变、发展。</p></div><a href="/2007/11/armorforsleep-smileforthem.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/11/red-hat-linux-networking-and-system-administration.html" class="post-title-link">Red Hat Linux Networking And System Administration</a></h2><div class="post-info">2007年11月4日</div><div class="post-content"></div><a href="/2007/11/red-hat-linux-networking-and-system-administration.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/11/nightwish-dark-passion-play.html" class="post-title-link">Nightwish-Dark Passion Play</a></h2><div class="post-info">2007年11月3日</div><div class="post-content"></div><a href="/2007/11/nightwish-dark-passion-play.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/11/ape-flac-to-mp3-shell.html" class="post-title-link">wav、flac 转换 MP3 脚本</a></h2><div class="post-info">2007年11月2日</div><div class="post-content"><p>在一个讨论音乐的论坛上找到了这个脚本，写的很不错。解决了 CUE 信息输入 MP3 的问题。因为他 lame 的处理并没有放在 shntool 里面。<br>由于单引号的屏蔽， shntool 里面无法将 mp3 tag 输入文件中。此脚本将所有信息全部放在变量里面，再输入。</p>
+<p>当然，新金属是很难消失的。因为他们是新金属，他们会自己不断演变、发展。</p>
+          <div class="read-more">
+            <a href="/2007/11/armorforsleep-smileforthem.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/11/red-hat-linux-networking-and-system-administration.html">Red Hat Linux Networking And System Administration</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年11月4日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><img src="http://photo11.yupoo.com/20071104/094404_1772022969.jpg" alt="Red Hat Linux Networking And System Administration (2002)"></p>
+<p><a href="http://down.linuxblog.cn/book/Red Hat Linux Networking And System Administration (2002" target="_blank" rel="external">点击下载</a>.pdf)</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/11/nightwish-dark-passion-play.html">Nightwish-Dark Passion Play</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年11月3日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><img src="http://photo11.yupoo.com/20071103/103907_2001306719.jpg" alt=""></p>
+<p>Nightwish 在干掉了主唱之后终于又发布了新专辑。据说明年1月要来上海开演唱会了。新主唱的声音比原来的听着“悦耳”一点。风格也适当的改变，没有很“野”的味道。</p>
+<p>金属味道也更重了一点，但是死亡气息就要少很多了。我更觉得那些幽暗一点的有歌特感。</p>
+<p>并不是特别出彩的一张专辑，不过应该是耐听的一张。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/11/ape-flac-to-mp3-shell.html">wav、flac 转换 MP3 脚本</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年11月2日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>在一个讨论音乐的论坛上找到了这个脚本，写的很不错。解决了 CUE 信息输入 MP3 的问题。因为他 lame 的处理并没有放在 shntool 里面。<br>由于单引号的屏蔽， shntool 里面无法将 mp3 tag 输入文件中。此脚本将所有信息全部放在变量里面，再输入。</p>
 <p>该脚本除了之前提到的 shntool 以外还用到了 cueprint 工具包。你可以通过以下命令安装：</p>
 <p>原模板用在最新的 shntool 上有一点错误，我稍许修改了一下。</p>
-<p><code>apt-get install cuetools</code></p></div><a href="/2007/11/ape-flac-to-mp3-shell.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/11/decoder-ape-with-jmac.html" class="post-title-link">使用 Jmac 转换 APE 格式的音频文件</a></h2><div class="post-info">2007年11月2日</div><div class="post-content"><p>mac 的确是挂掉了。但是其主页偶尔还是可以访问的。昨天晚上我就成功访问了。<br>对于 mac 的挂掉，实在是不解。 mac 在编译成功后就已经在 ape 官方论坛上留言了。并且，也看到很多人支持。 mac 貌似是使用了官方的源代码，作者还提供了需要修改的 diff 文件，真的是很不错！<br>mac 的作者是中国人。</p>
-<p>Jmac 是一款用 JAVA 写成的 Monkey’s Audio 编码、解码工具。可以很方便的将 ape 文件转换为 wav 文件。目前已经支持 3.99 版本的 mac 解码、编码。<br>主页地址 ： <a href="http://jmac.sourceforge.net/" target="_blank" rel="external">http://jmac.sourceforge.net/</a></p></div><a href="/2007/11/decoder-ape-with-jmac.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/11/mac-ape-linux-broken.html" class="post-title-link">APE 转换 MP3 在 Linux 下无法解决？</a></h2><div class="post-info">2007年11月1日</div><div class="post-content"></div><a href="/2007/11/mac-ape-linux-broken.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/10/motioncitysoundtrack-evenifitkillsme.html" class="post-title-link">Even If It Kills Me</a></h2><div class="post-info">2007年10月31日</div><div class="post-content"></div><a href="/2007/10/motioncitysoundtrack-evenifitkillsme.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/10/century-park.html" class="post-title-link">世纪公园</a></h2><div class="post-info">2007年10月27日</div><div class="post-content"></div><a href="/2007/10/century-park.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/10/bug-with-winbind-id.html" class="post-title-link">Winbind ID 与用户、组映射关系混乱</a></h2><div class="post-info">2007年10月26日</div><div class="post-content"></div><a href="/2007/10/bug-with-winbind-id.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/19/" class="prev">PREV</a><a href="/page/21/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<p><code>apt-get install cuetools</code></p>
+          <div class="read-more">
+            <a href="/2007/11/ape-flac-to-mp3-shell.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/11/decoder-ape-with-jmac.html">使用 Jmac 转换 APE 格式的音频文件</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年11月2日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>mac 的确是挂掉了。但是其主页偶尔还是可以访问的。昨天晚上我就成功访问了。<br>对于 mac 的挂掉，实在是不解。 mac 在编译成功后就已经在 ape 官方论坛上留言了。并且，也看到很多人支持。 mac 貌似是使用了官方的源代码，作者还提供了需要修改的 diff 文件，真的是很不错！<br>mac 的作者是中国人。</p>
+<p>Jmac 是一款用 JAVA 写成的 Monkey’s Audio 编码、解码工具。可以很方便的将 ape 文件转换为 wav 文件。目前已经支持 3.99 版本的 mac 解码、编码。<br>主页地址 ： <a href="http://jmac.sourceforge.net/" target="_blank" rel="external">http://jmac.sourceforge.net/</a></p>
+          <div class="read-more">
+            <a href="/2007/11/decoder-ape-with-jmac.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/11/mac-ape-linux-broken.html">APE 转换 MP3 在 Linux 下无法解决？</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年11月1日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>在家里我尽量让自己在 Linux 环境下处理桌面事务。尽管还有很多软件存在缺陷，比如 amule 的 web 管理很是问题，比如没有太好用的输入法。<br>昨天晚上又折腾了半夜，只是想将 APE 转换成 MP3 。在网上搜索一番，找到了不少资料。大多数都提到了 mac 这个工具。</p>
+<p>可惜的是，由于 mac 的代码问题，现在已经无法找到这款工具了。作者的主页以及 sf.net 上的项目页面都已经停止了。主页在：<a href="http://supermmx.org/linux/mac/" target="_blank" rel="external">http://supermmx.org/linux/mac/</a></p>
+<p>在 Windows 下这倒是一个很简单的问题。大学的时候一直用 EAC 来处理所有转换工作。后来 foobar 也有了 rip 功能。并且附带的编码还是很齐全的。就基本上用 foobar 了。</p>
+<p>一旦 mac 消失，似乎真的就无法转换 ape 了。如此脆弱。<br>当然，解码并不是问题。 据说 mplayer 都可以直接播放 ape。 但是编码似乎无路可走了，电驴上都找不到 mac 这个小东西。 在 ubuntu 英文论坛翻阅了帖子，也没找到解决方法。</p>
+<p>Linux 桌面的普及并不是几个商家，几个 Office 办公软件可以解决的。</p>
+<p><a href="http://bbs.linux.ccidnet.com/read.php?tid=539675" target="_blank" rel="external">这里</a>有一篇曾经很棒的转换教程。</p>
+<hr>
+<p><a href="http://www.oceanboo.cn" target="_blank" rel="external">OceanBoo</a> 的文章 <a href="http://www.oceanboo.cn/read.php/137.htm" target="_blank" rel="external">ubuntu下转换CUE/APE到flac格式</a>。其实也是需要 mac 编码的。</p>
+<p>shntool 依然是通过调用 mac 来实现 ape 的转换的。</p>
+<blockquote>
+<p>shntool [split]: warning: failed to read data from input file using format: [ape]<br>shntool [split]:          + you may not have permission to read file: [Blue.Merle.-.[Burning.in.the.sun].专辑.(APE).ape]<br>shntool [split]:          + arguments may be incorrect for decoder: [mac]<br>shntool [split]:          + verify that the decoder is installed and in your PATH<br>shntool [split]:          + this file may be unsupported, truncated or corrupt<br>shntool [split]: error: cannot continue due to error(s) shown above<br>于是，问题依旧…… 无奈 无奈</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/10/motioncitysoundtrack-evenifitkillsme.html">Even If It Kills Me</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年10月31日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><img src="http://photo5.yupoo.com/20071031/230628_626033866.jpg" alt=""></p>
+<p>朋克，歌手一般。倒是封面我特别喜欢。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/10/century-park.html">世纪公园</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年10月27日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://photo5.yupoo.com/20071027/180244_1071212690_fbtaowhp.jpg" target="_blank" rel="external"><img src="http://photo5.yupoo.com/20071027/180244_1071212690_m.jpg" alt=""></a> <a href="http://photo5.yupoo.com/20071027/180303_1315304930_kxlpqnnw.jpg" target="_blank" rel="external"><img src="http://photo5.yupoo.com/20071027/180303_1315304930_m.jpg" alt=""></a></p>
+<p><a href="http://photo11.yupoo.com/20071027/180220_1175978505_fvkqzvxs.jpg" target="_blank" rel="external"><img src="http://photo11.yupoo.com/20071027/180220_1175978505_m.jpg" alt=""></a> <a href="http://photo11.yupoo.com/20071027/180234_1633339153_xfcomfqn.jpg" target="_blank" rel="external"><img src="http://photo11.yupoo.com/20071027/180234_1633339153_m.jpg" alt=""></a></p>
+<p><a href="http://photo5.yupoo.com/20071027/180245_1301238844.jpg" target="_blank" rel="external"><img src="http://photo5.yupoo.com/20071027/180245_1301238844_m.jpg" alt=""></a> <a href="http://photo11.yupoo.com/20071027/180302_1108713550_uwbsaauv.jpg" target="_blank" rel="external"><img src="http://photo11.yupoo.com/20071027/180302_1108713550_m.jpg" alt=""></a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/10/bug-with-winbind-id.html">Winbind ID 与用户、组映射关系混乱</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年10月26日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>有两台机器的 Winbind ID 与真实的用户映射关系混乱了。虽然不知道是什么引起的，但感觉 Winbind 还是很容易有这个 Bug 的。</p>
+<p>如何解决呢？</p>
+<p>Winbind 将所有的缓存信息都<a href="http://us3.samba.org/samba/docs/man/Samba-HOWTO-Collection/winbind.html#id412710" target="_blank" rel="external">保存在了 tdb 文件中</a>。只要将 tdb 全部删除，重启 Winbind 服务即可。默认 tdb 文件保存在 /var/cache/samba/ 目录。</p>
+<p>在重启 Winbind 之后，就会发现所有域用户文件属性变成了 uid 显示。而不是用户名。执行：</p>
+<p><code>id username</code></p>
+<p>之后， Winbind 重新向 PDC 请求信息。这时重新建立 UID 与用户直接的关系。</p>
+<p>需要注意的是，某些以特定用户运行的程序可能这时需要重启，由于用户映射的改变，可能会导致权限问题。</p>
+<p>关于 Winbind ，您可以参考 <a href="http://linuxblog.cn/2007/09/add-linux-to-windows-domain-with-winbind.html" target="_blank" rel="external">此文</a> 。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/19/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/21/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

@@ -1,4 +1,171 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> AMD CPU使用VMware workstation安装ESX概要 · Water is</title><meta name="description" content="AMD CPU使用VMware workstation安装ESX概要 - latteye"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">AMD CPU使用VMware workstation安装ESX概要</h1><div class="post-info">2008年12月28日</div><div class="post-content"><p>最近刚升级了机器，配置如下：</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="AMD CPU使用VMware workstation安装ESX概要"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/2008/12/amd-cpu-e4-bd-bf-e7-94-a8vmware-workstation-e5-ae-89-e8-a3-85esx-e6-a6-82-e8-a6-81.html"/>
+
+
+<meta name="description" content="最近刚升级了机器，配置如下：  AMD Athlon 64X2 Dual Core Processor 5000+ Kingston 4G WD 250G SATA Windows XP SP2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AMD CPU使用VMware workstation安装ESX概要">
+<meta property="og:url" content="http://latteye.me/2008/12/amd-cpu-e4-bd-bf-e7-94-a8vmware-workstation-e5-ae-89-e8-a3-85esx-e6-a6-82-e8-a6-81.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="最近刚升级了机器，配置如下：  AMD Athlon 64X2 Dual Core Processor 5000+ Kingston 4G WD 250G SATA Windows XP SP2">
+<meta property="og:updated_time" content="2015-05-02T13:11:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AMD CPU使用VMware workstation安装ESX概要">
+<meta name="twitter:description" content="最近刚升级了机器，配置如下：  AMD Athlon 64X2 Dual Core Processor 5000+ Kingston 4G WD 250G SATA Windows XP SP2">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> AMD CPU使用VMware workstation安装ESX概要 · Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          AMD CPU使用VMware workstation安装ESX概要
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年12月28日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        <p>最近刚升级了机器，配置如下：</p>
 <blockquote>
 <p>AMD Athlon 64X2 Dual Core Processor 5000+</p>
 <p>Kingston 4G</p>
@@ -16,4 +183,202 @@ host.noTSC = &quot;TRUE&quot;
 ptsc.noTSC = &quot;TRUE&quot;
 host.TSC.noForceSync = &quot;TRUE&quot;</code><br>同时在虚拟机的vmx文件内添加<br><code>processor1.use = FALSE</code></p>
 <p>这样就可以正常使用esx esxi了，即使启动esx不到2分钟，运行也很流畅。</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2008/12/release-bearaudio-001.html" class="prev">PREV</a><a href="/2008/12/e6-9b-b4-e6-96-b0san-e5-ad-98-e5-82-a8lun-path-e5-90-8eoracle-e6-97-a0-e6-b3-95-e5-90-af-e5-8a-a8.html" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>作者: </span>
+      <span>latteye</span>
+    </p>
+    <p class="copyright-item">
+      <span>来源: </span>
+      <a href="http://latteye.me">http://latteye.me</a>
+    </p>
+    <p class="copyright-item">
+      <span>链接: </span>
+      <a href="http://latteye.me/2008/12/amd-cpu-e4-bd-bf-e7-94-a8vmware-workstation-e5-ae-89-e8-a3-85esx-e6-a6-82-e8-a6-81.html">http://latteye.me/2008/12/amd-cpu-e4-bd-bf-e7-94-a8vmware-workstation-e5-ae-89-e8-a3-85esx-e6-a6-82-e8-a6-81.html</a>
+    </p>
+
+    <p class="copyright-item lincese">
+      
+      本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+    </p>
+  </div>
+
+
+
+      
+      
+  <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code">
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/wechat.png" title="wechat">
+        </label>
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/alipay.png" title="alipay">
+        </label>
+      
+    </div>
+  </div>
+
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2008/12/release-bearaudio-001.html">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">BearAudio 0.0.1 完成</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2008/12/e6-9b-b4-e6-96-b0san-e5-ad-98-e5-82-a8lun-path-e5-90-8eoracle-e6-97-a0-e6-b3-95-e5-90-af-e5-8a-a8.html">
+        <span class="next-text nav-default">更新SAN存储LUN path后oracle无法启动</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "7c27380789354d14af755b0b00464371",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

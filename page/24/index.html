@@ -1,12 +1,706 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/use-mplayer-under-compiz-fusion.html" class="post-title-link">在 Compiz Fusion 下正常使用 Mplayer 看电影</a></h2><div class="post-info">2007年8月25日</div><div class="post-content"><p>安装了 Compiz Fusion 后总是无法正常使用 Mplayer（其实是GMplayer），总不能为了看个电影来回切换系统吧……<br>看了一些帖子以后发现似乎是窗口渲染的问题，这就好了！我不用窗口就是了（GMplayer），直接在命令行下调用mplayer。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/24/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/24/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/use-mplayer-under-compiz-fusion.html">在 Compiz Fusion 下正常使用 Mplayer 看电影</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月25日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>安装了 Compiz Fusion 后总是无法正常使用 Mplayer（其实是GMplayer），总不能为了看个电影来回切换系统吧……<br>看了一些帖子以后发现似乎是窗口渲染的问题，这就好了！我不用窗口就是了（GMplayer），直接在命令行下调用mplayer。</p>
 <p>编辑 ~/.bashrc 文件，加入以下内容：</p>
 <p><code>alias mpl=&#39;mplayer -font /usr/share/fonts/zh_CN/msyhbd.ttf -subcp gbk -subfont-autoscale 2 -subfont-text-scale 4&#39;</code></p>
-<p>注意我用的字体是雅黑，你也可以替换成其他字体，但要注意字体编码。<br></div><a href="/2007/08/use-mplayer-under-compiz-fusion.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/crontab-easy.html" class="post-title-link">一句话会用 Crontab</a></h2><div class="post-info">2007年8月24日</div><div class="post-content"></div><a href="/2007/08/crontab-easy.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/3v1deb-linuxblog-e9-95-9c-e5-83-8f-e6-ba-90.html" class="post-title-link">3v1deb LinuxBlog 镜像源</a></h2><div class="post-info">2007年8月24日</div><div class="post-content"></div><a href="/2007/08/3v1deb-linuxblog-e9-95-9c-e5-83-8f-e6-ba-90.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/linux-server-hacks-volume-two.html" class="post-title-link">Linux Server Hacks Volume Two</a></h2><div class="post-info">2007年8月21日</div><div class="post-content"></div><a href="/2007/08/linux-server-hacks-volume-two.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/creating-deb-packages-with-checkinstall.html" class="post-title-link">使用 Checkinstall 创建 .deb 包</a></h2><div class="post-info">2007年8月21日</div><div class="post-content"><p>使用 Checkinstall 创建 .deb 包<br>原作：Falko Timme <ft [at]="" falkotimme="" [dot]="" com=""></ft></p>
+<p>注意我用的字体是雅黑，你也可以替换成其他字体，但要注意字体编码。<br>
+          <div class="read-more">
+            <a href="/2007/08/use-mplayer-under-compiz-fusion.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/crontab-easy.html">一句话会用 Crontab</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月24日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>crontab 是定时执行任务的程序。</p>
+<p>  <em>crontab -e</em>  命令开始编辑当前用户的任务列表。</p>
+<p>  格式：</p>
+<p>  分 时 日 月 星期 命令</p>
+<ul>
+<li><p>号表示所有范围（以正整数为最小单位-含0）</p>
+<p>/2 表示每两小时执行一次（当然可以是3、4、5……）</p>
+<p>时间跨度用 - 号连接</p>
+<p>于是我希望21点到8点期间每三小时执行一次：</p>
+</li>
+</ul>
+<p><code>0 21-8/3 * * * 命令</code></p>
+<p>  希望每10分钟执行一次：</p>
+<p><code>*/10 * * * * 命令</code></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/3v1deb-linuxblog-e9-95-9c-e5-83-8f-e6-ba-90.html">3v1deb LinuxBlog 镜像源</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月24日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>苦了两天，终于弄清楚是我的显卡爆了，据说是GPU坏了。双敏 冰翼 9528 pro……<br>结果上海的市场上只有双敏9518卖了，AGP真的没落了。</p>
+<p>回来看到 Compiz Fusion 0.53 已经出来了，虽然之前被 Beryl 折腾的不行，（真的很卡，没法很舒服的工作。）但是还是勇敢的尝试了一下 Compiz Fusion。 没想到效率真的高多了。</p>
+<p>但是 <a href="http://download.tuxfamily.org/3v1deb" target="_blank" rel="external">3v1deb</a> 的速度真是让人苦不堪言，能到2k的时候我已经很开心了。</p>
+<p>花了一点时间，在LinuxBlog搭起了一个镜像，不过并没有包含所有内容，只是 eyecandy 部分（即Compiz Fusion、Beryl）且目前也只有提供 Ubuntu Feisty 系统。电信的用户可能可以获得100K以上的速度。</p>
+<p>每天更新两次。</p>
+<p>将以下地址添加进你的 /etc/apt/sources.list 即可。</p>
+<p><code>deb http://down.linuxblog.cn/soft/ feisty eyecandy</code></p>
+<p><code>apt-get update</code></p>
+<p>Enjoy!</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/linux-server-hacks-volume-two.html">Linux Server Hacks Volume Two</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月21日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><img src="http://linuxblog.cn/wp-content/images/book/linux-server-hacks.jpg" alt=""></p>
+<p>《LinuxFServerFHacks》第1卷讲解了100个帮助系统管理员使用Linux的聪明技巧和工具，能极大地提高系统管理员的水平。这本书介绍的速成技巧在今天仍然是有效的和有用的。所以O’Reilly决定与其第2版只是在第1版的基础上提供一些增值的知识，不如用《Linux Server Hack（卷二）》的形式提供给读者全新的100个速成技巧 —— 因为能够用Linux做到的聪明事可以说是无穷无尽的。<br>这个全新的第2卷中都是如何控制服务器的建议和分步操作的指令。每个速成技巧用几分钟的时间就可以读完，但能省得读者花几个小时的时间寻找服务器问题的正确答案。<br>本书主要内容：</p>
+<blockquote>
+<p>如何控制使用本地账户文件、LDAP、Kerberos甚至WindowsAActive Directory时的Linux身份验证过程<br>如何使用VNC、LTSP和FreeNX远程运行Linux图形桌面，减轻管理工作，或向终端用户提供稳定的安全的桌面环境<br>如何按预算创建自己的NAS机器，如何使用磁盘配额、克隆、快照、RAID和卷管理管理网络存储<br>如何监控网络入侵者，管理日志文件，并远程查询服务器和网络设备，收集数据<br>对硬盘和文件系统故障进行检修，恢复丢失的数据</p>
+</blockquote>
+<p>《Linux Server Hacks（卷二）》不仅能帮助读者成为一个更有效率的系统管理员，也教读者如何用软技巧、更好地时间管理和在周围推广Linux使用来促进你的职业生涯。</p>
+<p><a href="http://down.linuxblog.cn/book/OREILLY-Linux_Server_Hacks_Volume_Two.bz2" target="_blank" rel="external">点击下载</a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/creating-deb-packages-with-checkinstall.html">使用 Checkinstall 创建 .deb 包</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月21日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>使用 Checkinstall 创建 .deb 包<br>原作：Falko Timme <ft [at]="" falkotimme="" [dot]="" com=""></ft></p>
 <p>Checkinstall 是一款在本地创建 .deb 包的工具，他非常简单、易用。（他可以将你制作的包分发到多台基于Debian的系统上。）你可以像之前一样，从源代码编译软件，不同的是你将得到一个 .deb 包。这意味着你可以很方便的卸载软件：dpkg -r .</p>
 <p>我将在本文中通过 checkinstall 编译、安装一款杀毒软件 ClamAV 讲解在 Debian 系统下Checkinstall 的使用方法。</p>
 <p>此 howTo 只是一个实例指导，他并不包含诸多的技术信息，如果你希望深入了解 Checkinstall 请在互联网上多找些文章吧。</p>
-<p>此文章不对任何后果（行为？）作保证。</p></div><a href="/2007/08/creating-deb-packages-with-checkinstall.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/emesene-r801-release.html" class="post-title-link">emesene r801 版本发布</a></h2><div class="post-info">2007年8月21日</div><div class="post-content"></div><a href="/2007/08/emesene-r801-release.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/make-your-linux-look-better.html" class="post-title-link">让你的Linux 更好看-GNOME、FLUX、OPENBOX</a></h2><div class="post-info">2007年8月21日</div><div class="post-content"></div><a href="/2007/08/make-your-linux-look-better.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/create-atp-sourceslist-on-web.html" class="post-title-link">ATP sources.list 自动生成</a></h2><div class="post-info">2007年8月21日</div><div class="post-content"><p>昨天过了个七夕，回家后发现电脑无法正常使用。折腾了近10个小时，基本判断为主板或者显卡有问题。很有可能是主板电容爆浆……不知道啥时候才能修好。</p>
+<p>此文章不对任何后果（行为？）作保证。</p>
+          <div class="read-more">
+            <a href="/2007/08/creating-deb-packages-with-checkinstall.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/emesene-r801-release.html">emesene r801 版本发布</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月21日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>emesene 是我在 GTK 下用的最输入的一款 MSN 客户端，其外观和功能都很不错。</p>
+<p>昨天 emesene 发布了 r801版。</p>
+<p><a href="http://sourceforge.net/project/showfiles.php?group_id=168206&amp;package_id=191358" target="_blank" rel="external">点击此处下载</a>。</p>
+<p>解压后直接可以运行。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/make-your-linux-look-better.html">让你的Linux 更好看-GNOME、FLUX、OPENBOX</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月21日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>Ubuntu 论坛上看到的，由于作者的 Blog 被伟大的防火墙拦住了，所以全文专之。</p>
+<p><a href="http://linuxblog.cn/wp-content/images/gnome/2007-08-14-153845_1024x768_scrot-1.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/gnome/_2007-08-14-153845_1024x768_scrot-1.jpg" alt=""></a></p>
+<p>点击此处浏览 <a href="http://linuxblog.cn/html/ubuntudesktops.html" target="_blank" rel="external">linuxblog 镜像</a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/create-atp-sourceslist-on-web.html">ATP sources.list 自动生成</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月21日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>昨天过了个七夕，回家后发现电脑无法正常使用。折腾了近10个小时，基本判断为主板或者显卡有问题。很有可能是主板电容爆浆……不知道啥时候才能修好。</p>
 <p>我们来看看<a href="http://www.ubuntu-nl.org/source-o-matic/" target="_blank" rel="external">这个有趣的网站</a>，虽然本身的资料库还不够庞大，思路还是很不错的。</p>
-<p><a href="http://linuxblog.cn/wp-content/images/apt/Ubuntu%20-%20Linux%20for%20Human%20Beings%20-%20sourceslist%20generator.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/apt/_Ubuntu%20-%20Linux%20for%20Human%20Beings%20-%20sourceslist%20generator.png" alt=""></a></p></div><a href="/2007/08/create-atp-sourceslist-on-web.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/disconnect-your-console-without-ending-your-session.html" class="post-title-link">断开控制台而不结束会话-Screen</a></h2><div class="post-info">2007年8月18日</div><div class="post-content"><p>设想一下，你通过 ssh 连接到了一台服务器，接着你开始编译一个软件。这或许要占用你一个小时甚至更多的时间，突然！你需要离开，或者是断开网络了~<br>怎么办？下次再重新编译一次么？还有例外一种办法~（当然，我指的不是一开始放在后台运行。）</p>
-<p>Screen！<br></div><a href="/2007/08/disconnect-your-console-without-ending-your-session.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/08/lafee-jetzt-erst-recht-e4-b8-8b-e8-bd-bd.html" class="post-title-link">LaFee - Jetzt Erst Recht - 下载</a></h2><div class="post-info">2007年8月18日</div><div class="post-content"><p><a href="http://laroea.cn/wp-content/image/music/frontlafee.jpg" target="_blank" rel="external"><img src="http://laroea.cn/wp-content/image/music/_frontlafee.jpg" alt=""></a></p>
-<p>这两个月还真是好日子，Sum 41 之后 LaFee 又放出了新专辑。<br></div><a href="/2007/08/lafee-jetzt-erst-recht-e4-b8-8b-e8-bd-bd.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/23/" class="prev">PREV</a><a href="/page/25/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<p><a href="http://linuxblog.cn/wp-content/images/apt/Ubuntu%20-%20Linux%20for%20Human%20Beings%20-%20sourceslist%20generator.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/apt/_Ubuntu%20-%20Linux%20for%20Human%20Beings%20-%20sourceslist%20generator.png" alt=""></a></p>
+          <div class="read-more">
+            <a href="/2007/08/create-atp-sourceslist-on-web.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/disconnect-your-console-without-ending-your-session.html">断开控制台而不结束会话-Screen</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月18日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>设想一下，你通过 ssh 连接到了一台服务器，接着你开始编译一个软件。这或许要占用你一个小时甚至更多的时间，突然！你需要离开，或者是断开网络了~<br>怎么办？下次再重新编译一次么？还有例外一种办法~（当然，我指的不是一开始放在后台运行。）</p>
+<p>Screen！<br>
+          <div class="read-more">
+            <a href="/2007/08/disconnect-your-console-without-ending-your-session.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/08/lafee-jetzt-erst-recht-e4-b8-8b-e8-bd-bd.html">LaFee - Jetzt Erst Recht - 下载</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年8月18日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><a href="http://laroea.cn/wp-content/image/music/frontlafee.jpg" target="_blank" rel="external"><img src="http://laroea.cn/wp-content/image/music/_frontlafee.jpg" alt=""></a></p>
+<p>这两个月还真是好日子，Sum 41 之后 LaFee 又放出了新专辑。<br>
+          <div class="read-more">
+            <a href="/2007/08/lafee-jetzt-erst-recht-e4-b8-8b-e8-bd-bd.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/23/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/25/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

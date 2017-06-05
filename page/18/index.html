@@ -1,8 +1,686 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/01/the-silent-force-ogg-q10.html" class="post-title-link">Within Temptation-The Silent Force-下载</a></h2><div class="post-info">2008年1月3日</div><div class="post-content"></div><a href="/2008/01/the-silent-force-ogg-q10.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/12/yaourt.html" class="post-title-link">AUR 前端 yaourt 简介、下载</a></h2><div class="post-info">2007年12月22日</div><div class="post-content"><p><a href="http://www.fs2you.com/files/8d044a8a-b097-11dc-a91b-0014221b798a/" target="_blank" rel="external">yaourt-0.8.7-1-i686.pkg.tar.gz</a><br><a href="http://arch.latteye.com/yaourt/yaourt-0.9.1-1-i686.pkg.tar.gz" target="_blank" rel="external">yaourt-0.9.1-1-i686.pkg.tar.gz</a><br>这是已经打包好的 yaourt 包，arch 用户可以通过 pacman -A 命令安装它。</p>
-<p>前两天<a href="http://latteye.com/2007/12/arch-aur.html" target="_blank" rel="external">简单介绍了 AUR 系统</a>。单纯的 AUR 系统是个很好的软件组织仓库，但其本身并不容易被非常快速的安装、搜索。<br></div><a href="/2007/12/yaourt.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/12/shntools-mac-cuetools-arch.html" class="post-title-link">shntools、mac、cuetools for archlinux</a></h2><div class="post-info">2007年12月22日</div><div class="post-content"></div><a href="/2007/12/shntools-mac-cuetools-arch.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/12/metacity-2215-arch.html" class="post-title-link">Metacity 2.21.5 for Arch</a></h2><div class="post-info">2007年12月20日</div><div class="post-content"></div><a href="/2007/12/metacity-2215-arch.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/12/arch-aur.html" class="post-title-link">开源之精华-Arch 之 AUR 系统</a></h2><div class="post-info">2007年12月19日</div><div class="post-content"><p><strong>先说点闲话：</strong><br>玩 Linux 这几年，在论坛上一直能看到无聊的愤青~说来说去都是要比个谁家的孩子好！比到最后都是不了了之。Gnome 和 KDE 比，Linux 和 BSD 比，Linux 内部发行版本之间也要比。<br>比比是好的，争争也是好的。不比不争哪来发展？<br>但是争比也有点分寸：<br>1.仅讨论技术。<br>2.适可而止。<br>3.不调查就没有发言权。</p>
-<p><del datetime="2007-12-20T08:42:13+00:00">刚才在 Toy 那里看到 <a href="http://linuxtoy.org/archives/the-perfect-linux-desktop-arch-linux-2007-08-2-3.html#comment-64668" target="_blank" rel="external">aBiNg 留言一篇</a>，些许不爽。不高兴在别人的 Blog 唧唧歪歪，在这里我告诉你：Arch 有很大不同！</del>这不同并不仅仅在于软件是如何管理的，系统启动是用 rc.d 还是 sysv，而是在于开源的组织模式。</p></div><a href="/2007/12/arch-aur.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/12/macmenu-in-arch-gnome.html" class="post-title-link">在 Arch Linux Gnome 下使用 Mac Menu</a></h2><div class="post-info">2007年12月19日</div><div class="post-content"><p>Mac 风格的菜单栏大家一定都见过，先上图：</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/18/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/18/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/01/the-silent-force-ogg-q10.html">Within Temptation-The Silent Force-下载</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年1月3日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>寻寻觅觅近三年，终于买到了这张专辑的原盘，不容易啊！<br>Within Temptation 一直是我心中音色最棒的女声。而其乐曲的编排也显得很有气势。再加上非常强烈的旋律感，使得 Within Temptation 无比养耳且很耐听。</p>
+<p>如果将哥特的元素分解为 Dark、 Death、Rhythm 那么这张专辑的 Dark、Death 成分相对很少。但这并不影响 《The Silent Force》 成为Within Temptation 最成功的专辑。</p>
+<p><a href="http://photo15.yupoo.com/20080104/094117_1637598614_kztolptp.jpg" target="_blank" rel="external"><img src="http://photo14.yupoo.com/20080104/094832_424805801_pjjrjqcg.jpg" alt=""></a></p>
+<p>该压缩包为 OGG Q10 格式，从原盘压制，质量保证。<br>该资源首发<a href="http://www.zasv.com" target="_blank" rel="external">杂碎论坛</a>，也欢迎大家来逛逛<a href="http://latteye.com" target="_blank" rel="external">我的Blog</a>。</p>
+<p><a href="http://www.fs2you.com/files/c82c2121-b9ff-11dc-85b1-0014221f4662/" target="_blank" rel="external">点击下载地址</a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/12/yaourt.html">AUR 前端 yaourt 简介、下载</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年12月22日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><a href="http://www.fs2you.com/files/8d044a8a-b097-11dc-a91b-0014221b798a/" target="_blank" rel="external">yaourt-0.8.7-1-i686.pkg.tar.gz</a><br><a href="http://arch.latteye.com/yaourt/yaourt-0.9.1-1-i686.pkg.tar.gz" target="_blank" rel="external">yaourt-0.9.1-1-i686.pkg.tar.gz</a><br>这是已经打包好的 yaourt 包，arch 用户可以通过 pacman -A 命令安装它。</p>
+<p>前两天<a href="http://latteye.com/2007/12/arch-aur.html" target="_blank" rel="external">简单介绍了 AUR 系统</a>。单纯的 AUR 系统是个很好的软件组织仓库，但其本身并不容易被非常快速的安装、搜索。<br>
+          <div class="read-more">
+            <a href="/2007/12/yaourt.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/12/shntools-mac-cuetools-arch.html">shntools、mac、cuetools for archlinux</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年12月22日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>自己要用到，编译了一下，顺便贴上来。需要的直接下载即可。</p>
+<p><a href="http://www.fs2you.com/files/d31216fd-b07b-11dc-b6a9-0014221f3995/" target="_blank" rel="external">shntool-3.0.6-1-i686.pkg.tar.gz</a><br><a href="http://www.fs2you.com/files/8b2def5c-b07b-11dc-8773-0014221f4662/" target="_blank" rel="external">cuetools-1.3.1-1-i686.pkg.tar.gz</a><br><a href="http://www.fs2you.com/files/a8238f00-aef9-11dc-9bd2-0014221b798a/" target="_blank" rel="external">mac-3.99.4.5-1-i686.pkg.tar.gz</a></p>
+<p>用法可以参考<a href="http://latteye.com/tag/ape" target="_blank" rel="external">这里</a>的文章。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/12/metacity-2215-arch.html">Metacity 2.21.5 for Arch</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年12月20日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://www.fs2you.com/files/115bf154-af6f-11dc-beb6-00142218fc6e/" target="_blank" rel="external">metacity-2.21.5-1-i686.pkg.tar.gz</a></p>
+<p>使用 pacman -U 命令安装包。</p>
+<p>若安装此包后出现问题，使用 <code>pacman -Rd metacity</code> 删除之后，重新安装源中版本即可：<code>pacman -S  metacity</code> 。</p>
+<p>官方源中版本为：metacity-2.20.0-1-i686.pkg.tar.gz</p>
+<p>仅供测试。</p>
+<p><del datetime="2007-12-21T07:38:37+00:00">ps：谁的复合效果出来了，麻烦说一声。我咋弄不出那效果呢……</del></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/12/arch-aur.html">开源之精华-Arch 之 AUR 系统</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年12月19日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><strong>先说点闲话：</strong><br>玩 Linux 这几年，在论坛上一直能看到无聊的愤青~说来说去都是要比个谁家的孩子好！比到最后都是不了了之。Gnome 和 KDE 比，Linux 和 BSD 比，Linux 内部发行版本之间也要比。<br>比比是好的，争争也是好的。不比不争哪来发展？<br>但是争比也有点分寸：<br>1.仅讨论技术。<br>2.适可而止。<br>3.不调查就没有发言权。</p>
+<p><del datetime="2007-12-20T08:42:13+00:00">刚才在 Toy 那里看到 <a href="http://linuxtoy.org/archives/the-perfect-linux-desktop-arch-linux-2007-08-2-3.html#comment-64668" target="_blank" rel="external">aBiNg 留言一篇</a>，些许不爽。不高兴在别人的 Blog 唧唧歪歪，在这里我告诉你：Arch 有很大不同！</del>这不同并不仅仅在于软件是如何管理的，系统启动是用 rc.d 还是 sysv，而是在于开源的组织模式。</p>
+          <div class="read-more">
+            <a href="/2007/12/arch-aur.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/12/macmenu-in-arch-gnome.html">在 Arch Linux Gnome 下使用 Mac Menu</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年12月19日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>Mac 风格的菜单栏大家一定都见过，先上图：</p>
 <p><a href="http://photo15.yupoo.com/20071219/215742_337828578_lgaadtmk.jpg" target="_blank" rel="external"><img src="http://photo15.yupoo.com/20071219/215742_337828578_m.jpg" alt=""></a></p>
-<p>以前看过 ubuntu 下的实现方法，今天在 Arch 下弄起来了，才发现在Arch下是最方便的。</p></div><a href="/2007/12/macmenu-in-arch-gnome.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/12/bash-review.html" class="post-title-link">bash 小技巧</a></h2><div class="post-info">2007年12月13日</div><div class="post-content"><p>在 oceanboo 那里看到介绍 <a href="http://www.oceanboo.cn/read.php/231.htm" target="_blank" rel="external">bash-completion 的文章</a>。很棒的一款工具！其目的在于让人们在 bash 下工作的时候更加高效的输入命令参数，有些类似路由器下操作的感觉。</p>
+<p>以前看过 ubuntu 下的实现方法，今天在 Arch 下弄起来了，才发现在Arch下是最方便的。</p>
+          <div class="read-more">
+            <a href="/2007/12/macmenu-in-arch-gnome.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/12/bash-review.html">bash 小技巧</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年12月13日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>在 oceanboo 那里看到介绍 <a href="http://www.oceanboo.cn/read.php/231.htm" target="_blank" rel="external">bash-completion 的文章</a>。很棒的一款工具！其目的在于让人们在 bash 下工作的时候更加高效的输入命令参数，有些类似路由器下操作的感觉。</p>
 <p>Arch 下你可以通过以下命令安装他：</p>
 <p><code>pacman -S bash-completion</code></p>
-<p>接着 source /etc/bash-completion 文件即可使用他的功能了。</p></div><a href="/2007/12/bash-review.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/12/lunyu-jiwangbujiu.html" class="post-title-link">成事不说，遂事不谏，既往不咎</a></h2><div class="post-info">2007年12月9日</div><div class="post-content"></div><a href="/2007/12/lunyu-jiwangbujiu.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/12/aria2.html" class="post-title-link">aria2 强大的多线程+多协议+多镜像下载工具</a></h2><div class="post-info">2007年12月9日</div><div class="post-content"><p>很长一段时间 axel 都是我下载工具的第一选择。<br>现在已经将桌面环境换到了 Arch 上，Arch 的软件管理工具 pacman 具有高度的可定制性。其中，多镜像下载一直是众多爱好者想要实现的。可以看看这里一个很老的<a href="http://www.linuxsir.org/bbs/thread178204.html" target="_blank" rel="external">讨论贴</a>。</p></div><a href="/2007/12/aria2.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/12/emesene-messenger-r999.html" class="post-title-link">Emesene Messenger r999</a></h2><div class="post-info">2007年12月8日</div><div class="post-content"><p>Emesene r999 发布了，进入软件之后可以看到其版本号已经显示为 1.0。说明这是一个相对正事的版本。</p></div><a href="/2007/12/emesene-messenger-r999.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/17/" class="prev">PREV</a><a href="/page/19/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<p>接着 source /etc/bash-completion 文件即可使用他的功能了。</p>
+          <div class="read-more">
+            <a href="/2007/12/bash-review.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/12/lunyu-jiwangbujiu.html">成事不说，遂事不谏，既往不咎</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年12月9日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>哀公问社于宰我，宰我对曰：“夏后氏以松，殷人以柏，周人以栗，曰：使民战栗。” 子闻之，曰：“成事不说，遂事不谏，既往不咎。”</p>
+<p>总有人抓住过去的事情不放，浪费时间。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/12/aria2.html">aria2 强大的多线程+多协议+多镜像下载工具</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年12月9日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>很长一段时间 axel 都是我下载工具的第一选择。<br>现在已经将桌面环境换到了 Arch 上，Arch 的软件管理工具 pacman 具有高度的可定制性。其中，多镜像下载一直是众多爱好者想要实现的。可以看看这里一个很老的<a href="http://www.linuxsir.org/bbs/thread178204.html" target="_blank" rel="external">讨论贴</a>。</p>
+          <div class="read-more">
+            <a href="/2007/12/aria2.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/12/emesene-messenger-r999.html">Emesene Messenger r999</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年12月8日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>Emesene r999 发布了，进入软件之后可以看到其版本号已经显示为 1.0。说明这是一个相对正事的版本。</p>
+          <div class="read-more">
+            <a href="/2007/12/emesene-messenger-r999.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/17/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/19/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

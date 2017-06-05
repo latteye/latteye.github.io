@@ -1,4 +1,171 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 使用 Jmac 转换 APE 格式的音频文件 · Water is</title><meta name="description" content="使用 Jmac 转换 APE 格式的音频文件 - latteye"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">使用 Jmac 转换 APE 格式的音频文件</h1><div class="post-info">2007年11月2日</div><div class="post-content"><p>mac 的确是挂掉了。但是其主页偶尔还是可以访问的。昨天晚上我就成功访问了。<br>对于 mac 的挂掉，实在是不解。 mac 在编译成功后就已经在 ape 官方论坛上留言了。并且，也看到很多人支持。 mac 貌似是使用了官方的源代码，作者还提供了需要修改的 diff 文件，真的是很不错！<br>mac 的作者是中国人。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="使用 Jmac 转换 APE 格式的音频文件"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/2007/11/decoder-ape-with-jmac.html"/>
+
+
+<meta name="description" content="mac 的确是挂掉了。但是其主页偶尔还是可以访问的。昨天晚上我就成功访问了。对于 mac 的挂掉，实在是不解。 mac 在编译成功后就已经在 ape 官方论坛上留言了。并且，也看到很多人支持。 mac 貌似是使用了官方的源代码，作者还提供了需要修改的 diff 文件，真的是很不错！mac 的作者是中国人。 Jmac 是一款用 JAVA 写成的 Monkey’s Audio 编码、解码工具。可以很方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Jmac 转换 APE 格式的音频文件">
+<meta property="og:url" content="http://latteye.me/2007/11/decoder-ape-with-jmac.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="mac 的确是挂掉了。但是其主页偶尔还是可以访问的。昨天晚上我就成功访问了。对于 mac 的挂掉，实在是不解。 mac 在编译成功后就已经在 ape 官方论坛上留言了。并且，也看到很多人支持。 mac 貌似是使用了官方的源代码，作者还提供了需要修改的 diff 文件，真的是很不错！mac 的作者是中国人。 Jmac 是一款用 JAVA 写成的 Monkey’s Audio 编码、解码工具。可以很方">
+<meta property="og:updated_time" content="2015-05-02T13:11:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 Jmac 转换 APE 格式的音频文件">
+<meta name="twitter:description" content="mac 的确是挂掉了。但是其主页偶尔还是可以访问的。昨天晚上我就成功访问了。对于 mac 的挂掉，实在是不解。 mac 在编译成功后就已经在 ape 官方论坛上留言了。并且，也看到很多人支持。 mac 貌似是使用了官方的源代码，作者还提供了需要修改的 diff 文件，真的是很不错！mac 的作者是中国人。 Jmac 是一款用 JAVA 写成的 Monkey’s Audio 编码、解码工具。可以很方">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> 使用 Jmac 转换 APE 格式的音频文件 · Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          使用 Jmac 转换 APE 格式的音频文件
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年11月2日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        <p>mac 的确是挂掉了。但是其主页偶尔还是可以访问的。昨天晚上我就成功访问了。<br>对于 mac 的挂掉，实在是不解。 mac 在编译成功后就已经在 ape 官方论坛上留言了。并且，也看到很多人支持。 mac 貌似是使用了官方的源代码，作者还提供了需要修改的 diff 文件，真的是很不错！<br>mac 的作者是中国人。</p>
 <p>Jmac 是一款用 JAVA 写成的 Monkey’s Audio 编码、解码工具。可以很方便的将 ape 文件转换为 wav 文件。目前已经支持 3.99 版本的 mac 解码、编码。<br>主页地址 ： <a href="http://jmac.sourceforge.net/" target="_blank" rel="external">http://jmac.sourceforge.net/</a></p>
 <a id="more"></a>
 <blockquote>
@@ -21,4 +188,202 @@ build  core           gpl.txt         readme.txt  test</code></p>
 <p><code>shntool split -f Blue.Merle.-.\[Burning.in.the.sun\].\(APE\).cue -t &#39;%n.%t&#39; -o &#39;cust ext=mp3 lame -b 320 - %f&#39; Blue.Merle.-.\[Burning.in.the.sun\].\(APE\).wav</code></p>
 <p>大功告成！</p>
 <p>驳回前文的话，linux 下 ape 的处理并不是如此脆弱的。</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2007/11/ape-flac-to-mp3-shell.html" class="prev">PREV</a><a href="/2007/11/mac-ape-linux-broken.html" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>作者: </span>
+      <span>latteye</span>
+    </p>
+    <p class="copyright-item">
+      <span>来源: </span>
+      <a href="http://latteye.me">http://latteye.me</a>
+    </p>
+    <p class="copyright-item">
+      <span>链接: </span>
+      <a href="http://latteye.me/2007/11/decoder-ape-with-jmac.html">http://latteye.me/2007/11/decoder-ape-with-jmac.html</a>
+    </p>
+
+    <p class="copyright-item lincese">
+      
+      本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+    </p>
+  </div>
+
+
+
+      
+      
+  <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code">
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/wechat.png" title="wechat">
+        </label>
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/alipay.png" title="alipay">
+        </label>
+      
+    </div>
+  </div>
+
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2007/11/ape-flac-to-mp3-shell.html">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">wav、flac 转换 MP3 脚本</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2007/11/mac-ape-linux-broken.html">
+        <span class="next-text nav-default">APE 转换 MP3 在 Linux 下无法解决？</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "7c27380789354d14af755b0b00464371",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

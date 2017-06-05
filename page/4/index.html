@@ -1,4 +1,262 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2011/10/mongodb-e7-ac-94-2.html" class="post-title-link">MongoDB 笔记 2</a></h2><div class="post-info">2011年10月12日</div><div class="post-content"><p>昨天到今天一直在尝试在同一台机器上用多个IP地址来创建 Replica Set + Shard。<br>由于 MongoDB 官方用<a href="http://www.mongodb.org/display/DOCS/Security+and+Authentication#SecurityandAuthentication-ReplicaSetandShardingAuthentication" target="_blank" rel="external">户验证方面的文档</a>说的也不太细。所以走了一些回头路。<br>下面整理一些常见的错误，以及他们可能表达的意思。描述的顺序是按照排错的逻辑：</div><a href="/2011/10/mongodb-e7-ac-94-2.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2011/10/evanescence-vanescence.html" class="post-title-link">Evanescence 《Evanescence》</a></h2><div class="post-info">2011年10月10日</div><div class="post-content"><p><img src="http://ecx.images-amazon.com/images/I/41J6NLh9h%2BL._SL500_AA300_.jpg" alt="Evanescence"><br></div><a href="/2011/10/evanescence-vanescence.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2011/10/mongodb-note-1.html" class="post-title-link">MongoDB 笔记 1</a></h2><div class="post-info">2011年10月10日</div><div class="post-content"><p><strong>1. addshard 遇到的错误</strong></p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/4/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/4/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2011/10/mongodb-e7-ac-94-2.html">MongoDB 笔记 2</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2011年10月12日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>昨天到今天一直在尝试在同一台机器上用多个IP地址来创建 Replica Set + Shard。<br>由于 MongoDB 官方用<a href="http://www.mongodb.org/display/DOCS/Security+and+Authentication#SecurityandAuthentication-ReplicaSetandShardingAuthentication" target="_blank" rel="external">户验证方面的文档</a>说的也不太细。所以走了一些回头路。<br>下面整理一些常见的错误，以及他们可能表达的意思。描述的顺序是按照排错的逻辑：
+          <div class="read-more">
+            <a href="/2011/10/mongodb-e7-ac-94-2.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2011/10/evanescence-vanescence.html">Evanescence 《Evanescence》</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2011年10月10日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><img src="http://ecx.images-amazon.com/images/I/41J6NLh9h%2BL._SL500_AA300_.jpg" alt="Evanescence"><br>
+          <div class="read-more">
+            <a href="/2011/10/evanescence-vanescence.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2011/10/mongodb-note-1.html">MongoDB 笔记 1</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2011年10月10日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><strong>1. addshard 遇到的错误</strong></p>
 <blockquote>
 <p>db.runCommand({addshard:”172.16.5.104:20000”})</p>
 <p>{</p>
@@ -7,6 +265,429 @@
 &quot;errmsg&quot; : &quot;can&apos;t use localhost as a shard since all shards need to communicate. either use all shards and configdbs in localhost or all in actual IPs  host: 172.16.5.104:20000 isLocalHost:0&quot;
 </code></pre><p>}</p>
 </blockquote>
-<p>遇到这样的错误是由于某些服务启动在 localhost 地址。<br>经过检查发现 route 启动时，读取 config 服务是读取的 localhost 地址：<br></div><a href="/2011/10/mongodb-note-1.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2011/07/iptables-e6-8a-80-e6-9c-af-e5-b0-8f-e8-ae-b0.html" class="post-title-link">iptables 技术小记</a></h2><div class="post-info">2011年7月21日</div><div class="post-content"><p>明天要去面试了，想想自己已经快2年都没碰过 iptables 、mysql 等等面试常见问题项目，还真有点忐忑，呵呵。想着想着想到在2年前机房建设的时候，有遇到过2个 iptables 很有趣的知识点，一直没记下来。今天写上一笔。</div><a href="/2011/07/iptables-e6-8a-80-e6-9c-af-e5-b0-8f-e8-ae-b0.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2011/07/ipsec-e7-ae-80-e8-a7-a3.html" class="post-title-link">IPSEC 简解</a></h2><div class="post-info">2011年7月19日</div><div class="post-content"><p>在 Kernel 里面才倒腾了几个参数，都是关于 IPSec 的。看着看着发现逐条的解释不太现实了，一个条目解释透必须要把其他都带出来。干脆，梳理一下 IPSec 的工作方式吧。由于不涉及底层的实现，所以为简解。</div><a href="/2011/07/ipsec-e7-ae-80-e8-a7-a3.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2011/07/pc-low-fi-e4-b9-8b-e8-b7-af-2.html" class="post-title-link">PC Low-Fi 之路 2</a></h2><div class="post-info">2011年7月10日</div><div class="post-content"><p>在<a href="http://latteye.com/2011/07/pc-low-fi-%e4%b9%8b%e8%b7%af-1.html" target="_blank" rel="external">上一篇</a>中说到我买了一个性价比还不错的解码器。<br>之后还对 Foobar 做了一点工作，安装了 <a href="http://www.asio4all.com/" target="_blank" rel="external">ASIO4All</a>，在我的机器上是虚拟化的 ASIO 设备，这个东西的反馈不像 XP 下的 KS，ASIO 有人的反馈好，有人说不好。我在设置完之后听感上高音更加明亮，整体变的更加清透，结果还算不错，留下了。<br></div><a href="/2011/07/pc-low-fi-e4-b9-8b-e8-b7-af-2.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2011/07/linux-kernel-network-3-2.html" class="post-title-link">Linux Kernel 功能详解 网络篇 3</a></h2><div class="post-info">2011年7月10日</div><div class="post-content"><p><strong>网络篇 3 Transformation user configuration interface</strong></p>
-<p><strong>Networking support—&gt;Networking options—&gt;Transformation user configuration interface</strong><br></div><a href="/2011/07/linux-kernel-network-3-2.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2011/07/pc-low-fi-e4-b9-8b-e8-b7-af-1.html" class="post-title-link">PC Low-Fi 之路 1</a></h2><div class="post-info">2011年7月6日</div><div class="post-content"><p>闲来无事，开始想改善家里的听音环境。我不是一个极限追求 Hi-Fi 的人，我追求的是享受。回到家里，轻轻点两下，喜欢的音乐就从客厅传出。</div><a href="/2011/07/pc-low-fi-e4-b9-8b-e8-b7-af-1.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2011/06/e4-b9-85-e8-bf-9d-e7-9a-84-e5-81-87-e6-9c-9f.html" class="post-title-link">久违的假期</a></h2><div class="post-info">2011年6月26日</div><div class="post-content"></div><a href="/2011/06/e4-b9-85-e8-bf-9d-e7-9a-84-e5-81-87-e6-9c-9f.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2011/06/linux-kernel-e5-8a-9f-e8-83-bd-e8-af-a6-e8-a7-a3-e7-bd-91-e7-bb-9c-e7-af-87-2.html" class="post-title-link">Linux Kernel 功能详解-网络篇-2</a></h2><div class="post-info">2011年6月20日</div><div class="post-content"><p><strong>网络篇2 Unix Domain Sockets</strong><br>Networking support—&gt;Networking options—&gt;Unix domain sockets</p>
-<p>Unix Domain Sockets 是一种 IPC （Interprocess communication），他处理本机的进程与进程的通讯。如果要处理不同机器之间的通讯，可以看看<a href="http://osr507doc.sco.com/en/netguide/disockN.inet_sockets_intro.html" target="_blank" rel="external">这篇文章</a>。<br></div><a href="/2011/06/linux-kernel-e5-8a-9f-e8-83-bd-e8-af-a6-e8-a7-a3-e7-bd-91-e7-bb-9c-e7-af-87-2.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/3/" class="prev">PREV</a><a href="/page/5/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<p>遇到这样的错误是由于某些服务启动在 localhost 地址。<br>经过检查发现 route 启动时，读取 config 服务是读取的 localhost 地址：<br>
+          <div class="read-more">
+            <a href="/2011/10/mongodb-note-1.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2011/07/iptables-e6-8a-80-e6-9c-af-e5-b0-8f-e8-ae-b0.html">iptables 技术小记</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2011年7月21日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>明天要去面试了，想想自己已经快2年都没碰过 iptables 、mysql 等等面试常见问题项目，还真有点忐忑，呵呵。想着想着想到在2年前机房建设的时候，有遇到过2个 iptables 很有趣的知识点，一直没记下来。今天写上一笔。
+          <div class="read-more">
+            <a href="/2011/07/iptables-e6-8a-80-e6-9c-af-e5-b0-8f-e8-ae-b0.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2011/07/ipsec-e7-ae-80-e8-a7-a3.html">IPSEC 简解</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2011年7月19日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>在 Kernel 里面才倒腾了几个参数，都是关于 IPSec 的。看着看着发现逐条的解释不太现实了，一个条目解释透必须要把其他都带出来。干脆，梳理一下 IPSec 的工作方式吧。由于不涉及底层的实现，所以为简解。
+          <div class="read-more">
+            <a href="/2011/07/ipsec-e7-ae-80-e8-a7-a3.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2011/07/pc-low-fi-e4-b9-8b-e8-b7-af-2.html">PC Low-Fi 之路 2</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2011年7月10日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>在<a href="http://latteye.com/2011/07/pc-low-fi-%e4%b9%8b%e8%b7%af-1.html" target="_blank" rel="external">上一篇</a>中说到我买了一个性价比还不错的解码器。<br>之后还对 Foobar 做了一点工作，安装了 <a href="http://www.asio4all.com/" target="_blank" rel="external">ASIO4All</a>，在我的机器上是虚拟化的 ASIO 设备，这个东西的反馈不像 XP 下的 KS，ASIO 有人的反馈好，有人说不好。我在设置完之后听感上高音更加明亮，整体变的更加清透，结果还算不错，留下了。<br>
+          <div class="read-more">
+            <a href="/2011/07/pc-low-fi-e4-b9-8b-e8-b7-af-2.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2011/07/linux-kernel-network-3-2.html">Linux Kernel 功能详解 网络篇 3</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2011年7月10日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><strong>网络篇 3 Transformation user configuration interface</strong></p>
+<p><strong>Networking support—&gt;Networking options—&gt;Transformation user configuration interface</strong><br>
+          <div class="read-more">
+            <a href="/2011/07/linux-kernel-network-3-2.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2011/07/pc-low-fi-e4-b9-8b-e8-b7-af-1.html">PC Low-Fi 之路 1</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2011年7月6日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>闲来无事，开始想改善家里的听音环境。我不是一个极限追求 Hi-Fi 的人，我追求的是享受。回到家里，轻轻点两下，喜欢的音乐就从客厅传出。
+          <div class="read-more">
+            <a href="/2011/07/pc-low-fi-e4-b9-8b-e8-b7-af-1.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2011/06/e4-b9-85-e8-bf-9d-e7-9a-84-e5-81-87-e6-9c-9f.html">久违的假期</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2011年6月26日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>从大学毕业以来，我只休过两个假期。一个是用婚假和老婆去了马来西亚，一个就是这两天修病假。<br>期间也有修过病假，但和这次不同。这次真的是从心底完全的放松下来。<br>今天下午和老婆转了一圈家边新开的生活广场，那种毫无目的的蹓跶，享受生活的感觉真的很好。我们可以一边寻找着美食，一边嘲笑着在＂打折＂诱惑下排队在万德城买电器的人们，还可以看到很多可爱的小孩子。<br>似乎四年的辛苦到了今天终于有了初步的回报。似乎可以告诉自己，你现在很幸福了。</p>
+<p>晚上洗澡的时候发现这一天下来不像以前油光满面，一个月的咽喉炎今天也觉得好一些了。<br>假期真的很美好。或许是在忙碌夹缝中的假期才会如此的美好吧，抓紧享受吧。</p>
+<p>因为姐姐，姐夫送了我一个IPad2，所以Kindel 的采购计划就暂缓了。虽然 IPad 上看电子书不是最完美的，但IPad的娱乐性，高可用性，多样性实在是无法比拟的。这篇简短的博文就是在IPad上轻松完成，配合WordPress的软件，操作起来非常的顺畅。</p>
+<p>晚安，Holiday</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2011/06/linux-kernel-e5-8a-9f-e8-83-bd-e8-af-a6-e8-a7-a3-e7-bd-91-e7-bb-9c-e7-af-87-2.html">Linux Kernel 功能详解-网络篇-2</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2011年6月20日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><strong>网络篇2 Unix Domain Sockets</strong><br>Networking support—&gt;Networking options—&gt;Unix domain sockets</p>
+<p>Unix Domain Sockets 是一种 IPC （Interprocess communication），他处理本机的进程与进程的通讯。如果要处理不同机器之间的通讯，可以看看<a href="http://osr507doc.sco.com/en/netguide/disockN.inet_sockets_intro.html" target="_blank" rel="external">这篇文章</a>。<br>
+          <div class="read-more">
+            <a href="/2011/06/linux-kernel-e5-8a-9f-e8-83-bd-e8-af-a6-e8-a7-a3-e7-bd-91-e7-bb-9c-e7-af-87-2.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/3/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/5/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

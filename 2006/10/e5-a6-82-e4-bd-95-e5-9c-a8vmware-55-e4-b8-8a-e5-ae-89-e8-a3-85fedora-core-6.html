@@ -1,4 +1,193 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 如何在VMware 5.5上安装Fedora Core 6 · Water is</title><meta name="description" content="如何在VMware 5.5上安装Fedora Core 6 - latteye"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">如何在VMware 5.5上安装Fedora Core 6</h1><div class="post-info">2006年10月30日</div><div class="post-content"><p><a href="http://www.laroea.cn" target="_blank" rel="external"><img src="http://www.linuxblog.cn/people/latteye.jpg" alt=""></a><br>本文将介绍如何将Fedora Core 6安装在 VMware 5.5上。（VMware4、5适用）。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="如何在VMware 5.5上安装Fedora Core 6"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/2006/10/e5-a6-82-e4-bd-95-e5-9c-a8vmware-55-e4-b8-8a-e5-ae-89-e8-a3-85fedora-core-6.html"/>
+
+
+<meta name="description" content="本文将介绍如何将Fedora Core 6安装在 VMware 5.5上。（VMware4、5适用）。 1.创建一个新的虚拟机。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在VMware 5.5上安装Fedora Core 6">
+<meta property="og:url" content="http://latteye.me/2006/10/e5-a6-82-e4-bd-95-e5-9c-a8vmware-55-e4-b8-8a-e5-ae-89-e8-a3-85fedora-core-6.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="本文将介绍如何将Fedora Core 6安装在 VMware 5.5上。（VMware4、5适用）。 1.创建一个新的虚拟机。">
+<meta property="og:image" content="http://www.linuxblog.cn/people/latteye.jpg">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm1.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm2.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm3.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm4.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm5.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm6.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm7.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm8.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm9.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm10.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm11.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm12.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm13.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm14.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm15.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm16.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm17.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm18.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm19.png">
+<meta property="og:image" content="http://www.linuxblog.cn/wp-content/images/_vm20.png">
+<meta property="og:updated_time" content="2015-05-02T13:11:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何在VMware 5.5上安装Fedora Core 6">
+<meta name="twitter:description" content="本文将介绍如何将Fedora Core 6安装在 VMware 5.5上。（VMware4、5适用）。 1.创建一个新的虚拟机。">
+<meta name="twitter:image" content="http://www.linuxblog.cn/people/latteye.jpg">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> 如何在VMware 5.5上安装Fedora Core 6 · Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          如何在VMware 5.5上安装Fedora Core 6
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年10月30日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        <p><a href="http://www.laroea.cn" target="_blank" rel="external"><img src="http://www.linuxblog.cn/people/latteye.jpg" alt=""></a><br>本文将介绍如何将Fedora Core 6安装在 VMware 5.5上。（VMware4、5适用）。</p>
 <p>1.创建一个新的虚拟机。<br><a href="http://www.linuxblog.cn/wp-content/images/vm1.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm1.png" alt="vm1" title="vm1"></a><br><a id="more"></a><br>2.点击Custom来定制虚拟机选项。<br><a href="http://www.linuxblog.cn/wp-content/images/vm2.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm2.png" alt=""></a></p>
 <p>3.选择新的虚拟机格式。<br><a href="http://www.linuxblog.cn/wp-content/images/vm3.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm3.png" alt=""></a><br>4.选择Linux-Other Linux 2.6.x kernel。<br><a href="http://www.linuxblog.cn/wp-content/images/vm4.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm4.png" alt=""></a><br>5.给你的虚拟机起个名字，并且选择文件保存目录。<br><a href="http://www.linuxblog.cn/wp-content/images/vm5.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm5.png" alt=""></a><br>6.选择你想给虚拟机适用的内存大小。<br><a href="http://www.linuxblog.cn/wp-content/images/vm6.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm6.png" alt=""></a><br>7.选择虚拟机使用的网络类型-选择bridged。<br><a href="http://www.linuxblog.cn/wp-content/images/vm7.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm7.png" alt=""></a><br>8.在SCSI adapter选项窗口中选择BusLogic。<br><a href="http://www.linuxblog.cn/wp-content/images/vm8.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm8.png" alt=""></a><br>9.选择“创建一个新的虚拟磁盘文件。”<br><a href="http://www.linuxblog.cn/wp-content/images/vm9.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm9.png" alt=""></a><br>10.选择SCSI。<br><a href="http://www.linuxblog.cn/wp-content/images/vm10.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm10.png" alt=""></a><br>11 设置你愿意给VMware使用的磁盘总空间。<br><a href="http://www.linuxblog.cn/wp-content/images/vm11.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm11.png" alt=""></a><br>12.为虚拟机的磁盘文件选择保存位置。<br><a href="http://www.linuxblog.cn/wp-content/images/vm12.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm12.png" alt=""></a><br>13.好了，你的虚拟机已经设置好了。双击“CD-ROM1”<br><a href="http://www.linuxblog.cn/wp-content/images/vm13.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm13.png" alt=""></a><br>14.你可以选择使用你的真实光驱，或者是FC6的镜像文件。当完成设置后，点击“OK”。<br><a href="http://www.linuxblog.cn/wp-content/images/vm14.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm14.png" alt=""></a><br>15.好了，现在点击“Power On”按钮，当VM开启虚拟机的时候，在屏幕上按鼠标左键进入虚拟机，按F2进入虚拟机BIOS设置。按键盘右键直到Boot菜单处于高亮。按下键直到CD-ROM Drive处于高亮，按“+”键使得CD drive在hard drive之上。<br><a href="http://www.linuxblog.cn/wp-content/images/vm15.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm15.png" alt=""></a><br>16保存设置，并退出。<br><a href="http://www.linuxblog.cn/wp-content/images/vm16.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm16.png" alt=""></a><br>17.当重启以后，你就可以看到这个画面了。键入linux noprobe来启动。（noprebe的意思是让安装程序不要探测你的硬件。）<br><a href="http://www.linuxblog.cn/wp-content/images/vm17.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm17.png" alt=""></a><br>18.选择是否探测你的光盘真确性。<br><a href="http://www.linuxblog.cn/wp-content/images/vm18.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm18.png" alt=""></a><br>19.在下一个界面中选择添加（Add），并且将光标移动到BusLogic MultiMaster SCSI，选择OK。<br><a href="http://www.linuxblog.cn/wp-content/images/vm19.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm19.png" alt=""></a><br>20.选择完成。<br><a href="http://www.linuxblog.cn/wp-content/images/vm20.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_vm20.png" alt=""></a></p>
 <p>安装VMware-Tools</p>
@@ -8,4 +197,202 @@ yum install kernel-devel</code></p>
 <p>接着下载<a href="http://ftp.cvut.cz/vmware/vmware-tools-any-update2.tar.gz" target="_blank" rel="external">vmware-tools-any-update2.tar.gz</a>文件，解压缩。键入目录执行：<br><code>./runme.pl</code></p>
 <p>好了，到这里安装就结束了。有任何问题欢迎大家留言。</p>
 <p>文章翻译自digitalghetto的<a href="http://digitalghetto.org/fc6vmware.php" target="_blank" rel="external">How-to</a>。</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2006/10/gaim-e7-8a-b6-e6-80-81-e6-8f-90-e7-a4-ba-e4-b8-bb-e9-a2-98-e5-8f-91-e5-b8-83.html" class="prev">PREV</a><a href="/2006/10/linux-e4-b8-8bp2p-e8-bd-af-e4-bb-b6.html" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>作者: </span>
+      <span>latteye</span>
+    </p>
+    <p class="copyright-item">
+      <span>来源: </span>
+      <a href="http://latteye.me">http://latteye.me</a>
+    </p>
+    <p class="copyright-item">
+      <span>链接: </span>
+      <a href="http://latteye.me/2006/10/e5-a6-82-e4-bd-95-e5-9c-a8vmware-55-e4-b8-8a-e5-ae-89-e8-a3-85fedora-core-6.html">http://latteye.me/2006/10/e5-a6-82-e4-bd-95-e5-9c-a8vmware-55-e4-b8-8a-e5-ae-89-e8-a3-85fedora-core-6.html</a>
+    </p>
+
+    <p class="copyright-item lincese">
+      
+      本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+    </p>
+  </div>
+
+
+
+      
+      
+  <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code">
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/wechat.png" title="wechat">
+        </label>
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/alipay.png" title="alipay">
+        </label>
+      
+    </div>
+  </div>
+
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2006/10/gaim-e7-8a-b6-e6-80-81-e6-8f-90-e7-a4-ba-e4-b8-bb-e9-a2-98-e5-8f-91-e5-b8-83.html">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Gaim状态提示主题发布</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2006/10/linux-e4-b8-8bp2p-e8-bd-af-e4-bb-b6.html">
+        <span class="next-text nav-default">Linux下P2P软件</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "7c27380789354d14af755b0b00464371",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

@@ -1,9 +1,689 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/audioformat-2.html" class="post-title-link">AudioFormat</a></h2><div class="post-info">2006年11月26日</div><div class="post-content"><p>AudioFormat是一款相当小巧、实用的音频格式转换软件。喜欢Foobar一个右键-转换即可转换音乐的功能么？AudioFormat也能给你同样的感觉！</p>
-<p><a href="http://www.linuxblog.cn/wp-content/images/audioformat1.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_audioformat1.png" alt=""></a><br></div><a href="/2006/11/audioformat-2.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/ubuntu-610-e7-a1-ac-e7-9b-98-e5-ae-89-e8-a3-85.html" class="post-title-link">ubuntu 6.10 硬盘安装</a></h2><div class="post-info">2006年11月25日</div><div class="post-content"><p>本文介绍了如何从iso文件硬盘安装ubuntu 6.10。并不适用与其他发行版本。</p>
-<p>1. 在<a href="http://apt.nc.hcc.edu.tw/pub/ubuntu-cd/6.10/" target="_blank" rel="external">台湾服务器</a>下载<strong>Alternate install CD</strong>。注意！不是Desktop CD、不是Server install CD！必须是<strong>Alternate install CD</strong>。<br>  根据你的机器选择i386、x86或是其他版本。<br>  将iso文件保存在任一FAT32格式的分区上。<br></div><a href="/2006/11/ubuntu-610-e7-a1-ac-e7-9b-98-e5-ae-89-e8-a3-85.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/dc.html" class="post-title-link">DC#</a></h2><div class="post-info">2006年11月25日</div><div class="post-content"><p><a href="http://mono.dcsharp.com" target="_blank" rel="external">DC#(dcsharp)</a>是一款在局域网内聊天、共享文件的小工具。他使用了Direct Connect协议，并且用.Net编写，所以想要使用它，你必须安装.Net支持。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/38/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/38/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/audioformat-2.html">AudioFormat</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月26日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>AudioFormat是一款相当小巧、实用的音频格式转换软件。喜欢Foobar一个右键-转换即可转换音乐的功能么？AudioFormat也能给你同样的感觉！</p>
+<p><a href="http://www.linuxblog.cn/wp-content/images/audioformat1.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_audioformat1.png" alt=""></a><br>
+          <div class="read-more">
+            <a href="/2006/11/audioformat-2.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/ubuntu-610-e7-a1-ac-e7-9b-98-e5-ae-89-e8-a3-85.html">ubuntu 6.10 硬盘安装</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月25日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>本文介绍了如何从iso文件硬盘安装ubuntu 6.10。并不适用与其他发行版本。</p>
+<p>1. 在<a href="http://apt.nc.hcc.edu.tw/pub/ubuntu-cd/6.10/" target="_blank" rel="external">台湾服务器</a>下载<strong>Alternate install CD</strong>。注意！不是Desktop CD、不是Server install CD！必须是<strong>Alternate install CD</strong>。<br>  根据你的机器选择i386、x86或是其他版本。<br>  将iso文件保存在任一FAT32格式的分区上。<br>
+          <div class="read-more">
+            <a href="/2006/11/ubuntu-610-e7-a1-ac-e7-9b-98-e5-ae-89-e8-a3-85.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/dc.html">DC#</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月25日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><a href="http://mono.dcsharp.com" target="_blank" rel="external">DC#(dcsharp)</a>是一款在局域网内聊天、共享文件的小工具。他使用了Direct Connect协议，并且用.Net编写，所以想要使用它，你必须安装.Net支持。</p>
 <p>  本文将介绍如何在Ubuntu Edgy下快速的安装DC#</p>
-<p><a href="http://linuxblog.cn/blog/wp-content/images/hubs.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_hubs.png" alt=""></a><br><a href="http://linuxblog.cn/blog/wp-content/images/search.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_search.png" alt=""></a><br></div><a href="/2006/11/dc.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/e7-bd-91-e7-bb-9c-e7-a1-ac-e7-9b-98-e9-9b-86-e9-94-a6.html" class="post-title-link">网络硬盘集锦</a></h2><div class="post-info">2006年11月24日</div><div class="post-content"></div><a href="/2006/11/e7-bd-91-e7-bb-9c-e7-a1-ac-e7-9b-98-e9-9b-86-e9-94-a6.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/iglooftp-pro.html" class="post-title-link">IglooFTP PRO</a></h2><div class="post-info">2006年11月24日</div><div class="post-content"></div><a href="/2006/11/iglooftp-pro.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/xarchiver.html" class="post-title-link">Xarchiver</a></h2><div class="post-info">2006年11月24日</div><div class="post-content"></div><a href="/2006/11/xarchiver.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/gtk-murrine-theme.html" class="post-title-link">GTK Murrine Y Theme</a></h2><div class="post-info">2006年11月24日</div><div class="post-content"></div><a href="/2006/11/gtk-murrine-theme.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/beryl-theme.html" class="post-title-link">Beryl Theme</a></h2><div class="post-info">2006年11月24日</div><div class="post-content"></div><a href="/2006/11/beryl-theme.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/e8-bd-ac-e5-a4-a9-e4-bd-bf-e8-bf-98-e6-98-af-e6-92-92-e6-97-a6-e6-96-b0-e9-87-91-e5-b1-9e-e7-bb-bc-e8-bf-b0.html" class="post-title-link">[转]天使还是撒旦-新金属综述</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"><p>前言：</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/hubs.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_hubs.png" alt=""></a><br><a href="http://linuxblog.cn/blog/wp-content/images/search.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_search.png" alt=""></a><br>
+          <div class="read-more">
+            <a href="/2006/11/dc.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/e7-bd-91-e7-bb-9c-e7-a1-ac-e7-9b-98-e9-9b-86-e9-94-a6.html">网络硬盘集锦</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月24日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>常在网上转，一直要用到网络硬盘，现在推荐几个给大家。</p>
+<p>1.<a href="http://www.badongo.com" target="_blank" rel="external">http://www.badongo.com</a><br>单个文件最大1G空间，通过软件可以在Windows下快速的上传、下载自己的文件。当然也支持网页传输。</p>
+<p>2.<a href="http://www.gbaopan.com/" target="_blank" rel="external">http://www.gbaopan.com/</a>  G宝盘<br>1G免费空间文件保存，可以共享自己的文件。</p>
+<p>3.<a href="http://www.live-share.com/" target="_blank" rel="external">http://www.live-share.com/</a> 推荐<br>单个文件300M（注册用户500M）限制，无最大空间限制，注册用户可以管理、分享自己的文件。</p>
+<p>4.<a href="http://www.wikiupload.com/" target="_blank" rel="external">http://www.wikiupload.com/</a> 推荐</p>
+<p>最大单个文件5G，支持用户注册（但是我注册了3次都没成功。）。上传很稳定，速度不错，我有很多文件都放在这里。<br>他的删除规则是：单个文件连续30天无人访问则删除。</p>
+<p>5.<a href="http://www.sendspace.com/" target="_blank" rel="external">http://www.sendspace.com/</a></p>
+<p>用的不多，该网站比较侧重于收费服务。</p>
+<p>6.<a href="http://www.pc2n.com/" target="_blank" rel="external">http://www.pc2n.com/</a></p>
+<p>2G的免费空间，比较有特色的是，他的管理界面方式是模仿Windows桌面的。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/iglooftp-pro.html">IglooFTP PRO</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月24日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://www.iglooftp.com" target="_blank" rel="external">IglooFTP PRO</a>是一款基于Gtk的Ftp工具，在Gnomefiles网站上是下载量最高的ftp软件。<br>  使用之后，发现这是一款功能相当齐全的Ftp客户端，不但支持常用的书签功能，还支持SSL、缓存、防火墙调整、剪贴板监视……<br>  不过对中文的支持也不理想，在我使用中显示的都是乱码。</p>
+<p>  安装：</p>
+<p>  下载二进制包，进入目录：</p>
+<p><code>./Install</code></p>
+<p>  执行命令即可：</p>
+<p><code>IglooFTP-PRO</code></p>
+<p><a href="http://www.linuxblog.cn/wp-content/images/scr_default.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_scr_default.png" alt=""></a><br><a href="http://www.linuxblog.cn/wp-content/images/scr_pref.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_scr_pref.png" alt=""></a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/xarchiver.html">Xarchiver</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月24日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://xarchiver.xfce.org/" target="_blank" rel="external">Xarchiver</a> 0.44发布了，Xarchiver是一款GTK环境下的压缩、解压缩软件。<br>GTK默认的解压缩程序只可以解压缩arj,7z,rar,zip,tar,bzip, iso, lha, gzip, DEB and RPM格式。而Xarchiver 允许你创建、添加、解压缩、删除文件。并且支持多种压缩格式，对Arj，7z，zip，rar还提供了密码功能支持。<br><a href="http://www.gnomefiles.org/download.php?soft_id=1126&amp;where=http%3A%2F%2Fsourceforge.net%2Fproject%2Fshowfiles.php%3Fgroup_id%3D140153" target="_blank" rel="external">源码包下载</a><br><a href="http://www.live-share.com/files/100249/xarchiver_0.4.4-1_i386.deb.html" target="_blank" rel="external">deb for ubuntu edgy</a><br><a href="http://www.linuxblog.cn/wp-content/images/xar.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_xar.png" alt=""></a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/gtk-murrine-theme.html">GTK Murrine Y Theme</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月24日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>一款黑白色调的<a href="http://www.gnome-look.org/content/show.php?content=49094" target="_blank" rel="external">Murrine Y</a>主题发布了，多处采用了圆角设计，看起来格外柔和。<br><a href="http://linuxblog.cn/blog/wp-content/images/49094-1.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_49094-1.png" alt=""></a></p>
+<p>Murrine是一个GTK环境下的主题引擎，使用这款引擎安装的主题可以获得某些特性。<br>如果你是ubuntu用户且还没有安装Murrine引擎，请点击下面的地址：</p>
+<p><a href="http://southernvaleslug.org/ubuntu/dapper-drake/" target="_blank" rel="external">dapper</a><br><a href="http://southernvaleslug.org/ubuntu/edgy-eft/" target="_blank" rel="external">edgy</a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/beryl-theme.html">Beryl Theme</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月24日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>短短两天时间就有好几款Beryl主题发布，如果喜欢可以去<a href="http://www.gnome-look.org/index.php?xcontentmode=103" target="_blank" rel="external">这里</a>下载。我就不一一介绍了。现在也可以通过本站右侧的flickr相册看到最新的主题了！</p>
+<p><a href="http://linuxblog.cn/blog/wp-content/images/beryl/49060-1.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/beryl/_49060-1.png" alt=""></a><br><a href="http://linuxblog.cn/blog/wp-content/images/beryl/49083-2.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/beryl/_49083-2.png" alt=""></a><br><a href="http://linuxblog.cn/blog/wp-content/images/beryl/49102-1.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/beryl/_49102-1.png" alt=""></a><br><a href="http://linuxblog.cn/blog/wp-content/images/beryl/49103-1.jpg" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/beryl/_49103-1.jpg" alt=""></a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/e8-bd-ac-e5-a4-a9-e4-bd-bf-e8-bf-98-e6-98-af-e6-92-92-e6-97-a6-e6-96-b0-e9-87-91-e5-b1-9e-e7-bb-bc-e8-bf-b0.html">[转]天使还是撒旦-新金属综述</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>前言：</p>
 <p>新金属，这个金属界或许根本无法称之为风格的流派，从诞生起就颇受争议，但它却统治了上个世纪90年代整整十年的金属乐坛。作为新金属的忠实拥簇，我有幸从互联网上觅得一篇综述性文章，在此摘取其中精华献给热爱这个充满着激情与矛盾流派的人们。下面，正文开始。</p>
-<p>什麽是新金属？<br></div><a href="/2006/11/e8-bd-ac-e5-a4-a9-e4-bd-bf-e8-bf-98-e6-98-af-e6-92-92-e6-97-a6-e6-96-b0-e9-87-91-e5-b1-9e-e7-bb-bc-e8-bf-b0.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/e5-8d-87-e7-ba-a7-e5-88-b0edgy.html" class="post-title-link">升级到Edgy</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"><p>从dapper升级到edgy的方法可以参考linuxtoy的<a href="http://linuxtoy.org/archives/ubuntu_6_10_beta.html" target="_blank" rel="external">这篇</a>文章。</p>
+<p>什麽是新金属？<br>
+          <div class="read-more">
+            <a href="/2006/11/e8-bd-ac-e5-a4-a9-e4-bd-bf-e8-bf-98-e6-98-af-e6-92-92-e6-97-a6-e6-96-b0-e9-87-91-e5-b1-9e-e7-bb-bc-e8-bf-b0.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/e5-8d-87-e7-ba-a7-e5-88-b0edgy.html">升级到Edgy</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>从dapper升级到edgy的方法可以参考linuxtoy的<a href="http://linuxtoy.org/archives/ubuntu_6_10_beta.html" target="_blank" rel="external">这篇</a>文章。</p>
 <p>  我遇到的问题：</p>
-<p>  1.包覆盖时提示无法覆盖。解决方法：使用dpkg –force-overwrite -i 软件包来强制安装。<br>  2.gedit在安装时，由于python包的某些信息丢失，而无法对其操作。解决办法：感觉是个列……没有google到信息。于是仿造其他软件包的信息自己写了一个配置文件。<br>  3.应该是bug，参看<a href="http://www.mail-archive.com/desktop-bugs@lists.ubuntu.com/msg45167.html" target="_blank" rel="external">这里</a>。解决方案：我已经编译过了老、新版本的pango。问题并没有解决。关键可能在于那个fonts。期待官方资料。<br></div><a href="/2006/11/e5-8d-87-e7-ba-a7-e5-88-b0edgy.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/37/" class="prev">PREV</a><a href="/page/39/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<p>  1.包覆盖时提示无法覆盖。解决方法：使用dpkg –force-overwrite -i 软件包来强制安装。<br>  2.gedit在安装时，由于python包的某些信息丢失，而无法对其操作。解决办法：感觉是个列……没有google到信息。于是仿造其他软件包的信息自己写了一个配置文件。<br>  3.应该是bug，参看<a href="http://www.mail-archive.com/desktop-bugs@lists.ubuntu.com/msg45167.html" target="_blank" rel="external">这里</a>。解决方案：我已经编译过了老、新版本的pango。问题并没有解决。关键可能在于那个fonts。期待官方资料。<br>
+          <div class="read-more">
+            <a href="/2006/11/e5-8d-87-e7-ba-a7-e5-88-b0edgy.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/37/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/39/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

@@ -1,4 +1,178 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 打破Debian神话之一：urpmi系列工具 · Water is</title><meta name="description" content="打破Debian神话之一：urpmi系列工具 - latteye"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">打破Debian神话之一：urpmi系列工具</h1><div class="post-info">2006年11月23日</div><div class="post-content"><p>经过linuxfans朋友指点 知道了urpmi这个东西 学习一下</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="打破Debian神话之一：urpmi系列工具"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/2006/11/e6-89-93-e7-a0-b4debian-e7-a5-9e-e8-af-9d-e4-b9-8b-e4-b8-80-ef-bc-9aurpmi-e7-b3-bb-e5-88-97-e5-b7-a5-e5-85-b7.html"/>
+
+
+<meta name="description" content="经过linuxfans朋友指点 知道了urpmi这个东西 学习一下 注意本文只适合Mandrakelinux用户，请Redhat/Fedora、SUSE、Turbolinux等用户走开。尤其欢迎Debian用户前来批评指正(仅限技术方面)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="打破Debian神话之一：urpmi系列工具">
+<meta property="og:url" content="http://latteye.me/2006/11/e6-89-93-e7-a0-b4debian-e7-a5-9e-e8-af-9d-e4-b9-8b-e4-b8-80-ef-bc-9aurpmi-e7-b3-bb-e5-88-97-e5-b7-a5-e5-85-b7.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="经过linuxfans朋友指点 知道了urpmi这个东西 学习一下 注意本文只适合Mandrakelinux用户，请Redhat/Fedora、SUSE、Turbolinux等用户走开。尤其欢迎Debian用户前来批评指正(仅限技术方面)。">
+<meta property="og:updated_time" content="2015-05-02T13:11:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="打破Debian神话之一：urpmi系列工具">
+<meta name="twitter:description" content="经过linuxfans朋友指点 知道了urpmi这个东西 学习一下 注意本文只适合Mandrakelinux用户，请Redhat/Fedora、SUSE、Turbolinux等用户走开。尤其欢迎Debian用户前来批评指正(仅限技术方面)。">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> 打破Debian神话之一：urpmi系列工具 · Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          打破Debian神话之一：urpmi系列工具
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-urpmi是什么东西"><span class="toc-text">1.urpmi是什么东西</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-urpmi系列有哪些命令"><span class="toc-text">2.urpmi系列有哪些命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-起点：urpmi-–help"><span class="toc-text">3.起点：urpmi –help</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-最简单的一个例子"><span class="toc-text">4.最简单的一个例子</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-让人吃惊的一幕"><span class="toc-text">5.让人吃惊的一幕</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-其它的命令"><span class="toc-text">6.其它的命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-来做个例子吧"><span class="toc-text">7.来做个例子吧</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#urpmq-d-webmin"><span class="toc-text">urpmq -d webmin</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#urpmi-webmin"><span class="toc-text">urpmi webmin</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-最为关键的网址"><span class="toc-text">1. 最为关键的网址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Mandrakelinux的软件仓库-介质源-简介"><span class="toc-text">2. Mandrakelinux的软件仓库(介质源)简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Mandrakelinux-镜像服务器的结构"><span class="toc-text">3. Mandrakelinux 镜像服务器的结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-一个简单的例子"><span class="toc-text">4. 一个简单的例子</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-更为复杂的应用"><span class="toc-text">5. 更为复杂的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#附注："><span class="toc-text">附注：</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>经过linuxfans朋友指点 知道了urpmi这个东西 学习一下</p>
 <p>注意<br>本文只适合Mandrakelinux用户，请Redhat/Fedora、SUSE、Turbolinux等用户走开。尤其欢迎Debian用户前来批评指正(仅限技术方面)。<br><a id="more"></a></p>
 <p>前言<br>本文写作的目的，并不是想要将Debian用户争取到Mandrakelinux阵营来，更不是贬低Debian的技术含量。作为一个社区维护的项目， Debian为Linux的发展做出了很大的贡献。我只是希望让大家知道，Mandrakelinux作为一个商业与社区并重的发行版，有着自己的技术特色和优势。某些人混淆视听，说出的一些话让我十分不满，这也是我起这个标题的原因。</p>
 <h1 id="1-urpmi是什么东西"><a href="#1-urpmi是什么东西" class="headerlink" title="1.urpmi是什么东西"></a>1.urpmi是什么东西</h1><p>准确的说，urpmi是一组以urpm开头的命令。它的作用是来取代Redhat发明的rpm命令。rpm是一项伟大的发明，但它所带来的依赖性问题解决起来总是十分的困难。所以，各种各样的rpm辅助工具就开发出来了，urpmi系列就是其中的一种。它不但可以帮你解决依赖性问题，还提供了更多的功能，诸如安装介质管理。</p>
@@ -48,4 +222,202 @@
 <p>第一条命令是更新所有的介质源，第二条命令是更新系统中现有的所有rpm软件包。这样你就可以随时使用到最新版本的软件包。不过，既然是开发中版本，没人能保证它的稳定性。</p>
 <p>结束。</p>
 <h1 id="附注："><a href="#附注：" class="headerlink" title="附注："></a>附注：</h1><p>在论坛里看到很多人都在问Mandriva Linux中怎么更换输入法，因为默认的输入法SCIM与Realplayer和Adobe Reader冲突，导致它们不能正常启动。有人从网上下载输入法的安装文件然后自己安装，然而装上以后会碰到修改配置文件来使新装的输入法生效的问题。<br>其实，看了上面的文章之后，解决输入法问题也就易如反掌了。<br>方法：<br>1.按照上文中提到的方法配置好介质源。<br>2.用su -命令获得root权限，运行如下命令：<br>localedrake<br>然后按照提示选择国家和地区，然后是输入法，这时我们可以直接选择自己想用的输入法，例如fcitx，选好后点确定，系统就会自动从上面配置的介质源中安装fcitx了，并且自动配置好了输入法启动文件，然后重启X服务器，是不是已经成功了？</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2006/11/e5-a4-a7-e5-ad-a6-e5-9b-9b-e5-b9-b4-e7-9a-84-e5-bf-83-e5-be-97.html" class="prev">PREV</a><a href="/2006/11/e7-94-9f-e6-b4-bb-e3-80-81-e8-89-ba-e6-9c-af-e3-80-81-e5-88-9b-e9-80-a0.html" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>作者: </span>
+      <span>latteye</span>
+    </p>
+    <p class="copyright-item">
+      <span>来源: </span>
+      <a href="http://latteye.me">http://latteye.me</a>
+    </p>
+    <p class="copyright-item">
+      <span>链接: </span>
+      <a href="http://latteye.me/2006/11/e6-89-93-e7-a0-b4debian-e7-a5-9e-e8-af-9d-e4-b9-8b-e4-b8-80-ef-bc-9aurpmi-e7-b3-bb-e5-88-97-e5-b7-a5-e5-85-b7.html">http://latteye.me/2006/11/e6-89-93-e7-a0-b4debian-e7-a5-9e-e8-af-9d-e4-b9-8b-e4-b8-80-ef-bc-9aurpmi-e7-b3-bb-e5-88-97-e5-b7-a5-e5-85-b7.html</a>
+    </p>
+
+    <p class="copyright-item lincese">
+      
+      本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+    </p>
+  </div>
+
+
+
+      
+      
+  <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code">
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/wechat.png" title="wechat">
+        </label>
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/alipay.png" title="alipay">
+        </label>
+      
+    </div>
+  </div>
+
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2006/11/e5-a4-a7-e5-ad-a6-e5-9b-9b-e5-b9-b4-e7-9a-84-e5-bf-83-e5-be-97.html">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">大学四年的心得</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2006/11/e7-94-9f-e6-b4-bb-e3-80-81-e8-89-ba-e6-9c-af-e3-80-81-e5-88-9b-e9-80-a0.html">
+        <span class="next-text nav-default">生活、艺术、创造</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "7c27380789354d14af755b0b00464371",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

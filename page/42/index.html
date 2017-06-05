@@ -1,6 +1,702 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/sound-juicer.html" class="post-title-link">Sound Juicer</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"></div><a href="/2006/11/sound-juicer.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/vmware-player-workstation.html" class="post-title-link">VMWare Player & Workstation</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"></div><a href="/2006/11/vmware-player-workstation.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/x-chat.html" class="post-title-link">让X-Chat显示Tango主题的字体颜色样式</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"><p><a href="http://ubuntuforums.org/showthread.php?t=304977" target="_blank" rel="external">原文</a>作者<a href="http://ubuntuforums.org/member.php?u=51861" target="_blank" rel="external">stalefries</a>，翻译latteye。</p>
-<p>你只需要下载提供的文本文件，将它保存为~/.xchat2/colors.conf。<br>作者还在文中建议大家加入ubuntu的irc频道多多帮助他人~<br><a href="http://linuxblog.cn/blog/wp-content/images/X-chat%20Tango.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_X-chat%20Tango.png" alt=""></a><br></div><a href="/2006/11/x-chat.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/gaim-e5-b0-86-e5-88-86-e7-a6-bbaim-e4-b8-8eicq-e5-8d-8f-e8-ae-ae.html" class="post-title-link">Gaim将分离AIM与ICQ协议</a></h2><div class="post-info">2006年11月22日</div><div class="post-content"></div><a href="/2006/11/gaim-e5-b0-86-e5-88-86-e7-a6-bbaim-e4-b8-8eicq-e5-8d-8f-e8-ae-ae.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/mplayer-skin.html" class="post-title-link">Mplayer Skin</a></h2><div class="post-info">2006年11月22日</div><div class="post-content"></div><a href="/2006/11/mplayer-skin.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/fantasdic.html" class="post-title-link">Fantasdic</a></h2><div class="post-info">2006年11月22日</div><div class="post-content"></div><a href="/2006/11/fantasdic.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/gmobilemedia.html" class="post-title-link">gMobileMedia</a></h2><div class="post-info">2006年11月22日</div><div class="post-content"></div><a href="/2006/11/gmobilemedia.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html" class="post-title-link">如何在Ubuntu环境下编译内核</a></h2><div class="post-info">2006年11月21日</div><div class="post-content"><p>每个发行版本都有一些特殊的工具方便大家从源文件编译内核，本文介绍如何在ubuntu环境下编译内核。本文介绍了如何从www.kernel.org上下载最新的内核并定制它适合自己的机器，从而你可以不再以来发行版本中所带的内核版本。本文也介绍了如何给内核添加补丁以增加那些没有启用的功能。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/42/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/42/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/sound-juicer.html">Sound Juicer</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>如果你还在怀念Windows下的EAC，那就大可不必了。<a href="http://www.burtonini.com/blog/computers/sound-juicer" target="_blank" rel="external">Sound Juicer</a>就是一款可以替代EAC功能的工具。他可以配合多种编码器，将CD转化为多种音频格式。目前最新版本为<a href="http://www.gnomefiles.org/download.php?soft_id=426&amp;where=http%3A%2F%2Fdownload.gnome.org%2Fsources%2Fsound-juicer%2F2.16%2Fsound-juicer-2.16.2.tar.gz" target="_blank" rel="external">2.16.2</a>。</p>
+<p>  由于版权原因Sound Juicer默认提供了ogg，flac两种有损格式的压缩。如果你想压缩为MP3格式，可以尝试这么做：</p>
+<p><code>1.安装gstreamer8.0-lame软件包。
+2.在Sound Juicer-首选项-格式中添加一个格式：
+名称：MP3
+流水线：audio/x-raw-int,rate=44100,channels=2 ! lame name=enc
+后缀名：mp3</code><br><img src="http://www.linuxblog.cn/wp-content/images/sj-main.png" alt=""></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/vmware-player-workstation.html">VMWare Player & Workstation</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>VMware Player和Workstation今天都更新了：<br><a href="http://www.gnomefiles.org/download.php?soft_id=1143&amp;where=http%3A%2F%2Fwww.vmware.com%2Fdownload%2Fplayer%2F" target="_blank" rel="external">Player：1.0.3</a><br><a href="http://www.gnomefiles.org/download.php?soft_id=945&amp;where=http%3A%2F%2Fwww.vmware.com%2Fdownload%2Fws%2F" target="_blank" rel="external">Workstation：5.5.3</a></p>
+<p>更新修复了一些bug，比如usb端口的bug。最重要的是他们开始支持在VM中安装Vista了。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/x-chat.html">让X-Chat显示Tango主题的字体颜色样式</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><a href="http://ubuntuforums.org/showthread.php?t=304977" target="_blank" rel="external">原文</a>作者<a href="http://ubuntuforums.org/member.php?u=51861" target="_blank" rel="external">stalefries</a>，翻译latteye。</p>
+<p>你只需要下载提供的文本文件，将它保存为~/.xchat2/colors.conf。<br>作者还在文中建议大家加入ubuntu的irc频道多多帮助他人~<br><a href="http://linuxblog.cn/blog/wp-content/images/X-chat%20Tango.png" target="_blank" rel="external"><img src="http://linuxblog.cn/blog/wp-content/images/_X-chat%20Tango.png" alt=""></a><br>
+          <div class="read-more">
+            <a href="/2006/11/x-chat.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/gaim-e5-b0-86-e5-88-86-e7-a6-bbaim-e4-b8-8eicq-e5-8d-8f-e8-ae-ae.html">Gaim将分离AIM与ICQ协议</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月22日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>由于AIM和ICQ试用的是相同的协议，所以长期以来AIM和ICQ在Gaim的协议列表中都是使用的同一个协议-“AIM/ICQ”，并且使用的是AIM的图标。beta5之后，Gaim将分离这两个软件在协议表中的位置，这将使得配置变得更加简单。</p>
+<p><img src="http://gaim.sf.net/sean/images/aimicq.png" alt=""></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/mplayer-skin.html">Mplayer Skin</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月22日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://www.gnome-look.org/usermanager/search.php?username=embryo" target="_blank" rel="external">embryo</a>发布了一款非常酷的MplayerSkin-<a href="http://www.gnome-look.org/content/show.php?content=48965" target="_blank" rel="external">embUtronium</a>。喜欢的朋友赶快<a href="http://www.gnome-look.org/content/download.php?content=48965&amp;id=1" target="_blank" rel="external">下载</a>吧！</p>
+<p><a href="http://www.linuxblog.cn/wp-content/images/mplayerskin.jpg" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_mplayerskin.jpg" alt=""></a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/fantasdic.html">Fantasdic</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月22日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://www.gnome.org/projects/fantasdic/" target="_blank" rel="external">Fantasdic</a>是一款字典工具，和stardict一样他也是多平台的。<br>作为Gnome的项目之一，他可以很好的运行在GTK环境下。Fantasdic的某些优点还是值得试用的：</p>
+<p><code>监视剪贴板
+具有历史记录</code></p>
+<p>  当然，还有一些功能包括：多词典，多平台也不比stardict逊色。</p>
+<p><img src="http://www.gnome.org/projects/fantasdic/images/fantasdic1.png" alt=""><br><img src="http://www.gnome.org/projects/fantasdic/images/fantasdic2.png" alt=""></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/gmobilemedia.html">gMobileMedia</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月22日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://sourceforge.net/projects/gmobilebrowser/" target="_blank" rel="external">gMobileMedia</a>是一款和手机传输图片、铃声、照片的工具。他的后端是<a href="http://www.gammu.org" target="_blank" rel="external">gammu</a>。</p>
+<p>  gMobileMedia是一款基于GTK的用于浏览手机文件系统的工具，这款工具可以使用多个内存区域。目前gMobileMeida可以实现与诺基亚所有手机的连接。理论上他可以连接gammu所支持的所有手机类型。<br><a href="http://www.linuxblog.cn/wp-content/images/gMobileMedia.jpg" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_gMobileMedia.jpg" alt=""></a><br><a href="http://www.linuxblog.cn/wp-content/images/gMobileMedia1.jpg" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_gMobileMedia1.jpg" alt=""></a><br><a href="http://www.linuxblog.cn/wp-content/images/gMobileMedia2.jpg" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_gMobileMedia2.jpg" alt=""></a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html">如何在Ubuntu环境下编译内核</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月21日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>每个发行版本都有一些特殊的工具方便大家从源文件编译内核，本文介绍如何在ubuntu环境下编译内核。本文介绍了如何从www.kernel.org上下载最新的内核并定制它适合自己的机器，从而你可以不再以来发行版本中所带的内核版本。本文也介绍了如何给内核添加补丁以增加那些没有启用的功能。</p>
 <p>  本文通过以下系统测试：Ubuntu 6.10 Server (“Edgy Eft”) 和 Ubuntu 6.06 Desktop (“Dapper Drake”)。</p>
-<p>  首先我想说的是这并不是唯一编译内核的方法。有许多种方法可以达到相同的目的，这只是我所使用的一种方法。并且我保证我的方法不会出问题。<br></div><a href="/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/totem-2163-e5-8f-91-e5-b8-83.html" class="post-title-link">Totem 2.16.3 发布</a></h2><div class="post-info">2006年11月15日</div><div class="post-content"></div><a href="/2006/11/totem-2163-e5-8f-91-e5-b8-83.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/desktop-data-manager.html" class="post-title-link">Desktop Data Manager</a></h2><div class="post-info">2006年11月14日</div><div class="post-content"><p><a href="http://data-manager.sourceforge.net/" target="_blank" rel="external">Desktop Data Manager</a>是一款全面的剪贴板软件，他可以方便的缓存文字、图片等资料。他还可以快速的进行屏幕截图，可以方便的截取全屏或者是某个窗口。这两个功能基于两个不同的程序。</p>
+<p>  首先我想说的是这并不是唯一编译内核的方法。有许多种方法可以达到相同的目的，这只是我所使用的一种方法。并且我保证我的方法不会出问题。<br>
+          <div class="read-more">
+            <a href="/2006/11/e5-a6-82-e4-bd-95-e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e7-bc-96-e8-af-91-e5-86-85-e6-a0-b8.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/totem-2163-e5-8f-91-e5-b8-83.html">Totem 2.16.3 发布</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月15日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://hadess.net/totem.php3" target="_blank" rel="external">Totem</a>想必不用多介绍了，今天最新版本2.16.3发布了。<br>  <a href="http://www.gnomefiles.org/download.php?soft_id=64&amp;where=http%3A%2F%2Fdownload.gnome.org%2Fsources%2Ftotem%2F2.16%2Ftotem-2.16.3.tar.gz" target="_blank" rel="external">下载源代码</a><br>  <a href="http://www.live-share.com/files/91462/totem_2.16.3-0ubuntu-1_i386.deb.html" target="_blank" rel="external">下载deb for ubuntu edgy</a><br>  更新了以下内容：</p>
+<blockquote>
+<ul>
+<li>Better accessibility support in the volume button</li>
+<li>Browser plugin:</li>
+</ul>
+<ul>
+<li>Restart accepting streams that aren’t from the supported mime-type there are too many broken sites for now</li>
+<li>Don’t crash when printing a page with the plugin</li>
+<li>Don’t destroy a stream if we don’t have one</li>
+<li>Fix some cases where the server gives a playlist, and we never start the video viewer</li>
+<li>Catch errors after playback has started</li>
+</ul>
+<ul>
+<li>Playlist parser:</li>
+</ul>
+<ul>
+<li>Avoid D-Bus warnings with newer D-Bus versions</li>
+<li>Avoid trying to allocate loads of memory when gnome-vfs fails</li>
+</ul>
+<ul>
+<li>GStreamer backend:</li>
+</ul>
+<ul>
+<li>Avoid crashes when files contain non-UTF-8 metadata</li>
+<li>Avoid deadlocks when getting redirect streams</li>
+<li>Make the “automatically resize window” and resize menu items work again</li>
+</ul>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/desktop-data-manager.html">Desktop Data Manager</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月14日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><a href="http://data-manager.sourceforge.net/" target="_blank" rel="external">Desktop Data Manager</a>是一款全面的剪贴板软件，他可以方便的缓存文字、图片等资料。他还可以快速的进行屏幕截图，可以方便的截取全屏或者是某个窗口。这两个功能基于两个不同的程序。</p>
 <p><a href="http://www.linuxblog.cn/wp-content/images/clipboard-history.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_clipboard-history.png" alt=""></a></p>
-<p><a href="http://www.linuxblog.cn/wp-content/images/screenshot-app.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_screenshot-app.png" alt=""></a></p></div><a href="/2006/11/desktop-data-manager.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/41/" class="prev">PREV</a><a href="/page/43/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<p><a href="http://www.linuxblog.cn/wp-content/images/screenshot-app.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_screenshot-app.png" alt=""></a></p>
+          <div class="read-more">
+            <a href="/2006/11/desktop-data-manager.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/41/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/43/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

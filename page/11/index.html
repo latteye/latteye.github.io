@@ -1,5 +1,705 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/12/bearaudio-begin.html" class="post-title-link">开始写 BearAudio</a></h2><div class="post-info">2008年12月16日</div><div class="post-content"></div><a href="/2008/12/bearaudio-begin.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/12/config-nagios-monitor-oracle.html" class="post-title-link">配置 Nagios 监控 Oracle 服务器</a></h2><div class="post-info">2008年12月3日</div><div class="post-content"><p>环境：Oracle 10g<br>CentOS 5.2 x86_64</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/11/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/11/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/12/bearaudio-begin.html">开始写 BearAudio</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年12月16日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>一直想写一个播放器 :smile: ，从去年年底就开始有这个想法。到现在已经有一年了。由于在摩比源的日子实在太忙，搁置了这么久。现在在新单位总算有时间集中起来学习很多东西了。</p>
+<p>喜欢听点东西，所以也就喜欢捣鼓捣鼓播放器。但 Linux 下的播放器实在是寒酸 :cry: ，DSP VST 都可怜的很。于是一直想自己写一个。<br>但毕竟我不是开发出身 :cry: ，起步的时候总想拉人来帮忙。拉来拉去自己也没干成啥 :eek: 。还是靠自己吧，累点就累点吧，昨天又是不知不觉到半夜 :!: 。</p>
+<p>软件的名字叫 <strong>BearAudio</strong>， :cool: 中文咋说呢？<strong>小熊播放器</strong>~ :grin: </p>
+<p>SVN 在这里 <a href="http://code.latteye.com/bearaudio" target="_blank" rel="external">http://code.latteye.com/bearaudio</a> ,目前的状态是一穷二白。要是您看了此文动了尊手 check out 了，那就委屈您了。 :evil: </p>
+<p><strong>Lisa</strong> 答应来帮我做 UI。</p>
+<p>游离在 C++ 以及 GStreamer 已经半个多月了。现在开始边写边学。</p>
+<p>播放器的最终目标是开发出能够支持第三方 DSP 以及 VST 的专业音乐播放器。目前能想到的比较好的状态是直接直接支持 winamp 的众多插件。希望这个远大的理想能够实现。 :lol: </p>
+<p>现在，还是从走路开始学吧。 :sad: </p>
+<p><strong>0.0.1 版本的设计目标：</strong></p>
+<p>1. 命令行播放一个音频文件。<br>2. 通过键盘控制文件的播放，暂停、快进、快退。<br>3. 能够在 命令行 上显示播放的百分比。</p>
+<p>加油 :cool: </p>
+<p>我尽量让 C++ GTK GStreamer 的学习同步进行，相互吸收。过两天也可以请 Lisa 开始设计UI了。</p>
+<p>此文即为此项目开篇之文！</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/12/config-nagios-monitor-oracle.html">配置 Nagios 监控 Oracle 服务器</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年12月3日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>环境：Oracle 10g<br>CentOS 5.2 x86_64</p>
 <p><strong>一、在 Oracle 所在服务器上安装 NRPE</strong></p>
-<p>安装过程参考 Nagios NRPE 文档。<br></div><a href="/2008/12/config-nagios-monitor-oracle.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/11/config-nagios-send-alarm-with-fetion.html" class="post-title-link">配置 Nagios 使用 FetionRobot 短信报警</a></h2><div class="post-info">2008年11月27日</div><div class="post-content"><p><strong>一、概述</strong></p>
+<p>安装过程参考 Nagios NRPE 文档。<br>
+          <div class="read-more">
+            <a href="/2008/12/config-nagios-monitor-oracle.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/11/config-nagios-send-alarm-with-fetion.html">配置 Nagios 使用 FetionRobot 短信报警</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年11月27日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><strong>一、概述</strong></p>
 <p>  Nagios 是 Linux 环境下使用率最高的监控软件，它善于监控服务，容易进行二次定制。<br>  <a href="http://www.it-adv.net/" target="_blank" rel="external">Feition Robot</a> 是一款基于移动飞信服务的类 Unix 实现。通过 FetionRobot 可以很方便的在 shell 下发送免费短信。<br>  本文介绍介绍了如何通过 FetionRobot 使得 Nagios 可以免费发送报警短信。</p>
-<p>  平台：CentOS 5.2 x86_64</p></div><a href="/2008/11/config-nagios-send-alarm-with-fetion.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/11/e6-8a-9b-e5-bc-83vm-converter-e4-bb-8evm-server-e8-bf-81-e7-a7-bb-e5-88-b0esxi.html" class="post-title-link">抛弃VM converter, 从VM server迁移到ESXi</a></h2><div class="post-info">2008年11月20日</div><div class="post-content"></div><a href="/2008/11/e6-8a-9b-e5-bc-83vm-converter-e4-bb-8evm-server-e8-bf-81-e7-a7-bb-e5-88-b0esxi.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/11/autoinstall-with-kickstart.html" class="post-title-link">kickstart 安装配置</a></h2><div class="post-info">2008年11月19日</div><div class="post-content"><p>到了新公司，按照要求做一个基于 CentOS 5.2 的最小的系统。其极致性的最小仅需要保证系统能够开机。在不考虑 rpm 关联的情况下，成功的将 rpm 包的数量控制在了 60 个（还可以更小），不过这样的系统并没有实际使用意义。<br></div><a href="/2008/11/autoinstall-with-kickstart.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/11/ts-vmware-server-console.html" class="post-title-link">Vmware server console 连接故障解决一例</a></h2><div class="post-info">2008年11月18日</div><div class="post-content"><p>今天发现vmware server无法用console连接上去，该服务器系统rhel4.4， vmware server 1.04，连接出错的提示是511 Error connecting to /usr/sbin/vmware-serverd process，查vmware-serverd.log，发现如下出错信息：<br></div><a href="/2008/11/ts-vmware-server-console.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/11/rim-mobinex.html" class="post-title-link">摩比源周边</a></h2><div class="post-info">2008年11月4日</div><div class="post-content"></div><a href="/2008/11/rim-mobinex.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/10/learning-perl-10.html" class="post-title-link">Perl 语言入门 第十章</a></h2><div class="post-info">2008年10月31日</div><div class="post-content"></div><a href="/2008/10/learning-perl-10.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/10/rhcs-cluster-e9-97-ae-e9-a2-98-e4-b8-80-e4-be-8bcluster-is-not-quoraterefusing-connection.html" class="post-title-link">RHCS cluster问题一例Cluster is not quorate.Refusing connection. </a></h2><div class="post-info">2008年10月29日</div><div class="post-content"></div><a href="/2008/10/rhcs-cluster-e9-97-ae-e9-a2-98-e4-b8-80-e4-be-8bcluster-is-not-quoraterefusing-connection.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/10/telnet-email-sending.html" class="post-title-link">Telnet带验证的邮件发送过程</a></h2><div class="post-info">2008年10月28日</div><div class="post-content"><p>本文记录一次 telnet email server 发邮件的过程。邮件排错中，通常用这种方式比较直观，同时更容易看到“返回信息”，来帮助管理员工作。对 email 发送的过程也可以有了解。</p></div><a href="/2008/10/telnet-email-sending.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/10/" class="prev">PREV</a><a href="/page/12/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<p>  平台：CentOS 5.2 x86_64</p>
+          <div class="read-more">
+            <a href="/2008/11/config-nagios-send-alarm-with-fetion.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/11/e6-8a-9b-e5-bc-83vm-converter-e4-bb-8evm-server-e8-bf-81-e7-a7-bb-e5-88-b0esxi.html">抛弃VM converter, 从VM server迁移到ESXi</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年11月20日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>迁移环境<br>VM server 1.04 ==&gt;  ESXi 3.0 update 3<br>guest OS： RHEL4.4   虚拟机硬盘使用的是lsi的方式</p>
+<p>废话不说了，就说一下整个迁移步骤：</p>
+<p>1. 打开ESXi的ssh来上传VM server的虚拟机文件<br>安装好ESXi后，虽然可以通过访问datastore上传下载文件，但速度实在不敢恭维，而且很容易连接超时而中断上传。<br>打开ssh方法如下：<br>登录到ESXi的console，按Alt-F1，输入unsupported，会提示password。 输入root的密码就可以进入shell了。<br>ESXi的ssh是dropbear提供的，这个软件在嵌入式设备上用的很常见吧。<br>言归正传，在/etc/inetd.conf中将如下行的注释去掉<br>ssh     stream  tcp     nowait  root    /sbin/dropbearmulti     dropbear ++min=0,swap,group=shell -i<br>然后ps |grep inetd 将pid记下，最后kill -HUP  这样ssh就可以连上来了。</p>
+<p>2. 将VM server的虚拟机文件上传到ESXi的vmfs卷上，只要vmdk的文件全部上传就可以了</p>
+<p>3. 使用vmkfstools转换磁盘格式<br>vmkfstools -i  上传的磁盘文件  要生成的新磁盘文件</p>
+<p>4. 在VIC上新建虚拟机，选custom方式，虚拟机配置最好和原来VM server上一致，在建立磁盘选项中，选择使用已存在的磁盘，然后选中你上面生成的新磁盘文件。</p>
+<p>好了， 完毕。没问题的话，你应该可以正常使用了原来的虚拟机了。</p>
+<p>经测试，不管是windows还是linux都可以用以上方式迁移，但源虚拟机磁盘必须是scsi， 不能使用ide硬盘。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/11/autoinstall-with-kickstart.html">kickstart 安装配置</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年11月19日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>到了新公司，按照要求做一个基于 CentOS 5.2 的最小的系统。其极致性的最小仅需要保证系统能够开机。在不考虑 rpm 关联的情况下，成功的将 rpm 包的数量控制在了 60 个（还可以更小），不过这样的系统并没有实际使用意义。<br>
+          <div class="read-more">
+            <a href="/2008/11/autoinstall-with-kickstart.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/11/ts-vmware-server-console.html">Vmware server console 连接故障解决一例</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年11月18日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>今天发现vmware server无法用console连接上去，该服务器系统rhel4.4， vmware server 1.04，连接出错的提示是511 Error connecting to /usr/sbin/vmware-serverd process，查vmware-serverd.log，发现如下出错信息：<br>
+          <div class="read-more">
+            <a href="/2008/11/ts-vmware-server-console.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/11/rim-mobinex.html">摩比源周边</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年11月4日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>中午闲来无事，带着相机到公司周围转转。在摩比源的时日也不多了，看看这里也是一个黄金宝地了。中共一大会址、博物馆、时代广场、兰生影院、淮海公园……</p>
+<p>多少算留个纪念吧。<br>中午转了转东台路-古玩街，滨湖路。</p>
+<p><a href="http://www.yupoo.com/albums/view?id=ff8080811d65ba75011d66795f4b1e78" target="_blank" rel="external">打开照片速度太慢？去Yupoo看看吧！</a><br><a href="http://picasaweb.google.com/latteye/LqKjXB#" target="_blank" rel="external">还有 Picasa！</a></p>
+<p>[gallery=5]</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/10/learning-perl-10.html">Perl 语言入门 第十章</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年10月31日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <pre lang="PERL" line="1">
+#!/usr/bin/perl -w
+
+$x=int rand(100);
+$x++;
+
+while (<>) {
+         if (/\d/) {
+                 my $number=
+                 ($_==$x)?"correct.":
+                 ($_<$x)?"small": ($_="">$x)?"biggerr": "unknow";
+                 print "$number\n";
+         } else {
+                 print "Please enter a number\n";
+}
+}
+</$x)?"small":></pre>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/10/rhcs-cluster-e9-97-ae-e9-a2-98-e4-b8-80-e4-be-8bcluster-is-not-quoraterefusing-connection.html">RHCS cluster问题一例Cluster is not quorate.Refusing connection. </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年10月29日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>公司两台服务器用RHCS做HA， 最近出了问题， HA状态显示failed。无奈重启node1后发现cman起不来，报错：<br>Oct 29 14:14:51  ccsd[5232]: Cluster is not quorate.  Refusing connection.<br>Oct 29 14:14:51  ccsd[5232]: Error while processing connect: Connection refused<br>Oct 29 14:14:51  kernel: CMAN: sending membership request<br>fence进程也启动不了</p>
+<p>查阅资料无数， 解决方法如下：<br>把node2上cluster进程全部关闭，然后依次重新启动服务，顺序如下<br>service rgmanager stop<br>service fenced stop<br>service cman stop<br>service ccsd stop<br>然后按相反的顺序启动service，即<br>node2上 service ccsd start<br>node1上 service ccsd start<br>node2上 service cman start<br>node1上 service cman start<br>………<br>………<br>总算干净了</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/10/telnet-email-sending.html">Telnet带验证的邮件发送过程</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年10月28日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>本文记录一次 telnet email server 发邮件的过程。邮件排错中，通常用这种方式比较直观，同时更容易看到“返回信息”，来帮助管理员工作。对 email 发送的过程也可以有了解。</p>
+          <div class="read-more">
+            <a href="/2008/10/telnet-email-sending.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/10/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/12/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

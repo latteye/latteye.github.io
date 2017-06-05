@@ -1,4 +1,177 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 通向KDE4之路（七）：文档查看器Okular和Ligature · Water is</title><meta name="description" content="通向KDE4之路（七）：文档查看器Okular和Ligature - latteye"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">通向KDE4之路（七）：文档查看器Okular和Ligature</h1><div class="post-info">2007年2月15日</div><div class="post-content"><p><a href="http://www.myswear.net/forum/viewthread.php?tid=7863" target="_blank" rel="external">原文地址</a>，翻译者：yuanjiayj</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="通向KDE4之路（七）：文档查看器Okular和Ligature"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b8-83-ef-bc-89-ef-bc-9a-e6-96-87-e6-a1-a3-e6-9f-a5-e7-9c-8b-e5-99-a8okular-e5-92-8cligature.html"/>
+
+
+<meta name="description" content="原文地址，翻译者：yuanjiayj 本周的通向KDE4之路栏目的焦点转回到应用程序上来。今天要介绍的这两个极有前途的KDE4软件是Okular和Ligature。虽然它们是KDE4中才出现的新星，但在KDE3中都可以找到它们萌生的根基。下面是细节… 过去，KDE中包含了各式各样的用于查看各种文件格式的程序，通过KDE的KParts技术，这些查看器在需要时可被嵌入到其它KDE程序（如 konque">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通向KDE4之路（七）：文档查看器Okular和Ligature">
+<meta property="og:url" content="http://latteye.me/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b8-83-ef-bc-89-ef-bc-9a-e6-96-87-e6-a1-a3-e6-9f-a5-e7-9c-8b-e5-99-a8okular-e5-92-8cligature.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="原文地址，翻译者：yuanjiayj 本周的通向KDE4之路栏目的焦点转回到应用程序上来。今天要介绍的这两个极有前途的KDE4软件是Okular和Ligature。虽然它们是KDE4中才出现的新星，但在KDE3中都可以找到它们萌生的根基。下面是细节… 过去，KDE中包含了各式各样的用于查看各种文件格式的程序，通过KDE的KParts技术，这些查看器在需要时可被嵌入到其它KDE程序（如 konque">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_vol7_356_kghostview.png">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_vol7_356_kpdf.png">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_vol7_4x_mac_okular.png">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_vol7_4x_okular.png">
+<meta property="og:image" content="http://linuxblog.cn/blog/wp-content/images/_vol7_4x_ligature.png">
+<meta property="og:updated_time" content="2015-05-02T13:11:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通向KDE4之路（七）：文档查看器Okular和Ligature">
+<meta name="twitter:description" content="原文地址，翻译者：yuanjiayj 本周的通向KDE4之路栏目的焦点转回到应用程序上来。今天要介绍的这两个极有前途的KDE4软件是Okular和Ligature。虽然它们是KDE4中才出现的新星，但在KDE3中都可以找到它们萌生的根基。下面是细节… 过去，KDE中包含了各式各样的用于查看各种文件格式的程序，通过KDE的KParts技术，这些查看器在需要时可被嵌入到其它KDE程序（如 konque">
+<meta name="twitter:image" content="http://linuxblog.cn/blog/wp-content/images/_vol7_356_kghostview.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> 通向KDE4之路（七）：文档查看器Okular和Ligature · Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          通向KDE4之路（七）：文档查看器Okular和Ligature
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年2月15日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        <p><a href="http://www.myswear.net/forum/viewthread.php?tid=7863" target="_blank" rel="external">原文地址</a>，翻译者：yuanjiayj</p>
 <p>本周的通向KDE4之路栏目的焦点转回到应用程序上来。今天要介绍的这两个极有前途的KDE4软件是Okular和Ligature。虽然它们是KDE4中才出现的新星，但在KDE3中都可以找到它们萌生的根基。下面是细节…</p>
 <p>过去，KDE中包含了各式各样的用于查看各种文件格式的程序，通过KDE的KParts技术，这些查看器在需要时可被嵌入到其它KDE程序（如 konqueror等）中。这些查看器支持的格式有TIFF，PDF，PostScript，fax，DjVu等等。okular和Ligature从那些早期的简单的查看器的设计中汲取了大量的营养，并逐步形成了现在的样子。</p>
 <p>KDE中早就包含了一个叫作KGhostView的软件，它使用GhostScript作为后端，可用于查看PDF和PostScript这两种格式的文件。KDE已经将其作为打印预览工具。下面就是KDE 3.5.6版中KGhostScript的一张截图。请注意图中有些文字渲染失真的情况可能是我所用的发行版中所选的字体的关系，而不一定是因为 KGhostScript渲染文件的功能有缺陷。</p>
@@ -25,4 +198,202 @@
 <p>关于DVI文件的说明：为了查看DVI文件，您需要安装一些TeTeX文件，在我的发行版上加起来总共是85Mb左右—-这可能是DVI文件不太受欢迎的原因之一吧，虽然这种格式的表现能力还是很出色的。当Ligature在DVI文件中找到一个超级链接时，它会在文本下显示一条下划线以示可被点击，这在某些场合下是很有用的，不过这种链接也使得文件很丑陋。okular就没用加上这种下划线，但也工作的很好。</p>
 <p>okular与Ligature实现了相似的功能，但它们的内部构架是完全不同的，而它们内部所依赖的底层库又是相同的（就像MPlayer和xine内部千差万别，但它们都使用相同的底层库来解码）。这就意味着它们不太容易合并为一个项目，而对底层库的跟进开发则可同时使得两个程序都受益。okular 将会被各个发行版单独打包，而由于现在很多发行版最终都会把kdegraphics分解为若干个包，所以Ligature也将会被打成一个单独的软件包。当然只要也安装了必要的KDE库，GNOME用户们也可以正常地使用okular和Ligature。但他们也可以使用共享底层库的<a href="http://www.gnome.org/projects/evince/" target="_blank" rel="external">Evince</a>，而Evince与GNOME环境集成的更好。</p>
 <p>本周的内容就是这些。希望可以澄清关于okular和Ligature的理解上的混乱。</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2007/02/e6-98-8e-e6-9c-9d-e9-82-a3-e4-ba-9b-e4-ba-8b-e5-84-bf.html" class="prev">PREV</a><a href="/2007/02/grafpup-linux-20-e5-bc-80-e5-8f-91-e7-89-88-e6-9c-ac-e5-8f-91-e5-b8-83.html" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>作者: </span>
+      <span>latteye</span>
+    </p>
+    <p class="copyright-item">
+      <span>来源: </span>
+      <a href="http://latteye.me">http://latteye.me</a>
+    </p>
+    <p class="copyright-item">
+      <span>链接: </span>
+      <a href="http://latteye.me/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b8-83-ef-bc-89-ef-bc-9a-e6-96-87-e6-a1-a3-e6-9f-a5-e7-9c-8b-e5-99-a8okular-e5-92-8cligature.html">http://latteye.me/2007/02/e9-80-9a-e5-90-91kde4-e4-b9-8b-e8-b7-af-ef-bc-88-e4-b8-83-ef-bc-89-ef-bc-9a-e6-96-87-e6-a1-a3-e6-9f-a5-e7-9c-8b-e5-99-a8okular-e5-92-8cligature.html</a>
+    </p>
+
+    <p class="copyright-item lincese">
+      
+      本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+    </p>
+  </div>
+
+
+
+      
+      
+  <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code">
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/wechat.png" title="wechat">
+        </label>
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/alipay.png" title="alipay">
+        </label>
+      
+    </div>
+  </div>
+
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2007/02/e6-98-8e-e6-9c-9d-e9-82-a3-e4-ba-9b-e4-ba-8b-e5-84-bf.html">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">明朝那些事儿</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2007/02/grafpup-linux-20-e5-bc-80-e5-8f-91-e7-89-88-e6-9c-ac-e5-8f-91-e5-b8-83.html">
+        <span class="next-text nav-default">Grafpup Linux 2.0 开发版本发布</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "7c27380789354d14af755b0b00464371",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

@@ -1,12 +1,694 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2010/06/acer-h340-home-server.html" class="post-title-link">Acer H340 Home Server</a></h2><div class="post-info">2010年6月14日</div><div class="post-content"><p><img src="http://pic.yupoo.com/latteye/3900797982d4/utcuhl8p.jpg" alt=""></p></div><a href="/2010/06/acer-h340-home-server.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2010/05/wrt54g2-e6-81-a9-e5-b1-b1-e6-97-a0-e7-ba-bf-e6-94-b9-e7-89-88.html" class="post-title-link">WRT54G2 恩山无线改版</a></h2><div class="post-info">2010年5月19日</div><div class="post-content"><p>前两天老的 <a href="http://latteye.com/2008/07/linksys-wag354g-wireless-config-1.html" target="_blank" rel="external">Linksys WAG354G</a> 过世了，症状是 ADSL 部分总是不能同步到信号。稳定了一下自己的情绪之后，决定再买一只路由器。<br></div><a href="/2010/05/wrt54g2-e6-81-a9-e5-b1-b1-e6-97-a0-e7-ba-bf-e6-94-b9-e7-89-88.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2010/05/blog-e4-bc-98-e5-8c-96.html" class="post-title-link">Blog 优化</a></h2><div class="post-info">2010年5月19日</div><div class="post-content"><p>今天对 Blog 做了点优化，主要是因为 HM 最近太慢了。尤其是晚上，Load Avg 居然可以飙至 20 以上。可恶的是 imtx 用的 python 写的 Blog 居然飞快。主要还是因为 php 解析的网站太多了，需要排队。而 py 一上来就可以工作么？</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/7/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/7/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2010/06/acer-h340-home-server.html">Acer H340 Home Server</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2010年6月14日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><img src="http://pic.yupoo.com/latteye/3900797982d4/utcuhl8p.jpg" alt=""></p>
+          <div class="read-more">
+            <a href="/2010/06/acer-h340-home-server.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2010/05/wrt54g2-e6-81-a9-e5-b1-b1-e6-97-a0-e7-ba-bf-e6-94-b9-e7-89-88.html">WRT54G2 恩山无线改版</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2010年5月19日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>前两天老的 <a href="http://latteye.com/2008/07/linksys-wag354g-wireless-config-1.html" target="_blank" rel="external">Linksys WAG354G</a> 过世了，症状是 ADSL 部分总是不能同步到信号。稳定了一下自己的情绪之后，决定再买一只路由器。<br>
+          <div class="read-more">
+            <a href="/2010/05/wrt54g2-e6-81-a9-e5-b1-b1-e6-97-a0-e7-ba-bf-e6-94-b9-e7-89-88.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2010/05/blog-e4-bc-98-e5-8c-96.html">Blog 优化</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2010年5月19日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>今天对 Blog 做了点优化，主要是因为 HM 最近太慢了。尤其是晚上，Load Avg 居然可以飙至 20 以上。可恶的是 imtx 用的 python 写的 Blog 居然飞快。主要还是因为 php 解析的网站太多了，需要排队。而 py 一上来就可以工作么？</p>
 <p>优化过程参考了如下网站：</p>
 <p><a href="http://www.qiankun.org.ru/2010/04/wordpress-gzip-compression-web-css-js.html" target="_blank" rel="external">WordPress 网站启用Gzip压缩网页、CSS和JS</a><br><a href="http://wentong.org/339/" target="_blank" rel="external">压缩css和js为gz以优化加速 wordpress(.hatccess+gzip)</a><br><a href="http://www.osxcn.com/css/css-compressor.html" target="_blank" rel="external">CSS 压缩与优化工具</a></p>
-<p>优化结果如下：<br></div><a href="/2010/05/blog-e4-bc-98-e5-8c-96.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2010/05/ubuntu-kernel-e7-bc-96-e8-af-91-e7-9f-a5-e8-af-86-e4-b8-a4-e7-82-b9.html" class="post-title-link">Ubuntu Kernel 编译知识两点</a></h2><div class="post-info">2010年5月17日</div><div class="post-content"><p>一、体积巨大？</p>
+<p>优化结果如下：<br>
+          <div class="read-more">
+            <a href="/2010/05/blog-e4-bc-98-e5-8c-96.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2010/05/ubuntu-kernel-e7-bc-96-e8-af-91-e7-9f-a5-e8-af-86-e4-b8-a4-e7-82-b9.html">Ubuntu Kernel 编译知识两点</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2010年5月17日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>一、体积巨大？</p>
 <p>发现自己编译出来的模块体积非常大，比官方 Kernel 中带的模块大了7-8倍之多。</p>
-<p>原因是 Kernel Hacking 中 Debug 被打开了。关掉之后就好了。</p></div><a href="/2010/05/ubuntu-kernel-e7-bc-96-e8-af-91-e7-9f-a5-e8-af-86-e4-b8-a4-e7-82-b9.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2010/05/e8-a3-85-e4-bf-ae-e6-97-a5-e8-ae-b0.html" class="post-title-link">装修日记</a></h2><div class="post-info">2010年5月9日</div><div class="post-content"><p>2010年5月8号终于开工了，我的设计和施工都是辰歌来做的，挑了11点08分点了鞭炮。装修就正式开始了！我的装修日记也就开始了。</p>
+<p>原因是 Kernel Hacking 中 Debug 被打开了。关掉之后就好了。</p>
+          <div class="read-more">
+            <a href="/2010/05/ubuntu-kernel-e7-bc-96-e8-af-91-e7-9f-a5-e8-af-86-e4-b8-a4-e7-82-b9.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2010/05/e8-a3-85-e4-bf-ae-e6-97-a5-e8-ae-b0.html">装修日记</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2010年5月9日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>2010年5月8号终于开工了，我的设计和施工都是辰歌来做的，挑了11点08分点了鞭炮。装修就正式开始了！我的装修日记也就开始了。</p>
 <blockquote>
 <p>所有的图片都可以在这里看到大图哦：<a href="http://www.yupoo.com/photos/latteye/albums/1684973/" target="_blank" rel="external">http://www.yupoo.com/photos/latteye/albums/1684973/</a></p>
-</blockquote></div><a href="/2010/05/e8-a3-85-e4-bf-ae-e6-97-a5-e8-ae-b0.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2010/04/hp-e6-9c-8d-e5-8a-a1-e5-99-a8-e4-b8-8a-e9-81-87-e5-88-b0-e7-9a-84-e9-97-ae-e9-a2-98.html" class="post-title-link">HP服务器上遇到的问题</a></h2><div class="post-info">2010年4月8日</div><div class="post-content"><p>最近配置一台HP的服务器，安装RHEL5.3和挂载存储，遇到一些问题，在这里记录一下:<br></div><a href="/2010/04/hp-e6-9c-8d-e5-8a-a1-e5-99-a8-e4-b8-8a-e9-81-87-e5-88-b0-e7-9a-84-e9-97-ae-e9-a2-98.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2010/03/e5-88-b0-e5-ba-95-e4-b9-b0-e5-95-a5-e7-94-b5-e8-a7-86-e5-91-a2-ef-bc-9f.html" class="post-title-link">到底买啥电视呢？</a></h2><div class="post-info">2010年3月31日</div><div class="post-content"><p>今年3.15狠狠批斗了进口电视的售后问题。<br>自己也正在纠结到底是买日产电视还是国产电视，因为从配置-价格上来看，国产和日产相差了 70%-100% 的价格。</p>
-<p>于是我在 3.15 电子产品网站 Google 了一下：<br></div><a href="/2010/03/e5-88-b0-e5-ba-95-e4-b9-b0-e5-95-a5-e7-94-b5-e8-a7-86-e5-91-a2-ef-bc-9f.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2010/03/postfix-e5-9c-b0-e5-9d-80-e6-9b-bf-e6-8d-a2.html" class="post-title-link">Postfix 地址替换</a></h2><div class="post-info">2010年3月25日</div><div class="post-content"><p>Postfix 的地址替换在去年就开始做了。当时在 <a href="http://bbs.chinaunix.net/thread-1577559-1-1.html" target="_blank" rel="external">CU 有个简单的讨论帖</a>。不过当时的做法并不是完善的做法。<br></div><a href="/2010/03/postfix-e5-9c-b0-e5-9d-80-e6-9b-bf-e6-8d-a2.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2010/03/cacti-e5-9c-a8selinux-e7-9a-84strict-policy-e4-b8-8b-e9-85-8d-e7-bd-ae.html" class="post-title-link">cacti在selinux的strict policy下配置</a></h2><div class="post-info">2010年3月19日</div><div class="post-content"><p>系统： CentOS 5.4<br>内核： 2.6.18-164.el5<br>Selinux： selinux-policy-strict-2.4.6-255.el5<br></div><a href="/2010/03/cacti-e5-9c-a8selinux-e7-9a-84strict-policy-e4-b8-8b-e9-85-8d-e7-bd-ae.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2010/03/e8-a3-85-e4-bf-ae-e6-97-a5-e8-ae-b0-e7-81-af-e9-a5-b0-e9-80-89-e6-8b-a9.html" class="post-title-link">装修日记-灯饰选择</a></h2><div class="post-info">2010年3月4日</div><div class="post-content"><p>终于还是决定要写下来。<br>对于控制欲望这么强烈的我来说，装修真的是一件很辛苦的事情了。<br>记流水账的同时，也和大家分享分享找到的好东西。</p>
+</blockquote>
+          <div class="read-more">
+            <a href="/2010/05/e8-a3-85-e4-bf-ae-e6-97-a5-e8-ae-b0.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2010/04/hp-e6-9c-8d-e5-8a-a1-e5-99-a8-e4-b8-8a-e9-81-87-e5-88-b0-e7-9a-84-e9-97-ae-e9-a2-98.html">HP服务器上遇到的问题</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2010年4月8日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>最近配置一台HP的服务器，安装RHEL5.3和挂载存储，遇到一些问题，在这里记录一下:<br>
+          <div class="read-more">
+            <a href="/2010/04/hp-e6-9c-8d-e5-8a-a1-e5-99-a8-e4-b8-8a-e9-81-87-e5-88-b0-e7-9a-84-e9-97-ae-e9-a2-98.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2010/03/e5-88-b0-e5-ba-95-e4-b9-b0-e5-95-a5-e7-94-b5-e8-a7-86-e5-91-a2-ef-bc-9f.html">到底买啥电视呢？</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2010年3月31日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>今年3.15狠狠批斗了进口电视的售后问题。<br>自己也正在纠结到底是买日产电视还是国产电视，因为从配置-价格上来看，国产和日产相差了 70%-100% 的价格。</p>
+<p>于是我在 3.15 电子产品网站 Google 了一下：<br>
+          <div class="read-more">
+            <a href="/2010/03/e5-88-b0-e5-ba-95-e4-b9-b0-e5-95-a5-e7-94-b5-e8-a7-86-e5-91-a2-ef-bc-9f.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2010/03/postfix-e5-9c-b0-e5-9d-80-e6-9b-bf-e6-8d-a2.html">Postfix 地址替换</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2010年3月25日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>Postfix 的地址替换在去年就开始做了。当时在 <a href="http://bbs.chinaunix.net/thread-1577559-1-1.html" target="_blank" rel="external">CU 有个简单的讨论帖</a>。不过当时的做法并不是完善的做法。<br>
+          <div class="read-more">
+            <a href="/2010/03/postfix-e5-9c-b0-e5-9d-80-e6-9b-bf-e6-8d-a2.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2010/03/cacti-e5-9c-a8selinux-e7-9a-84strict-policy-e4-b8-8b-e9-85-8d-e7-bd-ae.html">cacti在selinux的strict policy下配置</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2010年3月19日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>系统： CentOS 5.4<br>内核： 2.6.18-164.el5<br>Selinux： selinux-policy-strict-2.4.6-255.el5<br>
+          <div class="read-more">
+            <a href="/2010/03/cacti-e5-9c-a8selinux-e7-9a-84strict-policy-e4-b8-8b-e9-85-8d-e7-bd-ae.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2010/03/e8-a3-85-e4-bf-ae-e6-97-a5-e8-ae-b0-e7-81-af-e9-a5-b0-e9-80-89-e6-8b-a9.html">装修日记-灯饰选择</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2010年3月4日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>终于还是决定要写下来。<br>对于控制欲望这么强烈的我来说，装修真的是一件很辛苦的事情了。<br>记流水账的同时，也和大家分享分享找到的好东西。</p>
 <p>1.餐厅灯</p>
-<p><img src="http://pic.yupoo.com/latteye/394398f33683/small.png" alt="餐桌灯"></p></div><a href="/2010/03/e8-a3-85-e4-bf-ae-e6-97-a5-e8-ae-b0-e7-81-af-e9-a5-b0-e9-80-89-e6-8b-a9.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/6/" class="prev">PREV</a><a href="/page/8/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<p><img src="http://pic.yupoo.com/latteye/394398f33683/small.png" alt="餐桌灯"></p>
+          <div class="read-more">
+            <a href="/2010/03/e8-a3-85-e4-bf-ae-e6-97-a5-e8-ae-b0-e7-81-af-e9-a5-b0-e9-80-89-e6-8b-a9.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/6/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/8/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

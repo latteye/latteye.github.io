@@ -1,6 +1,371 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Arch Linux 你咋地了？ · Water is</title><meta name="description" content="Arch Linux 你咋地了？ - latteye"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Arch Linux 你咋地了？</h1><div class="post-info">2012年8月10日</div><div class="post-content"><p>昨天晚上接在 HomeServer 上的 USB 音频解码器不出声音了，开始找问题。接着习惯性的 <code>pacman -Syu</code> 一下，提示 “已经存在 /lib 目录，无法继续”。瞄了一眼觉得可能是维护人员弄了低级的 bug，任何系统都有 /lib 目录啊，遂 <code>pacman -Su --force</code> ，谁知道紧接着就是 glibc 安装错误，然后所有的系统命令都提示不存在了。这时候连 reboot 命令都没有了…</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="Arch Linux 你咋地了？"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/2012/08/arch-linux-e4-bd-a0-e5-92-8b-e5-9c-b0-e4-ba-86-ef-bc-9f.html"/>
+
+
+<meta name="description" content="昨天晚上接在 HomeServer 上的 USB 音频解码器不出声音了，开始找问题。接着习惯性的 pacman -Syu 一下，提示 “已经存在 /lib 目录，无法继续”。瞄了一眼觉得可能是维护人员弄了低级的 bug，任何系统都有 /lib 目录啊，遂 pacman -Su --force ，谁知道紧接着就是 glibc 安装错误，然后所有的系统命令都提示不存在了。这时候连 reboot 命令都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arch Linux 你咋地了？">
+<meta property="og:url" content="http://latteye.me/2012/08/arch-linux-e4-bd-a0-e5-92-8b-e5-9c-b0-e4-ba-86-ef-bc-9f.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="昨天晚上接在 HomeServer 上的 USB 音频解码器不出声音了，开始找问题。接着习惯性的 pacman -Syu 一下，提示 “已经存在 /lib 目录，无法继续”。瞄了一眼觉得可能是维护人员弄了低级的 bug，任何系统都有 /lib 目录啊，遂 pacman -Su --force ，谁知道紧接着就是 glibc 安装错误，然后所有的系统命令都提示不存在了。这时候连 reboot 命令都">
+<meta property="og:updated_time" content="2015-05-02T13:11:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Arch Linux 你咋地了？">
+<meta name="twitter:description" content="昨天晚上接在 HomeServer 上的 USB 音频解码器不出声音了，开始找问题。接着习惯性的 pacman -Syu 一下，提示 “已经存在 /lib 目录，无法继续”。瞄了一眼觉得可能是维护人员弄了低级的 bug，任何系统都有 /lib 目录啊，遂 pacman -Su --force ，谁知道紧接着就是 glibc 安装错误，然后所有的系统命令都提示不存在了。这时候连 reboot 命令都">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Arch Linux 你咋地了？ · Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Arch Linux 你咋地了？
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2012年8月10日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        <p>昨天晚上接在 HomeServer 上的 USB 音频解码器不出声音了，开始找问题。接着习惯性的 <code>pacman -Syu</code> 一下，提示 “已经存在 /lib 目录，无法继续”。瞄了一眼觉得可能是维护人员弄了低级的 bug，任何系统都有 /lib 目录啊，遂 <code>pacman -Su --force</code> ，谁知道紧接着就是 glibc 安装错误，然后所有的系统命令都提示不存在了。这时候连 reboot 命令都没有了…</p>
 <p>到 <a href="http://www.linuxsir.org/bbs/forum96.html" target="_blank" rel="external">linuxsir 的 Arch 板块</a>看了两页，报错的帖子占了很多，其中的一类就是将 /lib 转移到 /usr/lib, 或者是 /lib 和 /lib64 合并。真不知道 Arch 这是怎么了，虽然以前 Arch 也出过问题，但是也没将系统弄崩溃过。也没深看下去，不知道官方想合并 lib 目录的用意何在。但无论如何，这绝对是一个危险的动作。我相信大多数发行版本都会将这个动作作为 dist upgrade 来处理。但是 Arch 没有这个概念… 于是铤而走险？</p>
 <p>今天一大早起来重新安装了 Debian Stable，后来发现 Stable 的 Kernel 和 alsa 都太老了，可能是无法识别 USB Audio 的主要原因，于是更新到 Debian testing。其实 Debian testing 还是比较稳定的。目前看来一切正常。</p>
 <p>人老了就经不起折腾了，现在只希望这些东西好好工作，别出问题。3年前还在不断的玩发行版本，遇到发行版本讨论还会参与一点。现在的心态是，工作的、稳定的就是好东西！</p>
 <p>其实各个发行版本维护了这么多年了，相互也已经形成了一种平衡关系，在我的概念里面 RedHat（CentOS），Fedora，Debian，Ubuntu，Gentoo 都有自己明确的市场定位和用户群体，常见的发行版本中不太熟悉的是 SuSe，不知道这个发行版本存在的意义。而如今市场向移动端转移，早早的被 Android 抢占了市场，站稳了脚跟。这本应该是 Linux 发行公司和 各大桌面体系所必争之地，而如今似乎大家都已经认命了。以前还看到过 Ubuntu 跑在手机上，后来也没什么新的动静。其实 Linux 手机端完全有能力做的像 iOS 那样好。当然 Android 的实时切入和 Google Play（Market）所积累的 App 资源现在很难被撼动，但还是值得一试。期待 Mozilla 的新系统。</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2012/08/linux-mpd-e6-92-ad-e6-94-be-e9-9f-b3-e4-b9-90-e9-80-9f-e5-ba-a6-e5-bf-ab-e9-97-ae-e9-a2-98-e4-b8-80-e5-88-99.html" class="prev">PREV</a><a href="/2011/12/e5-9c-a8-mac-os-e3-80-81linux-e4-b8-8b-e4-bd-bf-e7-94-a8-keepassx-e8-87-aa-e5-8a-a8-e5-a1-ab-e5-86-99-e8-a1-a8-e5-8d-95.html" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>作者: </span>
+      <span>latteye</span>
+    </p>
+    <p class="copyright-item">
+      <span>来源: </span>
+      <a href="http://latteye.me">http://latteye.me</a>
+    </p>
+    <p class="copyright-item">
+      <span>链接: </span>
+      <a href="http://latteye.me/2012/08/arch-linux-e4-bd-a0-e5-92-8b-e5-9c-b0-e4-ba-86-ef-bc-9f.html">http://latteye.me/2012/08/arch-linux-e4-bd-a0-e5-92-8b-e5-9c-b0-e4-ba-86-ef-bc-9f.html</a>
+    </p>
+
+    <p class="copyright-item lincese">
+      
+      本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+    </p>
+  </div>
+
+
+
+      
+      
+  <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code">
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/wechat.png" title="wechat">
+        </label>
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/alipay.png" title="alipay">
+        </label>
+      
+    </div>
+  </div>
+
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2012/08/linux-mpd-e6-92-ad-e6-94-be-e9-9f-b3-e4-b9-90-e9-80-9f-e5-ba-a6-e5-bf-ab-e9-97-ae-e9-a2-98-e4-b8-80-e5-88-99.html">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Linux MPD 播放音乐速度快问题一则</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2011/12/e5-9c-a8-mac-os-e3-80-81linux-e4-b8-8b-e4-bd-bf-e7-94-a8-keepassx-e8-87-aa-e5-8a-a8-e5-a1-ab-e5-86-99-e8-a1-a8-e5-8d-95.html">
+        <span class="next-text nav-default">在 Mac OS、Linux 下使用 KeePassX 自动填写表单</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "7c27380789354d14af755b0b00464371",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

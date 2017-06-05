@@ -1,9 +1,686 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/e5-9c-a8ubuntu-gnome-e7-8e-af-e5-a2-83-e4-b8-8b-e5-ae-89-e8-a3-85xgl-e5-92-8cberyl.html" class="post-title-link">在ubuntu gnome环境下安装XGL和beryl</a></h2><div class="post-info">2006年11月2日</div><div class="post-content"><p>本文翻译自<a href="http://forum.beryl-project.org" target="_blank" rel="external">beryl-project</a>上<a href="http://forum.beryl-project.org/profile-110-racerii" target="_blank" rel="external">RacerII</a>的<a href="http://forum.beryl-project.org/topic-4863-howto-xgl-and-beryl-how-for-gnome" target="_blank" rel="external">How-To</a>第二种方法。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/44/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/44/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/e5-9c-a8ubuntu-gnome-e7-8e-af-e5-a2-83-e4-b8-8b-e5-ae-89-e8-a3-85xgl-e5-92-8cberyl.html">在ubuntu gnome环境下安装XGL和beryl</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月2日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>本文翻译自<a href="http://forum.beryl-project.org" target="_blank" rel="external">beryl-project</a>上<a href="http://forum.beryl-project.org/profile-110-racerii" target="_blank" rel="external">RacerII</a>的<a href="http://forum.beryl-project.org/topic-4863-howto-xgl-and-beryl-how-for-gnome" target="_blank" rel="external">How-To</a>第二种方法。</p>
 <p>1.将系统软件升级到最新版本。</p>
 <p><code>sudo apt-get update
 sudo apt-get dist-upgrade</code><br>2.添加apt的源地址。</p>
 <p><code>deb http://www.beerorkid.com/compiz dapper main
 deb http://media.blutkind.org/xgl/ dapper main
 deb http://compiz-mirror.lupine.me.uk/ dapper main
-deb http://ubuntu.compiz.net/ dapper main</code><br></div><a href="/2006/11/e5-9c-a8ubuntu-gnome-e7-8e-af-e5-a2-83-e4-b8-8b-e5-ae-89-e8-a3-85xgl-e5-92-8cberyl.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/e6-9c-89-e8-b6-a3-e7-9a-84designed-for-power-by.html" class="post-title-link">有趣的Designed for & Power By</a></h2><div class="post-info">2006年11月1日</div><div class="post-content"><p><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_annvix.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_archlinux.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_arklinux.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_biobrew.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_centos.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_colinux.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_debian.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_edubuntu.png" alt=""></div><a href="/2006/11/e6-9c-89-e8-b6-a3-e7-9a-84designed-for-power-by.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/quod-libet.html" class="post-title-link">Quod Libet</a></h2><div class="post-info">2006年11月1日</div><div class="post-content"><p><img src="http://www.linuxblog.cn/logo/quodlibet/quodlibet.png" alt=""><br><a href="http://www.sacredchao.net/quodlibet" target="_blank" rel="external">Quod Libet</a>是我最喜爱的一款音乐播放器！他界面简洁但却提供多种界面模式，支持播放列表。无论你是喜欢通过播放列表管理音乐，还是通过专辑、通过音乐家-专辑、搜索、文件夹、网上广播，Quod Libet都提供了高效率的外观模式。</p>
-<p><a href="http://www.linuxblog.cn/wp-content/images/quodlibet/quodlibet1.jpg" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/quodlibet/_quodlibet1.jpg" alt=""></a><br></div><a href="/2006/11/quod-libet.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/10/rockbox.html" class="post-title-link">RockBox</a></h2><div class="post-info">2006年10月31日</div><div class="post-content"></div><a href="/2006/10/rockbox.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/10/xfld-03-e5-8f-91-e5-b8-83.html" class="post-title-link">xfld 0.3发布</a></h2><div class="post-info">2006年10月31日</div><div class="post-content"></div><a href="/2006/10/xfld-03-e5-8f-91-e5-b8-83.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/10/e5-9c-a8fedora-core-6-e4-b8-8b-e4-bd-bf-e7-94-a8ati-e9-a9-b1-e5-8a-a8.html" class="post-title-link">在Fedora Core 6下使用ATI驱动</a></h2><div class="post-info">2006年10月31日</div><div class="post-content"></div><a href="/2006/10/e5-9c-a8fedora-core-6-e4-b8-8b-e4-bd-bf-e7-94-a8ati-e9-a9-b1-e5-8a-a8.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/10/guifications.html" class="post-title-link">Guifications</a></h2><div class="post-info">2006年10月30日</div><div class="post-content"></div><a href="/2006/10/guifications.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/10/automize.html" class="post-title-link">Automize</a></h2><div class="post-info">2006年10月30日</div><div class="post-content"></div><a href="/2006/10/automize.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/10/gdm-e4-b8-bb-e9-a2-98-e5-8f-91-e5-b8-83.html" class="post-title-link">GDM主题发布</a></h2><div class="post-info">2006年10月30日</div><div class="post-content"></div><a href="/2006/10/gdm-e4-b8-bb-e9-a2-98-e5-8f-91-e5-b8-83.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/10/gaim-e7-8a-b6-e6-80-81-e6-8f-90-e7-a4-ba-e4-b8-bb-e9-a2-98-e5-8f-91-e5-b8-83.html" class="post-title-link">Gaim状态提示主题发布</a></h2><div class="post-info">2006年10月30日</div><div class="post-content"></div><a href="/2006/10/gaim-e7-8a-b6-e6-80-81-e6-8f-90-e7-a4-ba-e4-b8-bb-e9-a2-98-e5-8f-91-e5-b8-83.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/43/" class="prev">PREV</a><a href="/page/45/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+deb http://ubuntu.compiz.net/ dapper main</code><br>
+          <div class="read-more">
+            <a href="/2006/11/e5-9c-a8ubuntu-gnome-e7-8e-af-e5-a2-83-e4-b8-8b-e5-ae-89-e8-a3-85xgl-e5-92-8cberyl.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/e6-9c-89-e8-b6-a3-e7-9a-84designed-for-power-by.html">有趣的Designed for & Power By</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月1日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_annvix.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_archlinux.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_arklinux.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_biobrew.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_centos.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_colinux.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_debian.png" alt=""><img src="http://www.linuxblog.cn/wp-content/images/designedlogo/d_edubuntu.png" alt="">
+          <div class="read-more">
+            <a href="/2006/11/e6-9c-89-e8-b6-a3-e7-9a-84designed-for-power-by.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/quod-libet.html">Quod Libet</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月1日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><img src="http://www.linuxblog.cn/logo/quodlibet/quodlibet.png" alt=""><br><a href="http://www.sacredchao.net/quodlibet" target="_blank" rel="external">Quod Libet</a>是我最喜爱的一款音乐播放器！他界面简洁但却提供多种界面模式，支持播放列表。无论你是喜欢通过播放列表管理音乐，还是通过专辑、通过音乐家-专辑、搜索、文件夹、网上广播，Quod Libet都提供了高效率的外观模式。</p>
+<p><a href="http://www.linuxblog.cn/wp-content/images/quodlibet/quodlibet1.jpg" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/quodlibet/_quodlibet1.jpg" alt=""></a><br>
+          <div class="read-more">
+            <a href="/2006/11/quod-libet.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/10/rockbox.html">RockBox</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年10月31日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><img src="http://linuxblog.cn/blog/wp-content/images/rockbox400.png" alt=""><br><a href="http://www.rockbox.org" target="_blank" rel="external">Rockbox</a>是一款开源的，在Linux环境下刷新MP3播放器固件的软件。最新的版本为<a href="http://www.rockbox.org/download/" target="_blank" rel="external">2.5</a>，支持以下MP3：Archos, iRiver, Apple (iPod) and iAudio。<br>如果你的MP3使用的芯片和以上几款一样的话，也可以试试。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/10/xfld-03-e5-8f-91-e5-b8-83.html">xfld 0.3发布</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年10月31日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><img src="http://www.linuxblog.cn/logo/xfld/xfld.png" alt=""><br>xfld 0.3发布了。xfld是一款基于Xubuntu的系统，当然他的光盘也可以作为livecd使用。最新的xfld包括了xfce 4.4,OpenOffice.org 2.0.4, GIMP 2.2.13, Firefox 2.0, Thunderbird 1.5, AbiWord 2.4.5, Wireshark 0.99.3a。</p>
+<p>如果你想了解更多，可以去<a href="http://www.xfld.org/" target="_blank" rel="external">项目主页</a>查看。可惜的是，xfld似乎没有中文版本。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/10/e5-9c-a8fedora-core-6-e4-b8-8b-e4-bd-bf-e7-94-a8ati-e9-a9-b1-e5-8a-a8.html">在Fedora Core 6下使用ATI驱动</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年10月31日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>本文介绍在Fedora Core 6下驱动显卡的方法。</p>
+<p>首先，将你的内核版本从i586升级到i686版本。</p>
+<p><code>yumdownloader kernel-2.6.18-1.2798.fc6.i686
+sudo rpm -Uvh --replacefiles --replacepkgs \
+kernel-2.6.18-1.2798.fc6.i686.rpm</code></p>
+<p>接着就可以安装显卡驱动了：</p>
+<p><code>su -
+rpm -Uhv http://rpm.livna.org/livna-release-6.rpm
+yum install kmod-fglrx xorg-x11-drv-fglrx
+yum update kmod-fglrx xorg-x11-drv-fglrx
+service ati-fglrx restart
+ati-fglrx-config-display enable</code></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/10/guifications.html">Guifications</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年10月30日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>Guifications是一款Gaim插件，他可以提供类似MSN的弹出窗口-用来提示好友的动作。</p>
+<p><strong>安装：</strong></p>
+<p>Guifications官方提供了rpm和deb包，大家根据自己的系统<a href="http://prdownloads.sourceforge.net/guifications/" target="_blank" rel="external">下载</a>、安装即可。</p>
+<p>在安装完成之后，你只需要重启Gnome并在gaim中激活插件即可。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/10/automize.html">Automize</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年10月30日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://www.laroea.cn" target="_blank" rel="external"><img src="http://www.linuxblog.cn/people/latteye.jpg" alt=""></a><br>Automize是一款多平台的自动执行任务的工具。当然你会说：Linux已经有定时执行命令的工具了。不过如果有一款更加直观的工具未尝不是好事，何况Automize还可以定时帮我们发邮件、连接ftp、开网页、甚至还可以进行数据库的操作…………<br><a href="http://www.hiteksoftware.com/downloads.htm" target="_blank" rel="external">下载Automize</a>后解压缩，直接在目录执行<strong>./Automize</strong>就可以启动程序了。<br>不过这可是款商业软件！这里提供几个SN给大家：</p>
+<blockquote>
+<p>QXY8R-RQRXR-SR5GY-HVV96        (Automize Enterprise)</p>
+<p>QXY8R-RQRXR-GTK2K-HVV96        (Automize Pro)</p>
+<p>QXY8R-RQRXR-RTH4U-HVV96        (Automize Standard)</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/10/gdm-e4-b8-bb-e9-a2-98-e5-8f-91-e5-b8-83.html">GDM主题发布</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年10月30日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://www.laroea.cn" target="_blank" rel="external"><img src="http://www.linuxblog.cn/people/latteye.jpg" alt=""></a><br>今天，Gnome-look.org更新了三款GDM，都很Cool~哦。<br><a href="http://www.gnome-look.org/usermanager/search.php?username=Linuxville" target="_blank" rel="external">Linuxville</a>制作的<a href="http://www.gnome-look.org/content/show.php?content=48016" target="_blank" rel="external">Interpol</a>、<a href="http://www.gnome-look.org/content/show.php?content=48014" target="_blank" rel="external">Kill Bill</a>、<a href="http://www.gnome-look.org/content/show.php?content=48013" target="_blank" rel="external">Fedora Cube</a>。</p>
+<p><a href="http://www.linuxblog.cn/wp-content/images/gdm/48013-1.jpg" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/gdm/_48013-1.jpg" alt=""></a></p>
+<p><a href="http://www.linuxblog.cn/wp-content/images/gdm/48014-1.jpg" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/gdm/_48014-1.jpg" alt=""></a><br><a href="http://www.linuxblog.cn/wp-content/images/gdm/48016-1.jpg" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/gdm/_48016-1.jpg" alt=""></a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/10/gaim-e7-8a-b6-e6-80-81-e6-8f-90-e7-a4-ba-e4-b8-bb-e9-a2-98-e5-8f-91-e5-b8-83.html">Gaim状态提示主题发布</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年10月30日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://www.laroea.cn" target="_blank" rel="external"><img src="http://www.linuxblog.cn/people/latteye.jpg" alt=""></a><br><a href="http://www.gnome-look.org/usermanager/search.php?username=margus723" target="_blank" rel="external">margus723</a>发布了一款gaim状态提示主题，它可以配合2.0版本的gaim显示人物状态的变化。<a href="http://www.gnome-look.org/content/show.php?content=47998" target="_blank" rel="external">点击下载</a>。安装主题只需要将下载到的文件解压后，将目录复制到<strong>~/.gaim/guifications/themes/</strong>目录下即可。</p>
+<p><a href="http://www.linuxblog.cn/wp-content/images/47998-1.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_47998-1.png" alt=""></a><br><a href="http://www.linuxblog.cn/wp-content/images/47998-2.png" target="_blank" rel="external"><img src="http://www.linuxblog.cn/wp-content/images/_47998-2.png" alt=""></a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/43/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/45/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

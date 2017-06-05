@@ -1,6 +1,683 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2009/12/e8-ae-a1-e7-ae-97-e7-bd-91-e5-8d-a1-e5-8f-91-e9-80-81-e9-80-9f-e7-8e-87.html" class="post-title-link">计算网卡发送速率</a></h2><div class="post-info">2009年12月2日</div><div class="post-content"></div><a href="/2009/12/e8-ae-a1-e7-ae-97-e7-bd-91-e5-8d-a1-e5-8f-91-e9-80-81-e9-80-9f-e7-8e-87.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2009/11/e5-85-88-nat-ef-bc-9f-e5-85-88-e8-b7-af-e7-94-b1-ef-bc-9f.html" class="post-title-link">先 NAT ？先路由？</a></h2><div class="post-info">2009年11月23日</div><div class="post-content"></div><a href="/2009/11/e5-85-88-nat-ef-bc-9f-e5-85-88-e8-b7-af-e7-94-b1-ef-bc-9f.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2009/10/mediatemple-e8-af-95-e7-94-a8.html" class="post-title-link">Mediatemple 试用</a></h2><div class="post-info">2009年10月12日</div><div class="post-content"><p>  跟随着 <a href="http://imtx.cn" target="_blank" rel="external">imtx</a> <a href="http://imtx.cn/archives/1345.html" target="_blank" rel="external">的脚步</a>，我也一起开始尝试 <a href="mediatemple.net">Mediatemple</a> 。这可是我见过最贵的虚拟主机啊！天啊，每个月 20 美刀，要是我一个人就放个 Blog 的话，我是绝对不会租的。<br>  既然有幸接触了就认真看看吧。</p></div><a href="/2009/10/mediatemple-e8-af-95-e7-94-a8.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2009/10/how-many-open-files.html" class="post-title-link">你的系统打开了多少文件？</a></h2><div class="post-info">2009年10月10日</div><div class="post-content"><p>  研究这个问题的起因是我有两台机器，“打开文件数目”的统计出现了错误。到现在也没能找到问题的原因，借这个问题，正好把这方面的概念搞清楚了。同时发现，中文搜到的内容里面，讲清楚这个的很少。</p></div><a href="/2009/10/how-many-open-files.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2009/09/cpu-time-e8-af-a6-e8-b0-88.html" class="post-title-link">CPU Time 详谈</a></h2><div class="post-info">2009年9月28日</div><div class="post-content"><p>  在 ulimit 工具中，有一行 cpu time 选项。在搜索其功能的过程中，大多数文档解释时，就给出一句“CPU 使用最大时间”。并没有详细说明。<br></div><a href="/2009/09/cpu-time-e8-af-a6-e8-b0-88.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2009/09/advanced-route-pppd.html" class="post-title-link">高级路由应用一列</a></h2><div class="post-info">2009年9月27日</div><div class="post-content"><p>  关于 Linux 环境下的高级路由 第一手资料应该是 <a href="http://lartc.org/" target="_blank" rel="external">http://lartc.org/</a> 。系统的学习可以从这里开始。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/9/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/9/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2009/12/e8-ae-a1-e7-ae-97-e7-bd-91-e5-8d-a1-e5-8f-91-e9-80-81-e9-80-9f-e7-8e-87.html">计算网卡发送速率</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2009年12月2日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>/opt/rrdtool/bin/rrdtool fetch /var/www/html/cacti/rra/2/130.rrd AVERAGE -r 300 -s -5minutes | sed -n ‘3p’ | awk ‘{print $3}’ | awk ‘{printf “%.f\n” ,$1 * 8 / 1000000}’</p>
+<p>/opt/rrdtool/bin/rrdtool fetch /var/www/html/cacti/rra/2/130.rrd AVERAGE -r 300 -s -5minutes<br>显示最近5分钟该网卡的 input 和 output 数值</p>
+<p>sed -n ‘3p’<br>打印第三行</p>
+<p>awk ‘{print $3}’<br>打印第三列</p>
+<p>awk ‘{printf “%.f\n” ,$1 * 8 / 1000000}’<br>printf “%.f\n”<br>将科学计数法转换为普通数字</p>
+<p>$1 * 8 / 1000000<br>最后乘以 8 除以  1000000 得到最近一次计算出的网卡速率，单位是 M</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2009/11/e5-85-88-nat-ef-bc-9f-e5-85-88-e8-b7-af-e7-94-b1-ef-bc-9f.html">先 NAT ？先路由？</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2009年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>inside -&gt; outside: routing -&gt; NAT<br>outside -&gt; inside: NAT -&gt; routing</p>
+<p><del datetime="2009-11-25T07:55:03+00:00">但是为什么呢？</del></p>
+<p>想通了<br>先 路由才能接着判断这个包是否需要丢出去。<br>如果一个包根本不需要出去，那么也不需要 NAT 了。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2009/10/mediatemple-e8-af-95-e7-94-a8.html">Mediatemple 试用</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2009年10月12日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>  跟随着 <a href="http://imtx.cn" target="_blank" rel="external">imtx</a> <a href="http://imtx.cn/archives/1345.html" target="_blank" rel="external">的脚步</a>，我也一起开始尝试 <a href="mediatemple.net">Mediatemple</a> 。这可是我见过最贵的虚拟主机啊！天啊，每个月 20 美刀，要是我一个人就放个 Blog 的话，我是绝对不会租的。<br>  既然有幸接触了就认真看看吧。</p>
+          <div class="read-more">
+            <a href="/2009/10/mediatemple-e8-af-95-e7-94-a8.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2009/10/how-many-open-files.html">你的系统打开了多少文件？</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2009年10月10日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>  研究这个问题的起因是我有两台机器，“打开文件数目”的统计出现了错误。到现在也没能找到问题的原因，借这个问题，正好把这方面的概念搞清楚了。同时发现，中文搜到的内容里面，讲清楚这个的很少。</p>
+          <div class="read-more">
+            <a href="/2009/10/how-many-open-files.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2009/09/cpu-time-e8-af-a6-e8-b0-88.html">CPU Time 详谈</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2009年9月28日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>  在 ulimit 工具中，有一行 cpu time 选项。在搜索其功能的过程中，大多数文档解释时，就给出一句“CPU 使用最大时间”。并没有详细说明。<br>
+          <div class="read-more">
+            <a href="/2009/09/cpu-time-e8-af-a6-e8-b0-88.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2009/09/advanced-route-pppd.html">高级路由应用一列</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2009年9月27日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>  关于 Linux 环境下的高级路由 第一手资料应该是 <a href="http://lartc.org/" target="_blank" rel="external">http://lartc.org/</a> 。系统的学习可以从这里开始。</p>
 <p>  公司有一个应用，需要使用 3g，但目前的 3g 速度依然不满意。所以在应用层上，开发工程师能够绑定多个 ip 地址，同时占用多条线路。而在系统层面，就需要 pppd 来配合了。</p>
-<p>  操作的环境是 Ubuntu，在 pppd 部分与其他发行版本相同。</p></div><a href="/2009/09/advanced-route-pppd.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2009/09/hows-it-going.html" class="post-title-link">How's it going?</a></h2><div class="post-info">2009年9月26日</div><div class="post-content"><p>  细细看看其实今年就没认真的写过 Blog，或者说，兴趣上的事情就没认真过。</p>
+<p>  操作的环境是 Ubuntu，在 pppd 部分与其他发行版本相同。</p>
+          <div class="read-more">
+            <a href="/2009/09/advanced-route-pppd.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2009/09/hows-it-going.html">How's it going?</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2009年9月26日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>  细细看看其实今年就没认真的写过 Blog，或者说，兴趣上的事情就没认真过。</p>
 <p>  年初的时候写 BearAudio，写了两个月，搁浅。<br>  不再更新技术 Blog，做了好多事情，都没整理。<br>  Linux 桌面也不再玩了，虽然更新了一次新的硬件。<br>  前两天开了一个 SA 服务器，简直就是悲剧。有些时候我自以为我适合做服务性行业，但真做了，我总是向往着做纯技术的无忧无虑。<br>  和成批的人接触简直就是悲剧，而更因为网络的虚拟化，我所接触的简直就不是人，而是各个人背后的鬼影，一切卑劣的品质暴露无遗。<br>  当然，不排除虚拟的环境中依旧有好人，笑看风云是一个。</p>
 <p>  就当是看了一部“七宗罪”。</p>
-<p>  卍<br></div><a href="/2009/09/hows-it-going.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2009/04/linux-sysctl-rp-filter-e8-a7-a3-e9-87-8a.html" class="post-title-link">Linux Sysctl rp_filter 解释</a></h2><div class="post-info">2009年4月15日</div><div class="post-content"><p>本想搜中文资料，结果没找到说的清楚的帖子，还是自己看看英文吧。顺便勉强翻译一下。</p></div><a href="/2009/04/linux-sysctl-rp-filter-e8-a7-a3-e9-87-8a.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2009/04/3-e6-9c-88-e9-97-b5-e8-a1-8c-e5-85-ac-e5-9b-ad.html" class="post-title-link">3月闵行公园</a></h2><div class="post-info">2009年4月11日</div><div class="post-content"></div><a href="/2009/04/3-e6-9c-88-e9-97-b5-e8-a1-8c-e5-85-ac-e5-9b-ad.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2009/04/use-openssh-with-proxy.html" class="post-title-link">Use Openssh With Proxy</a></h2><div class="post-info">2009年4月2日</div><div class="post-content"><p>SSH 能够创建 Socks5 代理是众所周知的事情了。<br>但是 SSH (openssh) 怎么用代理呢？由其是 Socks5 代理。<br></div><a href="/2009/04/use-openssh-with-proxy.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/8/" class="prev">PREV</a><a href="/page/10/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<p>  卍<br>
+          <div class="read-more">
+            <a href="/2009/09/hows-it-going.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2009/04/linux-sysctl-rp-filter-e8-a7-a3-e9-87-8a.html">Linux Sysctl rp_filter 解释</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2009年4月15日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>本想搜中文资料，结果没找到说的清楚的帖子，还是自己看看英文吧。顺便勉强翻译一下。</p>
+          <div class="read-more">
+            <a href="/2009/04/linux-sysctl-rp-filter-e8-a7-a3-e9-87-8a.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2009/04/3-e6-9c-88-e9-97-b5-e8-a1-8c-e5-85-ac-e5-9b-ad.html">3月闵行公园</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2009年4月11日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>[gallery=8]</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2009/04/use-openssh-with-proxy.html">Use Openssh With Proxy</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2009年4月2日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>SSH 能够创建 Socks5 代理是众所周知的事情了。<br>但是 SSH (openssh) 怎么用代理呢？由其是 Socks5 代理。<br>
+          <div class="read-more">
+            <a href="/2009/04/use-openssh-with-proxy.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/8/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/10/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

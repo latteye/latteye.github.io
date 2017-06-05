@@ -1,12 +1,698 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/01/vector-nti-in-wine.html" class="post-title-link">Vector NTI IN Wine</a></h2><div class="post-info">2007年1月28日</div><div class="post-content"></div><a href="/2007/01/vector-nti-in-wine.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/01/flash-player-9-for-linux.html" class="post-title-link">Flash Player 9 For linux</a></h2><div class="post-info">2007年1月28日</div><div class="post-content"><p>真是惭愧，17日发布的东西今天才知道。还是在更新 Ubuntu 的时候看到了这个包。记得上一个测试版本让浏览器频繁崩溃，希望正式版本解决了以往已经发现的诸多问题。</p>
-<p>  在 Ubuntu 更新之后发现Firefox并没有启用最新的版本，而是老的7版本。查看了一下 deb 包的安装内容，只是安装在了 /usr/lib 目录下。但是 Firefox 读取插件是从 home 目录下的呢。看来我们还是要手动安装了。<br></div><a href="/2007/01/flash-player-9-for-linux.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/01/e8-bd-ac-e6-88-bf-e5-9c-b0-e4-ba-a7-e8-af-84-e6-9e-90-e4-b8-ad-e5-9b-bd-e6-88-bf-e4-bb-b7-e5-bf-85-e8-b7-8c-e7-9a-8440-e4-b8-aa-e7-90-86-e7-94-b1.html" class="post-title-link">[转][房地产评析] 中国房价必跌的40个理由</a></h2><div class="post-info">2007年1月27日</div><div class="post-content"><p>原作者黄祖斌  <a href="http://blog.focus.cn/group/blogforum_detail.php?blog_id=2489075&amp;msg_id=72934379" target="_blank" rel="external">原文地址</a></p>
-<p>步入一个新的社会环境之后必须学习很多东西，我个人在够买大多数东西时都会尽力对其了解（其实买电子类产品比较多拉~）。转此文并不代表对其全部肯定，但文章的确是有一定深度、经得起推敲的。所以转来以便日后细看。</p></div><a href="/2007/01/e8-bd-ac-e6-88-bf-e5-9c-b0-e4-ba-a7-e8-af-84-e6-9e-90-e4-b8-ad-e5-9b-bd-e6-88-bf-e4-bb-b7-e5-bf-85-e8-b7-8c-e7-9a-8440-e4-b8-aa-e7-90-86-e7-94-b1.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/01/lumaqq-2006-no-jre.html" class="post-title-link">LumaQQ 2006 NO Jre</a></h2><div class="post-info">2007年1月27日</div><div class="post-content"><p>当然！LumaQQ 2006 版本已经推出好长时间了，并且大家也可以顺利的在自己机器上使用。但是鄙人最近遇到一点问题，所以将简单的解决方法写下来。</p>
-<p>  Ubuntu Linux 更新了Jre的版本，从而导致LumaQQ无法找到新的Jre位置，他会不断的提示你设置 JAVA_HOME 变量的地址。按照这个提示我也设置了JAVA_HOME 的地址，但是却并没有解决问题。程序依然提示无法找到 Jre 。打开lumaqq执行脚本，仔细看到下面一段：<br></div><a href="/2007/01/lumaqq-2006-no-jre.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/01/griffith.html" class="post-title-link">Griffith</a></h2><div class="post-info">2007年1月27日</div><div class="post-content"><p>美好的P2P养育了一群疯狂的家伙，他们看到好东西就不顾一切的要得到他！比如我吧……Discovery的东西下了一陀，但是都没有看的超过一半（5555实在是太多了，不过的确很好看哦！）当然当然，我可以想想在看本贴的你的硬盘里面存了好多好多电子书，但是确从来没动过……很正常。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/33/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/33/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/01/vector-nti-in-wine.html">Vector NTI IN Wine</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年1月28日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>Vector NTI 是一款生物工程软件，在经受了多位前辈的熏陶之后我们应该有这样的思想：“任何科学研究需要的工具Linux都是有的！”可惜的是，Linux似乎并没有生物工程类的软件，没办法！我们只要用Wine模拟了。</p>
+<p><a href="http://ubuntuforums.org/member.php?u=127567" target="_blank" rel="external">misha680</a> 给出了详细的<a href="http://ubuntuforums.org/showthread.php?p=2068213" target="_blank" rel="external">方法</a>：</p>
+<p>1.安装 Wine、以及其他必要软件：</p>
+<p><code>sudo aptitude install wine cabextract unzip</code></p>
+<p>2.下载这个<a href="http://misha680.googlepages.com/InstallVectorNTI10.sh" target="_blank" rel="external">脚本</a>，并且给上执行权限。接着运行它，它会为你安装上所有必要的东西。</p>
+<p>3.我们来看看运行截图吧：</p>
+<p><a href="http://linuxblog.cn/wp-content/images/misha680t.png" target="_blank" rel="external"><img src="http://linuxblog.cn/wp-content/images/_misha680t.png" alt=""></a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/01/flash-player-9-for-linux.html">Flash Player 9 For linux</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年1月28日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>真是惭愧，17日发布的东西今天才知道。还是在更新 Ubuntu 的时候看到了这个包。记得上一个测试版本让浏览器频繁崩溃，希望正式版本解决了以往已经发现的诸多问题。</p>
+<p>  在 Ubuntu 更新之后发现Firefox并没有启用最新的版本，而是老的7版本。查看了一下 deb 包的安装内容，只是安装在了 /usr/lib 目录下。但是 Firefox 读取插件是从 home 目录下的呢。看来我们还是要手动安装了。<br>
+          <div class="read-more">
+            <a href="/2007/01/flash-player-9-for-linux.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/01/e8-bd-ac-e6-88-bf-e5-9c-b0-e4-ba-a7-e8-af-84-e6-9e-90-e4-b8-ad-e5-9b-bd-e6-88-bf-e4-bb-b7-e5-bf-85-e8-b7-8c-e7-9a-8440-e4-b8-aa-e7-90-86-e7-94-b1.html">[转][房地产评析] 中国房价必跌的40个理由</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年1月27日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>原作者黄祖斌  <a href="http://blog.focus.cn/group/blogforum_detail.php?blog_id=2489075&amp;msg_id=72934379" target="_blank" rel="external">原文地址</a></p>
+<p>步入一个新的社会环境之后必须学习很多东西，我个人在够买大多数东西时都会尽力对其了解（其实买电子类产品比较多拉~）。转此文并不代表对其全部肯定，但文章的确是有一定深度、经得起推敲的。所以转来以便日后细看。</p>
+          <div class="read-more">
+            <a href="/2007/01/e8-bd-ac-e6-88-bf-e5-9c-b0-e4-ba-a7-e8-af-84-e6-9e-90-e4-b8-ad-e5-9b-bd-e6-88-bf-e4-bb-b7-e5-bf-85-e8-b7-8c-e7-9a-8440-e4-b8-aa-e7-90-86-e7-94-b1.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/01/lumaqq-2006-no-jre.html">LumaQQ 2006 NO Jre</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年1月27日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>当然！LumaQQ 2006 版本已经推出好长时间了，并且大家也可以顺利的在自己机器上使用。但是鄙人最近遇到一点问题，所以将简单的解决方法写下来。</p>
+<p>  Ubuntu Linux 更新了Jre的版本，从而导致LumaQQ无法找到新的Jre位置，他会不断的提示你设置 JAVA_HOME 变量的地址。按照这个提示我也设置了JAVA_HOME 的地址，但是却并没有解决问题。程序依然提示无法找到 Jre 。打开lumaqq执行脚本，仔细看到下面一段：<br>
+          <div class="read-more">
+            <a href="/2007/01/lumaqq-2006-no-jre.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/01/griffith.html">Griffith</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年1月27日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>美好的P2P养育了一群疯狂的家伙，他们看到好东西就不顾一切的要得到他！比如我吧……Discovery的东西下了一陀，但是都没有看的超过一半（5555实在是太多了，不过的确很好看哦！）当然当然，我可以想想在看本贴的你的硬盘里面存了好多好多电子书，但是确从来没动过……很正常。</p>
 <p>  在日积月累之后，当你你发现硬盘空间所剩无几之时，就会开始繁重的整理工作了……无奈电影太多了（或许是最多的品种……）。</p>
-<p>  于是天赐的 <a href="http://griffith.vasconunes.net/" target="_blank" rel="external">Griffith</a> 出现了！他是干吗的？看看截图便知：</p></div><a href="/2007/01/griffith.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/01/within-temptation-what-have-you-done.html" class="post-title-link">Within Temptation - What Have You Done</a></h2><div class="post-info">2007年1月26日</div><div class="post-content"><p><a href="http://laroea.cn/wp-content/image/music/Within%20Temptation%20-%20The%20heart%20of%20everything.jpg" target="_blank" rel="external"><img src="http://laroea.cn/wp-content/image/music/_Within%20Temptation%20-%20The%20heart%20of%20everything.jpg" alt=""></a></p>
+<p>  于是天赐的 <a href="http://griffith.vasconunes.net/" target="_blank" rel="external">Griffith</a> 出现了！他是干吗的？看看截图便知：</p>
+          <div class="read-more">
+            <a href="/2007/01/griffith.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/01/within-temptation-what-have-you-done.html">Within Temptation - What Have You Done</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年1月26日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><a href="http://laroea.cn/wp-content/image/music/Within%20Temptation%20-%20The%20heart%20of%20everything.jpg" target="_blank" rel="external"><img src="http://laroea.cn/wp-content/image/music/_Within%20Temptation%20-%20The%20heart%20of%20everything.jpg" alt=""></a></p>
 <p>[audio:what_have_you_done.mp3]</p>
 <p>无论 Within Temptation 现在是金属歌特还是摇滚歌特，我们都无法否认其女主唱的音色绝对够的上“天籁”。接着加上优美的旋律，小提琴、钢琴、电吉他……这无论如何都是一道必听的盛宴！</p>
-<p>专辑名称：The Heart Of Everything<br>曲目表：<br>01) The Howling<br>02) What Have You Done (feat. Keith Caputo)<br>03) Frozen<br>04) Our Solemn Hour<br>05) The Heart Of Everything<br>06) Hand Of Sorrow<br>07) The Cross<br>08) Final Destination<br>09) All I Need<br>10) The Truth Beneath The Rose<br>11) Forgiven</p></div><a href="/2007/01/within-temptation-what-have-you-done.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/01/e6-8a-a2-e5-8a-ab.html" class="post-title-link">抢劫</a></h2><div class="post-info">2007年1月25日</div><div class="post-content"><p>今天到老姐处帮助安装Tor，以便可以通过某些不必要的交易网站的检查。在原来的小店面边上姐夫又租下了3个门面，打算开始卖手机了（之前只是专心卖手机配件），有趣的是他们居然还商量着买两个摄像头～为啥？</p>
-<p>  抢劫！<br></div><a href="/2007/01/e6-8a-a2-e5-8a-ab.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/01/last-exit.html" class="post-title-link">Last Exit</a></h2><div class="post-info">2007年1月25日</div><div class="post-content"></div><a href="/2007/01/last-exit.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/01/e4-bf-84-e7-bd-97-e6-96-af-e7-89-88-e6-9c-ac-e6-88-90-e9-be-99.html" class="post-title-link">俄罗斯版本成龙</a></h2><div class="post-info">2007年1月24日</div><div class="post-content"></div><a href="/2007/01/e4-bf-84-e7-bd-97-e6-96-af-e7-89-88-e6-9c-ac-e6-88-90-e9-be-99.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2007/01/zero-install-injector.html" class="post-title-link">Zero Install Injector</a></h2><div class="post-info">2007年1月24日</div><div class="post-content"><p><a href="http://0install.net/" target="_blank" rel="external">Zero Install Injector </a>是一款很神奇的软件，他的目标是终结 Linux 下软件安装困难的现象！通过它你可以非常智能化、自动化的安装任何软件（包括各种打包格式、源代码），作者自己声称这将会替代其他的软件管理软件：YUM、APT等。而 Zero Install Injector 在运行的时候甚至不需要root权限，如果一台主机上有多位用户欲安装同一软件他也会很合理的将他们共享。</p>
+<p>专辑名称：The Heart Of Everything<br>曲目表：<br>01) The Howling<br>02) What Have You Done (feat. Keith Caputo)<br>03) Frozen<br>04) Our Solemn Hour<br>05) The Heart Of Everything<br>06) Hand Of Sorrow<br>07) The Cross<br>08) Final Destination<br>09) All I Need<br>10) The Truth Beneath The Rose<br>11) Forgiven</p>
+          <div class="read-more">
+            <a href="/2007/01/within-temptation-what-have-you-done.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/01/e6-8a-a2-e5-8a-ab.html">抢劫</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年1月25日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>今天到老姐处帮助安装Tor，以便可以通过某些不必要的交易网站的检查。在原来的小店面边上姐夫又租下了3个门面，打算开始卖手机了（之前只是专心卖手机配件），有趣的是他们居然还商量着买两个摄像头～为啥？</p>
+<p>  抢劫！<br>
+          <div class="read-more">
+            <a href="/2007/01/e6-8a-a2-e5-8a-ab.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/01/last-exit.html">Last Exit</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年1月25日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="http://folks.o-hand.com/iain/last-exit/" target="_blank" rel="external">Last Exit</a> 是一款专为Last.fm设计的播放器，其中包含了许多官方播放器所不包含的功能，作者用了很多图示来解说功能：</p>
+<blockquote>
+<ul>
+<li>Stream support</li>
+<li>Station searching</li>
+<li>Tagging</li>
+<li>Journalling</li>
+<li>Access to subscriber features</li>
+</ul>
+</blockquote>
+<p><img src="http://linuxblog.cn/blog/wp-content/images/last-exit.png" alt=""></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/01/e4-bf-84-e7-bd-97-e6-96-af-e7-89-88-e6-9c-ac-e6-88-90-e9-be-99.html">俄罗斯版本成龙</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年1月24日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>在网不易看到的视频，立刻惊呆！如果说他没有任何图象处理的话，其实比成龙更牛啊……当然片子肯定是一段一段接起来的，不可能是一口气……</p>
+<object width="400" height="350"><param name="movie" value="http://www.tudou.com/v/xAOujwSfOsE"><embed src="http://www.tudou.com/v/xAOujwSfOsE" type="application/x-shockwave-flash" width="400" height="350"></object>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2007/01/zero-install-injector.html">Zero Install Injector</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2007年1月24日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><a href="http://0install.net/" target="_blank" rel="external">Zero Install Injector </a>是一款很神奇的软件，他的目标是终结 Linux 下软件安装困难的现象！通过它你可以非常智能化、自动化的安装任何软件（包括各种打包格式、源代码），作者自己声称这将会替代其他的软件管理软件：YUM、APT等。而 Zero Install Injector 在运行的时候甚至不需要root权限，如果一台主机上有多位用户欲安装同一软件他也会很合理的将他们共享。</p>
 <p><a href="http://www.gnomefiles.org/download.php?soft_id=921&amp;where=http%3A%2F%2F0install.net%2Finjector.html" target="_blank" rel="external">下载</a></p>
-<p>我们现来看看大致的工作流程吧：<br></div><a href="/2007/01/zero-install-injector.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/32/" class="prev">PREV</a><a href="/page/34/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<p>我们现来看看大致的工作流程吧：<br>
+          <div class="read-more">
+            <a href="/2007/01/zero-install-injector.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/32/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/34/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

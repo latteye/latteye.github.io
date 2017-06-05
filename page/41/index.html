@@ -1,23 +1,705 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/linux-e4-b8-8b-e7-9a-84-e6-9c-8d-e5-8a-a1-e7-ae-a1-e7-90-86.html" class="post-title-link">Linux下的服务管理</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"><p>winnt操作系统的服务管理是比较强的，它内置有一个服务管理器，能够非常方便的管理操作系统内的服务。Linux也同样有管理服务的特有方式。<br>Linux的服务都是以脚本的方式来运行的，存在于 /etc/rc.d/init.d目录下所有的脚本就是我们的服务脚本，它具有两项作用，一项是能够在系统启动的时候自动启动那些脚本中所要求启动的程序，另外，我们还能够通过该脚本来对服务进行控制，比如启动，停止等。<br></div><a href="/2006/11/linux-e4-b8-8b-e7-9a-84-e6-9c-8d-e5-8a-a1-e7-ae-a1-e7-90-86.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/the-cardigans.html" class="post-title-link">The Cardigans</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"><p><img src="http://images.amazon.com/images/P/B00020HALU.01._SCLZZZZZZZ_.jpg" alt=""></p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/41/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/41/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/linux-e4-b8-8b-e7-9a-84-e6-9c-8d-e5-8a-a1-e7-ae-a1-e7-90-86.html">Linux下的服务管理</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>winnt操作系统的服务管理是比较强的，它内置有一个服务管理器，能够非常方便的管理操作系统内的服务。Linux也同样有管理服务的特有方式。<br>Linux的服务都是以脚本的方式来运行的，存在于 /etc/rc.d/init.d目录下所有的脚本就是我们的服务脚本，它具有两项作用，一项是能够在系统启动的时候自动启动那些脚本中所要求启动的程序，另外，我们还能够通过该脚本来对服务进行控制，比如启动，停止等。<br>
+          <div class="read-more">
+            <a href="/2006/11/linux-e4-b8-8b-e7-9a-84-e6-9c-8d-e5-8a-a1-e7-ae-a1-e7-90-86.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/the-cardigans.html">The Cardigans</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><img src="http://images.amazon.com/images/P/B00020HALU.01._SCLZZZZZZZ_.jpg" alt=""></p>
 <p>中文名称：Long gone before daylight<br>资源类型：APE<br>发行时间：2003年<br>专辑歌手：The Cardigans 羊毛衫<br>地区：瑞典<br>语言：英语<br>简介：</p>
 <p>专辑介绍：（转自亚马逊）</p>
-<p>距离上一张专辑6年的时间，The Cardigans带来了迄今为止情绪上最为黑暗的作品，可能也是歌词上最为内省、诚实和动人的作品。当初”Lovefool”中诱人的甜美不见了， Nina的声音中多了几分成熟、沙哑与沧桑的落寞感。听着这样的声音难免有些惆怅，不过”You’re the Storm”、”Please Sister”（其中大量使用了管弦乐）这样的作品中，却恰到好处的渲染出一种荡气回肠的气势。而”Couldn’t Care Less”中低沉的鼓声随着歌词’my heart can’t care any more, my heart don’t beat like before, but you couldn’t care less, could you’不断的敲打在人隐隐作痛的心上，”Feathers And Down”中如羽毛轻轻坠落般的旋律与歌声却道出了极简单又深邃的哲理。专辑中也有”A Good Horse”、”For What It’s Worth”、”Live and Learn”这样情绪上较为亮色的作品，虽然不是我最喜欢的，却更充分地展现了Nina声音的真正实力…没有炫技、因为诚实而更加的动人，以至于让人沉溺其中不能自拔(偶最喜欢的女声之一了)</p></div><a href="/2006/11/the-cardigans.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/good-charlotte.html" class="post-title-link">Good Charlotte</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"><p><img src="http://images.amazon.com/images/P/B0002X590Q.01._SCLZZZZZZZ_.jpg" alt=""></p>
+<p>距离上一张专辑6年的时间，The Cardigans带来了迄今为止情绪上最为黑暗的作品，可能也是歌词上最为内省、诚实和动人的作品。当初”Lovefool”中诱人的甜美不见了， Nina的声音中多了几分成熟、沙哑与沧桑的落寞感。听着这样的声音难免有些惆怅，不过”You’re the Storm”、”Please Sister”（其中大量使用了管弦乐）这样的作品中，却恰到好处的渲染出一种荡气回肠的气势。而”Couldn’t Care Less”中低沉的鼓声随着歌词’my heart can’t care any more, my heart don’t beat like before, but you couldn’t care less, could you’不断的敲打在人隐隐作痛的心上，”Feathers And Down”中如羽毛轻轻坠落般的旋律与歌声却道出了极简单又深邃的哲理。专辑中也有”A Good Horse”、”For What It’s Worth”、”Live and Learn”这样情绪上较为亮色的作品，虽然不是我最喜欢的，却更充分地展现了Nina声音的真正实力…没有炫技、因为诚实而更加的动人，以至于让人沉溺其中不能自拔(偶最喜欢的女声之一了)</p>
+          <div class="read-more">
+            <a href="/2006/11/the-cardigans.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/good-charlotte.html">Good Charlotte</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><img src="http://images.amazon.com/images/P/B0002X590Q.01._SCLZZZZZZZ_.jpg" alt=""></p>
 <p>朋克！朋克！上耳就是这么爽～～不知耐听否？Sum 41 之后好久没爽过了～</p>
-<p>专辑介绍：</p></div><a href="/2006/11/good-charlotte.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/vsftp-e8-af-a6-e7-bb-86-e8-ae-be-e7-bd-ae.html" class="post-title-link">VSFtp详细设置</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"><p>用vsftp建立个人ftp站点</p>
+<p>专辑介绍：</p>
+          <div class="read-more">
+            <a href="/2006/11/good-charlotte.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/vsftp-e8-af-a6-e7-bb-86-e8-ae-be-e7-bd-ae.html">VSFtp详细设置</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>用vsftp建立个人ftp站点</p>
 <p>首先是最基本的配置,请看我的/etc/vsftpd/vsftpd.conf</p>
 <p>###############################################</p>
 <p>#接受匿名用户<br>anonymous_enable=YES</p>
 <p>#匿名用户login时不询问口令<br>no_anon_password=YES</p>
-<p>#接受本地用户<br>local_enable=YES</p></div><a href="/2006/11/vsftp-e8-af-a6-e7-bb-86-e8-ae-be-e7-bd-ae.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/e8-bd-aclinux-e7-b3-bb-e7-bb-9f-e4-b8-ad-e7-bd-91-e7-bb-9c-e9-85-8d-e7-bd-ae-e8-af-a6-e8-a7-a3.html" class="post-title-link">[转]Linux系统中网络配置详解</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"><p>从linux诞生的那一天起,就注定了它的网络功能空前地强大.所以在linux系统中如何配置网络,使其高效,安全的工作就显得十分重要.下面我们就从网络设备的安装,网络服务的设置和网络安全性三个方面来介绍一下linux系统中网络的设置.</p></div><a href="/2006/11/e8-bd-aclinux-e7-b3-bb-e7-bb-9f-e4-b8-ad-e7-bd-91-e7-bb-9c-e9-85-8d-e7-bd-ae-e8-af-a6-e8-a7-a3.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/e7-bb-b4-e7-93-a6-e5-b0-94-e7-ac-ac-vivaldi-e3-80-8a-e5-9b-9b-e5-ad-a3-e3-80-8bthe-four-seasons1970-e5-b9-b4argo-e9-87-91-e7-a2-9f-e7-89-88.html" class="post-title-link">维瓦尔第 Vivaldi -《四季》(The Four Seasons)1970年Argo金碟版</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"><p><img src="http://images.amazon.com/images/P/B000004CVL.01._SCLZZZZZZZ_.jpg" alt=""></p>
+<p>#接受本地用户<br>local_enable=YES</p>
+          <div class="read-more">
+            <a href="/2006/11/vsftp-e8-af-a6-e7-bb-86-e8-ae-be-e7-bd-ae.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/e8-bd-aclinux-e7-b3-bb-e7-bb-9f-e4-b8-ad-e7-bd-91-e7-bb-9c-e9-85-8d-e7-bd-ae-e8-af-a6-e8-a7-a3.html">[转]Linux系统中网络配置详解</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>从linux诞生的那一天起,就注定了它的网络功能空前地强大.所以在linux系统中如何配置网络,使其高效,安全的工作就显得十分重要.下面我们就从网络设备的安装,网络服务的设置和网络安全性三个方面来介绍一下linux系统中网络的设置.</p>
+          <div class="read-more">
+            <a href="/2006/11/e8-bd-aclinux-e7-b3-bb-e7-bb-9f-e4-b8-ad-e7-bd-91-e7-bb-9c-e9-85-8d-e7-bd-ae-e8-af-a6-e8-a7-a3.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/e7-bb-b4-e7-93-a6-e5-b0-94-e7-ac-ac-vivaldi-e3-80-8a-e5-9b-9b-e5-ad-a3-e3-80-8bthe-four-seasons1970-e5-b9-b4argo-e9-87-91-e7-a2-9f-e7-89-88.html">维瓦尔第 Vivaldi -《四季》(The Four Seasons)1970年Argo金碟版</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><img src="http://images.amazon.com/images/P/B000004CVL.01._SCLZZZZZZZ_.jpg" alt=""></p>
 <p>小提琴：阿兰·罗夫黛<br>羽管键琴`管风琴：西蒙·普雷斯顿<br>指挥：马里纳<br>乐团：圣马丁室内乐团</p>
 <p><strong>专辑简介：</strong></p>
 <p>据说该唱片是维尔瓦第《四季》全球销量第一的版本，也是DECCA公司旗下ARGO最佳录音之一。小提琴演奏者阿兰·罗夫黛甜美的音调与准确精湛的技巧，使得这张唱片有上等礼服般的含蓄优雅，而指挥马里纳与圣马丁学院乐团的密切配合，更是典型的英国风范。这张唱片是1970年的录音，对比明朗，平衡感极佳。</p>
-<p>维尔瓦第在《四季》里，用弦乐创造出了丰富的效果与娱乐特质，令人叹赏不已。曲中的意象——春天的小鸟<code>夏天的雷雨</code>秋天的猎人和冬天的冰雪，鲜明生动。<br></div><a href="/2006/11/e7-bb-b4-e7-93-a6-e5-b0-94-e7-ac-ac-vivaldi-e3-80-8a-e5-9b-9b-e5-ad-a3-e3-80-8bthe-four-seasons1970-e5-b9-b4argo-e9-87-91-e7-a2-9f-e7-89-88.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/emilie-simon.html" class="post-title-link">Emilie Simon</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"><p><img src="http://images.amazon.com/images/P/B00008DCD2.01._SCLZZZZZZZ_.jpg" alt=""></p>
-<p>Emilie Simon，来自法国的才女……在我觉得可以打四星半的这张专辑文案上写着: 巧妙融合法语和英语美感的飘浮式欧风电音。<br>听Emilie唱法文歌，有一种在听精灵语言感觉，可能是因为我完全听不懂法文，也可能是因为她的声音太有灵性。而听 Emilie唱英文歌，有浓浓的北欧味，像疯狂但是年轻一点的Bjork再加上有着沉稳歌声让人安定心灵的羊毛衫主唱Nina。</p></div><a href="/2006/11/emilie-simon.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/u2-e3-80-8athe-best-of-1980-1990-e3-80-8b.html" class="post-title-link">U2 -《The Best Of 1980-1990》</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"><p><img src="http://images-eu.amazon.com/images/P/B00000DFVF.02.LZZZZZZZ.jpg" alt=""></p>
-<p>毫无疑问，U2是80年代英国最受欢迎的摇滚乐团，起源于爱尔兰的U2组合从1977年就开始了他们的音乐生溽，当时乐团主要成员还都在都柏林上中学。其中，Bono (即Paul David Hewson，1960年5月10日出生于都柏林，乐手), The Edge (即David Evans，1961年出生于埃塞克斯，吉他手), Adam Clayton (1960年3月13日出生于英格兰牛津郡，男低音)以及Larry Mullen Jr(即Laurence Mullen，1961年是10月31日出生于都柏林，鼓手)最初一段时间曾演奏过滚石及海难男孩乐队的精典曲目，并为乐队起名为Feedback。后来他们还将名字改为Hype，但最终还是在1978年确定为U2。</p></div><a href="/2006/11/u2-e3-80-8athe-best-of-1980-1990-e3-80-8b.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/e7-bb-b4-e7-93-a6-e5-b0-94-e7-ac-ac-vivaldi-e3-80-8a-e8-8d-a3-e8-80-80-e7-bb-8f-e3-80-8bgloria.html" class="post-title-link">维瓦尔第 Vivaldi -《荣耀经》(Gloria)</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"><p><img src="http://images.amazon.com/images/P/B000002SRS.01._SCLZZZZZZZ_.gif" alt=""></p>
+<p>维尔瓦第在《四季》里，用弦乐创造出了丰富的效果与娱乐特质，令人叹赏不已。曲中的意象——春天的小鸟<code>夏天的雷雨</code>秋天的猎人和冬天的冰雪，鲜明生动。<br>
+          <div class="read-more">
+            <a href="/2006/11/e7-bb-b4-e7-93-a6-e5-b0-94-e7-ac-ac-vivaldi-e3-80-8a-e5-9b-9b-e5-ad-a3-e3-80-8bthe-four-seasons1970-e5-b9-b4argo-e9-87-91-e7-a2-9f-e7-89-88.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/emilie-simon.html">Emilie Simon</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><img src="http://images.amazon.com/images/P/B00008DCD2.01._SCLZZZZZZZ_.jpg" alt=""></p>
+<p>Emilie Simon，来自法国的才女……在我觉得可以打四星半的这张专辑文案上写着: 巧妙融合法语和英语美感的飘浮式欧风电音。<br>听Emilie唱法文歌，有一种在听精灵语言感觉，可能是因为我完全听不懂法文，也可能是因为她的声音太有灵性。而听 Emilie唱英文歌，有浓浓的北欧味，像疯狂但是年轻一点的Bjork再加上有着沉稳歌声让人安定心灵的羊毛衫主唱Nina。</p>
+          <div class="read-more">
+            <a href="/2006/11/emilie-simon.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/u2-e3-80-8athe-best-of-1980-1990-e3-80-8b.html">U2 -《The Best Of 1980-1990》</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><img src="http://images-eu.amazon.com/images/P/B00000DFVF.02.LZZZZZZZ.jpg" alt=""></p>
+<p>毫无疑问，U2是80年代英国最受欢迎的摇滚乐团，起源于爱尔兰的U2组合从1977年就开始了他们的音乐生溽，当时乐团主要成员还都在都柏林上中学。其中，Bono (即Paul David Hewson，1960年5月10日出生于都柏林，乐手), The Edge (即David Evans，1961年出生于埃塞克斯，吉他手), Adam Clayton (1960年3月13日出生于英格兰牛津郡，男低音)以及Larry Mullen Jr(即Laurence Mullen，1961年是10月31日出生于都柏林，鼓手)最初一段时间曾演奏过滚石及海难男孩乐队的精典曲目，并为乐队起名为Feedback。后来他们还将名字改为Hype，但最终还是在1978年确定为U2。</p>
+          <div class="read-more">
+            <a href="/2006/11/u2-e3-80-8athe-best-of-1980-1990-e3-80-8b.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/e7-bb-b4-e7-93-a6-e5-b0-94-e7-ac-ac-vivaldi-e3-80-8a-e8-8d-a3-e8-80-80-e7-bb-8f-e3-80-8bgloria.html">维瓦尔第 Vivaldi -《荣耀经》(Gloria)</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><img src="http://images.amazon.com/images/P/B000002SRS.01._SCLZZZZZZZ_.gif" alt=""></p>
 <p>专辑介绍：</p>
 <p>Vivaldi的声乐作品到廿世纪才广为人知,其教会音乐也是在1920年代后半才被发现约六十首,Gloria正是其中的一首曲子,1939年在Siena举行的Vivaldi Festival中,Gloria 与 Stabat Mater, Credo 等乐曲一起被复苏首演,引起众人瞩目,许多音乐学学者认为有些曲子甚至可以媲美Bach的宗教曲.而Vivaldi 共有两首 D大调 Gloria 传世, 以 RV.589 较有名.[separator]</p>
-<p>这部Gloria,开头的弦乐齐奏便现出标准的维瓦尔第式大跳，而后面接踵而来合唱和女声二重唱, “Gloria, Gloria”, 倾吐出婉转的气息，充溢着洋洋洒洒的温柔悲悯。当然，这类作品大多也是这种气质，可是其中的神来之笔却是承天意所禀，那种“不朽”简直有宿命的意味。其中的女高音咏叹调，歌词甚简：“O Lord God, heavenly King, God the Father almighty.”那旋律自然难以描绘,象是指向月亮的修长手指，被月光照得通体透明。然后气氛接着被合唱点燃，依然是恳求怜悯和宽恕的神态，然而那歌声轻盈自若，象是同那渴望一同飞升。据说巴赫的B小调弥撒即受这部作品影响。(本专辑除荣耀经外还收入Vivaldi数部宗教音乐作品)<br></div><a href="/2006/11/e7-bb-b4-e7-93-a6-e5-b0-94-e7-ac-ac-vivaldi-e3-80-8a-e8-8d-a3-e8-80-80-e7-bb-8f-e3-80-8bgloria.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2006/11/e8-bd-ac-e5-ad-99-e6-82-9f-e7-a9-ba-e7-9a-84-e5-b8-88-e7-88-b6-e6-98-af-e8-b0-81.html" class="post-title-link">[转]孙悟空的师父是谁</a></h2><div class="post-info">2006年11月23日</div><div class="post-content"><p><strong>猜测之一</strong><br>孙悟空是只石猴，很多年后有人说他是这本书的真正主角，其实这是不恰当的，他只是“第一主角”。因为西游的队伍里每个人都是主角，包括龙马。</p>
+<p>这部Gloria,开头的弦乐齐奏便现出标准的维瓦尔第式大跳，而后面接踵而来合唱和女声二重唱, “Gloria, Gloria”, 倾吐出婉转的气息，充溢着洋洋洒洒的温柔悲悯。当然，这类作品大多也是这种气质，可是其中的神来之笔却是承天意所禀，那种“不朽”简直有宿命的意味。其中的女高音咏叹调，歌词甚简：“O Lord God, heavenly King, God the Father almighty.”那旋律自然难以描绘,象是指向月亮的修长手指，被月光照得通体透明。然后气氛接着被合唱点燃，依然是恳求怜悯和宽恕的神态，然而那歌声轻盈自若，象是同那渴望一同飞升。据说巴赫的B小调弥撒即受这部作品影响。(本专辑除荣耀经外还收入Vivaldi数部宗教音乐作品)<br>
+          <div class="read-more">
+            <a href="/2006/11/e7-bb-b4-e7-93-a6-e5-b0-94-e7-ac-ac-vivaldi-e3-80-8a-e8-8d-a3-e8-80-80-e7-bb-8f-e3-80-8bgloria.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2006/11/e8-bd-ac-e5-ad-99-e6-82-9f-e7-a9-ba-e7-9a-84-e5-b8-88-e7-88-b6-e6-98-af-e8-b0-81.html">[转]孙悟空的师父是谁</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2006年11月23日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p><strong>猜测之一</strong><br>孙悟空是只石猴，很多年后有人说他是这本书的真正主角，其实这是不恰当的，他只是“第一主角”。因为西游的队伍里每个人都是主角，包括龙马。</p>
 <p>　　孙悟空是天产石猴，生于花果山水帘洞，得育明师。修成大道。降龙伏虎强销死籍。一根如意金箍棒，横扫天上地下，高傲刚强，生平从不服人。[separator]<br>　　他受业的师父，是一个叫菩提老祖的人。<br>　　我在很久以前写过东西论述过天地五仙的级别和差别。在那里边我曾经有过菩提老祖不如镇元大仙的论调。因为菩提老祖曾经露出口风可杀悟空.他既然居住在地上，又能教出孙悟空这等徒弟，理所当然属于地仙。而镇元是地仙之祖。所以镇元强于菩提更强于悟空这个推理我一直深信不疑。直到不久以前的一个晚上，那天晚上我无聊的翻着西游，忽然间，我想起一个问题：菩提到底是谁？</p>
 <p>　　跟我以前臆断的相反，菩提，也许根本不是地仙！</p>
-<p>　　因为这中间的疑点太多了，而我以前竟然一直没有注意到。</p></div><a href="/2006/11/e8-bd-ac-e5-ad-99-e6-82-9f-e7-a9-ba-e7-9a-84-e5-b8-88-e7-88-b6-e6-98-af-e8-b0-81.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/40/" class="prev">PREV</a><a href="/page/42/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<p>　　因为这中间的疑点太多了，而我以前竟然一直没有注意到。</p>
+          <div class="read-more">
+            <a href="/2006/11/e8-bd-ac-e5-ad-99-e6-82-9f-e7-a9-ba-e7-9a-84-e5-b8-88-e7-88-b6-e6-98-af-e8-b0-81.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/40/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/42/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

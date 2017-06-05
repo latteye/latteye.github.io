@@ -1,6 +1,371 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 自动下载 shooter.cn 字幕脚本 · Water is</title><meta name="description" content="自动下载 shooter.cn 字幕脚本 - latteye"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">自动下载 shooter.cn 字幕脚本</h1><div class="post-info">2012年10月6日</div><div class="post-content"><p>此脚本原作者是 HTPC 原动力论坛的 rabbitgg，<a href="http://bbs.htpc1.com/viewthread.php?tid=75393" target="_blank" rel="external">原帖地址</a>。<br>如果你有兴趣，可以看看作者在原帖的算法描述。<br>可能长期以来没有人有这种需求，而我只是需要一个能根据电影文件下载字幕的命令行工具。所以把部分代码从源文件剥离了出来。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="自动下载 shooter.cn 字幕脚本"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/2012/10/自动下载 shooter.cn 字幕脚本.html"/>
+
+
+<meta name="description" content="此脚本原作者是 HTPC 原动力论坛的 rabbitgg，原帖地址。如果你有兴趣，可以看看作者在原帖的算法描述。可能长期以来没有人有这种需求，而我只是需要一个能根据电影文件下载字幕的命令行工具。所以把部分代码从源文件剥离了出来。 在我的 HomeServer 上，通过 flexget 订阅 RSS 自动下载 torrent（主要是不同的 TVShow），rtorrent 一直监控目录，自动开始下载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动下载 shooter.cn 字幕脚本">
+<meta property="og:url" content="http://latteye.me/2012/10/自动下载 shooter.cn 字幕脚本.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="此脚本原作者是 HTPC 原动力论坛的 rabbitgg，原帖地址。如果你有兴趣，可以看看作者在原帖的算法描述。可能长期以来没有人有这种需求，而我只是需要一个能根据电影文件下载字幕的命令行工具。所以把部分代码从源文件剥离了出来。 在我的 HomeServer 上，通过 flexget 订阅 RSS 自动下载 torrent（主要是不同的 TVShow），rtorrent 一直监控目录，自动开始下载">
+<meta property="og:updated_time" content="2015-05-02T14:14:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自动下载 shooter.cn 字幕脚本">
+<meta name="twitter:description" content="此脚本原作者是 HTPC 原动力论坛的 rabbitgg，原帖地址。如果你有兴趣，可以看看作者在原帖的算法描述。可能长期以来没有人有这种需求，而我只是需要一个能根据电影文件下载字幕的命令行工具。所以把部分代码从源文件剥离了出来。 在我的 HomeServer 上，通过 flexget 订阅 RSS 自动下载 torrent（主要是不同的 TVShow），rtorrent 一直监控目录，自动开始下载">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> 自动下载 shooter.cn 字幕脚本 · Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          自动下载 shooter.cn 字幕脚本
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2012年10月6日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        <p>此脚本原作者是 HTPC 原动力论坛的 rabbitgg，<a href="http://bbs.htpc1.com/viewthread.php?tid=75393" target="_blank" rel="external">原帖地址</a>。<br>如果你有兴趣，可以看看作者在原帖的算法描述。<br>可能长期以来没有人有这种需求，而我只是需要一个能根据电影文件下载字幕的命令行工具。所以把部分代码从源文件剥离了出来。</p>
 <p>在我的 HomeServer 上，通过 flexget 订阅 RSS 自动下载 torrent（主要是不同的 TVShow），rtorrent 一直监控目录，自动开始下载。当下载结束，rtorrent 调用一个整理脚本，将 TVShow 与 Movie 分开，自动创建 TVShow 名称目录，自动创建 Movie 分类目录（我是按照首字母分类的）。<br>于是最后一步就是自动下载电影、连续剧字幕了。这个脚本直接跟连续剧文件路径即可，下载的字幕也会和电影文件在同一目录下。</p>
 <p>已知的问题是，很小的几率会出现下载到的 srt 文件显示“您的 SPlayer 版本过久”，暂时也没搞懂为什么会出现这个情况。</p>
 <a id="more"></a>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding:UTF-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys,os,urllib2,md5,struct,StringIO,gzip</div><div class="line">filepath=os.path.realpath(sys.argv[<span class="number">1</span>])</div><div class="line">pathName=os.path.dirname(filepath)</div><div class="line">hasPath=<span class="keyword">True</span></div><div class="line"></div><div class="line"><span class="keyword">try</span>:</div><div class="line">    mvfile=open(filepath,<span class="string">"rb"</span>)</div><div class="line"><span class="keyword">except</span> IOError:</div><div class="line">    <span class="keyword">print</span> <span class="string">"File could not be opened"</span></div><div class="line">    sys.exit(<span class="number">1</span>)</div><div class="line"></div><div class="line">BlockSize = <span class="number">4096</span></div><div class="line">NumOfSegments = <span class="number">4</span></div><div class="line"></div><div class="line"><span class="comment">#fileLength = statinfo.st_size</span></div><div class="line">fileLength = os.path.getsize(filepath)</div><div class="line"><span class="comment">#print fileLength</span></div><div class="line">offset = []</div><div class="line">offset.append(BlockSize)</div><div class="line">offset.append(fileLength / <span class="number">3</span> * <span class="number">2</span>)</div><div class="line">offset.append(fileLength / <span class="number">3</span>)</div><div class="line">offset.append(fileLength - <span class="number">8192</span>)</div><div class="line"></div><div class="line">buff = []</div><div class="line">strHash = <span class="string">''</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,NumOfSegments):</div><div class="line">  mvfile.seek(offset[i])</div><div class="line">  buff = mvfile.read(BlockSize)</div><div class="line">  <span class="keyword">if</span> (len(strHash) &gt; <span class="number">0</span>):</div><div class="line">     strHash += <span class="string">";"</span></div><div class="line">  m = md5.new()</div><div class="line">  m.update(buff)</div><div class="line">  strHash += m.hexdigest()</div><div class="line">  <span class="comment">#strHash += hashlib.new("md5", buff).hexdigest()</span></div><div class="line"></div><div class="line"><span class="comment">#print strHash</span></div><div class="line"></div><div class="line"><span class="comment">#print offset</span></div><div class="line">mvfile.close()</div><div class="line"></div><div class="line">Boundary=<span class="string">'----------------------------767a02e50d82'</span></div><div class="line">url = <span class="string">'http://svplayer.shooter.cn/api/subapi.php'</span></div><div class="line">user_agent = <span class="string">'SPlayer Build 580'</span></div><div class="line">ContentType = <span class="string">"multipart/form-data; boundary=----------------------------767a02e50d82"</span></div><div class="line">dataValue = <span class="string">'Content-Disposition: form-data; name='</span></div><div class="line"></div><div class="line">headers = &#123; <span class="string">'User-Agent'</span> : user_agent,</div><div class="line">            <span class="string">'Content-Type'</span> : ContentType,</div><div class="line">            <span class="string">'Connection'</span> : <span class="string">'Keep-Alive'</span>,</div><div class="line">            <span class="string">'Expect'</span> : <span class="string">'100-continue'</span>&#125;</div><div class="line"></div><div class="line">realData = <span class="string">'--'</span> + Boundary + <span class="string">'\r\n'</span> + dataValue + <span class="string">"\"pathinfo\"\r\n\r\n"</span> + filepath + <span class="string">'\r\n'</span></div><div class="line">realData += <span class="string">'--'</span> + Boundary + <span class="string">'\r\n'</span> + dataValue + <span class="string">"\"filehash\"\r\n\r\n"</span> + strHash + <span class="string">'\r\n'</span></div><div class="line">realData += <span class="string">'--'</span> + Boundary + <span class="string">'--\r\n'</span></div><div class="line"></div><div class="line">req = urllib2.Request(url, realData, headers)</div><div class="line">response = urllib2.urlopen(req)</div><div class="line">the_page = response.read()</div><div class="line"></div><div class="line"><span class="keyword">if</span>(len(the_page) &gt; <span class="number">2</span>):</div><div class="line">    <span class="comment"># sub number</span></div><div class="line">    NumOfSub = ord(the_page[:<span class="number">1</span>])</div><div class="line">    <span class="comment">#print NumOfSub</span></div><div class="line">    fileLen = <span class="number">0</span></div><div class="line">    nowPos = <span class="number">1</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, NumOfSub):</div><div class="line">        <span class="comment"># package length</span></div><div class="line">        packLen = struct.unpack(<span class="string">'!L'</span>,the_page[nowPos:nowPos+<span class="number">4</span>])</div><div class="line">        nowPos += <span class="number">4</span></div><div class="line">        <span class="comment"># discrbie length</span></div><div class="line">        desLen = struct.unpack(<span class="string">'!L'</span>,the_page[nowPos:nowPos+<span class="number">4</span>])</div><div class="line">        nowPos += desLen[<span class="number">0</span>] + <span class="number">4</span></div><div class="line">        subPack = ord(the_page[nowPos+<span class="number">4</span>:nowPos+<span class="number">5</span>])</div><div class="line">        nowPos += <span class="number">9</span></div><div class="line">        <span class="comment"># ext name length</span></div><div class="line">        <span class="comment">#print repr(the_page[nowPos:nowPos+4])</span></div><div class="line">        extLen = struct.unpack(<span class="string">'!L'</span>,the_page[nowPos:nowPos+<span class="number">4</span>])</div><div class="line">        nowPos += <span class="number">4</span></div><div class="line">        <span class="comment"># file ext name</span></div><div class="line">        fileExt = the_page[nowPos:nowPos+extLen[<span class="number">0</span>]]</div><div class="line">        nowPos += extLen[<span class="number">0</span>]</div><div class="line">        <span class="comment">#print fileExt</span></div><div class="line">        fileLen = struct.unpack(<span class="string">'!L'</span>,the_page[nowPos:nowPos+<span class="number">4</span>])</div><div class="line">        nowPos += <span class="number">4</span></div><div class="line">        <span class="comment">#print "描述长度是：%d,扩展名长度：%d,扩展名：%s,文件长度：%d" % (desLen[0],extLen[0],fileExt,fileLen[0])</span></div><div class="line"></div><div class="line">        fileName = filepath[:<span class="number">-4</span>] + <span class="string">'.chs'</span> + str(i) +<span class="string">'.'</span> + fileExt</div><div class="line">        <span class="comment">#print fileName</span></div><div class="line">        org_file = the_page[nowPos:nowPos+fileLen[<span class="number">0</span>]]</div><div class="line">        <span class="keyword">if</span>(hasPath == <span class="string">'True'</span>):</div><div class="line">           zip_file = open(os.path.join(pathName,os.path.basename(fileName)),<span class="string">'wb'</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">           zip_file = open(fileName,<span class="string">'wb'</span>)</div><div class="line"></div><div class="line">        <span class="comment">#处理压缩文件</span></div><div class="line">        <span class="keyword">if</span> ((ord(org_file[<span class="number">0</span>]) == <span class="number">31</span>) <span class="keyword">and</span> (ord(org_file[<span class="number">1</span>]) == <span class="number">139</span>) <span class="keyword">and</span> (ord(org_file[<span class="number">2</span>]) == <span class="number">8</span>)) :</div><div class="line">            compressedstream = StringIO.StringIO(org_file)</div><div class="line">            f = gzip.GzipFile(fileobj=compressedstream)      </div><div class="line">            data = f.read()</div><div class="line">            <span class="comment">#是UTF-16编码</span></div><div class="line">            <span class="keyword">if</span>((ord(data[<span class="number">0</span>]) == <span class="number">255</span>) <span class="keyword">and</span> (ord(data[<span class="number">1</span>]) == <span class="number">254</span>)):</div><div class="line">                temp_data = unicode(data[<span class="number">2</span>:],<span class="string">'utf-16'</span>)</div><div class="line">                zip_file.write(temp_data.encode(<span class="string">'gbk'</span>))</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                zip_file.write(data)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            data = the_page[nowPos:nowPos+fileLen[<span class="number">0</span>]]</div><div class="line">            <span class="comment">#是UTF-16编码</span></div><div class="line">            <span class="keyword">if</span>((ord(data[<span class="number">0</span>]) == <span class="number">255</span>) <span class="keyword">and</span> (ord(data[<span class="number">1</span>]) == <span class="number">254</span>)):</div><div class="line">                temp_data = unicode(data[<span class="number">2</span>:],<span class="string">'utf-16'</span>)</div><div class="line">                zip_file.write(temp_data.encode(<span class="string">'gbk'</span>))</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                zip_file.write(data)</div><div class="line">            <span class="comment">#zip_file.write(the_page[nowPos:nowPos+fileLen[0]])</span></div><div class="line">        zip_file.close()</div><div class="line">        nowPos += fileLen[<span class="number">0</span>]</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(subPack &gt; <span class="number">1</span>):</div><div class="line">            extLen = struct.unpack(<span class="string">'!L'</span>,the_page[nowPos+<span class="number">4</span>:nowPos+<span class="number">8</span>])</div><div class="line">            nowPos += <span class="number">8</span></div><div class="line">           <span class="comment"># 文件扩展名</span></div><div class="line">            fileExt = the_page[nowPos:nowPos+extLen[<span class="number">0</span>]]</div><div class="line">            nowPos += extLen[<span class="number">0</span>]</div><div class="line">            <span class="comment">#print fileExt</span></div><div class="line">            fileLen = struct.unpack(<span class="string">'!L'</span>,the_page[nowPos:nowPos+<span class="number">4</span>])</div><div class="line">            nowPos += <span class="number">4</span></div><div class="line">            fileName = filepath[:<span class="number">-4</span>] + <span class="string">'.chs'</span> + str(i) +<span class="string">'.'</span> + fileExt</div><div class="line">            <span class="comment">#print fileName</span></div><div class="line">            org_file = the_page[nowPos:nowPos+fileLen[<span class="number">0</span>]]</div><div class="line">            <span class="keyword">if</span>(hasPath == <span class="string">'True'</span>):</div><div class="line">               zip_file = open(os.path.join(pathName,os.path.basename(fileName)),<span class="string">'wb'</span>)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">               zip_file = open(fileName,<span class="string">'wb'</span>)</div><div class="line"></div><div class="line">            <span class="comment">#处理压缩文件</span></div><div class="line">            <span class="keyword">if</span> ((ord(org_file[<span class="number">0</span>]) == <span class="number">31</span>) <span class="keyword">and</span> (ord(org_file[<span class="number">1</span>]) == <span class="number">139</span>) <span class="keyword">and</span> (ord(org_file[<span class="number">2</span>]) == <span class="number">8</span>)) :</div><div class="line">                compressedstream = StringIO.StringIO(org_file)</div><div class="line">                f = gzip.GzipFile(fileobj=compressedstream)      </div><div class="line">                data = f.read()</div><div class="line">                <span class="comment">#是UTF-16编码</span></div><div class="line">                <span class="keyword">if</span>((ord(data[<span class="number">0</span>]) == <span class="number">255</span>) <span class="keyword">and</span> (ord(data[<span class="number">1</span>]) == <span class="number">254</span>)):</div><div class="line">                    temp_data = unicode(data[<span class="number">2</span>:],<span class="string">'utf-16'</span>)</div><div class="line">                    zip_file.write(temp_data.encode(<span class="string">'gbk'</span>))</div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    zip_file.write(data)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                data = the_page[nowPos:nowPos+fileLen[<span class="number">0</span>]]</div><div class="line">                <span class="comment">#是UTF-16编码</span></div><div class="line">                <span class="keyword">if</span>((ord(data[<span class="number">0</span>]) == <span class="number">255</span>) <span class="keyword">and</span> (ord(data[<span class="number">1</span>]) == <span class="number">254</span>)):</div><div class="line">                    temp_data = unicode(data[<span class="number">2</span>:],<span class="string">'utf-16'</span>)</div><div class="line">                    zip_file.write(temp_data.encode(<span class="string">'gbk'</span>))</div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    zip_file.write(data)</div><div class="line">                <span class="comment">#zip_file.write(the_page[nowPos:nowPos+fileLen[0]])</span></div><div class="line">            zip_file.close()</div><div class="line">            nowPos += fileLen[<span class="number">0</span>]</div></pre></td></tr></table></figure>
-</div></article></div></main><footer><div class="paginator"><a href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html" class="prev">PREV</a><a href="/2012/09/one-week-mobile-analytics-3.html" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>作者: </span>
+      <span>latteye</span>
+    </p>
+    <p class="copyright-item">
+      <span>来源: </span>
+      <a href="http://latteye.me">http://latteye.me</a>
+    </p>
+    <p class="copyright-item">
+      <span>链接: </span>
+      <a href="http://latteye.me/2012/10/自动下载 shooter.cn 字幕脚本.html">http://latteye.me/2012/10/自动下载 shooter.cn 字幕脚本.html</a>
+    </p>
+
+    <p class="copyright-item lincese">
+      
+      本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+    </p>
+  </div>
+
+
+
+      
+      
+  <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code">
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/wechat.png" title="wechat">
+        </label>
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/alipay.png" title="alipay">
+        </label>
+      
+    </div>
+  </div>
+
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2013/06/e4-b8-8a-e6-b5-b7-e6-a4-8d-e7-89-a9-e5-9b-ad-e8-8a-b1-e5-8d-89-e4-b8-80-e7-bb-84.html">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">上海植物园花卉一组</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2012/09/one-week-mobile-analytics-3.html">
+        <span class="next-text nav-default">一周移动产品分析 - (三)</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "7c27380789354d14af755b0b00464371",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

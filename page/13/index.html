@@ -1,4 +1,429 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Water is</title><meta name="description" content="latteye blog"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/09/qmail-toaster-defaulthost.html" class="post-title-link">Qmail Toaster Defaulthost</a></h2><div class="post-info">2008年9月19日</div><div class="post-content"></div><a href="/2008/09/qmail-toaster-defaulthost.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/09/qmail-toaster-defaultdomain-and-plusdomain.html" class="post-title-link">Qmail-Toaster defaultdomain and plusdomain</a></h2><div class="post-info">2008年9月17日</div><div class="post-content"><p>把 defaultdomain 和 plusdomain 放在一起叙述，只因为他们有那么一点点联系……</p></div><a href="/2008/09/qmail-toaster-defaultdomain-and-plusdomain.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/09/qmail-toaster-logsize.html" class="post-title-link">QMail-Toaster Logsize</a></h2><div class="post-info">2008年9月16日</div><div class="post-content"></div><a href="/2008/09/qmail-toaster-logsize.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/09/qmail-toster-logcount.html" class="post-title-link">Qmail-Toaster Logcount</a></h2><div class="post-info">2008年9月16日</div><div class="post-content"></div><a href="/2008/09/qmail-toster-logcount.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/09/qmail-toaster-domain.html" class="post-title-link">QMail-Toaster 域名管理</a></h2><div class="post-info">2008年9月15日</div><div class="post-content"></div><a href="/2008/09/qmail-toaster-domain.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/09/iptables-dnat-in-same-netmask.html" class="post-title-link">iptables 同网段端口转发问题</a></h2><div class="post-info">2008年9月9日</div><div class="post-content"><p>昨天遇到了 iptables 同网段端口转发的问题，记录一下。<br></div><a href="/2008/09/iptables-dnat-in-same-netmask.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/09/learning-perl-6.html" class="post-title-link">Perl 语言入门 第六章</a></h2><div class="post-info">2008年9月1日</div><div class="post-content"><p>6.1</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="latteye blog"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/page/13/"/>
+
+
+<meta name="description" content="latteye blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water is">
+<meta property="og:url" content="http://latteye.me/page/13/index.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="latteye blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Water is">
+<meta name="twitter:description" content="latteye blog">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/09/qmail-toaster-defaulthost.html">Qmail Toaster Defaulthost</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年9月19日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>defaulthost</p>
+<p>用来定义默认主机名。qmail-inject 会将任何不包含主机名的地址后添加 defaulhost。他的默认值为 me。<br>defaulthost 和你的机器主机名是不同的。</p>
+<p>当 <strong>QMAILDEFAULTHOST</strong> 变量存在时，将忽略 defaulthost 文件中的设置。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/09/qmail-toaster-defaultdomain-and-plusdomain.html">Qmail-Toaster defaultdomain and plusdomain</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年9月17日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>把 defaultdomain 和 plusdomain 放在一起叙述，只因为他们有那么一点点联系……</p>
+          <div class="read-more">
+            <a href="/2008/09/qmail-toaster-defaultdomain-and-plusdomain.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/09/qmail-toaster-logsize.html">QMail-Toaster Logsize</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年9月16日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>logsize 同样为 multilog 的一个参数。通过 -s数字来定义。在 Qmail Toaster 系统中被 /var/qmail/supervise/<module>/log/run 脚本调用。</module></p>
+<p>Qmail-Toaster 默认设置其为 1000000（等同1M）</p>
+<p>-s数字 设置了日志文件的最大大小。multilog 会判断当前日志文件是否已经达到最大设置。(在距离最大数值只有 2000 字节时，multilog 也会尝试将其结束。（不知道翻译的对不对）multilog will also decide that current is big enough if it sees a newline within 2000 bytes of the maximum file size; it tries to finish log files at line boundaries.) 大小设置必须在 4096 和 16777215之间。其默认值为 99999.</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/09/qmail-toster-logcount.html">Qmail-Toaster Logcount</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年9月16日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>logcount 是 multilog 命令中的一个参数，通过 -n数字 来指定。在 Qmail-Toaster 系统中，他在 /var/qmail/supervise/<module>/log/run 脚本中被调用。而此脚本调用 /var/qmail/control/logcount 中的数字。</module></p>
+<p>Qmail-Toaster 中默认的数值为 100.</p>
+<p>此数值控制log文件数量以及后期动作。在将当前日志文件移动后，multilog 检查旧的日志文件。如果日志文件数量大于预设值，则通过时间标签来删除最老的日志。logcount 最小值为2，默认值为 10.</p>
+<blockquote>
+<p>latteye：我很奇怪为啥会用这样一个工具。在我看来 logrotate 已经足够了。而且系统都是自带的。</p>
+<p>增加维护节点，会对后期维护留下隐患。</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/09/qmail-toaster-domain.html">QMail-Toaster 域名管理</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年9月15日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>不要使用网页配置页面来添加域名。这种方式以及过于陈旧并且可能导致不可预期的问题。我们用命令行来添加域名：</p>
+<p><code>/home/vpopmail/bin/vadddomain -q 15000000 testdomain.com newdomain</code></p>
+<p>此命令将创建名为 “testdomain.com” 的邮件域。并且 postmaster 将使用15M的磁盘配额，你必须用比特定义 postmaster 的配额。命令中定义 postmaster 的密码为“newdomain”。<br>第一步完成了邮件域的基本结构，接着来配置它：</p>
+<p><code>/home/vpopmail/bin/vmoddomlimits -P 100 -A 100 -F 100 -R 100 -L 100 -q 15000000 testdomain.com</code></p>
+<p>这将对此邮件域进行一定的限制。可以根据需求来进行配置。-P 参数设置此域最多可以有 100 个POP 帐户。-A参数允许此域有100个 aliaes。-F参数允许此域有 100 个 forwoard。-R 参数允许此域有 100个 autoresponders （自动回复）。-F 参数设置邮件列表（mailing lists）数量。最后的 -q 参数设置每个用户邮箱的磁盘配额（需要用比特）。还有很多参数可以帮助你定制。看看 vmoddomlimits 的相关内容就知道了。 </p>
+<p>本文只是一个笼统的介绍。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/09/iptables-dnat-in-same-netmask.html">iptables 同网段端口转发问题</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年9月9日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>昨天遇到了 iptables 同网段端口转发的问题，记录一下。<br>
+          <div class="read-more">
+            <a href="/2008/09/iptables-dnat-in-same-netmask.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/09/learning-perl-6.html">Perl 语言入门 第六章</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年9月1日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>6.1</p>
 <pre lang="PERL" line="1">
 #!/usr/bin/perl -w
 
@@ -13,4 +438,265 @@ while (chomp($_=<stdin>)){
     $name=$name_hash{$_};
     print "$name\n";
 }
-</stdin></pre></div><a href="/2008/09/learning-perl-6.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/09/configure-perl-in-vim.html" class="post-title-link">配置 VIM 适合 Perl</a></h2><div class="post-info">2008年9月1日</div><div class="post-content"></div><a href="/2008/09/configure-perl-in-vim.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/08/learning-perl-5.html" class="post-title-link">Perl 语言入门 第五章</a></h2><div class="post-info">2008年8月31日</div><div class="post-content"><p>先把自己拼拼凑凑写出来的东西贴出来，找到了英文版本 CHM，看过那个里面的答案。简单几行代码就能看出自己的代码组织能力很差。回头再分析一下原文答案。<br></div><a href="/2008/08/learning-perl-5.html" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2008/08/learning-perl-4.html" class="post-title-link">Perl 语言入门 第四章 答案</a></h2><div class="post-info">2008年8月30日</div><div class="post-content"><p>自己在学，边学边做作业：<br></div><a href="/2008/08/learning-perl-4.html" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/12/" class="prev">PREV</a><a href="/page/14/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+</stdin></pre>
+          <div class="read-more">
+            <a href="/2008/09/learning-perl-6.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/09/configure-perl-in-vim.html">配置 VIM 适合 Perl</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年9月1日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>由于一直没学多少开发，所以我对编辑器要求都不是很高。现在开始学 Perl 了，把 VIM 稍微弄一下吧。</p>
+<p><code>.vimrc</code></p>
+<p><code>syntax on
+set tabstop=4
+set nu
+set showmatch
+set syntax=perl</code></p>
+<p>同时下载 perl.vim 高亮脚本：<a href="http://www.vim.org/scripts/script.php?script_id=56" target="_blank" rel="external">http://www.vim.org/scripts/script.php?script_id=56</a></p>
+<p>保存为 ~/.vim/syntax/perl.vim 即可。如果配置文件中包含Windows下的回车符，替换掉即可。</p>
+<p><code>cat -A perl.vim | sed &#39;s/\^\M\$//g&#39; &gt; perl.vim</code></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/08/learning-perl-5.html">Perl 语言入门 第五章</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年8月31日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>先把自己拼拼凑凑写出来的东西贴出来，找到了英文版本 CHM，看过那个里面的答案。简单几行代码就能看出自己的代码组织能力很差。回头再分析一下原文答案。<br>
+          <div class="read-more">
+            <a href="/2008/08/learning-perl-5.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2008/08/learning-perl-4.html">Perl 语言入门 第四章 答案</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2008年8月30日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>自己在学，边学边做作业：<br>
+          <div class="read-more">
+            <a href="/2008/08/learning-perl-4.html" class="read-more-link">Read more..</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/12/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/page/14/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

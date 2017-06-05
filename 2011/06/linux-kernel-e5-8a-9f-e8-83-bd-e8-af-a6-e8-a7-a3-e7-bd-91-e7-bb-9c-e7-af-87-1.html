@@ -1,7 +1,374 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Linux Kernel 功能详解-网络篇-1 · Water is</title><meta name="description" content="Linux Kernel 功能详解-网络篇-1 - latteye"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://latteye.me/atom.xml" title="Water is"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://www.zhihu.com/people/yuan-hao-yang" target="_blank" class="nav-list-link">ZHIHU</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Linux Kernel 功能详解-网络篇-1</h1><div class="post-info">2011年6月20日</div><div class="post-content"><p>在编译 Kernel 的时候会找一些文档看看，有人会解释好 Kernel 的参数含义。但大多数只是给出一句话的解释，至少5成这种一句话解释我是看不懂的。<br>于是我想，详细的整理一下 Kernel 的功能，尽可能的解释明白这些功能。从比较基础的层面开始，在回到 Kernel 的应用层面。<br>希望这可以写成一个系列文章。我以 Linux Kernel 2.6.39.1 为基础，以网络、进程等方面分类。穿插的研究、各个部分的功能。尽可能做到详细，易懂。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="Linux Kernel 功能详解-网络篇-1"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Water is">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="http://latteye.me/2011/06/linux-kernel-e5-8a-9f-e8-83-bd-e8-af-a6-e8-a7-a3-e7-bd-91-e7-bb-9c-e7-af-87-1.html"/>
+
+
+<meta name="description" content="在编译 Kernel 的时候会找一些文档看看，有人会解释好 Kernel 的参数含义。但大多数只是给出一句话的解释，至少5成这种一句话解释我是看不懂的。于是我想，详细的整理一下 Kernel 的功能，尽可能的解释明白这些功能。从比较基础的层面开始，在回到 Kernel 的应用层面。希望这可以写成一个系列文章。我以 Linux Kernel 2.6.39.1 为基础，以网络、进程等方面分类。穿插的研">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Kernel 功能详解-网络篇-1">
+<meta property="og:url" content="http://latteye.me/2011/06/linux-kernel-e5-8a-9f-e8-83-bd-e8-af-a6-e8-a7-a3-e7-bd-91-e7-bb-9c-e7-af-87-1.html">
+<meta property="og:site_name" content="Water is">
+<meta property="og:description" content="在编译 Kernel 的时候会找一些文档看看，有人会解释好 Kernel 的参数含义。但大多数只是给出一句话的解释，至少5成这种一句话解释我是看不懂的。于是我想，详细的整理一下 Kernel 的功能，尽可能的解释明白这些功能。从比较基础的层面开始，在回到 Kernel 的应用层面。希望这可以写成一个系列文章。我以 Linux Kernel 2.6.39.1 为基础，以网络、进程等方面分类。穿插的研">
+<meta property="og:image" content="http://latteye.com/gmail.png">
+<meta property="og:updated_time" content="2015-05-02T13:11:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux Kernel 功能详解-网络篇-1">
+<meta name="twitter:description" content="在编译 Kernel 的时候会找一些文档看看，有人会解释好 Kernel 的参数含义。但大多数只是给出一句话的解释，至少5成这种一句话解释我是看不懂的。于是我想，详细的整理一下 Kernel 的功能，尽可能的解释明白这些功能。从比较基础的层面开始，在回到 Kernel 的应用层面。希望这可以写成一个系列文章。我以 Linux Kernel 2.6.39.1 为基础，以网络、进程等方面分类。穿插的研">
+<meta name="twitter:image" content="http://latteye.com/gmail.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> Linux Kernel 功能详解-网络篇-1 · Water is </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Water is</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Water is</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Linux Kernel 功能详解-网络篇-1
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2011年6月20日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        <p>在编译 Kernel 的时候会找一些文档看看，有人会解释好 Kernel 的参数含义。但大多数只是给出一句话的解释，至少5成这种一句话解释我是看不懂的。<br>于是我想，详细的整理一下 Kernel 的功能，尽可能的解释明白这些功能。从比较基础的层面开始，在回到 Kernel 的应用层面。<br>希望这可以写成一个系列文章。我以 Linux Kernel 2.6.39.1 为基础，以网络、进程等方面分类。穿插的研究、各个部分的功能。尽可能做到详细，易懂。</p>
 <p><strong>网络篇-1-Packet socket</strong><a id="more"></a><br>Networking Support —&gt; Networking options —&gt; Packet socket</p>
 <p>Packet socket 参数是用来支持系统在设备驱动层面(OSI 2层)接受和发送裸数据包(raw packets)。他允许用户脱离任何网络协议在硬件层面进行开发。最典型的软件是 tcpdump.</p>
 <p>tcpdump 利用libcap截获数据链路层(OSI 2层)的的数据，然后按照 IP 帧的格式来解析。而 libcap 则支持:BPF(Berkeley)、DLPI(Solaris)、NIT(SunOS4.1)、SOCK_PACKET(Linux)套接口。</p>
 <p>如有错误，欢迎来信指正：<img src="http://latteye.com/gmail.png" alt="gmail"></p>
 <p>参考资料：<br><a href="http://www.kernel.org/doc/man-pages/online/pages/man7/packet.7.html" target="_blank" rel="external">Man packet</a></p>
-</div></article></div></main><footer><div class="paginator"><a href="/2011/06/linux-kernel-e5-8a-9f-e8-83-bd-e8-af-a6-e8-a7-a3-e7-bd-91-e7-bb-9c-e7-af-87-2.html" class="prev">PREV</a><a href="/2011/06/e5-a4-b1-e6-9c-9b-e7-8f-8d-e6-83-9c.html" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://latteye.me">latteye</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>作者: </span>
+      <span>latteye</span>
+    </p>
+    <p class="copyright-item">
+      <span>来源: </span>
+      <a href="http://latteye.me">http://latteye.me</a>
+    </p>
+    <p class="copyright-item">
+      <span>链接: </span>
+      <a href="http://latteye.me/2011/06/linux-kernel-e5-8a-9f-e8-83-bd-e8-af-a6-e8-a7-a3-e7-bd-91-e7-bb-9c-e7-af-87-1.html">http://latteye.me/2011/06/linux-kernel-e5-8a-9f-e8-83-bd-e8-af-a6-e8-a7-a3-e7-bd-91-e7-bb-9c-e7-af-87-1.html</a>
+    </p>
+
+    <p class="copyright-item lincese">
+      
+      本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+    </p>
+  </div>
+
+
+
+      
+      
+  <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">赞赏支持</label>
+    <div class="qr-code">
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/wechat.png" title="wechat">
+        </label>
+      
+      
+        <label class="qr-code-image" for="reward">
+          <img class="image" src="/image/reward/alipay.png" title="alipay">
+        </label>
+      
+    </div>
+  </div>
+
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2011/06/linux-kernel-e5-8a-9f-e8-83-bd-e8-af-a6-e8-a7-a3-e7-bd-91-e7-bb-9c-e7-af-87-2.html">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Linux Kernel 功能详解-网络篇-2</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2011/06/e5-a4-b1-e6-9c-9b-e7-8f-8d-e6-83-9c.html">
+        <span class="next-text nav-default">失望&珍惜</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">latteye</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "7c27380789354d14af755b0b00464371",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>
